@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:9999
--- Generation Time: May 09, 2024 at 01:42 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 10, 2024 lúc 05:48 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `qlduan`
+-- Cơ sở dữ liệu: `qlduan`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Thủ tục
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaAnh` (`maAnh` INT, `tenAnh` VARCHAR(255), `duongDan` VARCHAR(255), `maDA` INT)   BEGIN
     UPDATE anh 
@@ -396,7 +396,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaTVTG` (`maTVTG` INT)   BEGIN
 END$$
 
 --
--- Functions
+-- Các hàm
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `SoNguoiThamGia` (`MaDA` INT) RETURNS INT(11)  BEGIN 
   DECLARE count INT;
@@ -409,7 +409,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `anh`
+-- Cấu trúc bảng cho bảng `anh`
 --
 
 CREATE TABLE `anh` (
@@ -420,7 +420,7 @@ CREATE TABLE `anh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `anh`
+-- Đang đổ dữ liệu cho bảng `anh`
 --
 
 INSERT INTO `anh` (`MaAnh`, `TenAnh`, `DuongDan`, `MaDA`) VALUES
@@ -434,7 +434,7 @@ INSERT INTO `anh` (`MaAnh`, `TenAnh`, `DuongDan`, `MaDA`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bangcapchungchi`
+-- Cấu trúc bảng cho bảng `bangcapchungchi`
 --
 
 CREATE TABLE `bangcapchungchi` (
@@ -446,7 +446,7 @@ CREATE TABLE `bangcapchungchi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `bangcapchungchi`
+-- Đang đổ dữ liệu cho bảng `bangcapchungchi`
 --
 
 INSERT INTO `bangcapchungchi` (`MaBC`, `TenBC`, `NgayCap`, `NoiCap`, `MaTV`) VALUES
@@ -456,7 +456,7 @@ INSERT INTO `bangcapchungchi` (`MaBC`, `TenBC`, `NgayCap`, `NoiCap`, `MaTV`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `congviec`
+-- Cấu trúc bảng cho bảng `congviec`
 --
 
 CREATE TABLE `congviec` (
@@ -471,10 +471,21 @@ CREATE TABLE `congviec` (
   `MaDA` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `congviec`
+--
+
+INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`) VALUES
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 0, 'cần lấy dữ liệu chính xác', 1),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 0, 'không có', 1),
+(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 0, 'không có', 1),
+(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1),
+(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `doitac`
+-- Cấu trúc bảng cho bảng `doitac`
 --
 
 CREATE TABLE `doitac` (
@@ -492,7 +503,7 @@ CREATE TABLE `doitac` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `doitac`
+-- Đang đổ dữ liệu cho bảng `doitac`
 --
 
 INSERT INTO `doitac` (`MaDT`, `TenDT`, `Email`, `SDT`, `Fax`, `DiaChi`, `TrangThai`, `GhiChu`, `MaSoThue`, `Nguoidaidien`, `ChucVu`) VALUES
@@ -502,7 +513,7 @@ INSERT INTO `doitac` (`MaDT`, `TenDT`, `Email`, `SDT`, `Fax`, `DiaChi`, `TrangTh
 -- --------------------------------------------------------
 
 --
--- Table structure for table `duan`
+-- Cấu trúc bảng cho bảng `duan`
 --
 
 CREATE TABLE `duan` (
@@ -519,7 +530,7 @@ CREATE TABLE `duan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `duan`
+-- Đang đổ dữ liệu cho bảng `duan`
 --
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`) VALUES
@@ -529,7 +540,7 @@ INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hopdong`
+-- Cấu trúc bảng cho bảng `hopdong`
 --
 
 CREATE TABLE `hopdong` (
@@ -546,7 +557,7 @@ CREATE TABLE `hopdong` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `hopdong`
+-- Đang đổ dữ liệu cho bảng `hopdong`
 --
 
 INSERT INTO `hopdong` (`MaHD`, `TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiChu`, `GiaTriHD`, `TrangThai`, `MaDT`, `MaDA`) VALUES
@@ -556,7 +567,7 @@ INSERT INTO `hopdong` (`MaHD`, `TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiC
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loaiduan`
+-- Cấu trúc bảng cho bảng `loaiduan`
 --
 
 CREATE TABLE `loaiduan` (
@@ -566,7 +577,7 @@ CREATE TABLE `loaiduan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `loaiduan`
+-- Đang đổ dữ liệu cho bảng `loaiduan`
 --
 
 INSERT INTO `loaiduan` (`MaLoaiDA`, `TenLoaiDA`, `MoTa`) VALUES
@@ -576,7 +587,7 @@ INSERT INTO `loaiduan` (`MaLoaiDA`, `TenLoaiDA`, `MoTa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nhiemvu`
+-- Cấu trúc bảng cho bảng `nhiemvu`
 --
 
 CREATE TABLE `nhiemvu` (
@@ -588,13 +599,24 @@ CREATE TABLE `nhiemvu` (
   `NgayBatDau` date DEFAULT NULL,
   `NgayKetThuc` date DEFAULT NULL,
   `NganSachDuKien` float DEFAULT NULL,
-  `MaTV` int(11) DEFAULT NULL
+  `MaTV` int(11) DEFAULT NULL,
+  `MaCV` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhiemvu`
+--
+
+INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `MaTV`, `MaCV`) VALUES
+(1, 'khảo sát các thông tin về loại tàu, thuyền và môi trường được đưa vào thi thực hành', 'thu thập các thông số của tàu thuyền, địa điểm, thời tiết thi thực hành thực tế', 1, 'high', '2016-05-11', '2016-05-25', 20, 1, 1),
+(2, 'thiết kế hệ thống', 'Thiết kế sơ đồ kiến trúc hệ thống, Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống, Lựa chọn nhà cung cấp phần mềm và phần cứng, Lập tài liệu hướng dẫn kỹ thuật cho hệ thống.', 1, 'trung bình', '2016-06-11', '2016-07-25', 200, 2, 2),
+(3, 'Lắp đặt và cấu hình phần cứng hệ thống', 'triển khai lắp đạt hệ thống', 0, 'trung bình', '2016-06-11', '2016-07-25', 200, 3, 3),
+(4, 'kiểm tra và kiểm thử hệ thống', 'sự tương thích, tối ưu, chính xác giữa phần cứng và phần mềm', 0, 'trung bình', '2016-07-26', '2016-07-30', 2000, 4, 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nhom`
+-- Cấu trúc bảng cho bảng `nhom`
 --
 
 CREATE TABLE `nhom` (
@@ -605,7 +627,7 @@ CREATE TABLE `nhom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `nhom`
+-- Đang đổ dữ liệu cho bảng `nhom`
 --
 
 INSERT INTO `nhom` (`MaNhom`, `TenNhom`, `TruongNhom`, `MaPB`) VALUES
@@ -616,7 +638,7 @@ INSERT INTO `nhom` (`MaNhom`, `TenNhom`, `TruongNhom`, `MaPB`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phongban`
+-- Cấu trúc bảng cho bảng `phongban`
 --
 
 CREATE TABLE `phongban` (
@@ -626,7 +648,7 @@ CREATE TABLE `phongban` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `phongban`
+-- Đang đổ dữ liệu cho bảng `phongban`
 --
 
 INSERT INTO `phongban` (`MaPB`, `TenPB`, `MoTa`) VALUES
@@ -636,7 +658,7 @@ INSERT INTO `phongban` (`MaPB`, `TenPB`, `MoTa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `quyen`
+-- Cấu trúc bảng cho bảng `quyen`
 --
 
 CREATE TABLE `quyen` (
@@ -646,7 +668,7 @@ CREATE TABLE `quyen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `quyen`
+-- Đang đổ dữ liệu cho bảng `quyen`
 --
 
 INSERT INTO `quyen` (`MaQuyen`, `TenQuyen`, `GhiChu`) VALUES
@@ -657,7 +679,7 @@ INSERT INTO `quyen` (`MaQuyen`, `TenQuyen`, `GhiChu`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sukien`
+-- Cấu trúc bảng cho bảng `sukien`
 --
 
 CREATE TABLE `sukien` (
@@ -669,10 +691,18 @@ CREATE TABLE `sukien` (
   `MaDA` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `sukien`
+--
+
+INSERT INTO `sukien` (`MaSK`, `TenSK`, `Anh`, `GhiChu`, `NoiDung`, `MaDA`) VALUES
+(1, 'Xây dựng hệ thống điện tử tự động giám sát thi thực hành - nghề điều khiển phương tiện thủy nội địa', 'https://file.qdnd.vn/data/old_img/phucthang/2013/4/19/5171054220130419204601609.jpg', 'hệ thống tương tự như hệ thống sát hạch lái xe ô tô', 'Đây là hệ thống được xây dựng tương tự như hệ thống sát hạch điện tử lái xe ô tô. Quy trình thi thực hành được thực hiện trên bến cảng, sử dụng phương tiện thi đúng tiêu chuẩn cấp độ tàu theo quy định của Bộ GTVT. Hệ thống bao gồm phần mềm quản lý, đánh giá và các thiết bị điện tử, cảm biến, camera giám sát lắp đặt tại tàu, bến cảng tự động giám sát, chấm điểm quá trình thực hiện các bài thi thực hành của thí sinh trên luồng dài 200m. Kết quả đánh giá hình ảnh quá trình thực hiện bài thi của thí sinh được truyền về trung tâm điều hành qua hệ thống mạng không dây và cáp quang nội bộ, đồng thời được cập nhật trực tiếp lên Internet thông qua website của trung tâm.\r\n\r\nHệ thống được thiết kế để tự động giám sát, đánh giá chấm điểm các bài thi thực hành:\r\n\r\nBài 1: Điều động tàu rời cầu, có chướng ngại vật khống chế phía mũi tàu.\r\nBài 2: Điều động tàu rời cầu, có chướng ngại vật khống chế phía lái tàu.\r\nBài 3: Điều động tàu cập cầu, có chướng ngại vật khống chế phía mũi\r\nBài 4: Điều động tàu cập cầu, có chướng ngại vật khống chế phía lái tàu.\r\nBài 5: Điều động tàu bắt chập tiêu phía mũi tàu.\r\nBài 6: Điều động tàu bắt chập tiêu phía sau lái tàu.', 1),
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', 'https://infovina.vn/content/article/09-10-2023/cac-loai-he-thong-monitor-giam-sat-thiet-bi-mang-hien-nay-091023095023.png', 'Hệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp nhiều lợi ích như nâng cao hiệu suất mạng, giảm thời gian ngừng hoạt động, nâng cao khả năng bảo mật và giảm chi phí vận hành.', 'Hệ Thống Phần Mềm Quản Trị Mạng\r\nHệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp một giao diện tập trung để quản lý các thiết bị mạng, theo dõi hiệu suất mạng, phát hiện và khắc phục sự cố, đồng thời đảm bảo bảo mật mạng.\r\n\r\nChức năng chính của NMS:\r\n\r\nGiám sát thiết bị mạng: NMS có thể thu thập dữ liệu từ các thiết bị mạng như bộ định tuyến, bộ chuyển đổi, điểm truy cập không dây và máy chủ, cho phép quản trị viên theo dõi trạng thái hoạt động, hiệu suất và cấu hình của các thiết bị này.\r\nTheo dõi hiệu suất mạng: NMS có thể theo dõi các chỉ số hiệu suất mạng quan trọng (KPI) như lưu lượng truy cập mạng, thời gian phản hồi, tỷ lệ mất gói tin và tỷ lệ sử dụng băng thông, giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng.\r\nPhát hiện và khắc phục sự cố: NMS có thể phát hiện các sự cố mạng như lỗi thiết bị, gián đoạn kết nối và tấn công mạng, đồng thời thông báo cho quản trị viên để họ có thể khắc phục sự cố kịp thời.\r\nCấu hình thiết bị: NMS cho phép quản trị viên cấu hình các thiết bị mạng từ xa, giúp tiết kiệm thời gian và công sức.\r\nQuản lý bảo mật mạng: NMS có thể giúp quản trị viên theo dõi các hoạt động mạng, phát hiện các mối đe dọa bảo mật và thực hiện các biện pháp phòng ngừa để bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nLợi ích của việc sử dụng NMS:\r\n\r\nNâng cao hiệu suất mạng: NMS giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng một cách nhanh chóng và hiệu quả, từ đó nâng cao hiệu suất tổng thể của mạng.\r\nGiảm thời gian ngừng hoạt động: NMS giúp phát hiện và khắc phục sự cố mạng kịp thời, giúp giảm thiểu thời gian ngừng hoạt động của mạng và đảm bảo hoạt động liên tục của các ứng dụng kinh doanh.\r\nNâng cao khả năng bảo mật: NMS giúp quản trị viên theo dõi các hoạt động mạng và phát hiện các mối đe dọa bảo mật, giúp bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nGiảm chi phí vận hành: NMS giúp tự động hóa các tác vụ quản trị mạng, giúp tiết kiệm thời gian và công sức cho quản trị viên, đồng thời giảm chi phí vận hành mạng.', 2);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taikhoan`
+-- Cấu trúc bảng cho bảng `taikhoan`
 --
 
 CREATE TABLE `taikhoan` (
@@ -684,7 +714,7 @@ CREATE TABLE `taikhoan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `taikhoan`
+-- Đang đổ dữ liệu cho bảng `taikhoan`
 --
 
 INSERT INTO `taikhoan` (`MaTK`, `TenTK`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES
@@ -695,7 +725,7 @@ INSERT INTO `taikhoan` (`MaTK`, `TenTK`, `MatKhau`, `MaQuyen`, `TrangThai`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thanhvien`
+-- Cấu trúc bảng cho bảng `thanhvien`
 --
 
 CREATE TABLE `thanhvien` (
@@ -715,55 +745,55 @@ CREATE TABLE `thanhvien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `thanhvien`
+-- Đang đổ dữ liệu cho bảng `thanhvien`
 --
 
 INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`, `MaNhom`, `MaDA`) VALUES
 (1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'Nhân Viên', 'nguyenvantung@gmail.com', 1, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg', 3, NULL),
 (2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Quản Trị Nội Dung', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg', 4, NULL),
 (3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg', 4, NULL),
-(5, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Lập  Trình Viên', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG', 5, NULL);
+(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Lập  Trình Viên', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG', 5, NULL);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `anh`
+-- Chỉ mục cho bảng `anh`
 --
 ALTER TABLE `anh`
   ADD PRIMARY KEY (`MaAnh`),
   ADD KEY `MaDA` (`MaDA`);
 
 --
--- Indexes for table `bangcapchungchi`
+-- Chỉ mục cho bảng `bangcapchungchi`
 --
 ALTER TABLE `bangcapchungchi`
   ADD PRIMARY KEY (`MaBC`),
   ADD KEY `MaTV` (`MaTV`);
 
 --
--- Indexes for table `congviec`
+-- Chỉ mục cho bảng `congviec`
 --
 ALTER TABLE `congviec`
   ADD PRIMARY KEY (`MaCV`),
   ADD KEY `MaDA` (`MaDA`);
 
 --
--- Indexes for table `doitac`
+-- Chỉ mục cho bảng `doitac`
 --
 ALTER TABLE `doitac`
   ADD PRIMARY KEY (`MaDT`);
 
 --
--- Indexes for table `duan`
+-- Chỉ mục cho bảng `duan`
 --
 ALTER TABLE `duan`
   ADD PRIMARY KEY (`MaDA`),
   ADD KEY `MaLoaiDA` (`MaLoaiDA`);
 
 --
--- Indexes for table `hopdong`
+-- Chỉ mục cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
   ADD PRIMARY KEY (`MaHD`),
@@ -771,53 +801,54 @@ ALTER TABLE `hopdong`
   ADD KEY `MaDA` (`MaDA`);
 
 --
--- Indexes for table `loaiduan`
+-- Chỉ mục cho bảng `loaiduan`
 --
 ALTER TABLE `loaiduan`
   ADD PRIMARY KEY (`MaLoaiDA`);
 
 --
--- Indexes for table `nhiemvu`
+-- Chỉ mục cho bảng `nhiemvu`
 --
 ALTER TABLE `nhiemvu`
   ADD PRIMARY KEY (`MaNV`),
-  ADD KEY `MaTV` (`MaTV`);
+  ADD KEY `MaTV` (`MaTV`),
+  ADD KEY `MaCV` (`MaCV`);
 
 --
--- Indexes for table `nhom`
+-- Chỉ mục cho bảng `nhom`
 --
 ALTER TABLE `nhom`
   ADD PRIMARY KEY (`MaNhom`),
   ADD KEY `MaPB` (`MaPB`);
 
 --
--- Indexes for table `phongban`
+-- Chỉ mục cho bảng `phongban`
 --
 ALTER TABLE `phongban`
   ADD PRIMARY KEY (`MaPB`);
 
 --
--- Indexes for table `quyen`
+-- Chỉ mục cho bảng `quyen`
 --
 ALTER TABLE `quyen`
   ADD PRIMARY KEY (`MaQuyen`);
 
 --
--- Indexes for table `sukien`
+-- Chỉ mục cho bảng `sukien`
 --
 ALTER TABLE `sukien`
   ADD PRIMARY KEY (`MaSK`),
   ADD KEY `MaDA` (`MaDA`);
 
 --
--- Indexes for table `taikhoan`
+-- Chỉ mục cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD PRIMARY KEY (`MaTK`),
   ADD KEY `MaQuyen` (`MaQuyen`);
 
 --
--- Indexes for table `thanhvien`
+-- Chỉ mục cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
   ADD PRIMARY KEY (`MaTV`),
@@ -825,154 +856,155 @@ ALTER TABLE `thanhvien`
   ADD KEY `MaNhom` (`MaNhom`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `anh`
+-- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
   MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `bangcapchungchi`
+-- AUTO_INCREMENT cho bảng `bangcapchungchi`
 --
 ALTER TABLE `bangcapchungchi`
   MODIFY `MaBC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `congviec`
+-- AUTO_INCREMENT cho bảng `congviec`
 --
 ALTER TABLE `congviec`
-  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `doitac`
+-- AUTO_INCREMENT cho bảng `doitac`
 --
 ALTER TABLE `doitac`
   MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `duan`
+-- AUTO_INCREMENT cho bảng `duan`
 --
 ALTER TABLE `duan`
   MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `hopdong`
+-- AUTO_INCREMENT cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
   MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `loaiduan`
+-- AUTO_INCREMENT cho bảng `loaiduan`
 --
 ALTER TABLE `loaiduan`
   MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `nhiemvu`
+-- AUTO_INCREMENT cho bảng `nhiemvu`
 --
 ALTER TABLE `nhiemvu`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `nhom`
+-- AUTO_INCREMENT cho bảng `nhom`
 --
 ALTER TABLE `nhom`
   MODIFY `MaNhom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `phongban`
+-- AUTO_INCREMENT cho bảng `phongban`
 --
 ALTER TABLE `phongban`
   MODIFY `MaPB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `quyen`
+-- AUTO_INCREMENT cho bảng `quyen`
 --
 ALTER TABLE `quyen`
   MODIFY `MaQuyen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `sukien`
+-- AUTO_INCREMENT cho bảng `sukien`
 --
 ALTER TABLE `sukien`
-  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `taikhoan`
+-- AUTO_INCREMENT cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   MODIFY `MaTK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `thanhvien`
+-- AUTO_INCREMENT cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
   MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `anh`
+-- Các ràng buộc cho bảng `anh`
 --
 ALTER TABLE `anh`
   ADD CONSTRAINT `anh_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`);
 
 --
--- Constraints for table `bangcapchungchi`
+-- Các ràng buộc cho bảng `bangcapchungchi`
 --
 ALTER TABLE `bangcapchungchi`
   ADD CONSTRAINT `bangcapchungchi_ibfk_1` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`);
 
 --
--- Constraints for table `congviec`
+-- Các ràng buộc cho bảng `congviec`
 --
 ALTER TABLE `congviec`
   ADD CONSTRAINT `congviec_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`);
 
 --
--- Constraints for table `duan`
+-- Các ràng buộc cho bảng `duan`
 --
 ALTER TABLE `duan`
   ADD CONSTRAINT `duan_ibfk_1` FOREIGN KEY (`MaLoaiDA`) REFERENCES `loaiduan` (`MaLoaiDA`);
 
 --
--- Constraints for table `hopdong`
+-- Các ràng buộc cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
   ADD CONSTRAINT `hopdong_ibfk_1` FOREIGN KEY (`MaDT`) REFERENCES `doitac` (`MaDT`),
   ADD CONSTRAINT `hopdong_ibfk_2` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`);
 
 --
--- Constraints for table `nhiemvu`
+-- Các ràng buộc cho bảng `nhiemvu`
 --
 ALTER TABLE `nhiemvu`
-  ADD CONSTRAINT `nhiemvu_ibfk_1` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`);
+  ADD CONSTRAINT `nhiemvu_ibfk_1` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`),
+  ADD CONSTRAINT `nhiemvu_ibfk_2` FOREIGN KEY (`MaCV`) REFERENCES `congviec` (`MaCV`);
 
 --
--- Constraints for table `nhom`
+-- Các ràng buộc cho bảng `nhom`
 --
 ALTER TABLE `nhom`
   ADD CONSTRAINT `nhom_ibfk_1` FOREIGN KEY (`MaPB`) REFERENCES `phongban` (`MaPB`);
 
 --
--- Constraints for table `sukien`
+-- Các ràng buộc cho bảng `sukien`
 --
 ALTER TABLE `sukien`
   ADD CONSTRAINT `sukien_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`);
 
 --
--- Constraints for table `taikhoan`
+-- Các ràng buộc cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
   ADD CONSTRAINT `taikhoan_ibfk_1` FOREIGN KEY (`MaQuyen`) REFERENCES `quyen` (`MaQuyen`);
 
 --
--- Constraints for table `thanhvien`
+-- Các ràng buộc cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
   ADD CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`),
