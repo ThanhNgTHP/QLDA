@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 10, 2024 lúc 05:48 AM
+-- Thời gian đã tạo: Th5 10, 2024 lúc 06:00 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -526,16 +526,17 @@ CREATE TABLE `duan` (
   `MoTa` text DEFAULT NULL,
   `MaLoaiDA` int(11) DEFAULT NULL,
   `NganSachThucTe` float DEFAULT NULL,
-  `NganSachDuKien` float DEFAULT NULL
+  `NganSachDuKien` float DEFAULT NULL,
+  `TienDo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `duan`
 --
 
-INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`) VALUES
-(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, NULL, NULL),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2025-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, NULL, NULL);
+INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
+(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 1000, 900, 0),
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2025-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 2000, 1500, 0);
 
 -- --------------------------------------------------------
 
@@ -553,16 +554,17 @@ CREATE TABLE `hopdong` (
   `GiaTriHD` float DEFAULT NULL,
   `TrangThai` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `MaDT` int(11) DEFAULT NULL,
-  `MaDA` int(11) DEFAULT NULL
+  `MaDA` int(11) DEFAULT NULL,
+  `Anh` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `hopdong`
 --
 
-INSERT INTO `hopdong` (`MaHD`, `TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiChu`, `GiaTriHD`, `TrangThai`, `MaDT`, `MaDA`) VALUES
-(1, 'Hợp Đồng Cung Cấp Hàng Hóa', '654/HĐ', '2024-07-21', '2024-12-12', 'Ghi Rõ Thông Tin Về Tên Doanh Nghiệp, Trụ Sở, Số Điện Thoại, Chức Vụ, Và Người Đại Diện', 1736730000, 'Hết Hiệu Lực', 1, 1),
-(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2);
+INSERT INTO `hopdong` (`MaHD`, `TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiChu`, `GiaTriHD`, `TrangThai`, `MaDT`, `MaDA`, `Anh`) VALUES
+(1, 'Hợp Đồng Cung Cấp Hàng Hóa', '654/HĐ', '2024-07-21', '2024-12-12', 'Ghi Rõ Thông Tin Về Tên Doanh Nghiệp, Trụ Sở, Số Điện Thoại, Chức Vụ, Và Người Đại Diện', 1736730000, 'Hết Hiệu Lực', 1, 1, 'https://luatthanhcong.com/wp-content/uploads/2022/10/Mau-hop-dong-lao-dong-1.jpg'),
+(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2, 'https://sanketoan.vn/public/library_staff/25094/images/3(273).PNG');
 
 -- --------------------------------------------------------
 
