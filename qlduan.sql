@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 10, 2024 lúc 06:00 AM
+-- Máy chủ: 127.0.0.1:8888
+-- Thời gian đã tạo: Th5 16, 2024 lúc 08:28 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -476,11 +476,84 @@ CREATE TABLE `congviec` (
 --
 
 INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 0, 'cần lấy dữ liệu chính xác', 1),
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 100, 'cần lấy dữ liệu chính xác', 1),
 (2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 0, 'không có', 1),
 (3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 0, 'không có', 1),
 (4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1),
 (5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1);
+
+--
+-- Bẫy `congviec`
+--
+DELIMITER $$
+CREATE TRIGGER `congviec_delete_trigger` AFTER DELETE ON `congviec` FOR EACH ROW BEGIN
+	SET @MaDA = OLD.MaDA;
+    SET @MaCV = OLD.MaCV;
+    SET @JobTotal = 0;
+    SET @JobProcessTotal = 0;
+    
+ 	SELECT COUNT(congviec.TienDo) INTO @JobTotal
+    FROM congviec 
+    WHERE congviec.MaDA = @MaDA;
+    
+	SELECT SUM(congviec.TienDo) INTO @JobProcessTotal
+    FROM congviec 
+    WHERE congviec.MaDA = @MaDA;
+    
+    SET @Process = FLOOR(@JobProcessTotal / @JobTotal);
+    
+    UPDATE duan 
+    SET duan.TienDo = @Process
+    WHERE duan.MaDA = @MaDA;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `congviec_insert_trigger` AFTER INSERT ON `congviec` FOR EACH ROW BEGIN
+	SET @MaDA = NEW.MaDA;
+    SET @MaCV = NEW.MaCV;
+    SET @JobTotal = 0;
+    SET @JobProcessTotal = 0;
+    
+ 	SELECT COUNT(congviec.TienDo) INTO @JobTotal
+    FROM congviec 
+    WHERE congviec.MaDA = @MaDA;
+    
+	SELECT SUM(congviec.TienDo) INTO @JobProcessTotal
+    FROM congviec 
+    WHERE congviec.MaDA = @MaDA;
+    
+    SET @Process = FLOOR(@JobProcessTotal / @JobTotal);
+    
+    UPDATE duan 
+    SET duan.TienDo = @Process
+    WHERE duan.MaDA = @MaDA;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `congviec_update_trigger` AFTER UPDATE ON `congviec` FOR EACH ROW BEGIN
+	SET @MaDA = NEW.MaDA;
+    SET @MaCV = NEW.MaCV;
+    SET @JobTotal = 0;
+    SET @JobProcessTotal = 0;
+    
+ 	SELECT COUNT(congviec.TienDo) INTO @JobTotal
+    FROM congviec 
+    WHERE congviec.MaDA = @MaDA;
+    
+	SELECT SUM(congviec.TienDo) INTO @JobProcessTotal
+    FROM congviec 
+    WHERE congviec.MaDA = @MaDA;
+    
+    SET @Process = FLOOR(@JobProcessTotal / @JobTotal);
+    
+    UPDATE duan 
+    SET duan.TienDo = @Process
+    WHERE duan.MaDA = @MaDA;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -614,6 +687,79 @@ INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `Nga
 (2, 'thiết kế hệ thống', 'Thiết kế sơ đồ kiến trúc hệ thống, Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống, Lựa chọn nhà cung cấp phần mềm và phần cứng, Lập tài liệu hướng dẫn kỹ thuật cho hệ thống.', 1, 'trung bình', '2016-06-11', '2016-07-25', 200, 2, 2),
 (3, 'Lắp đặt và cấu hình phần cứng hệ thống', 'triển khai lắp đạt hệ thống', 0, 'trung bình', '2016-06-11', '2016-07-25', 200, 3, 3),
 (4, 'kiểm tra và kiểm thử hệ thống', 'sự tương thích, tối ưu, chính xác giữa phần cứng và phần mềm', 0, 'trung bình', '2016-07-26', '2016-07-30', 2000, 4, 4);
+
+--
+-- Bẫy `nhiemvu`
+--
+DELIMITER $$
+CREATE TRIGGER `nhiemvu_delete_trigger` AFTER DELETE ON `nhiemvu` FOR EACH ROW BEGIN
+    SET @MaCV = OLD.MaCV;
+    SET @MaNV = OLD.MaNV;
+    SET @TaskTotal = 0;
+    SET @CompleteTaskCount = 0;
+    
+ 	SELECT COUNT(*) INTO @TaskTotal
+    FROM nhiemvu 
+    WHERE nhiemvu.MaCV = @MaCV;
+    
+	SELECT COUNT(*) INTO @CompleteTaskCount
+    FROM nhiemvu 
+    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
+    
+    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
+    
+    UPDATE congviec 
+    SET congviec.TienDo = @Process
+    WHERE congviec.MaCV = @MaCV;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `nhiemvu_insert_trigger` AFTER INSERT ON `nhiemvu` FOR EACH ROW BEGIN
+	SET @MaCV = NEW.MaCV;
+    SET @MaNV = NEW.MaNV;
+    SET @TaskTotal = 0;
+    SET @CompleteTaskCount = 0;
+    
+ 	SELECT COUNT(*) INTO @TaskTotal
+    FROM nhiemvu 
+    WHERE nhiemvu.MaCV = @MaCV;
+    
+	SELECT COUNT(*) INTO @CompleteTaskCount
+    FROM nhiemvu 
+    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
+    
+    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
+    
+    UPDATE congviec 
+    SET congviec.TienDo = @Process
+    WHERE congviec.MaCV = @MaCV;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `nhiemvu_update_trigger` AFTER UPDATE ON `nhiemvu` FOR EACH ROW BEGIN
+	SET @MaCV = NEW.MaCV;
+    SET @MaNV = NEW.MaNV;
+    SET @TaskTotal = 0;
+    SET @CompleteTaskCount = 0;
+    
+ 	SELECT COUNT(*) INTO @TaskTotal
+    FROM nhiemvu 
+    WHERE nhiemvu.MaCV = @MaCV;
+    
+	SELECT COUNT(*) INTO @CompleteTaskCount
+    FROM nhiemvu 
+    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
+    
+    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
+    
+    UPDATE congviec 
+    SET congviec.TienDo = @Process
+    WHERE congviec.MaCV = @MaCV;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -907,7 +1053,7 @@ ALTER TABLE `loaiduan`
 -- AUTO_INCREMENT cho bảng `nhiemvu`
 --
 ALTER TABLE `nhiemvu`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`

@@ -1,0 +1,277 @@
+CREATE TABLE Contract // Sửa
+(
+    Id INT PRIMARY KEY,
+    Name VARCHAR(255) CHARACTER SET utf8,
+    Signature DATE, 
+    Expire DATE,
+    Customer VARCHAR(255) CHARACTER SET utf8,
+    Value FLOAT,
+    Description TEXT CHARACTER SET utf8,
+    Status VARCHAR(255) CHARACTER SET utf8
+    MaCT INT,
+    FOREIGN KEY (MaCT) REFERENCES CongTy(MaCT)
+
+)
+
+CREATE TABLE Quyen
+(
+    MaQuyen INT PRIMARY KEY,
+    TenQuyen VARCHAR(255) CHARACTER SET utf8,
+    GhiChu TEXT
+);
+
+
+CREATE TABLE TaiKhoan
+(
+    MaTK INT PRIMARY KEY AUTO_INCREMENT,
+    TenTK VARCHAR(16),
+    MatKhau VARCHAR(16),
+    MaQuyen INT,
+    FOREIGN KEY (MaQuyen) REFERENCES quyen(MaQuyen)
+)
+
+CREATE TABLE CongTy
+(
+    MaCT INT PRIMARY KEY AUTO_INCREMENT,
+    TenCT VARCHAR(255) CHARACTER SET utf8,
+    Email VARCHAR(64),
+    SDT CHAR,
+    Fax VARCHAR(15),
+    DiaChi VARCHAR(255) CHARACTER SET utf8,
+    TrangThai VARCHAR(255) CHARACTER SET utf8,
+    ChuCT VARCHAR(255) CHARACTER SET utf8,
+    GhiChu TEXT
+)
+
+CREATE TABLE ThanhVien
+(
+    MaTV INT PRIMARY KEY AUTO_INCREMENT,
+    HoTen VARCHAR(30) CHARACTER SET utf8,
+    SDT CHAR,
+    DiaChi VARCHAR(255) CHARACTER SET utf8,
+    NgaySinh DATE,
+    ChucVu VARCHAR(255) CHARACTER SET utf8,
+    PhongBan VARCHAR(255) CHARACTER SET utf8,
+    Email VARCHAR(64),
+    ChuKyDienTu TEXT,
+    FOREIGN KEY (MaTK) REFERENCES taikhoan(MaTK)
+)
+
+CREATE TABLE DuAn 
+(
+	MaDA INT PRIMARY KEY AUTO_INCREMENT,
+    TenDA VARCHAR(255) CHARACTER SET utf8,
+    NgayBatDau DATE,
+    NgayKetThuc DATE,
+    NganSachDuKien FLOAT,
+    NganSachThucTe FLOAT,
+    TrangThai TEXT,
+    TienDo FLOAT,
+    LienHe TEXT,
+    PhongBan TEXT,
+    DoUuTien TEXT,
+    LoaiDuAn TEXT,
+    GhiChu TEXT
+)
+
+CREATE TABLE thanhvienthamgia 
+(
+	MaTVTG INT PRIMARY KEY AUTO_INCREMENT,
+    MaTV INT,
+    MaDA INT,
+    FOREIGN KEY (MaTV) REFERENCES thanhvien(MaTV),
+    FOREIGN KEY (MaDA) REFERENCES duan(MaDA)
+)
+
+
+
+CREATE TABLE NhiemVu 
+(
+    MaNV INT PRIMARY KEY AUTO_INCREMENT,
+    TenNV VARCHAR(255) CHARACTER SET utf8,
+    TrangThai VARCHAR(255) CHARACTER SET utf8,
+    TienDo FLOAT,
+    LienHe TEXT,
+    NgayBatDau DATE,
+    NgayKetThuc DATE,
+    NganSachDuKien FLOAT,
+    GhiChu TEXT,
+    MaTV INT,
+    MaDA INT,
+    FOREIGN KEY (MaDA) REFERENCES taikhoan(MaTK)
+)
+
+CREATE TABLE TepTin
+(
+    MaTT INT PRIMARY KEY,
+    TenTT VARCHAR(255) CHARACTER SET utf8,
+    NgayTaiLen DATE,
+    DuongDan VARCHAR(255)
+);
+
+CREATE TABLE CongViec
+(
+    MaCV INT PRIMARY KEY AUTO_INCREMENT,
+    TenCV VARCHAR(255) CHARACTER SET utf8,
+    NoiDung TEXT,
+    GhiChu TEXT,
+    NgayBatDau DATE,
+    NgayKetThuc DATE,
+    MaNhom INT,
+    FOREIGN KEY (MaNhom) REFERENCES Nhom(MaNhom),
+    MaDA INT,
+    FOREIGN KEY (MaDA) REFERENCES duan(MaDA)
+)
+
+INSERT INTO contract (`Name`, `Signature`, `Expire`, `Customer`, `Value`, `Description`, `Status`) VALUES ('Website Công Ty', '2024-03-01', '2024-03-31', 'Bùi Đức Minh', 2000, 'Phèo Phèo Phèo Phèo Phèo', 'Chưa Tiến Hành') // Sửa
+
+INSERT INTO Quyen (`TenQuyen`, `GhiChu`) VALUES ('Quan Tri', '123');
+INSERT INTO Quyen (`TenQuyen`, `GhiChu`) VALUES ('ChinhSua', '123');
+
+INSERT INTO teptin (`TenTT`, `NgayTaiLen`, `DuongDan`) VALUES ('TepTin1', '2024-3-20', 'abc');
+INSERT INTO teptin (`TenTT`, `NgayTaiLen`, `DuongDan`) VALUES ('TepTin1', '2024-3-20', 'abc');
+
+INSERT INTO taikhoan (`TenTK`, `MatKhau`, `MaQuyen`) VALUES ('TaiKhoan1', 'TaiKhoan1', 1);
+INSERT INTO taikhoan (`TenTK`, `MatKhau`, `MaQuyen`) VALUES ('TaiKhoan2', 'TaiKhoan2', 2);
+
+INSERT INTO congty (`TenCT`, `Email`, `SDT`, `Fax`, `DiaChi`, `TrangThai`, `ChuCT`, `GhiChu`) VALUES ('TenCongTy1', 'Email1', '0123456789', 'FAX1', 'DiaChi1', 'TrangThai1', 'ChuCT1', 'GhiChu1');
+
+INSERT INTO congty (`TenCT`, `Email`, `SDT`, `Fax`, `DiaChi`, `TrangThai`, `ChuCT`, `GhiChu`) VALUES ('TenCongTy2', 'Email2', '0123456789', 'FAX2', 'DiaChi2', 'TrangThai2', 'ChuCT2', 'GhiChu2');
+
+INSERT INTO thanhvien (`HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `PhongBan`, `Email`, `ChuKyDienTu`, `MaTK`) VALUES ('HoTen1', '0123456789', 'DiaChi1', '2024-03-01', 'ChucVu1', 'PhongBan1', 'Email1', 'ChuKyDienTu', 1);
+
+
+INSERT INTO duan (`TenDA`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `NganSachThucTe`, `TrangThai`, `TienDo`, `LienHe`, `PhongBan`, `DoUuTien`, `LoaiDuAn`, `GhiChu`) VALUES ('DuAn1', '2024-03-01', '2024-03-30', 3000.00, 3000.00, 'TrangThai1', 50.00, 'LienHe1', 'PhongBan1', 'DoUuTien1', 'LoaiDuAn1', 'GhiChu1');
+
+
+INSERT INTO thanhvienthamgia (`MaTV`, `MaDA`) VALUES (1, 2);
+
+
+INSERT INTO congviec(`TenCV`, `NoiDung`, `GhiChu`, `NgayBatDau`, `NgayKetThuc`, `MaNhom`, `MaDA`) VALUES ('CongViec1', 'NoiDung1', 'GhiChu1', '2024-3-20', '2024-3-20', '3', '1');
+
+INSERT INTO congviec(`TenCV`, `NoiDung`, `GhiChu`, `NgayBatDau`, `NgayKetThuc`, `MaNhom`, `MaDA`) VALUES ('CongViec2', 'NoiDung2', 'GhiChu2', '2024-3-20', '2024-3-20', '4', '2');
+
+
+RENAME TABLE `contract` TO `HopDong`;
+
+ALTER TABLE table_name
+ADD column_name datatype;
+
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;
+
+ALTER TABLE ten_bang
+CHANGE COLUMN ten_truong_cu ten_truong_moi kieu_du_lieu [ràng buộc mới];
+
+ALTER TABLE hopdong
+ADD MaCT INT;
+
+ALTER TABLE hopdong
+ADD FOREIGN KEY (MaCT) REFERENCES congty(MaCT);
+
+
+ALTER TABLE thanhvien
+DROP CONSTRAINT thanhvien_ibfk_3;
+
+
+
+PERMISSION, CONTRACT                 ACCOUNT, COMPANY, STAFF		  PROJECT 	  	      PROJECT_STAFF(TVTG)	TASK 		FILE
+
+
+
+
+
+DELIMITER $$
+CREATE PROCEDURE XacMinhTaiKhoan( taikhoan varchar(255), matkhau varchar(255))
+BEGIN
+    SELECT quyen.TenQuyen, thanhvien.MaTV, taikhoan.TenTK FROM taikhoan
+    INNER JOIN quyen ON taikhoan.MaQuyen = quyen.MaQuyen
+    INNER JOIN thanhvien ON taikhoan.MaTK = thanhvien.MaTK
+    WHERE taikhoan.TenTK = taikhoan AND taikhoan.MatKhau = matkhau;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE ThongTinDA()
+BEGIN
+    SELECT MaDA AS ProjectID, TenDA AS ProjectName, TenNgan AS ShortName, NgayBatDau AS Begin , NgayKetThuc AS Expire, TrangThai AS Status, LienHe AS Contact, PhongBan AS Department, LoaiDuAn AS Catgories, GhiChu AS Description
+    FROM duan;
+END$$
+DELIMITER ;
+
+CALL XacMinhTaiKhoan('TaiKhoan1', 'TaiKhoan1')
+
+DROP PROCEDURE XacMinhTaiKhoan;
+
+DELIMITER $$
+CREATE PROCEDURE ThongTinTV(MaTV INT)
+BEGIN
+    SELECT * FROM thanhvien WHERE thanhvien.MaTV = MaTV;
+END$$
+DELIMITER ;
+
+BEGIN
+    SELECT duan.MaDA as ProjectID, duan.TenDA as ProjectName, duan.NgayBatDau as Begin, duan.NgayKetThuc as Expire, duan.TrangThai AS Status, duan.LienHe AS Contact, duan.PhongBan as Department, duan.LoaiDuAn as Catgories, duan.GhiChu as Description, hopdong.MaHD as ContractID, hopdong.TenHD as ContractName, SoHD, hopdong.SoHD as ContractNumber, hopdong.NgayKiKet as SignatureBegin, hopdong.NgayHetHan as SignatureExpire, hopdong.GhiChu as ContractDescription, hopdong.GiaTriHD as ContractValue, hopdong.TrangThai as ContractStatus, congty.MaCT as PartnerID, congty.TenCT as PartnerName, congty.Email as Email, congty.SDT as SDT, congty.Fax as Fax, congty.DiaChi as PartnerAddress, congty.TrangThai as ParnerStatus, congty.GhiChu as PartnerDescription
+    FROM dua
+    INNER JOIN hopdong ON duan.MaDA = hopdong.MaDA
+    INNER JOIN congty ON hopdong.MaCT = congty.MaCT
+    INNER JOIN thanhvienthamgia ON duan.MaDA = thanhvienthamgia.MaDA
+    WHERE duan.MaDA = MaDA;
+END
+
+DELIMITER $$
+CREATE PROCEDURE ThongTinTVTG(MaDA INT)
+BEGIN
+  SELECT COUNT(MaTVTG) FROM thanhvienthamgia
+  INNER JOIN duan ON thanhvienthamgia.MaDA = duan.MaDA
+  INNER JOIN thanhvien ON thanhvienthamgia.MaTV = thanhvien.MaTV;
+END$$
+DELIMITER ;
+
+SELECT CONSTRAINT_NAME 
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+WHERE TABLE_SCHEMA = 'your_database_name' -- Thay thế your_database_name bằng tên cơ sở dữ liệu của bạn
+AND TABLE_NAME = 'TaiKhoan'  
+AND REFERENCED_TABLE_NAME = 'quyen';
+
+DELIMITER $$
+
+CREATE TRIGGER table_trigger
+BEFORE INSERT
+ON test_table
+FOR EACH ROW
+BEGIN
+	// Statement
+END$$
+
+DELIMITER ;
+
+INSERT INTO nhiemvu(`TenNV`,`NoiDung`,`HoanThanh`,`DoUuTien`,`NgayBatDau`,`NgayKetThuc`,`NganSachDuKien`,`MaTV`,`MaCV`) VALUES ('xóa', 'xóa', 0, 'high', '2016-05-11', '2016-05-25', '20', '1', '1');
+
+$cfg['Servers'][$i]['port'] = 9000;
+
+
+
+
+Page:
+
+	Login: TaiKhoan, Quyen, ThanhVien
+	Home (Manage Project): DuAn, ThanhVien(Số người), HopDong (Số HD), CongTy(Tên CT)
+	Intro
+	Project Info: DuAn, ThanhVien, HopDong, CongTy
+	
+
+SELECT quyen.TenQuyen AS PermissionName, taikhoan.TenTK AS Username,
+(
+    SELECT thanhvien.MaTK FROM thanhvien WHERE thanhvien.MaTV = thanhvien.MaTV
+)
+FROM taikhoan INNER JOIN quyen ON taikhoan.MaQuyen = quyen.MaQuyen 
+INNER JOIN thanhvien ON taikhoan.MaTK = thanhvien.MaTK 
+WHERE taikhoan.MaTK = 1;
+
+
+<?php echo '<hr style="height:2px;border-width:0;color:gray;background-color:red;">' ?>
+
+
+bangcapchungchi - thanhvien - thanhvienthamgia
+	
