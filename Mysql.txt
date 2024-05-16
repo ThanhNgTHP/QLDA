@@ -1,4 +1,4 @@
-CREATE TABLE Contract // Sửa
+CREATE TABLE Contract // Sửa1
 (
     Id INT PRIMARY KEY,
     Name VARCHAR(255) CHARACTER SET utf8,
