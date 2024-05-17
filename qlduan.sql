@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:8888
--- Thời gian đã tạo: Th5 16, 2024 lúc 08:28 AM
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 17, 2024 lúc 07:44 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -468,19 +468,20 @@ CREATE TABLE `congviec` (
   `NganSachDuKien` float DEFAULT NULL,
   `TienDo` int(11) DEFAULT NULL,
   `GhiChu` text DEFAULT NULL,
-  `MaDA` int(11) DEFAULT NULL
+  `MaDA` int(11) DEFAULT NULL,
+  `NganSachThucTe` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `congviec`
 --
 
-INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 100, 'cần lấy dữ liệu chính xác', 1),
-(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 0, 'không có', 1),
-(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 0, 'không có', 1),
-(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1),
-(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1);
+INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`) VALUES
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 25, 'cần lấy dữ liệu chính xác', 1, NULL),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 25, 'không có', 1, NULL),
+(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 0, 'không có', 1, NULL),
+(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, NULL),
+(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, NULL);
 
 --
 -- Bẫy `congviec`
@@ -608,7 +609,7 @@ CREATE TABLE `duan` (
 --
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
-(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 1000, 900, 0),
+(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 1000, 900, 10),
 (2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2025-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 2000, 1500, 0);
 
 -- --------------------------------------------------------
@@ -675,18 +676,26 @@ CREATE TABLE `nhiemvu` (
   `NgayKetThuc` date DEFAULT NULL,
   `NganSachDuKien` float DEFAULT NULL,
   `MaTV` int(11) DEFAULT NULL,
-  `MaCV` int(11) DEFAULT NULL
+  `MaCV` int(11) DEFAULT NULL,
+  `NganSachThucTe` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `nhiemvu`
 --
 
-INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `MaTV`, `MaCV`) VALUES
-(1, 'khảo sát các thông tin về loại tàu, thuyền và môi trường được đưa vào thi thực hành', 'thu thập các thông số của tàu thuyền, địa điểm, thời tiết thi thực hành thực tế', 1, 'high', '2016-05-11', '2016-05-25', 20, 1, 1),
-(2, 'thiết kế hệ thống', 'Thiết kế sơ đồ kiến trúc hệ thống, Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống, Lựa chọn nhà cung cấp phần mềm và phần cứng, Lập tài liệu hướng dẫn kỹ thuật cho hệ thống.', 1, 'trung bình', '2016-06-11', '2016-07-25', 200, 2, 2),
-(3, 'Lắp đặt và cấu hình phần cứng hệ thống', 'triển khai lắp đạt hệ thống', 0, 'trung bình', '2016-06-11', '2016-07-25', 200, 3, 3),
-(4, 'kiểm tra và kiểm thử hệ thống', 'sự tương thích, tối ưu, chính xác giữa phần cứng và phần mềm', 0, 'trung bình', '2016-07-26', '2016-07-30', 2000, 4, 4);
+INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `MaTV`, `MaCV`, `NganSachThucTe`) VALUES
+(1, 'khảo sát các thông tin về loại tàu, thuyền và môi trường được đưa vào thi thực hành', 'thu thập các thông số của tàu thuyền, địa điểm, thời tiết thi thực hành thực tế', 1, 'high', '2016-05-11', '2016-05-25', 20, 1, 1, 10),
+(2, 'thiết kế hệ thống', 'Thiết kế sơ đồ kiến trúc hệ thống, Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống, Lựa chọn nhà cung cấp phần mềm và phần cứng, Lập tài liệu hướng dẫn kỹ thuật cho hệ thống.', 1, 'trung bình', '2016-06-11', '2016-07-25', 200, 2, 2, 114),
+(3, 'Lắp đặt và cấu hình phần cứng hệ thống', 'triển khai lắp đạt hệ thống', 0, 'trung bình', '2016-06-11', '2016-07-25', 200, 3, 3, 150),
+(4, 'kiểm tra và kiểm thử hệ thống', 'sự tương thích, tối ưu, chính xác giữa phần cứng và phần mềm', 0, 'trung bình', '2016-07-26', '2016-07-30', 2000, 4, 4, 1540),
+(11, 'Huấn luyện cán bộ vận hành hệ thống', 'Huấn luyện cán bộ cách vận hành hệ thống', 0, 'trung bình', '2016-10-03', '2016-11-11', 1500, 3, 5, 1601),
+(12, 'xác định mục tiêu của hệ thống', 'xác định hệ thống dùng để làm gì?', 0, 'trung bình', '2016-02-05', '2016-02-07', 100, 1, 1, 100),
+(13, 'Phân tích thông tin', 'xác định các điểm mạnh, điểm yếu, cơ hội và thách thức của hệ thống', 0, 'trung bình', '2016-02-07', '2016-02-10', 100, 1, 1, 140),
+(14, 'Đề xuất giải pháp', 'Lập kế hoạch triển khai các giải pháp đề xuất', 0, 'trung bình', '2016-02-11', '2016-02-15', 100, 1, 1, 70),
+(15, 'Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống', 'thiết kế hệ thống phần mềm và phần cứng', 0, 'trung bình', '2016-03-01', '2016-03-10', 1750, 2, 2, 1420),
+(16, 'Lựa chọn nhà cung cấp phần cứng', 'tìm hiểu, lựa chọn các nhà cung cấp phần cứng của hệ thống', 0, 'trung bình', '2016-03-11', '2016-03-15', 1750, 2, 2, 520),
+(17, 'Lập tài liệu hướng dẫn kỹ thuật cho hệ thống', 'tài liệu hướng dẫn kỹ thuật', 0, 'trung bình', '2016-03-16', '2016-03-30', 1750, 2, 2, 3250);
 
 --
 -- Bẫy `nhiemvu`
@@ -1053,7 +1062,7 @@ ALTER TABLE `loaiduan`
 -- AUTO_INCREMENT cho bảng `nhiemvu`
 --
 ALTER TABLE `nhiemvu`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`
