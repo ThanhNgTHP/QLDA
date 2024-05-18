@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:8888
--- Thời gian đã tạo: Th5 18, 2024 lúc 04:47 PM
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 18, 2024 lúc 09:37 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -68,6 +68,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaLDA` (IN `maLoaiDA` INT, IN `ten
     WHERE loaiduan.MaLoaiDA = maLoaiDA;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaNhiemVu` (`maNV` INT, `tenNV` VARCHAR(255), `noiDung` TEXT, `hoanThanh` TINYINT, `doUuTien` VARCHAR(255), `ngayBatDau` DATE, `ngayKetThuc` DATE, `nganSachDuKien` FLOAT, `maTV` INT, `maCV` INT, `nganSachThucTe` FLOAT)   BEGIN
+    UPDATE nhiemvu 
+    SET nhiemvu.TenNV = tenNV, nhiemvu.NoiDung = noiDung, nhiemvu.HoanThanh = hoanThanh, nhiemvu.DoUuTien = doUuTien, nhiemvu.NgayBatDau = ngayBatDau, nhiemvu.NgayKetThuc = ngayKetThuc, nhiemvu.NganSachDuKien = nganSachDuKien, nhiemvu.NganSachThucTe = nganSachThucTe, nhiemvu.MaTV = maTV, nhiemvu.MaCV = maCV
+    WHERE nhiemvu.MaNV = maNV;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaNhom` (`maNhom` INT, `tenNhom` VARCHAR(255), `truongNhom` VARCHAR(255), `maPB` INT)   BEGIN
     UPDATE nhom 
     SET nhom.TenNhom = tenNhom, nhom.TruongNhom = truongNhom, nhom.MaPB = maPB
@@ -78,6 +84,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaPB` (IN `maPB` INT, IN `tenPB` V
     UPDATE phongban 
     SET phongban.TenPB = tenPB, phongban.MoTa = moTa
     WHERE phongban.MaPB = maPB;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaSuKien` (`maSK` INT, `tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
+    UPDATE sukien 
+    SET sukien.TenSK = tenSK, sukien.Anh = anh, sukien.GhiChu = ghiChu, sukien.NoiDung = noiDung, sukien.MaDA = maDA
+    WHERE sukien.MaSK = maSK;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaTK` (IN `maTK` INT, IN `tenTK` VARCHAR(255), IN `matKhau` VARCHAR(255), IN `maQuyen` INT, IN `trangThai` VARCHAR(255))   BEGIN
@@ -126,12 +138,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemLDA` (IN `tenLoaiDA` VARCHAR(25
     INSERT INTO `loaiduan`(`TenLoaiDA`, `MoTa`) VALUES (tenLoaiDA, moTa);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemNhiemVu` (`tenNV` VARCHAR(255), `noiDung` TEXT, `hoanThanh` TINYINT, `doUuTien` VARCHAR(255), `ngayBatDau` DATE, `ngayKetThuc` DATE, `nganSachDuKien` FLOAT, `maTV` INT, `maCV` INT, `nganSachThucTe` FLOAT)   BEGIN
+    INSERT INTO `nhiemvu`(`TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `NganSachThucTe`, `MaTV`, `MaCV`) VALUES (tenNV, noiDung, hoanThanh, doUuTien, ngayBatDau, ngayKetThuc, nganSachDuKien, nganSachThucTe, maTV, maCV);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemNhom` (`tenNhom` VARCHAR(255), `truongNhom` VARCHAR(255), `maPB` INT)   BEGIN
     INSERT INTO `nhom`(`TenNhom`, `TruongNhom`, `MaPB`) VALUES (tenNhom, truongNhom, maPB);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemPB` (IN `tenPB` VARCHAR(255), IN `moTa` TEXT)   BEGIN
     INSERT INTO `phongban`(`TenPB`, `MoTa`) VALUES (tenPB, moTa);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemSuKien` (`tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
+    INSERT INTO `sukien`(`TenSK`, `Anh`, `GhiChu`, `NoiDung`, `MaDA`) VALUES (tenSK, anh, ghiChu, noiDung, maDA);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTK` (`tenTK` VARCHAR(255), `matKhau` VARCHAR(255), `maquyen` INT, `trangthai` VARCHAR(255))   BEGIN
@@ -280,6 +300,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaLDA` ()   BEGIN
   FROM loaiduan;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaNhiemVu` ()   BEGIN
+  SELECT nhiemvu.MaNV AS ID, nhiemvu.TenNV AS Name, nhiemvu.NoiDung AS Content, nhiemvu.HoanThanh AS Complete, nhiemvu.DoUuTien AS Priority, nhiemvu.NgayBatDau AS Begin, nhiemvu.NgayKetThuc AS End, nhiemvu.NganSachDuKien AS TargetBudget, nhiemvu.NganSachThucTe AS ActualBudget, nhiemvu.MaTV AS StaffID, nhiemvu.MaCV AS JobID
+  FROM nhiemvu;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaNhom` ()   BEGIN
   SELECT nhom.MaNhom AS ID, nhom.TenNhom AS Name, nhom.TruongNhom AS Leader, nhom.MaPB AS DepartmentID
   from nhom
@@ -294,6 +319,11 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaQuyen` ()   BEGIN
     SELECT quyen.MaQuyen AS ID, quyen.TenQuyen AS Name, quyen.GhiChu as Note
     FROM quyen;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaSuKien` ()   BEGIN
+  SELECT sukien.MaSK AS ID, sukien.TenSK AS Name, sukien.Anh AS Image, sukien.GhiChu AS Note, sukien.NoiDung  AS Content, sukien.MaDA AS ProjectID
+  FROM sukien;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTK` ()   BEGIN
@@ -375,12 +405,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaLDA` (IN `maLoaiDA` INT)   BEGIN
     DELETE FROM loaiduan WHERE loaiduan.MaLoaiDA = maLoaiDA;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaNhiemVu` (`maNV` INT)   BEGIN
+    DELETE FROM nhiemvu WHERE nhiemvu.MaNV = maNV;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaNhom` (`maNhom` INT, `maPB` INT)   BEGIN
 	DELETE FROM nhom WHERE nhom.MaNhomhom = maNhom;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaPB` (IN `maPB` INT)   BEGIN
     DELETE FROM phongban WHERE phongban.MaPB = maPB;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaSuKien` (`maSK` INT)   BEGIN
+    DELETE FROM sukien WHERE sukien.MaSK = maSK;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaTK` (`maTK` INT)   BEGIN
@@ -477,8 +515,8 @@ CREATE TABLE `congviec` (
 --
 
 INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 25, 'cần lấy dữ liệu chính xác', 1, 300),
-(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 25, 'không có', 1, 5305),
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 40, 'cần lấy dữ liệu chính xác', 1, 780),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 25, 'không có', 1, 3055),
 (3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 0, 'không có', 1, 160),
 (4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550),
 (5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600);
@@ -660,7 +698,7 @@ CREATE TABLE `duan` (
 --
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
-(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 8915, 900, 10),
+(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 7145, 900, 13),
 (2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2025-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 0, 1500, 0);
 
 -- --------------------------------------------------------
@@ -743,10 +781,10 @@ INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `Nga
 (11, 'Huấn luyện cán bộ vận hành hệ thống', 'Huấn luyện cán bộ cách vận hành hệ thống', 0, 'trung bình', '2016-10-03', '2016-11-11', 1500, 3, 5, 1600),
 (12, 'xác định mục tiêu của hệ thống', 'xác định hệ thống dùng để làm gì?', 0, 'trung bình', '2016-02-05', '2016-02-07', 100, 1, 1, 100),
 (13, 'Phân tích thông tin', 'xác định các điểm mạnh, điểm yếu, cơ hội và thách thức của hệ thống', 0, 'trung bình', '2016-02-07', '2016-02-10', 100, 1, 1, 140),
-(14, 'Đề xuất giải pháp', 'Lập kế hoạch triển khai các giải pháp đề xuất', 0, 'trung bình', '2016-02-11', '2016-02-15', 100, 1, 1, 70),
 (15, 'Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống', 'thiết kế hệ thống phần mềm và phần cứng', 0, 'trung bình', '2016-03-01', '2016-03-10', 1750, 2, 2, 1420),
 (16, 'Lựa chọn nhà cung cấp phần cứng', 'tìm hiểu, lựa chọn các nhà cung cấp phần cứng của hệ thống', 0, 'trung bình', '2016-03-11', '2016-03-15', 1750, 2, 2, 520),
-(17, 'Lập tài liệu hướng dẫn kỹ thuật cho hệ thống', 'tài liệu hướng dẫn kỹ thuật', 0, 'trung bình', '2016-03-16', '2016-03-30', 1750, 2, 2, 3250);
+(18, 'Lập tài liệu hướng dẫn kỹ thuật cho hệ thống', 'tài liệu hướng dẫn kỹ thuật', 0, 'trung bình', '2016-03-16', '2016-03-30', 1750, 2, 2, 1000),
+(19, 'Đề xuất giải pháp', 'Lập kế hoạch triển khai các giải pháp đề xuất', 0, 'trung bình', '2016-02-11', '2016-02-15', 100, 1, 1, 500);
 
 --
 -- Bẫy `nhiemvu`
@@ -1161,7 +1199,7 @@ ALTER TABLE `loaiduan`
 -- AUTO_INCREMENT cho bảng `nhiemvu`
 --
 ALTER TABLE `nhiemvu`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`
@@ -1185,7 +1223,7 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT cho bảng `sukien`
 --
 ALTER TABLE `sukien`
-  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `taikhoan`
