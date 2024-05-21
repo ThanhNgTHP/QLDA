@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:8888
--- Thời gian đã tạo: Th5 18, 2024 lúc 04:47 PM
+-- Thời gian đã tạo: Th5 21, 2024 lúc 06:16 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -182,11 +182,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDA` (IN `MaDA` INT)   BEGIN
     WHERE duan.MaDA = MaDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDATVTG` (`MaDA` INT)   BEGIN
-  SELECT thanhvienthamgia.MaTVTG AS ID, thanhvienthamgia.MaTV AS StaffID, thanhvienthamgia.MaDA AS ProjectID FROM thanhvienthamgia
-  WHERE thanhvienthamgia.MaDA = MaDA;
-END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDT` (IN `MaDT` INT)   BEGIN
   SELECT doitac.MaDT AS ID, doitac.TenDT AS Name, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai AS Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
   FROM doitac
@@ -311,6 +306,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTVTG` ()   BEGIN
   FROM thanhvienthamgia;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinThanhVienThamGiaDuAn` (IN `MaDA` INT)   BEGIN
+  SELECT thanhvien.MaTV AS StaffID, duan.MaDA AS ProjectID 
+  FROM thanhvien INNER JOIN duan
+  ON thanhvien.MaDA = duan.MaDA
+  WHERE duan.MaDA = MaDA;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
     SELECT HoTen AS StaffName, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status
     FROM thanhvien WHERE thanhvien.MaTV = MaTV;
@@ -400,7 +402,11 @@ END$$
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `SoNguoiThamGia` (`MaDA` INT) RETURNS INT(11)  BEGIN 
   DECLARE count INT;
-  SELECT COUNT(MaTV) INTO count FROM thanhvienthamgia WHERE thanhvienthamgia.MaDA = MaDA;
+  SELECT COUNT(MaTV) INTO count 
+  FROM thanhvien INNER JOIN duan 
+  ON thanhvien.MaDA = duan.MaDA
+  WHERE duan.MaDA = MaDA;
+
   RETURN count;
 END$$
 
@@ -469,19 +475,20 @@ CREATE TABLE `congviec` (
   `TienDo` int(11) DEFAULT NULL,
   `GhiChu` text DEFAULT NULL,
   `MaDA` int(11) DEFAULT NULL,
-  `NganSachThucTe` float DEFAULT NULL
+  `NganSachThucTe` float DEFAULT NULL,
+  `MaNhom` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `congviec`
 --
 
-INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 25, 'cần lấy dữ liệu chính xác', 1, 300),
-(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 25, 'không có', 1, 5305),
-(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 0, 'không có', 1, 160),
-(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550),
-(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600);
+INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`) VALUES
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 25, 'cần lấy dữ liệu chính xác', 1, 300, 3),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 25, 'không có', 1, 5305, 4),
+(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 0, 'không có', 1, 160, 5),
+(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 3),
+(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 3);
 
 --
 -- Bẫy `congviec`
@@ -1005,10 +1012,10 @@ CREATE TABLE `thanhvien` (
 --
 
 INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`, `MaNhom`, `MaDA`) VALUES
-(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'Nhân Viên', 'nguyenvantung@gmail.com', 1, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg', 3, NULL),
-(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Quản Trị Nội Dung', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg', 4, NULL),
-(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg', 4, NULL),
-(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Lập  Trình Viên', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG', 5, NULL);
+(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'Nhân Viên', 'nguyenvantung@gmail.com', 1, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg', 3, 1),
+(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Quản Trị Nội Dung', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg', 4, 1),
+(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg', 4, 2),
+(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Lập  Trình Viên', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG', 5, 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1033,7 +1040,8 @@ ALTER TABLE `bangcapchungchi`
 --
 ALTER TABLE `congviec`
   ADD PRIMARY KEY (`MaCV`),
-  ADD KEY `MaDA` (`MaDA`);
+  ADD KEY `MaDA` (`MaDA`),
+  ADD KEY `MaNhom` (`MaNhom`);
 
 --
 -- Chỉ mục cho bảng `doitac`
@@ -1219,7 +1227,8 @@ ALTER TABLE `bangcapchungchi`
 -- Các ràng buộc cho bảng `congviec`
 --
 ALTER TABLE `congviec`
-  ADD CONSTRAINT `congviec_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`);
+  ADD CONSTRAINT `congviec_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`),
+  ADD CONSTRAINT `congviec_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`);
 
 --
 -- Các ràng buộc cho bảng `duan`
