@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 22, 2024 lúc 03:58 PM
+-- Máy chủ: 127.0.0.1:8888
+-- Thời gian đã tạo: Th5 24, 2024 lúc 01:04 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -177,21 +177,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnh` (`MaAnh` INT)   BEGIN
   WHERE anh.MaAnh = MaAnh;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhDA_old` (IN `MaDA` INT)   BEGIN
-  SELECT anh.TenAnh as Name, anh.DuongDan as Path, anh.MaAnh AS ID, anh.MaDA AS ProjectID
-  FROM duan 
-  INNER JOIN anh ON duan.MaDA = anh.MaDA
-  WHERE duan.MaDA = MaDA;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhDuAn` (IN `maDA` INT)   BEGIN
-  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaDuAn` (IN `maDA` INT)   BEGIN
+  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID
   FROM anh
   WHERE anh.LoaiAnh = 'anh du an' AND anh.MaDA = maDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhHopDong` (IN `maHD` INT)   BEGIN
-  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaHopDong` (IN `maHD` INT)   BEGIN
+  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaHD AS ContractID
   FROM anh
   WHERE anh.LoaiAnh = 'anh hop dong' AND anh.MaHD = maHD;
 END$$
@@ -339,13 +332,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTK` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
-    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaNhom AS TeamID, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay
+    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaNhom AS TeamID, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay, thanhvien.MaDA AS ProjectID
     FROM thanhvien;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTVTG` ()   BEGIN
-  SELECT thanhvienthamgia.MaTVTG AS ID, thanhvienthamgia.MaTV AS StaffID, thanhvienthamgia.MaDA AS ProjectID
-  FROM thanhvienthamgia;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
@@ -475,12 +463,12 @@ CREATE TABLE `anh` (
 --
 
 INSERT INTO `anh` (`MaAnh`, `TenAnh`, `DuongDan`, `MaDA`, `MaHD`, `LoaiAnh`) VALUES
-(1, 'Mô Phỏng Xe Tăng', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/1.jpg', 1, NULL, 'anh du an'),
-(2, 'Mô Phỏng Lái Xe Ô Tô', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/2.jpg', 2, NULL, 'anh du an'),
-(3, 'Mô Phỏng Phòng Học', 'https://www.simulation.vn/images/sbhinh1.jpg', 1, NULL, 'anh du an'),
-(4, 'Mô Phỏng Súng AK', 'https://www.simulation.vn/images/ak-nhinthang.jpg', 1, NULL, 'anh du an'),
-(5, 'Mô Phỏng Cấu Tạo Hoạt Động Động Cơ Cơ Khí', 'https://www.simulation.vn/images/giamtoccanh2.jpg', 1, NULL, 'anh du an'),
-(6, 'Mô Phỏng Huấn Luyện Chiến Thuật Phân Đội Tank - Thiết Giáp', 'https://www.simulation.vn/images/3dtank.jpg', 1, NULL, 'anh du an'),
+(1, 'Mô Phỏng Xe Tăng', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/1.jpg', 1, 1, 'anh du an'),
+(2, 'Mô Phỏng Lái Xe Ô Tô', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/2.jpg', 2, 1, 'anh du an'),
+(3, 'Mô Phỏng Phòng Học', 'https://www.simulation.vn/images/sbhinh1.jpg', 1, 1, 'anh du an'),
+(4, 'Mô Phỏng Súng AK', 'https://www.simulation.vn/images/ak-nhinthang.jpg', 1, 1, 'anh du an'),
+(5, 'Mô Phỏng Cấu Tạo Hoạt Động Động Cơ Cơ Khí', 'https://www.simulation.vn/images/giamtoccanh2.jpg', 1, 1, 'anh du an'),
+(6, 'Mô Phỏng Huấn Luyện Chiến Thuật Phân Đội Tank - Thiết Giáp', 'https://www.simulation.vn/images/3dtank.jpg', 1, 1, 'anh du an'),
 (8, 'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 1', 'https://sanketoan.vn/public/library_staff/25094/images/3(273).PNG', 1, 1, 'anh hop dong'),
 (9, 'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 2', 'https://o.vdoc.vn/data/image/2022/05/16/Hop-dong-ve-quay-phim-chup-hinh-1-1.jpg', 1, 1, 'anh hop dong'),
 (10, 'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 3', 'https://s1.hopdongmau.com/pehAUEk9tIABIOBY/thumb/2015/08/20/mau-hop-dong-dich-vu-quang-cao-thuong-mai_1qA3eaucDq.jpg', 1, 1, 'anh hop dong'),
@@ -1183,7 +1171,7 @@ ALTER TABLE `thanhvien`
 -- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
-  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `bangcapchungchi`
