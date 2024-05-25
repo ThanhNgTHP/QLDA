@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 22, 2024 lúc 03:58 PM
+-- Thời gian đã tạo: Th5 25, 2024 lúc 07:43 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -177,21 +177,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnh` (`MaAnh` INT)   BEGIN
   WHERE anh.MaAnh = MaAnh;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhDA_old` (IN `MaDA` INT)   BEGIN
-  SELECT anh.TenAnh as Name, anh.DuongDan as Path, anh.MaAnh AS ID, anh.MaDA AS ProjectID
-  FROM duan 
-  INNER JOIN anh ON duan.MaDA = anh.MaDA
-  WHERE duan.MaDA = MaDA;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhDuAn` (IN `maDA` INT)   BEGIN
-  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaDuAn` (IN `maDA` INT)   BEGIN
+  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID
   FROM anh
   WHERE anh.LoaiAnh = 'anh du an' AND anh.MaDA = maDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhHopDong` (IN `maHD` INT)   BEGIN
-  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaHopDong` (IN `maHD` INT)   BEGIN
+  SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaHD AS ContractID
   FROM anh
   WHERE anh.LoaiAnh = 'anh hop dong' AND anh.MaHD = maHD;
 END$$
@@ -339,13 +332,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTK` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
-    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaNhom AS TeamID, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay
+    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaNhom AS TeamID, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay, thanhvien.MaDA AS ProjectID
     FROM thanhvien;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTVTG` ()   BEGIN
-  SELECT thanhvienthamgia.MaTVTG AS ID, thanhvienthamgia.MaTV AS StaffID, thanhvienthamgia.MaDA AS ProjectID
-  FROM thanhvienthamgia;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
@@ -475,12 +463,12 @@ CREATE TABLE `anh` (
 --
 
 INSERT INTO `anh` (`MaAnh`, `TenAnh`, `DuongDan`, `MaDA`, `MaHD`, `LoaiAnh`) VALUES
-(1, 'Mô Phỏng Xe Tăng', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/1.jpg', 1, NULL, 'anh du an'),
-(2, 'Mô Phỏng Lái Xe Ô Tô', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/2.jpg', 2, NULL, 'anh du an'),
-(3, 'Mô Phỏng Phòng Học', 'https://www.simulation.vn/images/sbhinh1.jpg', 1, NULL, 'anh du an'),
-(4, 'Mô Phỏng Súng AK', 'https://www.simulation.vn/images/ak-nhinthang.jpg', 1, NULL, 'anh du an'),
-(5, 'Mô Phỏng Cấu Tạo Hoạt Động Động Cơ Cơ Khí', 'https://www.simulation.vn/images/giamtoccanh2.jpg', 1, NULL, 'anh du an'),
-(6, 'Mô Phỏng Huấn Luyện Chiến Thuật Phân Đội Tank - Thiết Giáp', 'https://www.simulation.vn/images/3dtank.jpg', 1, NULL, 'anh du an'),
+(1, 'Mô Phỏng Xe Tăng', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/1.jpg', 1, 1, 'anh du an'),
+(2, 'Mô Phỏng Lái Xe Ô Tô', 'https://www.simulation.vn/templates/phoneapps-et/slideshow/2.jpg', 2, 1, 'anh du an'),
+(3, 'Mô Phỏng Phòng Học', 'https://www.simulation.vn/images/sbhinh1.jpg', 1, 1, 'anh du an'),
+(4, 'Mô Phỏng Súng AK', 'https://www.simulation.vn/images/ak-nhinthang.jpg', 1, 1, 'anh du an'),
+(5, 'Mô Phỏng Cấu Tạo Hoạt Động Động Cơ Cơ Khí', 'https://www.simulation.vn/images/giamtoccanh2.jpg', 1, 1, 'anh du an'),
+(6, 'Mô Phỏng Huấn Luyện Chiến Thuật Phân Đội Tank - Thiết Giáp', 'https://www.simulation.vn/images/3dtank.jpg', 1, 1, 'anh du an'),
 (8, 'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 1', 'https://sanketoan.vn/public/library_staff/25094/images/3(273).PNG', 1, 1, 'anh hop dong'),
 (9, 'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 2', 'https://o.vdoc.vn/data/image/2022/05/16/Hop-dong-ve-quay-phim-chup-hinh-1-1.jpg', 1, 1, 'anh hop dong'),
 (10, 'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 3', 'https://s1.hopdongmau.com/pehAUEk9tIABIOBY/thumb/2015/08/20/mau-hop-dong-dich-vu-quang-cao-thuong-mai_1qA3eaucDq.jpg', 1, 1, 'anh hop dong'),
@@ -537,11 +525,15 @@ CREATE TABLE `congviec` (
 --
 
 INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 20, 'cần lấy dữ liệu chính xác', 1, 350.3, 3),
-(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 25, 'không có', 1, 5305, 4),
-(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 50, 'không có', 1, 360.15, 5),
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 62, 'cần lấy dữ liệu chính xác', 1, 840, 3),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 57, 'không có', 1, 6060, 4),
+(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 83, 'không có', 1, 9147.15, 5),
 (4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 3),
-(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 3);
+(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 3),
+(8, 'Xác định yêu cầu', 'không có', '2005-06-16', '2005-06-20', 1500, 100, 'không có', 2, 500, 5),
+(9, 'Chọn giải pháp', 'không có', '2005-06-21', '2005-06-30', 1250, 100, 'không có', 2, 755, 5),
+(10, 'Triển khai hệ thống', 'không có', '2005-07-01', '2005-12-15', 1250, 100, 'không có', 2, 8787, 3),
+(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 6);
 
 --
 -- Bẫy `congviec`
@@ -720,8 +712,11 @@ CREATE TABLE `duan` (
 --
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
-(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 9165.45, 900, 19),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2025-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, NULL, 1500, NULL);
+(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 19197.2, 900, 40),
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 11242, 1500, 75),
+(4, 'Hệ thống mô phỏng dạy lái tàu thủy', '2013-12-20', '2016-11-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng lái tàu đường sông cho phép các học viên thực hành tập lái trên một cabin mô phỏng được thiết kế giống như thực tế. Quang cảnh hoạt động của khúc sông tập luyện được tái tạo phù hợp với quang cảnh thực tế trên môi trường đồ họa 3D.', 2, 0, 100000, 0),
+(5, 'Bộ phần mềm mô phỏng thực hành, thí nghiệm ảo 3D: VNSIM 3D Visual Traning Tools', '2021-09-27', '2022-09-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Phòng học Kết nối 3D khoa học phổ thông (VNSIM) được ra đời mang đến giải pháp tân tiến hỗ trợ cho việc dạy và học trở nên dễ dàng, thuận tiện nhất. Nhằm tạo ra một tiện ích giúp cho giáo viên và học sinh phổ thông dễ dàng hình dung và tiếp cận với các vấn đề khó của các môn học khoa học tự nhiên mà không dễ thể hiện trong điều kiện thực tế.', 2, 0, 90000, 0),
+(6, 'Thiết bị, phần mềm mô phỏng thực hành lái xe ô tô', '2019-11-22', '2021-11-27', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng dạy lái xe ô tô bằng công nghệ thực tại ảo 3D được chế tạo nhằm tạo ra một ca bin giống như cabine thật của xe ô tô. Người học sẽ sử dụng chiếc xe mô phỏng này để thực hiện các bài tập của mình trong một thế giới ảo 3D được lập trình sẵn tương tự như thế giới thật mà khi thi lấy bằng lái xe hoặc tham gia giao thông chúng ta sẽ gặp phải.', 2, 0, 120000, 0);
 
 -- --------------------------------------------------------
 
@@ -806,7 +801,22 @@ INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `Nga
 (15, 'Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống', 'thiết kế hệ thống phần mềm và phần cứng', 0, 'trung bình', '2016-03-01', '2016-03-10', 1750, 3, 2, 1420),
 (16, 'Lựa chọn nhà cung cấp phần cứng', 'tìm hiểu, lựa chọn các nhà cung cấp phần cứng của hệ thống', 0, 'trung bình', '2016-03-11', '2016-03-15', 1750, 2, 2, 520),
 (17, 'Lập tài liệu hướng dẫn kỹ thuật cho hệ thống', 'tài liệu hướng dẫn kỹ thuật', 0, 'trung bình', '2016-03-16', '2016-03-30', 1750, 2, 2, 3250),
-(18, 'lập trình phần mềm hệ thống', 'hoàn thiện các chức năng của hệ thống', 1, 'high', '2016-03-01', '2016-03-17', 250, 1, 3, 200.15);
+(18, 'lập trình phần mềm hệ thống', 'hoàn thiện các chức năng của hệ thống', 1, 'high', '2016-03-01', '2016-03-17', 250, 1, 3, 200.15),
+(20, 'Xác định mục tiêu và nhu cầu của hệ thống quản trị mạng', 'không có', 1, 'high', '2005-06-16', '2005-06-17', 200, 2, 8, 100),
+(21, 'Phân tích quy mô mạng, số lượng người dùng và thiết bị', 'không có', 1, 'high', '2005-06-17', '2005-06-18', 150, 2, 8, 200),
+(22, 'Xác định các tính năng cần thiết của hệ thống, ví dụ như giám sát hiệu suất mạng, quản lý cấu hình thiết bị, bảo mật mạng, v.v', 'không có', 1, 'high', '2005-06-18', '2005-06-19', 350, 2, 8, 100),
+(23, 'Lập ngân sách cho dự án', 'không có', 1, 'high', '2005-06-19', '2005-06-20', 100, 2, 8, 100),
+(24, 'Nghiên cứu và đánh giá các giải pháp quản trị mạng khác nhau trên thị trường', 'không có', 1, 'high', '2005-06-21', '2005-06-22', 345, 2, 9, 300),
+(25, 'Lựa chọn giải pháp phù hợp với nhu cầu, ngân sách và khả năng kỹ thuật của tổ chức', 'không có', 1, 'high', '2005-06-22', '2005-06-23', 155, 2, 9, 132),
+(26, 'Xem xét các yếu tố như tính năng, khả năng mở rộng, độ tin cậy, hỗ trợ kỹ thuật, v.v', 'không có', 1, 'high', '2005-06-23', '2005-06-25', 213, 2, 9, 323),
+(27, 'Cài đặt phần mềm quản trị mạng trên máy chủ quản lý', 'không có', 1, 'high', '2005-07-01', '2005-08-30', 2000, 1, 10, 1987),
+(28, 'Cấu hình các thiết bị mạng để hoạt động với hệ thống quản trị mạng', 'không có', 1, 'high', '2005-09-01', '2005-09-30', 3500, 1, 10, 4000),
+(29, 'Thử nghiệm và kiểm tra hệ thống để đảm bảo hoạt động chính xác', 'không có', 1, 'high', '2005-10-01', '2005-10-30', 4000, 1, 10, 2500),
+(30, 'Cung cấp tài liệu hướng dẫn và đào tạo cho người dùng', 'không có', 1, 'high', '2005-11-01', '2005-12-10', 1000, 1, 10, 300),
+(31, 'Theo dõi hiệu suất mạng và giám sát các thiết bị mạng', 'không có', 0, 'high', '2005-12-16', '2005-12-18', 500, 4, 11, 150),
+(32, 'Cấu hình và cập nhật hệ thống quản trị mạng khi cần thiết', 'không có', 0, 'high', '2005-12-18', '2005-12-20', 600, 4, 11, 300),
+(35, 'Giải quyết các sự cố mạng và hỗ trợ người dùng', 'không có', 0, 'high', '2005-12-20', '2005-12-25', 600, 4, 11, 300),
+(36, 'Thực hiện bảo mật mạng và bảo vệ hệ thống khỏi các mối đe dọa', 'không có', 0, 'high', '2005-12-26', '2005-12-30', 1000, 4, 11, 450);
 
 --
 -- Bẫy `nhiemvu`
@@ -949,7 +959,7 @@ CREATE TABLE `nhom` (
 INSERT INTO `nhom` (`MaNhom`, `TenNhom`, `TruongNhom`, `MaPB`) VALUES
 (3, 'Nhóm Lập Trình', 'Nguyễn Thị Hoan', 1),
 (4, 'Nhóm Thiết Kế', 'Bùi Hoan Tuân', 2),
-(5, 'Nhóm Phân Tích Yêu Cầu', 'Phạm Hồng Quân', 1),
+(5, 'Nhóm Phân Tích', 'Phạm Hồng Quân', 1),
 (6, 'Nhóm điều khiển điện tử', 'Trần Thị Long', 3);
 
 -- --------------------------------------------------------
@@ -1183,7 +1193,7 @@ ALTER TABLE `thanhvien`
 -- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
-  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `bangcapchungchi`
@@ -1195,7 +1205,7 @@ ALTER TABLE `bangcapchungchi`
 -- AUTO_INCREMENT cho bảng `congviec`
 --
 ALTER TABLE `congviec`
-  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `doitac`
@@ -1207,7 +1217,7 @@ ALTER TABLE `doitac`
 -- AUTO_INCREMENT cho bảng `duan`
 --
 ALTER TABLE `duan`
-  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `hopdong`
@@ -1225,7 +1235,7 @@ ALTER TABLE `loaiduan`
 -- AUTO_INCREMENT cho bảng `nhiemvu`
 --
 ALTER TABLE `nhiemvu`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`
