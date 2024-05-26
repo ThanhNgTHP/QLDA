@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 25, 2024 lúc 07:43 PM
+-- Thời gian đã tạo: Th5 26, 2024 lúc 12:23 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -37,9 +37,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaBCCC` (`maBC` INT, `tenBC` VARCH
     WHERE bangcapchungchi.MaBC = maBC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaCV` (`maCV` INT, `tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaCV` (`maCV` INT, `tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT, `maTV` INT, `doUuTien` VARCHAR(255))   BEGIN
     UPDATE congviec 
-    SET congviec.TenCV = tenCV, congviec.NoiDung = noiDung, congviec.NgayKetThuc = ngayKetThuc, congviec.NgayBatDau = ngayBatDau, congviec.NganSachDuKien = nganSachDuKien, congviec.TienDo = tienDo, congviec.GhiChu = ghiChu, congviec.MaDA = maDA, congviec.NganSachThucTe = nganSachThucTe, congviec.MaNhom = maNhom
+    SET congviec.TenCV = tenCV, congviec.NoiDung = noiDung, congviec.NgayKetThuc = ngayKetThuc, congviec.NgayBatDau = ngayBatDau, congviec.NganSachDuKien = nganSachDuKien, congviec.TienDo = tienDo, congviec.GhiChu = ghiChu, congviec.MaDA = maDA, congviec.NganSachThucTe = nganSachThucTe, congviec.MaNhom = maNhom, congviec.MaTV = maTV, congviec.DoUuTien = doUuTien
     WHERE congviec.MaCV = maCV;
 END$$
 
@@ -118,8 +118,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemBCCC` (`tenBC` VARCHAR(255), `n
 	INSERT INTO `bangcapchungchi`(`TenBC`, `NgayCap`, `NoiCap`, `MaTV`) VALUES (tenBC, ngayCap, noiCap, maTV);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (`tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT)   BEGIN
-    INSERT INTO `congviec`(`TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maNhom);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (`tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT, `maTV` INT, `doUuTien` VARCHAR(255))   BEGIN
+    INSERT INTO `congviec`(`TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maNhom, maTV, doUuTien);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemDA` (IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, `nganSachThucTe` FLOAT, `nganSachDuKien` FLOAT, `tienDo` INT)   BEGIN
@@ -276,7 +276,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaBC` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaCV` ()   BEGIN
-  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS Targetbudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID
+  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS Targetbudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
   FROM congviec;
 END$$
 
@@ -476,7 +476,16 @@ INSERT INTO `anh` (`MaAnh`, `TenAnh`, `DuongDan`, `MaDA`, `MaHD`, `LoaiAnh`) VAL
 (12, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXTJUlDUf3Z2fUJIF_lt1Y_rFNfKfxanpTED8alu6hmsY6cvqb9lP9ORtTs1-VOMgQRo&usqp=CAU', 2, 2, 'anh hop dong'),
 (13, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 2', 'https://image.slidesharecdn.com/hpngcungngdchvqungco-220530095856-53a865bd/85/H-P-D-NG-CUNG-NG-D-CH-V-QU-NG-CAO-doc-1-320.jpg', 2, 2, 'anh hop dong'),
 (14, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/756a7eaa66f9a88f9f768174f70790cc/thumb_1200_1553.png', 2, 2, 'anh hop dong'),
-(15, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'https://phangiaco.com.vn/upload/images/giay-phep-quang-cao-hop-den-quang-cao.jpg', 2, 2, 'anh hop dong');
+(15, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'https://phangiaco.com.vn/upload/images/giay-phep-quang-cao-hop-den-quang-cao.jpg', 2, 2, 'anh hop dong'),
+(18, 'Phòng học Phần mềm sa bàn điện tử 3D mô phỏng đã triển khai', 'https://simulation.vn/images/sbhinh2.jpg', 4, 3, 'anh du an'),
+(19, 'Tàu cập cảng Hải Phòng', 'https://simulation.vn/images/taucapcanghp.jpg', 4, 3, 'anh du an'),
+(20, 'Tàu vận động hướng về cảng Hải Phòng', 'https://simulation.vn/images/canghp.jpg', 4, 3, 'anh du an'),
+(21, 'Tàu di chuyển về cầu Việt Trì', 'https://simulation.vn/images/cauviettri.jpg', 4, 3, 'anh du an'),
+(22, 'Tàu di chuyển qua cầu Bính, Hải Phòng', 'https://simulation.vn/images/caubinhhp.jpg', 4, 3, 'anh du an'),
+(23, 'Tàu di chuyển qua cầu Phả Lại, Hải Dương', 'https://simulation.vn/images/cauphalaihd.jpg', 4, 3, 'anh du an'),
+(24, 'Giao diện lựa chọn vào bài tập được thiết kế theo giáo trình', 'https://simulation.vn/images/tau-song-giao-dien.jpg', 4, 3, 'anh du an'),
+(25, 'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang trang 1', 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/474078iDX/hinh-nen-mau-xanh-la-dep_093249980.jpg', 4, 3, 'anh hop dong'),
+(26, 'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang trang 2', 'https://tecwood.com.vn/news/hinh-nen-mau-xanh-la-cay-moi.jpg', 4, 3, 'anh hop dong');
 
 -- --------------------------------------------------------
 
@@ -517,23 +526,25 @@ CREATE TABLE `congviec` (
   `GhiChu` text DEFAULT NULL,
   `MaDA` int(11) DEFAULT NULL,
   `NganSachThucTe` float DEFAULT NULL,
-  `MaNhom` int(11) DEFAULT NULL
+  `MaNhom` int(11) DEFAULT NULL,
+  `MaTV` int(11) DEFAULT NULL,
+  `DoUuTien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `congviec`
 --
 
-INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 62, 'cần lấy dữ liệu chính xác', 1, 840, 3),
-(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 57, 'không có', 1, 6060, 4),
-(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 83, 'không có', 1, 9147.15, 5),
-(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 3),
-(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 3),
-(8, 'Xác định yêu cầu', 'không có', '2005-06-16', '2005-06-20', 1500, 100, 'không có', 2, 500, 5),
-(9, 'Chọn giải pháp', 'không có', '2005-06-21', '2005-06-30', 1250, 100, 'không có', 2, 755, 5),
-(10, 'Triển khai hệ thống', 'không có', '2005-07-01', '2005-12-15', 1250, 100, 'không có', 2, 8787, 3),
-(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 6);
+INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 62, 'cần lấy dữ liệu chính xác', 1, 840, 5, 2, 'cao'),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 57, 'không có', 1, 6060, 5, 2, 'cao'),
+(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 83, 'không có', 1, 9147.15, 3, 1, 'cao'),
+(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 7, 6, 'cao'),
+(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 6, 4, 'cao'),
+(8, 'Xác định yêu cầu', 'không có', '2005-06-16', '2005-06-20', 1500, 100, 'không có', 2, 500, 5, 2, 'cao'),
+(9, 'Chọn giải pháp', 'không có', '2005-06-21', '2005-06-30', 1250, 100, 'không có', 2, 755, 5, 2, 'cao'),
+(10, 'Triển khai hệ thống', 'không có', '2005-07-01', '2005-12-15', 1250, 10, 'không có', 2, 8787, 3, 1, 'cao'),
+(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 6, 4, 'cao');
 
 --
 -- Bẫy `congviec`
@@ -685,7 +696,8 @@ CREATE TABLE `doitac` (
 
 INSERT INTO `doitac` (`MaDT`, `TenDT`, `Email`, `SDT`, `Fax`, `DiaChi`, `TrangThai`, `GhiChu`, `MaSoThue`, `Nguoidaidien`, `ChucVu`) VALUES
 (1, 'Trường Cao Đẳng Nghề', 'truongcaodangnghe@gmail.com', '0977569889', '02203752519', 'Xã Nam Đồng, Thành Phố Hải Dương, Tỉnh Hải Dương', 'Ngừng Hợp Tác', 'Không Có', '0104922104', 'Nguyễn Văn Vọng', 'Hiệu Trưởng'),
-(2, 'Tổng Công Ty Xây Dựng Lũng Lô', 'nguyenhuong@gmail.com', '0123575251', '04913722549', 'Số 162 Trường Chinh - Đống Đa - Hà Nội', 'Ngừng Hợp Tác', 'Không Có', '0434971814', 'Tăng Văn Chúc', 'Giám  Đốc');
+(2, 'Tổng Công Ty Xây Dựng Lũng Lô', 'nguyenhuong@gmail.com', '0123575251', '04913722549', 'Số 162 Trường Chinh - Đống Đa - Hà Nội', 'Ngừng Hợp Tác', 'Không Có', '0434971814', 'Tăng Văn Chúc', 'Giám  Đốc'),
+(3, 'Công ty cổ phần Tân Minh Giang', 'tmg@viettel.vn', '0839895240', '08398952', 'A8 Phan Văn Trị - Phường 10 - Quận Gò Vấp - Tp HCM', 'đối tác cũ', 'không có', '0302996482', 'Trần Xuân Hùng', 'Tổng Giám đốc');
 
 -- --------------------------------------------------------
 
@@ -713,8 +725,8 @@ CREATE TABLE `duan` (
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
 (1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 19197.2, 900, 40),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 11242, 1500, 75),
-(4, 'Hệ thống mô phỏng dạy lái tàu thủy', '2013-12-20', '2016-11-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng lái tàu đường sông cho phép các học viên thực hành tập lái trên một cabin mô phỏng được thiết kế giống như thực tế. Quang cảnh hoạt động của khúc sông tập luyện được tái tạo phù hợp với quang cảnh thực tế trên môi trường đồ họa 3D.', 2, 0, 100000, 0),
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 11242, 1500, 52),
+(4, 'Hệ thống mô phỏng dạy lái tàu sông', '2013-12-20', '2016-11-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng lái tàu đường sông cho phép các học viên thực hành tập lái trên một cabin mô phỏng được thiết kế giống như thực tế. Quang cảnh hoạt động của khúc sông tập luyện được tái tạo phù hợp với quang cảnh thực tế trên môi trường đồ họa 3D.', 2, 0, 100000, 0),
 (5, 'Bộ phần mềm mô phỏng thực hành, thí nghiệm ảo 3D: VNSIM 3D Visual Traning Tools', '2021-09-27', '2022-09-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Phòng học Kết nối 3D khoa học phổ thông (VNSIM) được ra đời mang đến giải pháp tân tiến hỗ trợ cho việc dạy và học trở nên dễ dàng, thuận tiện nhất. Nhằm tạo ra một tiện ích giúp cho giáo viên và học sinh phổ thông dễ dàng hình dung và tiếp cận với các vấn đề khó của các môn học khoa học tự nhiên mà không dễ thể hiện trong điều kiện thực tế.', 2, 0, 90000, 0),
 (6, 'Thiết bị, phần mềm mô phỏng thực hành lái xe ô tô', '2019-11-22', '2021-11-27', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng dạy lái xe ô tô bằng công nghệ thực tại ảo 3D được chế tạo nhằm tạo ra một ca bin giống như cabine thật của xe ô tô. Người học sẽ sử dụng chiếc xe mô phỏng này để thực hiện các bài tập của mình trong một thế giới ảo 3D được lập trình sẵn tương tự như thế giới thật mà khi thi lấy bằng lái xe hoặc tham gia giao thông chúng ta sẽ gặp phải.', 2, 0, 120000, 0);
 
@@ -743,7 +755,8 @@ CREATE TABLE `hopdong` (
 
 INSERT INTO `hopdong` (`MaHD`, `TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiChu`, `GiaTriHD`, `TrangThai`, `MaDT`, `MaDA`) VALUES
 (1, 'Hợp Đồng Cung Cấp Hàng Hóa', '654/HĐ', '2024-07-21', '2024-12-12', 'Ghi Rõ Thông Tin Về Tên Doanh Nghiệp, Trụ Sở, Số Điện Thoại, Chức Vụ, Và Người Đại Diện', 1736730000, 'Hết Hiệu Lực', 1, 1),
-(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2);
+(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2),
+(3, 'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang', '20-12/TMG-VNSIM', '2013-12-20', '2016-11-15', 'không có', 200000, 'hợp đồng đã hoàn thành', 3, 4);
 
 -- --------------------------------------------------------
 
@@ -768,180 +781,6 @@ INSERT INTO `loaiduan` (`MaLoaiDA`, `TenLoaiDA`, `MoTa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nhiemvu`
---
-
-CREATE TABLE `nhiemvu` (
-  `MaNV` int(11) NOT NULL,
-  `TenNV` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `NoiDung` text DEFAULT NULL,
-  `HoanThanh` tinyint(1) DEFAULT NULL,
-  `DoUuTien` varchar(255) DEFAULT NULL,
-  `NgayBatDau` date DEFAULT NULL,
-  `NgayKetThuc` date DEFAULT NULL,
-  `NganSachDuKien` float DEFAULT NULL,
-  `MaTV` int(11) DEFAULT NULL,
-  `MaCV` int(11) DEFAULT NULL,
-  `NganSachThucTe` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `nhiemvu`
---
-
-INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `MaTV`, `MaCV`, `NganSachThucTe`) VALUES
-(1, 'khảo sát các thông tin về loại tàu, thuyền và môi trường được đưa vào thi thực hành', 'thu thập các thông số của tàu thuyền, địa điểm, thời tiết thi thực hành thực tế', 1, 'high', '2016-05-11', '2016-05-25', 20, 2, 1, 30),
-(2, 'thiết kế hệ thống', 'Thiết kế sơ đồ kiến trúc hệ thống, Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống, Lựa chọn nhà cung cấp phần mềm và phần cứng, Lập tài liệu hướng dẫn kỹ thuật cho hệ thống.', 1, 'trung bình', '2016-06-11', '2016-07-25', 200, 2, 2, 115),
-(3, 'Lắp đặt và cấu hình phần cứng hệ thống', 'triển khai lắp đạt hệ thống', 0, 'trung bình', '2016-06-11', '2016-07-25', 200, 4, 3, 160),
-(4, 'kiểm tra và kiểm thử hệ thống', 'sự tương thích, tối ưu, chính xác giữa phần cứng và phần mềm', 0, 'trung bình', '2016-07-26', '2016-07-30', 2000, 4, 4, 1550),
-(11, 'Huấn luyện cán bộ vận hành hệ thống', 'Huấn luyện cán bộ cách vận hành hệ thống', 0, 'trung bình', '2016-10-03', '2016-11-11', 1500, 4, 5, 1600),
-(12, 'xác định mục tiêu của hệ thống', 'xác định hệ thống dùng để làm gì?', 0, 'trung bình', '2016-02-05', '2016-02-07', 100, 2, 1, 100),
-(13, 'Phân tích thông tin', 'xác định các điểm mạnh, điểm yếu, cơ hội và thách thức của hệ thống', 0, 'trung bình', '2016-02-07', '2016-02-10', 100, 2, 1, 140),
-(14, 'Đề xuất giải pháp', 'Lập kế hoạch triển khai các giải pháp đề xuất', 0, 'trung bình', '2016-02-11', '2016-02-15', 100, 2, 1, 70),
-(15, 'Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống', 'thiết kế hệ thống phần mềm và phần cứng', 0, 'trung bình', '2016-03-01', '2016-03-10', 1750, 3, 2, 1420),
-(16, 'Lựa chọn nhà cung cấp phần cứng', 'tìm hiểu, lựa chọn các nhà cung cấp phần cứng của hệ thống', 0, 'trung bình', '2016-03-11', '2016-03-15', 1750, 2, 2, 520),
-(17, 'Lập tài liệu hướng dẫn kỹ thuật cho hệ thống', 'tài liệu hướng dẫn kỹ thuật', 0, 'trung bình', '2016-03-16', '2016-03-30', 1750, 2, 2, 3250),
-(18, 'lập trình phần mềm hệ thống', 'hoàn thiện các chức năng của hệ thống', 1, 'high', '2016-03-01', '2016-03-17', 250, 1, 3, 200.15),
-(20, 'Xác định mục tiêu và nhu cầu của hệ thống quản trị mạng', 'không có', 1, 'high', '2005-06-16', '2005-06-17', 200, 2, 8, 100),
-(21, 'Phân tích quy mô mạng, số lượng người dùng và thiết bị', 'không có', 1, 'high', '2005-06-17', '2005-06-18', 150, 2, 8, 200),
-(22, 'Xác định các tính năng cần thiết của hệ thống, ví dụ như giám sát hiệu suất mạng, quản lý cấu hình thiết bị, bảo mật mạng, v.v', 'không có', 1, 'high', '2005-06-18', '2005-06-19', 350, 2, 8, 100),
-(23, 'Lập ngân sách cho dự án', 'không có', 1, 'high', '2005-06-19', '2005-06-20', 100, 2, 8, 100),
-(24, 'Nghiên cứu và đánh giá các giải pháp quản trị mạng khác nhau trên thị trường', 'không có', 1, 'high', '2005-06-21', '2005-06-22', 345, 2, 9, 300),
-(25, 'Lựa chọn giải pháp phù hợp với nhu cầu, ngân sách và khả năng kỹ thuật của tổ chức', 'không có', 1, 'high', '2005-06-22', '2005-06-23', 155, 2, 9, 132),
-(26, 'Xem xét các yếu tố như tính năng, khả năng mở rộng, độ tin cậy, hỗ trợ kỹ thuật, v.v', 'không có', 1, 'high', '2005-06-23', '2005-06-25', 213, 2, 9, 323),
-(27, 'Cài đặt phần mềm quản trị mạng trên máy chủ quản lý', 'không có', 1, 'high', '2005-07-01', '2005-08-30', 2000, 1, 10, 1987),
-(28, 'Cấu hình các thiết bị mạng để hoạt động với hệ thống quản trị mạng', 'không có', 1, 'high', '2005-09-01', '2005-09-30', 3500, 1, 10, 4000),
-(29, 'Thử nghiệm và kiểm tra hệ thống để đảm bảo hoạt động chính xác', 'không có', 1, 'high', '2005-10-01', '2005-10-30', 4000, 1, 10, 2500),
-(30, 'Cung cấp tài liệu hướng dẫn và đào tạo cho người dùng', 'không có', 1, 'high', '2005-11-01', '2005-12-10', 1000, 1, 10, 300),
-(31, 'Theo dõi hiệu suất mạng và giám sát các thiết bị mạng', 'không có', 0, 'high', '2005-12-16', '2005-12-18', 500, 4, 11, 150),
-(32, 'Cấu hình và cập nhật hệ thống quản trị mạng khi cần thiết', 'không có', 0, 'high', '2005-12-18', '2005-12-20', 600, 4, 11, 300),
-(35, 'Giải quyết các sự cố mạng và hỗ trợ người dùng', 'không có', 0, 'high', '2005-12-20', '2005-12-25', 600, 4, 11, 300),
-(36, 'Thực hiện bảo mật mạng và bảo vệ hệ thống khỏi các mối đe dọa', 'không có', 0, 'high', '2005-12-26', '2005-12-30', 1000, 4, 11, 450);
-
---
--- Bẫy `nhiemvu`
---
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_hoanthanh_delete_trigger` AFTER DELETE ON `nhiemvu` FOR EACH ROW BEGIN
-    SET @MaCV = OLD.MaCV;
-    SET @MaNV = OLD.MaNV;
-    SET @TaskTotal = 0;
-    SET @CompleteTaskCount = 0;
-
- 	SELECT COUNT(*) INTO @TaskTotal
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-	SELECT COUNT(*) INTO @CompleteTaskCount
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
-    
-    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
-    
-    UPDATE congviec 
-    SET congviec.TienDo = @Process
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_hoanthanh_insert_trigger` AFTER INSERT ON `nhiemvu` FOR EACH ROW BEGIN
-	SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @TaskTotal = 0;
-    SET @CompleteTaskCount = 0;
-    
- 	SELECT COUNT(*) INTO @TaskTotal
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-	SELECT COUNT(*) INTO @CompleteTaskCount
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
-    
-    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
-    
-    UPDATE congviec 
-    SET congviec.TienDo = @Process
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_hoanthanh_update_trigger` AFTER UPDATE ON `nhiemvu` FOR EACH ROW BEGIN
-	SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @TaskTotal = 0;
-    SET @CompleteTaskCount = 0;
-    
- 	SELECT COUNT(*) INTO @TaskTotal
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-	SELECT COUNT(*) INTO @CompleteTaskCount
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
-    
-    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
-    
-    UPDATE congviec 
-    SET congviec.TienDo = @Process
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_ngansachthucte_delete_trigger` AFTER DELETE ON `nhiemvu` FOR EACH ROW BEGIN
-SET @MaCV = OLD.MaCV;
-    SET @MaNV = OLD.MaNV;
-    SET @FactBudget = 0;
-    
- 	SELECT SUM(nhiemvu.NganSachThucTe) INTO @FactBudget
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-    UPDATE congviec 
-    SET congviec.NganSachThucTe = @FactBudget
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_ngansachthucte_insert_trigger` AFTER INSERT ON `nhiemvu` FOR EACH ROW BEGIN
-SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @FactBudget = 0;
-    
- 	SELECT SUM(nhiemvu.NganSachThucTe) INTO @FactBudget
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-    UPDATE congviec 
-    SET congviec.NganSachThucTe = @FactBudget
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_ngansachthucte_update_trigger` AFTER UPDATE ON `nhiemvu` FOR EACH ROW BEGIN
-	SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @FactBudget = 0;
-    
- 	SELECT SUM(nhiemvu.NganSachThucTe) INTO @FactBudget
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-    UPDATE congviec 
-    SET congviec.NganSachThucTe = @FactBudget
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `nhom`
 --
 
@@ -960,7 +799,8 @@ INSERT INTO `nhom` (`MaNhom`, `TenNhom`, `TruongNhom`, `MaPB`) VALUES
 (3, 'Nhóm Lập Trình', 'Nguyễn Thị Hoan', 1),
 (4, 'Nhóm Thiết Kế', 'Bùi Hoan Tuân', 2),
 (5, 'Nhóm Phân Tích', 'Phạm Hồng Quân', 1),
-(6, 'Nhóm điều khiển điện tử', 'Trần Thị Long', 3);
+(6, 'Nhóm điều khiển điện tử', 'Trần Thị Long', 3),
+(7, 'Nhóm kiểm thử', 'Lê Thị Liên', 7);
 
 -- --------------------------------------------------------
 
@@ -981,7 +821,11 @@ CREATE TABLE `phongban` (
 INSERT INTO `phongban` (`MaPB`, `TenPB`, `MoTa`) VALUES
 (1, 'Phòng lập trình', 'Không Có'),
 (2, 'Phòng Thiết Kế', 'Không Có'),
-(3, 'Phòng điều khiển điện tử', 'không có');
+(3, 'Phòng điều khiển điện tử', 'không có'),
+(4, 'Phòng dữ liệu 3D', 'không có'),
+(5, 'Phòng thiết kế cơ khí', 'không có'),
+(6, 'phòng bảo hành', 'không có'),
+(7, 'Phòng kiểm thử', 'không có');
 
 -- --------------------------------------------------------
 
@@ -1025,7 +869,8 @@ CREATE TABLE `sukien` (
 
 INSERT INTO `sukien` (`MaSK`, `TenSK`, `Anh`, `GhiChu`, `NoiDung`, `MaDA`) VALUES
 (1, 'Xây dựng hệ thống điện tử tự động giám sát thi thực hành - nghề điều khiển phương tiện thủy nội địa', 'https://file.qdnd.vn/data/old_img/phucthang/2013/4/19/5171054220130419204601609.jpg', 'hệ thống tương tự như hệ thống sát hạch lái xe ô tô', 'Đây là hệ thống được xây dựng tương tự như hệ thống sát hạch điện tử lái xe ô tô. Quy trình thi thực hành được thực hiện trên bến cảng, sử dụng phương tiện thi đúng tiêu chuẩn cấp độ tàu theo quy định của Bộ GTVT. Hệ thống bao gồm phần mềm quản lý, đánh giá và các thiết bị điện tử, cảm biến, camera giám sát lắp đặt tại tàu, bến cảng tự động giám sát, chấm điểm quá trình thực hiện các bài thi thực hành của thí sinh trên luồng dài 200m. Kết quả đánh giá hình ảnh quá trình thực hiện bài thi của thí sinh được truyền về trung tâm điều hành qua hệ thống mạng không dây và cáp quang nội bộ, đồng thời được cập nhật trực tiếp lên Internet thông qua website của trung tâm.\r\n\r\nHệ thống được thiết kế để tự động giám sát, đánh giá chấm điểm các bài thi thực hành:\r\n\r\nBài 1: Điều động tàu rời cầu, có chướng ngại vật khống chế phía mũi tàu.\r\nBài 2: Điều động tàu rời cầu, có chướng ngại vật khống chế phía lái tàu.\r\nBài 3: Điều động tàu cập cầu, có chướng ngại vật khống chế phía mũi\r\nBài 4: Điều động tàu cập cầu, có chướng ngại vật khống chế phía lái tàu.\r\nBài 5: Điều động tàu bắt chập tiêu phía mũi tàu.\r\nBài 6: Điều động tàu bắt chập tiêu phía sau lái tàu.', 1),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', 'https://infovina.vn/content/article/09-10-2023/cac-loai-he-thong-monitor-giam-sat-thiet-bi-mang-hien-nay-091023095023.png', 'Hệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp nhiều lợi ích như nâng cao hiệu suất mạng, giảm thời gian ngừng hoạt động, nâng cao khả năng bảo mật và giảm chi phí vận hành.', 'Hệ Thống Phần Mềm Quản Trị Mạng\r\nHệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp một giao diện tập trung để quản lý các thiết bị mạng, theo dõi hiệu suất mạng, phát hiện và khắc phục sự cố, đồng thời đảm bảo bảo mật mạng.\r\n\r\nChức năng chính của NMS:\r\n\r\nGiám sát thiết bị mạng: NMS có thể thu thập dữ liệu từ các thiết bị mạng như bộ định tuyến, bộ chuyển đổi, điểm truy cập không dây và máy chủ, cho phép quản trị viên theo dõi trạng thái hoạt động, hiệu suất và cấu hình của các thiết bị này.\r\nTheo dõi hiệu suất mạng: NMS có thể theo dõi các chỉ số hiệu suất mạng quan trọng (KPI) như lưu lượng truy cập mạng, thời gian phản hồi, tỷ lệ mất gói tin và tỷ lệ sử dụng băng thông, giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng.\r\nPhát hiện và khắc phục sự cố: NMS có thể phát hiện các sự cố mạng như lỗi thiết bị, gián đoạn kết nối và tấn công mạng, đồng thời thông báo cho quản trị viên để họ có thể khắc phục sự cố kịp thời.\r\nCấu hình thiết bị: NMS cho phép quản trị viên cấu hình các thiết bị mạng từ xa, giúp tiết kiệm thời gian và công sức.\r\nQuản lý bảo mật mạng: NMS có thể giúp quản trị viên theo dõi các hoạt động mạng, phát hiện các mối đe dọa bảo mật và thực hiện các biện pháp phòng ngừa để bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nLợi ích của việc sử dụng NMS:\r\n\r\nNâng cao hiệu suất mạng: NMS giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng một cách nhanh chóng và hiệu quả, từ đó nâng cao hiệu suất tổng thể của mạng.\r\nGiảm thời gian ngừng hoạt động: NMS giúp phát hiện và khắc phục sự cố mạng kịp thời, giúp giảm thiểu thời gian ngừng hoạt động của mạng và đảm bảo hoạt động liên tục của các ứng dụng kinh doanh.\r\nNâng cao khả năng bảo mật: NMS giúp quản trị viên theo dõi các hoạt động mạng và phát hiện các mối đe dọa bảo mật, giúp bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nGiảm chi phí vận hành: NMS giúp tự động hóa các tác vụ quản trị mạng, giúp tiết kiệm thời gian và công sức cho quản trị viên, đồng thời giảm chi phí vận hành mạng.', 2);
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', 'https://infovina.vn/content/article/09-10-2023/cac-loai-he-thong-monitor-giam-sat-thiet-bi-mang-hien-nay-091023095023.png', 'Hệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp nhiều lợi ích như nâng cao hiệu suất mạng, giảm thời gian ngừng hoạt động, nâng cao khả năng bảo mật và giảm chi phí vận hành.', 'Hệ Thống Phần Mềm Quản Trị Mạng\r\nHệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp một giao diện tập trung để quản lý các thiết bị mạng, theo dõi hiệu suất mạng, phát hiện và khắc phục sự cố, đồng thời đảm bảo bảo mật mạng.\r\n\r\nChức năng chính của NMS:\r\n\r\nGiám sát thiết bị mạng: NMS có thể thu thập dữ liệu từ các thiết bị mạng như bộ định tuyến, bộ chuyển đổi, điểm truy cập không dây và máy chủ, cho phép quản trị viên theo dõi trạng thái hoạt động, hiệu suất và cấu hình của các thiết bị này.\r\nTheo dõi hiệu suất mạng: NMS có thể theo dõi các chỉ số hiệu suất mạng quan trọng (KPI) như lưu lượng truy cập mạng, thời gian phản hồi, tỷ lệ mất gói tin và tỷ lệ sử dụng băng thông, giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng.\r\nPhát hiện và khắc phục sự cố: NMS có thể phát hiện các sự cố mạng như lỗi thiết bị, gián đoạn kết nối và tấn công mạng, đồng thời thông báo cho quản trị viên để họ có thể khắc phục sự cố kịp thời.\r\nCấu hình thiết bị: NMS cho phép quản trị viên cấu hình các thiết bị mạng từ xa, giúp tiết kiệm thời gian và công sức.\r\nQuản lý bảo mật mạng: NMS có thể giúp quản trị viên theo dõi các hoạt động mạng, phát hiện các mối đe dọa bảo mật và thực hiện các biện pháp phòng ngừa để bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nLợi ích của việc sử dụng NMS:\r\n\r\nNâng cao hiệu suất mạng: NMS giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng một cách nhanh chóng và hiệu quả, từ đó nâng cao hiệu suất tổng thể của mạng.\r\nGiảm thời gian ngừng hoạt động: NMS giúp phát hiện và khắc phục sự cố mạng kịp thời, giúp giảm thiểu thời gian ngừng hoạt động của mạng và đảm bảo hoạt động liên tục của các ứng dụng kinh doanh.\r\nNâng cao khả năng bảo mật: NMS giúp quản trị viên theo dõi các hoạt động mạng và phát hiện các mối đe dọa bảo mật, giúp bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nGiảm chi phí vận hành: NMS giúp tự động hóa các tác vụ quản trị mạng, giúp tiết kiệm thời gian và công sức cho quản trị viên, đồng thời giảm chi phí vận hành mạng.', 2),
+(4, 'Hệ thống mô phỏng dạy lái tàu thủy', 'https://simulation.vn/images/sbhinh9.jpg', 'không có', 'Việt Nam có hệ thống giao thông đường thủy phong phú với hệ thống sông kênh dày đặc, có tổng chiều dài trên 40.000 km. Hệ thống giao thông đường thủy đóng vai trò quan trọng trong ngành giao thông vận tải, lưu thông hàng hóa, góp phần giảm áp lực cho vận tải đường bộ. Song song với những thuận lợi đó thì nhiều năm qua, giao thông đường thủy nội địa vẫn nổi cộm vấn đề người điều khiển phương tiện thủy không có bằng lái, chứng chỉ chuyên môn. Việc đào tạo, cấp chứng chỉ chuyên môn cho lực lượng lái tàu hiện có và đào tạo bổ sung nguồn nhân lực mới có trình độ chuyên môn, nghiệp vụ cho ngành vận tải đường thủy đang là vấn đề rất cấp bách. Tuy nhiên, việc đáp ứng nhu cầu về số lượng lao động cũng cần phải đi đôi với việc đảm bảo chất lượng đào tạo. Việc đào tạo phải đảm bảo học viên ra trường nắm chắc được kỹ thuật, nghiệp vụ, đảm bảo an toàn cho phương tiện giao thông, tài sản của cá nhân nói riêng và an toàn giao thông đường thủy nội địa nói chung. Để đáp ứng được các yêu cầu đề ra đó thì việc nâng cấp cơ sở vật chất, hiện đại hóa các cơ sở đào tạo, ứng dụng công nghệ thông tin vào quá trình đào tạo là rất cần thiết, phù hợp với xu hướng phát triển của thế giới.\r\n\r\nNgoài việc ứng dụng công nghệ thông tin trong việc xây dựng bài giảng, giảng dạy lý thuyết trên lớp thì việc ứng dụng công nghệ thông tin, cụ thể là công nghệ mô phỏng, vào các giờ học thực hành cũng có ý nghĩa và hiệu quả thiết thực, đã và đang được áp dụng tại các nước tiên tiến trên thế giới.\r\n\r\nHiện nay, ở nước ta, các đơn vị đào tạo và nhà trường đã bước đầu quan tâm xây dựng các hệ thống mô phỏng, các chương trình phần mềm phục vụ cho nhiệm vụ cụ thể của mình. Các hệ thống này đã góp phần tích cực trong việc nâng cao chất lượng huấn luyện, từng bước góp phần xây dựng nhà trường chính quy hiện đại. Ví dụ như: thiết bị mô phỏng tập lái tầu sông đặt tại trường Cao đẳng giao thông 1; Hệ thống mô phỏng dạy lái tàu sông tại trường trung cấp nghề giao thông đường thủy Việt Trì, Phú Thọ; Hệ thống mô phỏng tàu sông tại trường ĐH cảnh sát TP Hồ Chí Minh, trường Trung cấp cảnh sát T52 (Thăng Bình, Quảng Nam), trường Trung cấp nghề Tiền Giang, trung cấp nghề Trà Vinh,...\r\n\r\nNgoài ra, ứng dụng công nghệ mô phỏng vào việc xây dựng hệ thống sa bàn điện tử 3D cũng là một phương pháp có tính hiệu quả thiết thực trong việc đưa công nghệ thông tin vào hỗ trợ quá trình đào tạo nghiệp vụ giao thông vận tải đường thủy nội địa. Bởi trong quá trình đào tạo, việc đi khảo sát thực tế để nắm được các tuyến luồng giao thông đường thủy đóng một vai trò hết sức quan trọng. Tuy nhiên, quá trình này lại tốn rất nhiều thời gian trong khi thời gian đào tạo lại có hạn, đồng thời nhà trường cũng không thể tổ chức cho học viên đi thực tế trên tất cả các tuyến sông. Hệ thống sa bàn điện tử 3D mô phỏng được xây dựng dựa trên cơ sở khảo sát các địa danh, tuyến, luồng cụ thể, sau đó số hóa các đối tượng dưới dạng mô hình 3D, đưa vào phần mềm, bố trí lại trong không gian 3D với các chi tiết địa hình, hiệu ứng thủy văn giống như trong thực tế. Hệ thống giúp cho học viên có thể nắm được các tuyến luồng, thủy văn của các tuyến sông ngay từ các giờ giảng trên lớp, thông qua hệ thống hình ảnh, âm thanh sát với thực tế.', 4);
 
 -- --------------------------------------------------------
 
@@ -1067,20 +912,19 @@ CREATE TABLE `thanhvien` (
   `MaTK` int(11) DEFAULT NULL,
   `GioiTinh` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Nam',
   `TrangThai` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `AnhDaiDien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `MaNhom` int(11) DEFAULT NULL,
-  `MaDA` int(11) DEFAULT NULL
+  `AnhDaiDien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `thanhvien`
 --
 
-INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`, `MaNhom`, `MaDA`) VALUES
-(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'kĩ sư lập trình', 'nguyenvantung@gmail.com', 1, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg', 3, 1),
-(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Phân tích hệ thống', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg', 5, 1),
-(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg', 4, 2),
-(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Kỹ thuật viên điều khiển', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG', 6, 2);
+INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`) VALUES
+(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'kĩ sư lập trình', 'nguyenvantung@gmail.com', 1, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg'),
+(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Phân tích hệ thống', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg'),
+(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg'),
+(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Kỹ thuật viên điều khiển', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG'),
+(6, 'Phạm Tiến Đồng', '0978563485', 'Trung hòa, Cầu Giấy, HN', '1989-04-05', 'Nhân viên kiểm thử', 'phamdong@gmail.com', 3, 'Nam', 'Đang làm việc', 'https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1107,7 +951,8 @@ ALTER TABLE `bangcapchungchi`
 ALTER TABLE `congviec`
   ADD PRIMARY KEY (`MaCV`),
   ADD KEY `MaDA` (`MaDA`),
-  ADD KEY `MaNhom` (`MaNhom`);
+  ADD KEY `MaNhom` (`MaNhom`),
+  ADD KEY `MaTV` (`MaTV`);
 
 --
 -- Chỉ mục cho bảng `doitac`
@@ -1135,14 +980,6 @@ ALTER TABLE `hopdong`
 --
 ALTER TABLE `loaiduan`
   ADD PRIMARY KEY (`MaLoaiDA`);
-
---
--- Chỉ mục cho bảng `nhiemvu`
---
-ALTER TABLE `nhiemvu`
-  ADD PRIMARY KEY (`MaNV`),
-  ADD KEY `MaTV` (`MaTV`),
-  ADD KEY `MaCV` (`MaCV`);
 
 --
 -- Chỉ mục cho bảng `nhom`
@@ -1182,8 +1019,7 @@ ALTER TABLE `taikhoan`
 --
 ALTER TABLE `thanhvien`
   ADD PRIMARY KEY (`MaTV`),
-  ADD KEY `MaTK` (`MaTK`),
-  ADD KEY `MaNhom` (`MaNhom`);
+  ADD KEY `MaTK` (`MaTK`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -1193,7 +1029,7 @@ ALTER TABLE `thanhvien`
 -- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
-  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `bangcapchungchi`
@@ -1211,7 +1047,7 @@ ALTER TABLE `congviec`
 -- AUTO_INCREMENT cho bảng `doitac`
 --
 ALTER TABLE `doitac`
-  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `duan`
@@ -1223,7 +1059,7 @@ ALTER TABLE `duan`
 -- AUTO_INCREMENT cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `loaiduan`
@@ -1232,22 +1068,16 @@ ALTER TABLE `loaiduan`
   MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT cho bảng `nhiemvu`
---
-ALTER TABLE `nhiemvu`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
 -- AUTO_INCREMENT cho bảng `nhom`
 --
 ALTER TABLE `nhom`
-  MODIFY `MaNhom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MaNhom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `phongban`
 --
 ALTER TABLE `phongban`
-  MODIFY `MaPB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaPB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `quyen`
@@ -1259,7 +1089,7 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT cho bảng `sukien`
 --
 ALTER TABLE `sukien`
-  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `taikhoan`
@@ -1271,7 +1101,7 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1295,7 +1125,8 @@ ALTER TABLE `bangcapchungchi`
 --
 ALTER TABLE `congviec`
   ADD CONSTRAINT `congviec_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`),
-  ADD CONSTRAINT `congviec_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`);
+  ADD CONSTRAINT `congviec_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`),
+  ADD CONSTRAINT `congviec_ibfk_3` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`);
 
 --
 -- Các ràng buộc cho bảng `duan`
@@ -1309,13 +1140,6 @@ ALTER TABLE `duan`
 ALTER TABLE `hopdong`
   ADD CONSTRAINT `hopdong_ibfk_1` FOREIGN KEY (`MaDT`) REFERENCES `doitac` (`MaDT`),
   ADD CONSTRAINT `hopdong_ibfk_2` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`);
-
---
--- Các ràng buộc cho bảng `nhiemvu`
---
-ALTER TABLE `nhiemvu`
-  ADD CONSTRAINT `nhiemvu_ibfk_1` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`),
-  ADD CONSTRAINT `nhiemvu_ibfk_2` FOREIGN KEY (`MaCV`) REFERENCES `congviec` (`MaCV`);
 
 --
 -- Các ràng buộc cho bảng `nhom`
@@ -1339,8 +1163,7 @@ ALTER TABLE `taikhoan`
 -- Các ràng buộc cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  ADD CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`),
-  ADD CONSTRAINT `thanhvien_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`);
+  ADD CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
