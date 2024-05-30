@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:8888
--- Thời gian đã tạo: Th5 24, 2024 lúc 01:04 PM
+-- Thời gian đã tạo: Th5 30, 2024 lúc 07:19 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -37,9 +37,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaBCCC` (`maBC` INT, `tenBC` VARCH
     WHERE bangcapchungchi.MaBC = maBC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaCV` (`maCV` INT, `tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaCV` (`maCV` INT, `tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT, `maTV` INT, `doUuTien` VARCHAR(255))   BEGIN
     UPDATE congviec 
-    SET congviec.TenCV = tenCV, congviec.NoiDung = noiDung, congviec.NgayKetThuc = ngayKetThuc, congviec.NgayBatDau = ngayBatDau, congviec.NganSachDuKien = nganSachDuKien, congviec.TienDo = tienDo, congviec.GhiChu = ghiChu, congviec.MaDA = maDA, congviec.NganSachThucTe = nganSachThucTe, congviec.MaNhom = maNhom
+    SET congviec.TenCV = tenCV, congviec.NoiDung = noiDung, congviec.NgayKetThuc = ngayKetThuc, congviec.NgayBatDau = ngayBatDau, congviec.NganSachDuKien = nganSachDuKien, congviec.TienDo = tienDo, congviec.GhiChu = ghiChu, congviec.MaDA = maDA, congviec.NganSachThucTe = nganSachThucTe, congviec.MaNhom = maNhom, congviec.MaTV = maTV, congviec.DoUuTien = doUuTien
     WHERE congviec.MaCV = maCV;
 END$$
 
@@ -118,8 +118,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemBCCC` (`tenBC` VARCHAR(255), `n
 	INSERT INTO `bangcapchungchi`(`TenBC`, `NgayCap`, `NoiCap`, `MaTV`) VALUES (tenBC, ngayCap, noiCap, maTV);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (`tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT)   BEGIN
-    INSERT INTO `congviec`(`TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maNhom);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (`tenCV` VARCHAR(255), `noiDung` TEXT, `ngayKetThuc` DATE, `ngayBatDau` DATE, `nganSachDuKien` FLOAT, `tienDo` INT, `ghiChu` TEXT, `maDA` INT, `nganSachThucTe` FLOAT, `maNhom` INT, `maTV` INT, `doUuTien` VARCHAR(255))   BEGIN
+    INSERT INTO `congviec`(`TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maNhom, maTV, doUuTien);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemDA` (IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, `nganSachThucTe` FLOAT, `nganSachDuKien` FLOAT, `tienDo` INT)   BEGIN
@@ -187,18 +187,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaHopDong` (IN `maHD` I
   SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaHD AS ContractID
   FROM anh
   WHERE anh.LoaiAnh = 'anh hop dong' AND anh.MaHD = maHD;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinChiTietDA` (IN `MaDA` INT)   BEGIN
-    SELECT duan.MaDA AS ProjecID, duan.TenDA AS ProjectName, duan.NgayBatDau AS ProjectName, duan.NgayKetThuc AS ProjectExpire, duan.LienHe AS ProjectContact, duan.MoTa AS ProjectDescription, duan.TrangThai AS ProjectStatus, thanhvien.MaTV AS StaffID, thanhvien.HoTen AS StaffName, thanhvien.GioiTinh AS StaffGender, thanhvien.ChucVu AS StaffPosition, thanhvien.TrangThai AS StaffStatus, nhom.MaNhom AS TeamID, nhom.TenNhom AS TeamName, phongban.MaPB AS DepartmentID, phongban.TenPB AS DepartmentName, hopdong.MaHD AS ContractID, hopdong.TenHD AS ContractName, hopdong.SoHD AS ContractNumber, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS ContractExpire, hopdong.GhiChu AS ContractNote, hopdong.GiaTriHD AS ContractValue, hopdong.TrangThai AS ContractStatus, doitac.MaDT AS PartnerID, doitac.TenDT AS PartnerName, doitac.NguoiLienHe AS PartnerContact, doitac.Email AS PartnerEmail, doitac.SDT AS PartnerPhone, doitac.Fax AS PartnerFax, doitac.DiaChi AS PartnerAddress, doitac.GhiChu AS PartnerNote, doitac.TrangThai AS PartnerStatus, doitac.MaSoThue AS TaxCode
-	FROM duan
-    INNER JOIN hopdong ON duan.MaDA = hopdong.MaDA
-    INNER JOIN doitac ON hopdong.MaDT = doitac.MaDT
-    INNER JOIN thanhvienthamgia ON duan.MaDA = thanhvienthamgia.MaDA
-    INNER JOIN thanhvien ON thanhvienthamgia.MaTV = thanhvien.MaTV
-    INNER JOIN nhom ON nhom.MaNhom = thanhvien.MaNhom
-    INNER JOIN phongban ON nhom.MaPB = phongban.MaPB
-    WHERE duan.MaDA = MaDA;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDA` (IN `MaDA` INT)   BEGIN
@@ -276,7 +264,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaBC` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaCV` ()   BEGIN
-  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS Targetbudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID
+  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
   FROM congviec;
 END$$
 
@@ -332,7 +320,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTK` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
-    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaNhom AS TeamID, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay, thanhvien.MaDA AS ProjectID
+    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay
     FROM thanhvien;
 END$$
 
@@ -363,6 +351,41 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDA` (IN `TenDA` VARCHAR(255)
     SELECT MaDA AS ProjectID, duan.TenDA AS ProjectName, NgayBatDau AS Begin , NgayKetThuc AS Expire, TrangThai AS Status, LienHe AS Contact, MoTa AS Description
     FROM duan
     WHERE duan.TenDA LIKE @TenDA;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDT` (`TenDT` VARCHAR(255))   BEGIN
+    SET @TenDT = CONCAT('%', TenDT , '%');
+    SELECT doitac.MaDT AS PartnerID, doitac.TenDT AS PartnerName, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai as Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
+    FROM doitac
+    WHERE doitac.TenDT LIKE @TenDT;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemHD` (`TenHD` VARCHAR(255))   BEGIN
+    SET @TenHD = CONCAT('%', TenHD , '%');
+    SELECT hopdong.MaHD AS ContractID, hopdong.TenHD AS ContractName, hopdong.SoHD AS Number, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS Expire, hopdong.GhiChu AS Note, hopdong.GiaTriHD AS Value, hopdong.TrangThai AS Status, hopdong.MaDT AS PartnerID, hopdong.MaDA AS ProjectID
+    FROM hopdong
+    WHERE hopdong.TenHD LIKE @TenHD;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemSK` (`TenSK` VARCHAR(255))   BEGIN
+    SET @TenSK = CONCAT('%', TenSK , '%');
+    SELECT sukien.MaSK AS EventID, sukien.TenSK AS EventName, sukien.Anh AS Image, sukien.GhiChu AS Note, sukien.NoiDung AS Content, sukien.MaDA AS ProjectID
+    FROM sukien
+    WHERE sukien.TenSK LIKE @TenSK;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemTK` (`TenTK` VARCHAR(255))   BEGIN
+    SET @TenTK = CONCAT('%', TenTK , '%');
+    SELECT taikhoan.MaTK AS ACcountID, taikhoan.TenTK AS AccountName, taikhoan.MatKhau AS Password, taikhoan.MaQuyen AS PermissionID, taikhoan.TrangThai AS Status
+    FROM taikhoan
+    WHERE taikhoan.TenTK LIKE @TenTK;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemTV` (`HoTen` VARCHAR(255))   BEGIN
+    SET @HoTen = CONCAT('%', HoTen , '%');
+    SELECT MaTV AS StaffID, thanhvien.HoTen AS StaffName, thanhvien.SDT AS Phone, thanhvien.DiaChi AS Address, thanhvien.NgaySinh as Birthday, thanhvien.ChucVu AS Possition, thanhvien.Email AS Email, thanhvien.MaTK AS AccountID, thanhvien.GioiTinh AS Gender, thanhvien.TrangThai AS Status, thanhvien.AnhDaiDien AS Avatar
+    FROM thanhvien
+    WHERE thanhvien.HoTen LIKE @HoTen;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `XacMinhTaiKhoan` (IN `taikhoan` VARCHAR(255), IN `matkhau` VARCHAR(255))   BEGIN
@@ -431,13 +454,30 @@ END$$
 --
 -- Các hàm
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
+  DECLARE count INT;
+  
+  UPDATE taikhoan 
+  SET  taikhoan.MatKhau = MatKhauMoi
+  WHERE taikhoan.MatKhau = MatKhauCu;
+ 
+  SET count = ROW_COUNT();
+  
+  IF count > 0 THEN
+  	RETURN true;
+  ELSE
+  	RETURN false;
+  END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `SoNguoiThamGia` (`MaDA` INT) RETURNS INT(11)  BEGIN 
   DECLARE count INT;
-  SELECT COUNT(MaTV) INTO count 
-  FROM thanhvien INNER JOIN duan 
-  ON thanhvien.MaDA = duan.MaDA
+  SELECT COUNT(MaDA) INTO count 
+  FROM congviec INNER JOIN duan 
+  ON congviec.MaDA = duan.MaDA
+  INNER JOIN thanhvien
+  ON thanhvien.MaTV = congviec.MaTV
   WHERE duan.MaDA = MaDA;
-
   RETURN count;
 END$$
 
@@ -517,19 +557,30 @@ CREATE TABLE `congviec` (
   `GhiChu` text DEFAULT NULL,
   `MaDA` int(11) DEFAULT NULL,
   `NganSachThucTe` float DEFAULT NULL,
-  `MaNhom` int(11) DEFAULT NULL
+  `MaNhom` int(11) DEFAULT NULL,
+  `MaTV` int(11) DEFAULT NULL,
+  `DoUuTien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `congviec`
 --
 
-INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 20, 'cần lấy dữ liệu chính xác', 1, 350.3, 3),
-(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 25, 'không có', 1, 5305, 4),
-(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 50, 'không có', 1, 360.15, 5),
-(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 3),
-(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 3);
+INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 62, 'cần lấy dữ liệu chính xác', 1, 840, 5, 2, 'cao'),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 57, 'không có', 1, 6060, 5, 2, 'cao'),
+(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 83, 'không có', 1, 9147.15, 3, 1, 'cao'),
+(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 7, 6, 'cao'),
+(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 6, 4, 'cao'),
+(8, 'Xác định yêu cầu', 'không có', '2005-06-16', '2005-06-20', 1500, 100, 'không có', 2, 500, 5, 2, 'cao'),
+(9, 'Chọn giải pháp', 'không có', '2005-06-21', '2005-06-30', 1250, 100, 'không có', 2, 755, 5, 2, 'cao'),
+(10, 'Triển khai hệ thống', 'không có', '2005-07-01', '2005-12-15', 1250, 10, 'không có', 2, 8787, 3, 1, 'cao'),
+(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 6, 4, 'cao'),
+(13, 'Duy trì và nâng cấp', 'không có', '2005-12-30', '2006-01-01', 1000, 10, 'không có', 2, 1200, 4, 1, 'high'),
+(14, 'Cập nhật phần mềm quản trị mạng và firmware thiết bị mạng', 'không có', '2006-01-02', '2006-01-10', 1000, 10, 'không có', 2, 1200, 5, 1, 'high'),
+(15, 'Nâng cấp hệ thống', 'không có', '2006-01-11', '2006-01-15', 1000, 10, 'không có', 2, 1200, 6, 1, 'high'),
+(16, 'Đảm bảo hoạt động của hệ thống', 'Đảm bảo hệ thống luôn hoạt động an toàn và hiệu quả', '2006-01-16', '2006-01-17', 1000, 10, 'không có', 2, 1200, 7, 1, 'high'),
+(17, 'Lập kế hoạch dự phòng và khôi phục', 'không có', '2006-01-18', '2006-01-20', 1000, 10, 'không có', 2, 1200, 4, 1, 'high');
 
 --
 -- Bẫy `congviec`
@@ -681,7 +732,8 @@ CREATE TABLE `doitac` (
 
 INSERT INTO `doitac` (`MaDT`, `TenDT`, `Email`, `SDT`, `Fax`, `DiaChi`, `TrangThai`, `GhiChu`, `MaSoThue`, `Nguoidaidien`, `ChucVu`) VALUES
 (1, 'Trường Cao Đẳng Nghề', 'truongcaodangnghe@gmail.com', '0977569889', '02203752519', 'Xã Nam Đồng, Thành Phố Hải Dương, Tỉnh Hải Dương', 'Ngừng Hợp Tác', 'Không Có', '0104922104', 'Nguyễn Văn Vọng', 'Hiệu Trưởng'),
-(2, 'Tổng Công Ty Xây Dựng Lũng Lô', 'nguyenhuong@gmail.com', '0123575251', '04913722549', 'Số 162 Trường Chinh - Đống Đa - Hà Nội', 'Ngừng Hợp Tác', 'Không Có', '0434971814', 'Tăng Văn Chúc', 'Giám  Đốc');
+(2, 'Tổng Công Ty Xây Dựng Lũng Lô', 'nguyenhuong@gmail.com', '0123575251', '04913722549', 'Số 162 Trường Chinh - Đống Đa - Hà Nội', 'Ngừng Hợp Tác', 'Không Có', '0434971814', 'Tăng Văn Chúc', 'Giám  Đốc'),
+(3, 'Công ty cổ phần Tân Minh Giang', 'tmg@viettel.vn', '0839895240', '08398952', 'A8 Phan Văn Trị - Phường 10 - Quận Gò Vấp - Tp HCM', 'đối tác cũ', 'không có', '0302996482', 'Trần Xuân Hùng', 'Tổng Giám đốc');
 
 -- --------------------------------------------------------
 
@@ -708,8 +760,8 @@ CREATE TABLE `duan` (
 --
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
-(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 9165.45, 900, 19),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2025-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, NULL, 1500, NULL);
+(1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 19197.2, 900, 40),
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 17242, 1500, 28);
 
 -- --------------------------------------------------------
 
@@ -756,166 +808,11 @@ CREATE TABLE `loaiduan` (
 
 INSERT INTO `loaiduan` (`MaLoaiDA`, `TenLoaiDA`, `MoTa`) VALUES
 (1, 'Thiết Bị', 'Không Có'),
-(2, 'Phần Mềm', 'Không Có');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `nhiemvu`
---
-
-CREATE TABLE `nhiemvu` (
-  `MaNV` int(11) NOT NULL,
-  `TenNV` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `NoiDung` text DEFAULT NULL,
-  `HoanThanh` tinyint(1) DEFAULT NULL,
-  `DoUuTien` varchar(255) DEFAULT NULL,
-  `NgayBatDau` date DEFAULT NULL,
-  `NgayKetThuc` date DEFAULT NULL,
-  `NganSachDuKien` float DEFAULT NULL,
-  `MaTV` int(11) DEFAULT NULL,
-  `MaCV` int(11) DEFAULT NULL,
-  `NganSachThucTe` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `nhiemvu`
---
-
-INSERT INTO `nhiemvu` (`MaNV`, `TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `MaTV`, `MaCV`, `NganSachThucTe`) VALUES
-(1, 'khảo sát các thông tin về loại tàu, thuyền và môi trường được đưa vào thi thực hành', 'thu thập các thông số của tàu thuyền, địa điểm, thời tiết thi thực hành thực tế', 1, 'high', '2016-05-11', '2016-05-25', 20, 2, 1, 30),
-(2, 'thiết kế hệ thống', 'Thiết kế sơ đồ kiến trúc hệ thống, Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống, Lựa chọn nhà cung cấp phần mềm và phần cứng, Lập tài liệu hướng dẫn kỹ thuật cho hệ thống.', 1, 'trung bình', '2016-06-11', '2016-07-25', 200, 2, 2, 115),
-(3, 'Lắp đặt và cấu hình phần cứng hệ thống', 'triển khai lắp đạt hệ thống', 0, 'trung bình', '2016-06-11', '2016-07-25', 200, 4, 3, 160),
-(4, 'kiểm tra và kiểm thử hệ thống', 'sự tương thích, tối ưu, chính xác giữa phần cứng và phần mềm', 0, 'trung bình', '2016-07-26', '2016-07-30', 2000, 4, 4, 1550),
-(11, 'Huấn luyện cán bộ vận hành hệ thống', 'Huấn luyện cán bộ cách vận hành hệ thống', 0, 'trung bình', '2016-10-03', '2016-11-11', 1500, 4, 5, 1600),
-(12, 'xác định mục tiêu của hệ thống', 'xác định hệ thống dùng để làm gì?', 0, 'trung bình', '2016-02-05', '2016-02-07', 100, 2, 1, 100),
-(13, 'Phân tích thông tin', 'xác định các điểm mạnh, điểm yếu, cơ hội và thách thức của hệ thống', 0, 'trung bình', '2016-02-07', '2016-02-10', 100, 2, 1, 140),
-(14, 'Đề xuất giải pháp', 'Lập kế hoạch triển khai các giải pháp đề xuất', 0, 'trung bình', '2016-02-11', '2016-02-15', 100, 2, 1, 70),
-(15, 'Thiết kế chi tiết các thành phần phần mềm và phần cứng của hệ thống', 'thiết kế hệ thống phần mềm và phần cứng', 0, 'trung bình', '2016-03-01', '2016-03-10', 1750, 3, 2, 1420),
-(16, 'Lựa chọn nhà cung cấp phần cứng', 'tìm hiểu, lựa chọn các nhà cung cấp phần cứng của hệ thống', 0, 'trung bình', '2016-03-11', '2016-03-15', 1750, 2, 2, 520),
-(17, 'Lập tài liệu hướng dẫn kỹ thuật cho hệ thống', 'tài liệu hướng dẫn kỹ thuật', 0, 'trung bình', '2016-03-16', '2016-03-30', 1750, 2, 2, 3250),
-(18, 'lập trình phần mềm hệ thống', 'hoàn thiện các chức năng của hệ thống', 1, 'high', '2016-03-01', '2016-03-17', 250, 1, 3, 200.15);
-
---
--- Bẫy `nhiemvu`
---
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_hoanthanh_delete_trigger` AFTER DELETE ON `nhiemvu` FOR EACH ROW BEGIN
-    SET @MaCV = OLD.MaCV;
-    SET @MaNV = OLD.MaNV;
-    SET @TaskTotal = 0;
-    SET @CompleteTaskCount = 0;
-
- 	SELECT COUNT(*) INTO @TaskTotal
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-	SELECT COUNT(*) INTO @CompleteTaskCount
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
-    
-    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
-    
-    UPDATE congviec 
-    SET congviec.TienDo = @Process
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_hoanthanh_insert_trigger` AFTER INSERT ON `nhiemvu` FOR EACH ROW BEGIN
-	SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @TaskTotal = 0;
-    SET @CompleteTaskCount = 0;
-    
- 	SELECT COUNT(*) INTO @TaskTotal
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-	SELECT COUNT(*) INTO @CompleteTaskCount
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
-    
-    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
-    
-    UPDATE congviec 
-    SET congviec.TienDo = @Process
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_hoanthanh_update_trigger` AFTER UPDATE ON `nhiemvu` FOR EACH ROW BEGIN
-	SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @TaskTotal = 0;
-    SET @CompleteTaskCount = 0;
-    
- 	SELECT COUNT(*) INTO @TaskTotal
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-	SELECT COUNT(*) INTO @CompleteTaskCount
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV AND nhiemvu.HoanThanh = true;
-    
-    SET @Process = FLOOR(@CompleteTaskCount / @TaskTotal * 100);
-    
-    UPDATE congviec 
-    SET congviec.TienDo = @Process
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_ngansachthucte_delete_trigger` AFTER DELETE ON `nhiemvu` FOR EACH ROW BEGIN
-SET @MaCV = OLD.MaCV;
-    SET @MaNV = OLD.MaNV;
-    SET @FactBudget = 0;
-    
- 	SELECT SUM(nhiemvu.NganSachThucTe) INTO @FactBudget
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-    UPDATE congviec 
-    SET congviec.NganSachThucTe = @FactBudget
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_ngansachthucte_insert_trigger` AFTER INSERT ON `nhiemvu` FOR EACH ROW BEGIN
-SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @FactBudget = 0;
-    
- 	SELECT SUM(nhiemvu.NganSachThucTe) INTO @FactBudget
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-    UPDATE congviec 
-    SET congviec.NganSachThucTe = @FactBudget
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nhiemvu_ngansachthucte_update_trigger` AFTER UPDATE ON `nhiemvu` FOR EACH ROW BEGIN
-	SET @MaCV = NEW.MaCV;
-    SET @MaNV = NEW.MaNV;
-    SET @FactBudget = 0;
-    
- 	SELECT SUM(nhiemvu.NganSachThucTe) INTO @FactBudget
-    FROM nhiemvu 
-    WHERE nhiemvu.MaCV = @MaCV;
-    
-    UPDATE congviec 
-    SET congviec.NganSachThucTe = @FactBudget
-    WHERE congviec.MaCV = @MaCV;
-END
-$$
-DELIMITER ;
+(2, 'Phần Mềm', 'Không Có'),
+(18, 'Game - Trò chơi', 'không có'),
+(19, 'Ứng dụng điện thoại', 'không có'),
+(20, 'Website', 'không có'),
+(21, 'Phần mềm nhúng', 'không có');
 
 -- --------------------------------------------------------
 
@@ -937,8 +834,9 @@ CREATE TABLE `nhom` (
 INSERT INTO `nhom` (`MaNhom`, `TenNhom`, `TruongNhom`, `MaPB`) VALUES
 (3, 'Nhóm Lập Trình', 'Nguyễn Thị Hoan', 1),
 (4, 'Nhóm Thiết Kế', 'Bùi Hoan Tuân', 2),
-(5, 'Nhóm Phân Tích Yêu Cầu', 'Phạm Hồng Quân', 1),
-(6, 'Nhóm điều khiển điện tử', 'Trần Thị Long', 3);
+(5, 'Nhóm Phân Tích', 'Phạm Hồng Quân', 1),
+(6, 'Nhóm điều khiển điện tử', 'Trần Thị Long', 3),
+(7, 'Nhóm kiểm thử', 'Lê Thị Liên', 7);
 
 -- --------------------------------------------------------
 
@@ -959,7 +857,11 @@ CREATE TABLE `phongban` (
 INSERT INTO `phongban` (`MaPB`, `TenPB`, `MoTa`) VALUES
 (1, 'Phòng lập trình', 'Không Có'),
 (2, 'Phòng Thiết Kế', 'Không Có'),
-(3, 'Phòng điều khiển điện tử', 'không có');
+(3, 'Phòng điều khiển điện tử', 'không có'),
+(4, 'Phòng dữ liệu 3D', 'không có'),
+(5, 'Phòng thiết kế cơ khí', 'không có'),
+(6, 'phòng bảo hành', 'không có'),
+(7, 'Phòng kiểm thử', 'không có');
 
 -- --------------------------------------------------------
 
@@ -1045,20 +947,19 @@ CREATE TABLE `thanhvien` (
   `MaTK` int(11) DEFAULT NULL,
   `GioiTinh` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Nam',
   `TrangThai` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `AnhDaiDien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `MaNhom` int(11) DEFAULT NULL,
-  `MaDA` int(11) DEFAULT NULL
+  `AnhDaiDien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `thanhvien`
 --
 
-INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`, `MaNhom`, `MaDA`) VALUES
-(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'kĩ sư lập trình', 'nguyenvantung@gmail.com', 1, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg', 3, 1),
-(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Phân tích hệ thống', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg', 5, 1),
-(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg', 4, 2),
-(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Kỹ thuật viên điều khiển', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG', 6, 2);
+INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`) VALUES
+(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'kĩ sư lập trình', 'nguyenvantung@gmail.com', 1, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg'),
+(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Phân tích hệ thống', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg'),
+(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg'),
+(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Kỹ thuật viên điều khiển', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG'),
+(6, 'Phạm Tiến Đồng', '0978563485', 'Trung hòa, Cầu Giấy, HN', '1989-04-05', 'Nhân viên kiểm thử', 'phamdong@gmail.com', 3, 'Nam', 'Đang làm việc', 'https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1085,7 +986,8 @@ ALTER TABLE `bangcapchungchi`
 ALTER TABLE `congviec`
   ADD PRIMARY KEY (`MaCV`),
   ADD KEY `MaDA` (`MaDA`),
-  ADD KEY `MaNhom` (`MaNhom`);
+  ADD KEY `MaNhom` (`MaNhom`),
+  ADD KEY `MaTV` (`MaTV`);
 
 --
 -- Chỉ mục cho bảng `doitac`
@@ -1113,14 +1015,6 @@ ALTER TABLE `hopdong`
 --
 ALTER TABLE `loaiduan`
   ADD PRIMARY KEY (`MaLoaiDA`);
-
---
--- Chỉ mục cho bảng `nhiemvu`
---
-ALTER TABLE `nhiemvu`
-  ADD PRIMARY KEY (`MaNV`),
-  ADD KEY `MaTV` (`MaTV`),
-  ADD KEY `MaCV` (`MaCV`);
 
 --
 -- Chỉ mục cho bảng `nhom`
@@ -1160,8 +1054,7 @@ ALTER TABLE `taikhoan`
 --
 ALTER TABLE `thanhvien`
   ADD PRIMARY KEY (`MaTV`),
-  ADD KEY `MaTK` (`MaTK`),
-  ADD KEY `MaNhom` (`MaNhom`);
+  ADD KEY `MaTK` (`MaTK`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -1171,7 +1064,7 @@ ALTER TABLE `thanhvien`
 -- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
-  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `bangcapchungchi`
@@ -1183,49 +1076,43 @@ ALTER TABLE `bangcapchungchi`
 -- AUTO_INCREMENT cho bảng `congviec`
 --
 ALTER TABLE `congviec`
-  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `doitac`
 --
 ALTER TABLE `doitac`
-  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `duan`
 --
 ALTER TABLE `duan`
-  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `loaiduan`
 --
 ALTER TABLE `loaiduan`
-  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT cho bảng `nhiemvu`
---
-ALTER TABLE `nhiemvu`
-  MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`
 --
 ALTER TABLE `nhom`
-  MODIFY `MaNhom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MaNhom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `phongban`
 --
 ALTER TABLE `phongban`
-  MODIFY `MaPB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaPB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `quyen`
@@ -1237,7 +1124,7 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT cho bảng `sukien`
 --
 ALTER TABLE `sukien`
-  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `taikhoan`
@@ -1249,7 +1136,7 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1273,7 +1160,8 @@ ALTER TABLE `bangcapchungchi`
 --
 ALTER TABLE `congviec`
   ADD CONSTRAINT `congviec_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`),
-  ADD CONSTRAINT `congviec_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`);
+  ADD CONSTRAINT `congviec_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`),
+  ADD CONSTRAINT `congviec_ibfk_3` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`);
 
 --
 -- Các ràng buộc cho bảng `duan`
@@ -1287,13 +1175,6 @@ ALTER TABLE `duan`
 ALTER TABLE `hopdong`
   ADD CONSTRAINT `hopdong_ibfk_1` FOREIGN KEY (`MaDT`) REFERENCES `doitac` (`MaDT`),
   ADD CONSTRAINT `hopdong_ibfk_2` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`);
-
---
--- Các ràng buộc cho bảng `nhiemvu`
---
-ALTER TABLE `nhiemvu`
-  ADD CONSTRAINT `nhiemvu_ibfk_1` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`),
-  ADD CONSTRAINT `nhiemvu_ibfk_2` FOREIGN KEY (`MaCV`) REFERENCES `congviec` (`MaCV`);
 
 --
 -- Các ràng buộc cho bảng `nhom`
@@ -1317,8 +1198,7 @@ ALTER TABLE `taikhoan`
 -- Các ràng buộc cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  ADD CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`),
-  ADD CONSTRAINT `thanhvien_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`);
+  ADD CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

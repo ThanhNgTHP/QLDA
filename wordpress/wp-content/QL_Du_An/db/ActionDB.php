@@ -308,6 +308,42 @@
                 return $result;
             }
 
+            public function TaskAllInfo(){
+                parent::connect();
+
+                if(isset($this->conn)){
+                    /**
+                     * @var bool|mysqli_stmt $stmt
+                     */
+                    $stmt = $this->conn->prepare("CALL ThongTinTatCaNhiemVu()");
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+                }
+
+                parent::disconnect();
+
+                return $result;
+            }
+
+            public function EventAllInfo(){
+                parent::connect();
+
+                if(isset($this->conn)){
+                    /**
+                     * @var bool|mysqli_stmt $stmt
+                     */
+                    $stmt = $this->conn->prepare("CALL ThongTinTatCaSK()");
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+                }
+
+                parent::disconnect();
+
+                return $result;
+            }
+
             public function ProjectInfo($ProjectID){
                 parent::connect();
 
@@ -864,6 +900,27 @@
                      */
                     $stmt = $this->conn->prepare("CALL ThongTinAnhDA(?)");
                     $stmt->bind_param("i", $projectID);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+                }
+
+                parent::disconnect();
+
+                return $result;
+            }
+
+            public function ChangePassword($currentPassword, $newPassword){
+                parent::connect();
+
+                $result = null;
+
+                if(isset($this->conn)){
+                    /**
+                     * @var bool|mysqli_stmt $stmt
+                     */
+                    $stmt = $this->conn->prepare("SELECT DoiMatKhau(?, ?) AS State");
+                    $stmt->bind_param("ss", $currentPassword, $newPassword);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     $stmt->close();

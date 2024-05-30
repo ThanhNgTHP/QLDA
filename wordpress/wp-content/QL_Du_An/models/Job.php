@@ -28,6 +28,20 @@
             /** @var int $ProjectID */
             public  $ProjectID;
 
+            /** @var int $Progress */
+
+            public  $Progress;
+            
+            /** @var int $TargetBudget */
+            public  $TargetBudget;
+
+            /** @var int $ActualBudget */
+            public  $ActualBudget;
+
+            /** @var int $StaffID */
+            public  $StaffID;
+
+
             /**
              * Lấy ra tất cả công việc
              *
@@ -40,7 +54,6 @@
                 $result = $actionDB->JobAllInfo();
 
                 $jobAll = array();
-                exit;
     
                 while($row = $result->fetch_assoc()){
                     $job = new Job();
@@ -53,6 +66,11 @@
                     $job->End = $row['End'];
                     $job->TeamID = $row['TeamID'];
                     $job->ProjectID = $row['ProjectID'];
+                    $job->Progress = $row['Progress'];
+                    $job->Progress = $row['Priority'];
+                    $job->TargetBudget = $row['TargetBudget'];
+                    $job->ActualBudget = $row['ActualBudget'];
+                    $job->StaffID = $row['StaffID'];
                     
                     $jobAll[] = $job;
                 }

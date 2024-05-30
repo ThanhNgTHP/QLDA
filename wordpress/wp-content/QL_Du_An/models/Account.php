@@ -70,4 +70,3 @@ if(!class_exists('Account')){
         }
     }
 }
-?>

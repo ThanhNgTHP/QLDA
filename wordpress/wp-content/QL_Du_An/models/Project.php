@@ -31,6 +31,17 @@
             /** @var int $ProjectCategoryID */
             public $ProjectCategoryID;
 
+            /** @var float $TargetBudget */
+
+            public $TargetBudget;
+
+            /** @var float $ActualBudget */
+            public $ActualBudget;
+
+            /** @var int $Progress */
+            public $Progress;
+
+
             /**
              * Lấy ra danh sách ảnh thuộc dự án
              *
@@ -121,4 +132,3 @@
             }
         }
     }
-?>

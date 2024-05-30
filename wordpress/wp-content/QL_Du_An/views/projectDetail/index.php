@@ -19,8 +19,19 @@
         <?php echo "Ngày bắt đầu: ". $projectDetail->Project->Begin ?><br>
         <?php echo"Ngày Kết thúc: ".  $projectDetail->Project->End ?><br>
         <?php echo "Liên hệ dự án: ". $projectDetail->Project->Contact ?><br>
-        <?php echo "Ghi chú: ". $projectDetail->Project->Description ?><br>
+        <?php echo "Mô tả: ". $projectDetail->Project->Description ?><br>
         <?php echo "Trạng thái: ". $projectDetail->Project->Status ?><br>
+
+        <!-- <?php echo "Ngân sách dư kiến: ". $projectDetail->Project->TargetBudget ?><br>
+        <?php echo "Ngân sách thực tế: ". $projectDetail->Project->ActualBudget ?><br>
+        <div class="overflow-hidden text-ellipsis whitespace-nowrap">
+            <div class="inline-block">Tiến độ:</div>
+            <div class="w-[90%] inline-block bg-gray-200 rounded-full dark:bg-gray-700">
+                <div class="w-[<?php echo $projectDetail->Project->Progress ?>%] bg-blue-600 text-sm font-medium text-blue-100 text-center p-0.5 leading-none rounded-full">
+                    <?php echo $projectDetail->Project->Progress ?>
+                </div>
+            </div>
+        </div> -->
 
         <br>
 

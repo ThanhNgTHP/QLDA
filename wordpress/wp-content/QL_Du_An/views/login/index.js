@@ -24,13 +24,11 @@ navbars = document.querySelectorAll('aside');
 body.style.backgroundImage = `url("${window.location.protocol}//${window.location.hostname}/wordpress/wp-content/QL_Du_An/resources/login_img/anh1.png")`;
 body.style.backgroundRepeat = 'no-repeat';
 body.style.backgroundSize = 'cover';
-body.style.overflow = 'hidden';
-
 
 for(var navbar of navbars){
-    // navbar.style.display = 'none';
+    navbar.style.display = 'none';
 
-    navbar.style.visibility = 'hidden';
+    // navbar.style.visibility = 'hidden';
     navbar.style.width = '0px';
     navbar.style.borderWidth = "0 0 0 0";
     navbar.classList.remove("wp-container-content-3");

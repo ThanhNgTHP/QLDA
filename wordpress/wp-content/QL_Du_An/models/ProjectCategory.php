@@ -64,5 +64,3 @@ if(!class_exists('ProjectCategory')){
     }
 
 }
-    
-?>

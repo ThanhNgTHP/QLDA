@@ -1,5 +1,6 @@
 <?php 
 if(!class_exists('User')){
+    include_once getenv('DIR_DB') . '/ActionDB.php';
     include_once getenv('DIR_MODELS') . '/Account.php';
     include_once getenv('DIR_MODELS') . '/Permission.php';
     include_once getenv('DIR_MODELS') . '/Staff.php';
@@ -17,14 +18,6 @@ if(!class_exists('User')){
          /** @var Permission $Permission */
          public $Permission;
 
-        /** @var Qualification[] $Qualifications */
-        public $Qualifications;
-
-        /** @var Team $Team */
-        public $Team;
-
-        /** @var Department $Department */
-        public $Department;
         public function __construct($AccountID){
             [$Account] = array_values(array_filter(Account::GetAllAccount(), function($account) use($AccountID){
                 return $account->ID === $AccountID;
@@ -33,11 +26,19 @@ if(!class_exists('User')){
 
             $this->Permission = $Account->GetAccountPermission();
             $this->Staff = $Account->GetAccountStaff();
-            $this->Qualifications = $this->Staff->GetStaffQualifications();
-            $this->Team = $this->Staff->GetStaffTeam();
-            $this->Department = $this->Team->GetTeamDepartment();
+        }
+
+        public function ChangePassword($currentPassword, $newPassword){
+
+            $action = new ActionDB();
+            $result = $action->ChangePassword($currentPassword, $newPassword);
+            
+            while($row = $result->fetch_assoc()) {
+
+                return (bool) $row["State"];
+            }
+
+            return false;
         }
     }
 }
-    
-?>

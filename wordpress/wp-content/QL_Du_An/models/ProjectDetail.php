@@ -61,5 +61,3 @@ if(!class_exists('ProjectDetail')){
         }
     }
 }
-    
-?>

@@ -22,8 +22,8 @@
 </div> -->
 
 
-<div class="login-container flex w-full h-screen align-item items-center">
-    <form id="form-login" action="<?php echo home_url(); ?>" method="post">
+<div class="login-container w-screen h-screen flex justify-center items-center">
+    <form id="form-login" class="" action="<?php echo home_url(); ?>" method="post">
         <div class="login w-[100%] outline
                     p-[10px_20px_10px_20px] 
                     shadow-[50px_40px_20px_0px_rgba(0,0,0,0.5)]
@@ -40,7 +40,7 @@
 
             <div class="text-center mt-[40px] mb-[40px]">
                 <label for="password">Mật khẩu</label>
-                <input id="password" class="outline ml-[10px] p-[0_0_0_5px]" name="password" type="password">
+                <input id="password" class="outline ml-[15px] p-[0_0_0_5px]" name="password" type="password">
             </div>
 
             <div id="alert-login" class="hidden text-center mb-[20px] text-red-600">
