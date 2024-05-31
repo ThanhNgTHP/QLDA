@@ -31,6 +31,17 @@
             /** @var int $ProjectCategoryID */
             public $ProjectCategoryID;
 
+            /** @var float $TargetBudget */
+
+            public $TargetBudget;
+
+            /** @var float $ActualBudget */
+            public $ActualBudget;
+
+            /** @var int $Progress */
+            public $Progress;
+
+
             /**
              * Lấy ra danh sách ảnh thuộc dự án
              *
@@ -99,6 +110,10 @@
                     $project->Description = $row['Description'];
                     
                     $project->ProjectCategoryID = $row['ProjectCategoryID'];
+
+                    $project->TargetBudget = $row['TargetBudget'];
+                    $project->ActualBudget = $row['ActualBudget'];
+                    $project->Progress = $row['Progress'];
     
                     $projectAll[] = $project;
                 }
@@ -121,4 +136,3 @@
             }
         }
     }
-?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 26, 2024 lúc 12:23 PM
+-- Thời gian đã tạo: Th5 31, 2024 lúc 09:44 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -189,20 +189,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaHopDong` (IN `maHD` I
   WHERE anh.LoaiAnh = 'anh hop dong' AND anh.MaHD = maHD;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinChiTietDA` (IN `MaDA` INT)   BEGIN
-    SELECT duan.MaDA AS ProjecID, duan.TenDA AS ProjectName, duan.NgayBatDau AS ProjectName, duan.NgayKetThuc AS ProjectExpire, duan.LienHe AS ProjectContact, duan.MoTa AS ProjectDescription, duan.TrangThai AS ProjectStatus, thanhvien.MaTV AS StaffID, thanhvien.HoTen AS StaffName, thanhvien.GioiTinh AS StaffGender, thanhvien.ChucVu AS StaffPosition, thanhvien.TrangThai AS StaffStatus, nhom.MaNhom AS TeamID, nhom.TenNhom AS TeamName, phongban.MaPB AS DepartmentID, phongban.TenPB AS DepartmentName, hopdong.MaHD AS ContractID, hopdong.TenHD AS ContractName, hopdong.SoHD AS ContractNumber, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS ContractExpire, hopdong.GhiChu AS ContractNote, hopdong.GiaTriHD AS ContractValue, hopdong.TrangThai AS ContractStatus, doitac.MaDT AS PartnerID, doitac.TenDT AS PartnerName, doitac.NguoiLienHe AS PartnerContact, doitac.Email AS PartnerEmail, doitac.SDT AS PartnerPhone, doitac.Fax AS PartnerFax, doitac.DiaChi AS PartnerAddress, doitac.GhiChu AS PartnerNote, doitac.TrangThai AS PartnerStatus, doitac.MaSoThue AS TaxCode
-	FROM duan
-    INNER JOIN hopdong ON duan.MaDA = hopdong.MaDA
-    INNER JOIN doitac ON hopdong.MaDT = doitac.MaDT
-    INNER JOIN thanhvienthamgia ON duan.MaDA = thanhvienthamgia.MaDA
-    INNER JOIN thanhvien ON thanhvienthamgia.MaTV = thanhvien.MaTV
-    INNER JOIN nhom ON nhom.MaNhom = thanhvien.MaNhom
-    INNER JOIN phongban ON nhom.MaPB = phongban.MaPB
-    WHERE duan.MaDA = MaDA;
-END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDA` (IN `MaDA` INT)   BEGIN
-    SELECT duan.MaDA AS ID, duan.TenDA AS Name, duan.NgayBatDau AS Begin, duan.NgayKetThuc AS End, duan.TrangThai AS Status, duan.LienHe AS Contact, duan.MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID 
+    SELECT duan.MaDA AS ID, duan.TenDA AS Name, duan.NgayBatDau AS Begin, duan.NgayKetThuc AS End, duan.TrangThai AS Status, duan.LienHe AS Contact, duan.MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
     FROM duan 
     WHERE duan.MaDA = MaDA;
 END$$
@@ -276,7 +264,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaBC` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaCV` ()   BEGIN
-  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS Targetbudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
+  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
   FROM congviec;
 END$$
 
@@ -332,7 +320,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTK` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
-    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaNhom AS TeamID, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay, thanhvien.MaDA AS ProjectID
+    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay
     FROM thanhvien;
 END$$
 
@@ -345,6 +333,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVBC` (`MaTV` INT)   BEGIN
   SELECT bangcapchungchi.MaTV AS StaffID, bangcapchungchi.MaBC AS ID, bangcapchungchi.TenBC AS Name, bangcapchungchi.NoiCap AS Address, bangcapchungchi.NgayCap AS Date
   FROM thanhvien INNER JOIN bangcapchungchi ON thanhvien.MaTV = bangcapchungchi.MaTV
   WHERE thanhvien.MaTV = MaTV;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVDA` (IN `MaDA` INT)   BEGIN
+    SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
+    FROM congviec 
+    WHERE congviec.MaDA = MaDA;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVTG` (`MaDA` INT)   BEGIN
@@ -360,9 +354,44 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDA` (IN `TenDA` VARCHAR(255) CHARSET utf8mb4)   BEGIN
     SET @TenDA = CONCAT('%', TenDA , '%');
-    SELECT MaDA AS ProjectID, duan.TenDA AS ProjectName, NgayBatDau AS Begin , NgayKetThuc AS Expire, TrangThai AS Status, LienHe AS Contact, MoTa AS Description
+    SELECT MaDA AS ProjectID, duan.TenDA AS ProjectName, NgayBatDau AS Begin , NgayKetThuc AS Expire, TrangThai AS Status, LienHe AS Contact, MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
     FROM duan
     WHERE duan.TenDA LIKE @TenDA;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDT` (`TenDT` VARCHAR(255))   BEGIN
+    SET @TenDT = CONCAT('%', TenDT , '%');
+    SELECT doitac.MaDT AS PartnerID, doitac.TenDT AS PartnerName, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai as Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
+    FROM doitac
+    WHERE doitac.TenDT LIKE @TenDT;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemHD` (`TenHD` VARCHAR(255))   BEGIN
+    SET @TenHD = CONCAT('%', TenHD , '%');
+    SELECT hopdong.MaHD AS ContractID, hopdong.TenHD AS ContractName, hopdong.SoHD AS Number, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS Expire, hopdong.GhiChu AS Note, hopdong.GiaTriHD AS Value, hopdong.TrangThai AS Status, hopdong.MaDT AS PartnerID, hopdong.MaDA AS ProjectID
+    FROM hopdong
+    WHERE hopdong.TenHD LIKE @TenHD;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemSK` (`TenSK` VARCHAR(255))   BEGIN
+    SET @TenSK = CONCAT('%', TenSK , '%');
+    SELECT sukien.MaSK AS EventID, sukien.TenSK AS EventName, sukien.Anh AS Image, sukien.GhiChu AS Note, sukien.NoiDung AS Content, sukien.MaDA AS ProjectID
+    FROM sukien
+    WHERE sukien.TenSK LIKE @TenSK;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemTK` (`TenTK` VARCHAR(255))   BEGIN
+    SET @TenTK = CONCAT('%', TenTK , '%');
+    SELECT taikhoan.MaTK AS ACcountID, taikhoan.TenTK AS AccountName, taikhoan.MatKhau AS Password, taikhoan.MaQuyen AS PermissionID, taikhoan.TrangThai AS Status
+    FROM taikhoan
+    WHERE taikhoan.TenTK LIKE @TenTK;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemTV` (`HoTen` VARCHAR(255))   BEGIN
+    SET @HoTen = CONCAT('%', HoTen , '%');
+    SELECT MaTV AS StaffID, thanhvien.HoTen AS StaffName, thanhvien.SDT AS Phone, thanhvien.DiaChi AS Address, thanhvien.NgaySinh as Birthday, thanhvien.ChucVu AS Possition, thanhvien.Email AS Email, thanhvien.MaTK AS AccountID, thanhvien.GioiTinh AS Gender, thanhvien.TrangThai AS Status, thanhvien.AnhDaiDien AS Avatar
+    FROM thanhvien
+    WHERE thanhvien.HoTen LIKE @HoTen;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `XacMinhTaiKhoan` (IN `taikhoan` VARCHAR(255), IN `matkhau` VARCHAR(255))   BEGIN
@@ -431,13 +460,30 @@ END$$
 --
 -- Các hàm
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
+  DECLARE count INT;
+  
+  UPDATE taikhoan 
+  SET  taikhoan.MatKhau = MatKhauMoi
+  WHERE taikhoan.MatKhau = MatKhauCu;
+ 
+  SET count = ROW_COUNT();
+  
+  IF count > 0 THEN
+  	RETURN true;
+  ELSE
+  	RETURN false;
+  END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `SoNguoiThamGia` (`MaDA` INT) RETURNS INT(11)  BEGIN 
   DECLARE count INT;
-  SELECT COUNT(MaTV) INTO count 
-  FROM thanhvien INNER JOIN duan 
-  ON thanhvien.MaDA = duan.MaDA
+  SELECT COUNT(MaDA) INTO count 
+  FROM congviec INNER JOIN duan 
+  ON congviec.MaDA = duan.MaDA
+  INNER JOIN thanhvien
+  ON thanhvien.MaTV = congviec.MaTV
   WHERE duan.MaDA = MaDA;
-
   RETURN count;
 END$$
 
@@ -476,16 +522,7 @@ INSERT INTO `anh` (`MaAnh`, `TenAnh`, `DuongDan`, `MaDA`, `MaHD`, `LoaiAnh`) VAL
 (12, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXTJUlDUf3Z2fUJIF_lt1Y_rFNfKfxanpTED8alu6hmsY6cvqb9lP9ORtTs1-VOMgQRo&usqp=CAU', 2, 2, 'anh hop dong'),
 (13, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 2', 'https://image.slidesharecdn.com/hpngcungngdchvqungco-220530095856-53a865bd/85/H-P-D-NG-CUNG-NG-D-CH-V-QU-NG-CAO-doc-1-320.jpg', 2, 2, 'anh hop dong'),
 (14, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/756a7eaa66f9a88f9f768174f70790cc/thumb_1200_1553.png', 2, 2, 'anh hop dong'),
-(15, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'https://phangiaco.com.vn/upload/images/giay-phep-quang-cao-hop-den-quang-cao.jpg', 2, 2, 'anh hop dong'),
-(18, 'Phòng học Phần mềm sa bàn điện tử 3D mô phỏng đã triển khai', 'https://simulation.vn/images/sbhinh2.jpg', 4, 3, 'anh du an'),
-(19, 'Tàu cập cảng Hải Phòng', 'https://simulation.vn/images/taucapcanghp.jpg', 4, 3, 'anh du an'),
-(20, 'Tàu vận động hướng về cảng Hải Phòng', 'https://simulation.vn/images/canghp.jpg', 4, 3, 'anh du an'),
-(21, 'Tàu di chuyển về cầu Việt Trì', 'https://simulation.vn/images/cauviettri.jpg', 4, 3, 'anh du an'),
-(22, 'Tàu di chuyển qua cầu Bính, Hải Phòng', 'https://simulation.vn/images/caubinhhp.jpg', 4, 3, 'anh du an'),
-(23, 'Tàu di chuyển qua cầu Phả Lại, Hải Dương', 'https://simulation.vn/images/cauphalaihd.jpg', 4, 3, 'anh du an'),
-(24, 'Giao diện lựa chọn vào bài tập được thiết kế theo giáo trình', 'https://simulation.vn/images/tau-song-giao-dien.jpg', 4, 3, 'anh du an'),
-(25, 'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang trang 1', 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/474078iDX/hinh-nen-mau-xanh-la-dep_093249980.jpg', 4, 3, 'anh hop dong'),
-(26, 'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang trang 2', 'https://tecwood.com.vn/news/hinh-nen-mau-xanh-la-cay-moi.jpg', 4, 3, 'anh hop dong');
+(15, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'https://phangiaco.com.vn/upload/images/giay-phep-quang-cao-hop-den-quang-cao.jpg', 2, 2, 'anh hop dong');
 
 -- --------------------------------------------------------
 
@@ -544,7 +581,12 @@ INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`,
 (8, 'Xác định yêu cầu', 'không có', '2005-06-16', '2005-06-20', 1500, 100, 'không có', 2, 500, 5, 2, 'cao'),
 (9, 'Chọn giải pháp', 'không có', '2005-06-21', '2005-06-30', 1250, 100, 'không có', 2, 755, 5, 2, 'cao'),
 (10, 'Triển khai hệ thống', 'không có', '2005-07-01', '2005-12-15', 1250, 10, 'không có', 2, 8787, 3, 1, 'cao'),
-(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 6, 4, 'cao');
+(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 6, 4, 'cao'),
+(13, 'Duy trì và nâng cấp', 'không có', '2005-12-30', '2006-01-01', 1000, 10, 'không có', 2, 1200, 4, 1, 'high'),
+(14, 'Cập nhật phần mềm quản trị mạng và firmware thiết bị mạng', 'không có', '2006-01-02', '2006-01-10', 1000, 10, 'không có', 2, 1200, 5, 1, 'high'),
+(15, 'Nâng cấp hệ thống', 'không có', '2006-01-11', '2006-01-15', 1000, 10, 'không có', 2, 1200, 6, 1, 'high'),
+(16, 'Đảm bảo hoạt động của hệ thống', 'Đảm bảo hệ thống luôn hoạt động an toàn và hiệu quả', '2006-01-16', '2006-01-17', 1000, 10, 'không có', 2, 1200, 7, 1, 'high'),
+(17, 'Lập kế hoạch dự phòng và khôi phục', 'không có', '2006-01-18', '2006-01-20', 1000, 10, 'không có', 2, 1200, 4, 1, 'high');
 
 --
 -- Bẫy `congviec`
@@ -725,10 +767,7 @@ CREATE TABLE `duan` (
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
 (1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 19197.2, 900, 40),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 11242, 1500, 52),
-(4, 'Hệ thống mô phỏng dạy lái tàu sông', '2013-12-20', '2016-11-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng lái tàu đường sông cho phép các học viên thực hành tập lái trên một cabin mô phỏng được thiết kế giống như thực tế. Quang cảnh hoạt động của khúc sông tập luyện được tái tạo phù hợp với quang cảnh thực tế trên môi trường đồ họa 3D.', 2, 0, 100000, 0),
-(5, 'Bộ phần mềm mô phỏng thực hành, thí nghiệm ảo 3D: VNSIM 3D Visual Traning Tools', '2021-09-27', '2022-09-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Phòng học Kết nối 3D khoa học phổ thông (VNSIM) được ra đời mang đến giải pháp tân tiến hỗ trợ cho việc dạy và học trở nên dễ dàng, thuận tiện nhất. Nhằm tạo ra một tiện ích giúp cho giáo viên và học sinh phổ thông dễ dàng hình dung và tiếp cận với các vấn đề khó của các môn học khoa học tự nhiên mà không dễ thể hiện trong điều kiện thực tế.', 2, 0, 90000, 0),
-(6, 'Thiết bị, phần mềm mô phỏng thực hành lái xe ô tô', '2019-11-22', '2021-11-27', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng dạy lái xe ô tô bằng công nghệ thực tại ảo 3D được chế tạo nhằm tạo ra một ca bin giống như cabine thật của xe ô tô. Người học sẽ sử dụng chiếc xe mô phỏng này để thực hiện các bài tập của mình trong một thế giới ảo 3D được lập trình sẵn tương tự như thế giới thật mà khi thi lấy bằng lái xe hoặc tham gia giao thông chúng ta sẽ gặp phải.', 2, 0, 120000, 0);
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-25', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 17242, 1500, 28);
 
 -- --------------------------------------------------------
 
@@ -755,8 +794,7 @@ CREATE TABLE `hopdong` (
 
 INSERT INTO `hopdong` (`MaHD`, `TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiChu`, `GiaTriHD`, `TrangThai`, `MaDT`, `MaDA`) VALUES
 (1, 'Hợp Đồng Cung Cấp Hàng Hóa', '654/HĐ', '2024-07-21', '2024-12-12', 'Ghi Rõ Thông Tin Về Tên Doanh Nghiệp, Trụ Sở, Số Điện Thoại, Chức Vụ, Và Người Đại Diện', 1736730000, 'Hết Hiệu Lực', 1, 1),
-(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2),
-(3, 'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang', '20-12/TMG-VNSIM', '2013-12-20', '2016-11-15', 'không có', 200000, 'hợp đồng đã hoàn thành', 3, 4);
+(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -776,7 +814,11 @@ CREATE TABLE `loaiduan` (
 
 INSERT INTO `loaiduan` (`MaLoaiDA`, `TenLoaiDA`, `MoTa`) VALUES
 (1, 'Thiết Bị', 'Không Có'),
-(2, 'Phần Mềm', 'Không Có');
+(2, 'Phần Mềm', 'Không Có'),
+(18, 'Game - Trò chơi', 'không có'),
+(19, 'Ứng dụng điện thoại', 'không có'),
+(20, 'Website', 'không có'),
+(21, 'Phần mềm nhúng', 'không có');
 
 -- --------------------------------------------------------
 
@@ -869,8 +911,7 @@ CREATE TABLE `sukien` (
 
 INSERT INTO `sukien` (`MaSK`, `TenSK`, `Anh`, `GhiChu`, `NoiDung`, `MaDA`) VALUES
 (1, 'Xây dựng hệ thống điện tử tự động giám sát thi thực hành - nghề điều khiển phương tiện thủy nội địa', 'https://file.qdnd.vn/data/old_img/phucthang/2013/4/19/5171054220130419204601609.jpg', 'hệ thống tương tự như hệ thống sát hạch lái xe ô tô', 'Đây là hệ thống được xây dựng tương tự như hệ thống sát hạch điện tử lái xe ô tô. Quy trình thi thực hành được thực hiện trên bến cảng, sử dụng phương tiện thi đúng tiêu chuẩn cấp độ tàu theo quy định của Bộ GTVT. Hệ thống bao gồm phần mềm quản lý, đánh giá và các thiết bị điện tử, cảm biến, camera giám sát lắp đặt tại tàu, bến cảng tự động giám sát, chấm điểm quá trình thực hiện các bài thi thực hành của thí sinh trên luồng dài 200m. Kết quả đánh giá hình ảnh quá trình thực hiện bài thi của thí sinh được truyền về trung tâm điều hành qua hệ thống mạng không dây và cáp quang nội bộ, đồng thời được cập nhật trực tiếp lên Internet thông qua website của trung tâm.\r\n\r\nHệ thống được thiết kế để tự động giám sát, đánh giá chấm điểm các bài thi thực hành:\r\n\r\nBài 1: Điều động tàu rời cầu, có chướng ngại vật khống chế phía mũi tàu.\r\nBài 2: Điều động tàu rời cầu, có chướng ngại vật khống chế phía lái tàu.\r\nBài 3: Điều động tàu cập cầu, có chướng ngại vật khống chế phía mũi\r\nBài 4: Điều động tàu cập cầu, có chướng ngại vật khống chế phía lái tàu.\r\nBài 5: Điều động tàu bắt chập tiêu phía mũi tàu.\r\nBài 6: Điều động tàu bắt chập tiêu phía sau lái tàu.', 1),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', 'https://infovina.vn/content/article/09-10-2023/cac-loai-he-thong-monitor-giam-sat-thiet-bi-mang-hien-nay-091023095023.png', 'Hệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp nhiều lợi ích như nâng cao hiệu suất mạng, giảm thời gian ngừng hoạt động, nâng cao khả năng bảo mật và giảm chi phí vận hành.', 'Hệ Thống Phần Mềm Quản Trị Mạng\r\nHệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp một giao diện tập trung để quản lý các thiết bị mạng, theo dõi hiệu suất mạng, phát hiện và khắc phục sự cố, đồng thời đảm bảo bảo mật mạng.\r\n\r\nChức năng chính của NMS:\r\n\r\nGiám sát thiết bị mạng: NMS có thể thu thập dữ liệu từ các thiết bị mạng như bộ định tuyến, bộ chuyển đổi, điểm truy cập không dây và máy chủ, cho phép quản trị viên theo dõi trạng thái hoạt động, hiệu suất và cấu hình của các thiết bị này.\r\nTheo dõi hiệu suất mạng: NMS có thể theo dõi các chỉ số hiệu suất mạng quan trọng (KPI) như lưu lượng truy cập mạng, thời gian phản hồi, tỷ lệ mất gói tin và tỷ lệ sử dụng băng thông, giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng.\r\nPhát hiện và khắc phục sự cố: NMS có thể phát hiện các sự cố mạng như lỗi thiết bị, gián đoạn kết nối và tấn công mạng, đồng thời thông báo cho quản trị viên để họ có thể khắc phục sự cố kịp thời.\r\nCấu hình thiết bị: NMS cho phép quản trị viên cấu hình các thiết bị mạng từ xa, giúp tiết kiệm thời gian và công sức.\r\nQuản lý bảo mật mạng: NMS có thể giúp quản trị viên theo dõi các hoạt động mạng, phát hiện các mối đe dọa bảo mật và thực hiện các biện pháp phòng ngừa để bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nLợi ích của việc sử dụng NMS:\r\n\r\nNâng cao hiệu suất mạng: NMS giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng một cách nhanh chóng và hiệu quả, từ đó nâng cao hiệu suất tổng thể của mạng.\r\nGiảm thời gian ngừng hoạt động: NMS giúp phát hiện và khắc phục sự cố mạng kịp thời, giúp giảm thiểu thời gian ngừng hoạt động của mạng và đảm bảo hoạt động liên tục của các ứng dụng kinh doanh.\r\nNâng cao khả năng bảo mật: NMS giúp quản trị viên theo dõi các hoạt động mạng và phát hiện các mối đe dọa bảo mật, giúp bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nGiảm chi phí vận hành: NMS giúp tự động hóa các tác vụ quản trị mạng, giúp tiết kiệm thời gian và công sức cho quản trị viên, đồng thời giảm chi phí vận hành mạng.', 2),
-(4, 'Hệ thống mô phỏng dạy lái tàu thủy', 'https://simulation.vn/images/sbhinh9.jpg', 'không có', 'Việt Nam có hệ thống giao thông đường thủy phong phú với hệ thống sông kênh dày đặc, có tổng chiều dài trên 40.000 km. Hệ thống giao thông đường thủy đóng vai trò quan trọng trong ngành giao thông vận tải, lưu thông hàng hóa, góp phần giảm áp lực cho vận tải đường bộ. Song song với những thuận lợi đó thì nhiều năm qua, giao thông đường thủy nội địa vẫn nổi cộm vấn đề người điều khiển phương tiện thủy không có bằng lái, chứng chỉ chuyên môn. Việc đào tạo, cấp chứng chỉ chuyên môn cho lực lượng lái tàu hiện có và đào tạo bổ sung nguồn nhân lực mới có trình độ chuyên môn, nghiệp vụ cho ngành vận tải đường thủy đang là vấn đề rất cấp bách. Tuy nhiên, việc đáp ứng nhu cầu về số lượng lao động cũng cần phải đi đôi với việc đảm bảo chất lượng đào tạo. Việc đào tạo phải đảm bảo học viên ra trường nắm chắc được kỹ thuật, nghiệp vụ, đảm bảo an toàn cho phương tiện giao thông, tài sản của cá nhân nói riêng và an toàn giao thông đường thủy nội địa nói chung. Để đáp ứng được các yêu cầu đề ra đó thì việc nâng cấp cơ sở vật chất, hiện đại hóa các cơ sở đào tạo, ứng dụng công nghệ thông tin vào quá trình đào tạo là rất cần thiết, phù hợp với xu hướng phát triển của thế giới.\r\n\r\nNgoài việc ứng dụng công nghệ thông tin trong việc xây dựng bài giảng, giảng dạy lý thuyết trên lớp thì việc ứng dụng công nghệ thông tin, cụ thể là công nghệ mô phỏng, vào các giờ học thực hành cũng có ý nghĩa và hiệu quả thiết thực, đã và đang được áp dụng tại các nước tiên tiến trên thế giới.\r\n\r\nHiện nay, ở nước ta, các đơn vị đào tạo và nhà trường đã bước đầu quan tâm xây dựng các hệ thống mô phỏng, các chương trình phần mềm phục vụ cho nhiệm vụ cụ thể của mình. Các hệ thống này đã góp phần tích cực trong việc nâng cao chất lượng huấn luyện, từng bước góp phần xây dựng nhà trường chính quy hiện đại. Ví dụ như: thiết bị mô phỏng tập lái tầu sông đặt tại trường Cao đẳng giao thông 1; Hệ thống mô phỏng dạy lái tàu sông tại trường trung cấp nghề giao thông đường thủy Việt Trì, Phú Thọ; Hệ thống mô phỏng tàu sông tại trường ĐH cảnh sát TP Hồ Chí Minh, trường Trung cấp cảnh sát T52 (Thăng Bình, Quảng Nam), trường Trung cấp nghề Tiền Giang, trung cấp nghề Trà Vinh,...\r\n\r\nNgoài ra, ứng dụng công nghệ mô phỏng vào việc xây dựng hệ thống sa bàn điện tử 3D cũng là một phương pháp có tính hiệu quả thiết thực trong việc đưa công nghệ thông tin vào hỗ trợ quá trình đào tạo nghiệp vụ giao thông vận tải đường thủy nội địa. Bởi trong quá trình đào tạo, việc đi khảo sát thực tế để nắm được các tuyến luồng giao thông đường thủy đóng một vai trò hết sức quan trọng. Tuy nhiên, quá trình này lại tốn rất nhiều thời gian trong khi thời gian đào tạo lại có hạn, đồng thời nhà trường cũng không thể tổ chức cho học viên đi thực tế trên tất cả các tuyến sông. Hệ thống sa bàn điện tử 3D mô phỏng được xây dựng dựa trên cơ sở khảo sát các địa danh, tuyến, luồng cụ thể, sau đó số hóa các đối tượng dưới dạng mô hình 3D, đưa vào phần mềm, bố trí lại trong không gian 3D với các chi tiết địa hình, hiệu ứng thủy văn giống như trong thực tế. Hệ thống giúp cho học viên có thể nắm được các tuyến luồng, thủy văn của các tuyến sông ngay từ các giờ giảng trên lớp, thông qua hệ thống hình ảnh, âm thanh sát với thực tế.', 4);
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', 'https://infovina.vn/content/article/09-10-2023/cac-loai-he-thong-monitor-giam-sat-thiet-bi-mang-hien-nay-091023095023.png', 'Hệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp nhiều lợi ích như nâng cao hiệu suất mạng, giảm thời gian ngừng hoạt động, nâng cao khả năng bảo mật và giảm chi phí vận hành.', 'Hệ Thống Phần Mềm Quản Trị Mạng\r\nHệ thống Phần mềm Quản trị Mạng (NMS) là một công cụ thiết yếu cho quản trị viên mạng, giúp họ giám sát, quản lý và tối ưu hóa hiệu suất mạng của mình. NMS cung cấp một giao diện tập trung để quản lý các thiết bị mạng, theo dõi hiệu suất mạng, phát hiện và khắc phục sự cố, đồng thời đảm bảo bảo mật mạng.\r\n\r\nChức năng chính của NMS:\r\n\r\nGiám sát thiết bị mạng: NMS có thể thu thập dữ liệu từ các thiết bị mạng như bộ định tuyến, bộ chuyển đổi, điểm truy cập không dây và máy chủ, cho phép quản trị viên theo dõi trạng thái hoạt động, hiệu suất và cấu hình của các thiết bị này.\r\nTheo dõi hiệu suất mạng: NMS có thể theo dõi các chỉ số hiệu suất mạng quan trọng (KPI) như lưu lượng truy cập mạng, thời gian phản hồi, tỷ lệ mất gói tin và tỷ lệ sử dụng băng thông, giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng.\r\nPhát hiện và khắc phục sự cố: NMS có thể phát hiện các sự cố mạng như lỗi thiết bị, gián đoạn kết nối và tấn công mạng, đồng thời thông báo cho quản trị viên để họ có thể khắc phục sự cố kịp thời.\r\nCấu hình thiết bị: NMS cho phép quản trị viên cấu hình các thiết bị mạng từ xa, giúp tiết kiệm thời gian và công sức.\r\nQuản lý bảo mật mạng: NMS có thể giúp quản trị viên theo dõi các hoạt động mạng, phát hiện các mối đe dọa bảo mật và thực hiện các biện pháp phòng ngừa để bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nLợi ích của việc sử dụng NMS:\r\n\r\nNâng cao hiệu suất mạng: NMS giúp quản trị viên xác định và giải quyết các vấn đề về hiệu suất mạng một cách nhanh chóng và hiệu quả, từ đó nâng cao hiệu suất tổng thể của mạng.\r\nGiảm thời gian ngừng hoạt động: NMS giúp phát hiện và khắc phục sự cố mạng kịp thời, giúp giảm thiểu thời gian ngừng hoạt động của mạng và đảm bảo hoạt động liên tục của các ứng dụng kinh doanh.\r\nNâng cao khả năng bảo mật: NMS giúp quản trị viên theo dõi các hoạt động mạng và phát hiện các mối đe dọa bảo mật, giúp bảo vệ mạng khỏi các cuộc tấn công mạng.\r\nGiảm chi phí vận hành: NMS giúp tự động hóa các tác vụ quản trị mạng, giúp tiết kiệm thời gian và công sức cho quản trị viên, đồng thời giảm chi phí vận hành mạng.', 2);
 
 -- --------------------------------------------------------
 
@@ -1041,7 +1082,7 @@ ALTER TABLE `bangcapchungchi`
 -- AUTO_INCREMENT cho bảng `congviec`
 --
 ALTER TABLE `congviec`
-  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `doitac`
@@ -1065,7 +1106,7 @@ ALTER TABLE `hopdong`
 -- AUTO_INCREMENT cho bảng `loaiduan`
 --
 ALTER TABLE `loaiduan`
-  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`

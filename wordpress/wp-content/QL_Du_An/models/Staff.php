@@ -67,15 +67,10 @@ if(!class_exists('Staff')){
          */
         public $AccountID;
         
-        /**
-         * @var int $TeamID
-         */
-        public $TeamID;
-
-        /**
-         * @var int $ProjectID
-         */
-        public $ProjectID; 
+        // /**
+        //  * @var int $ProjectID
+        //  */
+        // public $ProjectID; 
 
         /**
          * Lấy ra danh sách bằng cấp của nhân viên 
@@ -119,7 +114,7 @@ if(!class_exists('Staff')){
 
                 $joinStaff->ID = $row['ID'];
                 $joinStaff->StaffID = $row['StaffID'];
-                $joinStaff->ProjectID = $row['ProjectID'];
+                // $joinStaff->ProjectID = $row['ProjectID'];
 
                 $joinStaffs[] = $joinStaff;
             }
@@ -128,19 +123,26 @@ if(!class_exists('Staff')){
         }
 
         /**
-         * Lấy ra thành viên thuộc nhóm
+         * Lấy ra thành viên thuộc các nhóm
          *
          * @return Team
          */
-        public function GetStaffTeam(){
-            $TeamID = $this->TeamID;
-            [$Team] = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
-                return $team->ID === $TeamID;
+        public function GetTeams(){
+            $StaffID = $this->ID;
+
+            $Jobs = array_values(array_filter(Job::GetAllJob(), function($job) use($StaffID){
+                return $job->StaffID === $StaffID;
             }));
 
-            $this->TeamID = $Team->ID;
+            $Teams = [];
+            foreach ($Jobs as $key => $job){
+                $TeamID = $job->TeamID;
+                $Teams = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
+                    return $team->ID === $TeamID;
+                }));
+            }
 
-            return $Team;
+            return $Teams;
         }
 
         public static function GetAllStaff() { 
@@ -163,9 +165,7 @@ if(!class_exists('Staff')){
                 $staff->AccountID = $row['AccountID'];
                 $staff->Gender = $row['Gender'];
                 $staff->Status = $row['Status'];
-                $staff->TeamID = $row['TeamID'];
                 $staff->Avatar = $row['Avatar'];
-                $staff->ProjectID = $row['ProjectID'];
 
                 $staffAll[] = $staff;
             }
@@ -197,5 +197,3 @@ if(!class_exists('Staff')){
         }
     }
 }
-    
-?>

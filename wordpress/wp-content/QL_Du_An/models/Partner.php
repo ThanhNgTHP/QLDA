@@ -87,6 +87,3 @@ if(!class_exists('Partner')){
         } 
     }
 }
-    
-
-?>

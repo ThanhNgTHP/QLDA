@@ -8,6 +8,8 @@ if(!isset($projectID)){
 }
 
 $Staffs_ = GetStaffsWhereProjectID($projectID);
+print_r($Staffs_);
+exit;
 
 $groups = [[]];
 for($i = 0; $i < count($Staffs_); $i++){
@@ -48,10 +50,14 @@ function GetStaffsWhereProjectID($ProjectID){
     // }, $Project->GetStaffJoinProject());
 
     // bổ sung cột ProjectID
-    $Staffs = array_values(array_filter(Staff::GetAllStaff(), function($Staff) use ($ProjectID){
-        return $Staff->ProjectID == $ProjectID;
+    // $Staffs = array_values(array_filter(Staff::GetAllStaff(), function($Staff) use ($ProjectID){
+    //     return $Staff->ProjectID == $ProjectID;
+    // }));
+
+    $jobs = array_values(array_filter(Job::GetAllJob(), function($Job) use ($ProjectID){
+        return $Job->ProjectID == $ProjectID;
     }));
 
-    return $Staffs;
+    return $jobs;
 }
 ?>

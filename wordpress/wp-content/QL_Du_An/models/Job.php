@@ -3,6 +3,7 @@
         include_once getenv('DIR_DB') . '/ActionDB.php';
         include_once getenv('DIR_MODELS') . '/Team.php';
         include_once getenv('DIR_MODELS') . '/Project.php';
+        include_once getenv('DIR_MODELS') . '/Staff.php';
         class Job{
             /** @var int $ID */
             public  $ID;
@@ -54,7 +55,6 @@
                 $result = $actionDB->JobAllInfo();
 
                 $jobAll = array();
-                exit;
     
                 while($row = $result->fetch_assoc()){
                     $job = new Job();
@@ -68,6 +68,7 @@
                     $job->TeamID = $row['TeamID'];
                     $job->ProjectID = $row['ProjectID'];
                     $job->Progress = $row['Progress'];
+                    $job->Progress = $row['Priority'];
                     $job->TargetBudget = $row['TargetBudget'];
                     $job->ActualBudget = $row['ActualBudget'];
                     $job->StaffID = $row['StaffID'];
@@ -91,6 +92,15 @@
                 $ProjectID = $this->ProjectID;
                 [$project] = array_values(array_filter(Project::GetAllProject(), function ($project) use ($ProjectID){
                     return $project->ID == $ProjectID;
+                }));
+
+                return $project;
+            }
+
+            public function StaffProject(){
+                $StaffID = $this->StaffID;
+                [$staff] = array_values(array_filter(Staff::GetAllStaff(), function ($project) use ($StaffID){
+                    return $staff->ID == $StaffID;
                 }));
 
                 return $project;

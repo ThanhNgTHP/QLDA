@@ -32,6 +32,9 @@ if(!class_exists('ProjectSummary')){
         /** @var Image $Image */
         public $Image;
 
+        /** @var Image $ProjectProgress */
+        public $ProjectProgress;
+
         public static function GetAllProjectSummary(){
 
             $actionDB = new ActionDB();
@@ -45,6 +48,7 @@ if(!class_exists('ProjectSummary')){
 
                 $projectSummary->ProjectID = $project->ID;
                 $projectSummary->ProjectName = $project->Name;
+                $projectSummary->ProjectProgress = $project->Progress;
                 
                 $staff = new Staff();
                 $projectSummary->StaffCount = $staff->GetStaffCountInProject($project->ID);

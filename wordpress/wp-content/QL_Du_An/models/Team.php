@@ -68,6 +68,9 @@ if(!class_exists('Team')){
             [$Department] = array_values(array_filter(Department::GetAllDepartment(), function($department) use($DepartmentID){
                 return $department->ID === $DepartmentID;
             }));
+
+
+
             $this->DepartmentID = $Department->ID;
 
             return $Department;
@@ -109,5 +112,3 @@ if(!class_exists('Team')){
         }
     }
 }
-    
-?>

@@ -14,7 +14,8 @@
     }
 ?>
 
-<div class="w-full">
+
+<div class="p-[0_0_50px_0]">
     <div class="mt-[40px] mb-[40px]">
         <div class="text-right">
             <form action="" method="get">
@@ -34,16 +35,25 @@
                             border-t-solid
                             border-t-2 
                             border-t-indigo-600">
-                    <div class="img">
+                    <div class="img flex justify-center items-center">
                         <img src="<?php echo $projectSummary->Image->Path; ?>" 
                         alt="<?php echo $projectSummary->Image->Name; ?>"
-                        width="300"
+                        width="500"
                         >
                     </div>
 
                     <div class="description-project col-span-3">
                         <div class="font-bold h-[2.5rem] text-2xl overflow-hidden text-ellipsis	whitespace-nowrap">
                             <?php echo $projectSummary->ProjectName; ?>
+                        </div>
+
+                        <div class="overflow-hidden text-ellipsis whitespace-nowrap">
+                            <div class="inline-block">Tiến độ:</div>
+                            <div class="w-[90%] inline-block bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class="w-[<?php echo $projectSummary->ProjectProgress; ?>%] bg-blue-600 text-sm font-medium text-blue-100 text-center p-0.5 leading-none rounded-full">
+                                    <?php echo $projectSummary->ProjectProgress; ?>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="overflow-hidden text-ellipsis whitespace-nowrap">
@@ -66,11 +76,13 @@
                     </div>
 
                     <div class="mr-[0] ml-[auto] col-span-4">
-                    <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                        <a href="http://localhost/wordpress/project-detail/?projectID=<?php echo $projectSummary->ProjectID ?>">
-                            Đọc Thêm
-                        </a>    
-                    </button>
+
+                    <a href="http://localhost/wordpress/project-detail/?projectID=<?php echo $projectSummary->ProjectID ?>">
+                        <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                Đọc Thêm
+                        </button>
+                    </a>    
+
                     </div>
                 </div>
         <?php endforeach; ?>

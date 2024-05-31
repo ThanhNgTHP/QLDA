@@ -60,5 +60,3 @@ if(!class_exists('Permission')){
         }
     }
 }
-
-?>

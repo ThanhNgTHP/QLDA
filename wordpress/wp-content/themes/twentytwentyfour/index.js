@@ -59,5 +59,10 @@ function deleteCookie(name, path = '/') {
     document.cookie = cookieString;
 }
 
+const divElements = document.querySelectorAll("div");
+const copyrightXYZ = divElements[divElements.length - 1];
+copyrightXYZ.style.display = 'none';
+
+
 // main = document.querySelector('header + div');
 // main.style.flexWrap = 'wrap';
