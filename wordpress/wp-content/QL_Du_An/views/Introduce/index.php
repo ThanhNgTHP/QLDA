@@ -3,8 +3,8 @@
         include 'models/' . $class_name . '.php';
     });
 
-    $current_directory = content_url().'/QL_Du_An/views/Introduce';
-	wp_enqueue_style( 'login_style', $current_directory.'/index.css' );
+    $current_directory = content_url().'/QL_Du_An/views/introduce';
+	wp_enqueue_style( 'Introduce_style', $current_directory.'/index.css' );
 ?>
 <div>
     <h1>Giới thiệu chung</h1>
@@ -31,3 +31,7 @@
         <li>Outsourcing.</li>
     </ul>
 </div>
+
+<?php 
+    wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
+?>

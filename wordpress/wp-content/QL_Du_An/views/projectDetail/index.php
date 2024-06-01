@@ -28,7 +28,7 @@
             <div class="inline-block">Tiến độ:</div>
             <div class="w-[90%] inline-block bg-gray-200 rounded-full dark:bg-gray-700">
                 <div class="w-[<?php echo $projectDetail->Project->Progress ?>%] bg-blue-600 text-sm font-medium text-blue-100 text-center p-0.5 leading-none rounded-full">
-                    <?php echo $projectDetail->Project->Progress ?>
+                    <?php echo $projectDetail->Project->Progress ?>%
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
 
         <div class="list-staff">
             <div class="text-[30px]">
-                Danh sách nhân viên
+                Danh sách thành viên
             </div>
 
             <a href="list-staff-project/?projectID=<?php echo $projectDetail->Project->ID ?>">

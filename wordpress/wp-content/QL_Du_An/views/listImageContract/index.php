@@ -4,7 +4,7 @@
     $current_directory_url = content_url().'/QL_Du_An/views/listImageContract';
     $img_directory_url = content_url().'/QL_Du_An/resources/layout_img';
 
-	wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+	wp_enqueue_style( 'list_image_contract_style', $current_directory_url.'/index.css');
 
 ?>
 

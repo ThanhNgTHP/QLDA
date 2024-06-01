@@ -26,15 +26,10 @@
     </div>
     <div>
 
-    <?php 
-        $staffx = new Staff();
-    ?>
-        <?php $staffid =  0;?>
+    <?php $staffID =  0;?>
 
     <?php foreach($groups as $key => $group): ?>
-        <?php if($group['StaffID'] != $staffid): ?>
-
-            <?php $i = 0; ?>
+        <?php if($group['StaffID'] != $staffID): ?>
 
                 <div class="grid grid-cols-4 gap-1
                         p-[25px_0_0_0]
@@ -54,7 +49,7 @@
                 <?php echo "Trạng thái: ". $group['Status']; ?><br>
 
                 </div>
-            <?php $staffid =  $group['StaffID'];?>
+            <?php $staffID =  $group['StaffID'];?>
         <?php endif ?>
         <?php endforeach ?>
     </div>

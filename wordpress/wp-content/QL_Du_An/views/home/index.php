@@ -51,7 +51,7 @@
                             <div class="inline-block">Tiến độ:</div>
                             <div class="w-[90%] inline-block bg-gray-200 rounded-full dark:bg-gray-700">
                                 <div class="w-[<?php echo $projectSummary->ProjectProgress; ?>%] bg-blue-600 text-sm font-medium text-blue-100 text-center p-0.5 leading-none rounded-full">
-                                    <?php echo $projectSummary->ProjectProgress; ?>
+                                    <?php echo $projectSummary->ProjectProgress; ?>%
                                 </div>
                             </div>
                         </div>
