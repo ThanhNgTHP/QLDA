@@ -110,6 +110,10 @@
                     $project->Description = $row['Description'];
                     
                     $project->ProjectCategoryID = $row['ProjectCategoryID'];
+
+                    $project->TargetBudget = $row['TargetBudget'];
+                    $project->ActualBudget = $row['ActualBudget'];
+                    $project->Progress = $row['Progress'];
     
                     $projectAll[] = $project;
                 }

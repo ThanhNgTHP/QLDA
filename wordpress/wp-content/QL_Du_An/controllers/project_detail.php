@@ -5,6 +5,7 @@ if(!class_exists('ProjectDetail')){
     include_once getenv('DIR_MODELS') . '/Contract.php';
     include_once getenv('DIR_MODELS') . '/Partner.php';
     include_once getenv('DIR_MODELS') . '/Image.php';
+    include_once getenv('DIR_MODELS') . '/Job.php';
     class ProjectDetail{
 
         /** @var Project $Project */
@@ -18,6 +19,9 @@ if(!class_exists('ProjectDetail')){
 
         /** @var Partner $Partner */
         public $Partner;
+
+        /** @var Partner $Job */
+        public $Jobs;
 
         public function __construct($projectID){
             [$Project] = array_values(array_filter(Project::GetAllProject(), function($project) use($projectID){
@@ -39,6 +43,11 @@ if(!class_exists('ProjectDetail')){
                 return $partner->ID === $Contract->PartnerID;
             }));
             $this->Partner = $Partner;
+
+            // [$Job] = array_values(array_filter(Job::GetAllJob(), function($job) use($Project){
+            //     return $job->ProjectID === $Project->ID;
+            // }));
+            // $this->Jobs = $Job;            
         }
     }
 }

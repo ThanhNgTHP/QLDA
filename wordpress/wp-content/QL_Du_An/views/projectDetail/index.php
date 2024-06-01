@@ -22,16 +22,16 @@
         <?php echo "Mô tả: ". $projectDetail->Project->Description ?><br>
         <?php echo "Trạng thái: ". $projectDetail->Project->Status ?><br>
 
-        <!-- <?php echo "Ngân sách dư kiến: ". $projectDetail->Project->TargetBudget ?><br>
+        <?php echo "Ngân sách dư kiến: ". $projectDetail->Project->TargetBudget ?><br>
         <?php echo "Ngân sách thực tế: ". $projectDetail->Project->ActualBudget ?><br>
         <div class="overflow-hidden text-ellipsis whitespace-nowrap">
             <div class="inline-block">Tiến độ:</div>
             <div class="w-[90%] inline-block bg-gray-200 rounded-full dark:bg-gray-700">
                 <div class="w-[<?php echo $projectDetail->Project->Progress ?>%] bg-blue-600 text-sm font-medium text-blue-100 text-center p-0.5 leading-none rounded-full">
-                    <?php echo $projectDetail->Project->Progress ?>
+                    <?php echo $projectDetail->Project->Progress ?>%
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <br>
 
@@ -50,7 +50,7 @@
 
         <div class="list-staff">
             <div class="text-[30px]">
-                Danh sách nhân viên
+                Danh sách thành viên
             </div>
 
             <a href="list-staff-project/?projectID=<?php echo $projectDetail->Project->ID ?>">
@@ -60,6 +60,20 @@
             </a>
             
         </div>
+
+        <div class="list-job">
+            <div class="text-[30px]">
+                Danh sách công việc
+            </div>
+
+            <a href="list-job-project/?projectID=<?php echo $projectDetail->Project->ID ?>">
+                <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Hiển Thị
+                </button>
+            </a>
+            
+        </div>
+
 
         <br>
 

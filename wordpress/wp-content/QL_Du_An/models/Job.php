@@ -3,6 +3,7 @@
         include_once getenv('DIR_DB') . '/ActionDB.php';
         include_once getenv('DIR_MODELS') . '/Team.php';
         include_once getenv('DIR_MODELS') . '/Project.php';
+        include_once getenv('DIR_MODELS') . '/Staff.php';
         class Job{
             /** @var int $ID */
             public  $ID;
@@ -29,8 +30,10 @@
             public  $ProjectID;
 
             /** @var int $Progress */
-
             public  $Progress;
+
+            /** @var int $Priority */
+            public  $Priority;
             
             /** @var int $TargetBudget */
             public  $TargetBudget;
@@ -67,7 +70,7 @@
                     $job->TeamID = $row['TeamID'];
                     $job->ProjectID = $row['ProjectID'];
                     $job->Progress = $row['Progress'];
-                    $job->Progress = $row['Priority'];
+                    $job->Priority = $row['Priority'];
                     $job->TargetBudget = $row['TargetBudget'];
                     $job->ActualBudget = $row['ActualBudget'];
                     $job->StaffID = $row['StaffID'];
@@ -95,6 +98,15 @@
 
                 return $project;
             }
+
+            // public function StaffProject(){
+            //     $StaffID = $this->StaffID;
+            //     [$staff] = array_values(array_filter(Staff::GetAllStaff(), function ($staff) use ($StaffID){
+            //         return $staff->ID == $StaffID;
+            //     }));
+
+            //     return $staff;
+            // }
         }  
     }
 ?>

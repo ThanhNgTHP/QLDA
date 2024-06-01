@@ -67,10 +67,10 @@ if(!class_exists('Staff')){
          */
         public $AccountID;
         
-        /**
-         * @var int $ProjectID
-         */
-        public $ProjectID; 
+        // /**
+        //  * @var int $ProjectID
+        //  */
+        // public $ProjectID; 
 
         /**
          * Lấy ra danh sách bằng cấp của nhân viên 
@@ -114,7 +114,7 @@ if(!class_exists('Staff')){
 
                 $joinStaff->ID = $row['ID'];
                 $joinStaff->StaffID = $row['StaffID'];
-                $joinStaff->ProjectID = $row['ProjectID'];
+                // $joinStaff->ProjectID = $row['ProjectID'];
 
                 $joinStaffs[] = $joinStaff;
             }
@@ -137,7 +137,7 @@ if(!class_exists('Staff')){
             $Teams = [];
             foreach ($Jobs as $key => $job){
                 $TeamID = $job->TeamID;
-                $Teams = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
+                [$Teams] = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
                     return $team->ID === $TeamID;
                 }));
             }

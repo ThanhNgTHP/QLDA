@@ -1,5 +1,7 @@
 <?php 
 include_once getenv('DIR_MODELS') . '/Staff.php';
+include_once getenv('DIR_DB') . '/ActionDB.php';
+
 
 $projectID = $_GET['projectID'] ?? null;
 if(!isset($projectID)){
@@ -8,21 +10,31 @@ if(!isset($projectID)){
 }
 
 $Staffs_ = GetStaffsWhereProjectID($projectID);
+// print_r($Staffs_);
+// exit;
 
-$groups = [[]];
+// $groups = [[]];
+$groups = $Staffs_;
+
+
+
 for($i = 0; $i < count($Staffs_); $i++){
     $isGroup = false;
     $Staffs = $Staffs_;
     $staff = $Staffs[$i];
 
+
+
     for($j = 0; $j < count($groups); $j++){
         
-        if(!isset($groups[$j]) || count($groups[$j]) === 0){
+        if(!isset($groups[$j]) || count($groups) === 0){
             break;
         }
         else{
+            // print_r($groups[$j]['TeamID']);
+            // exit;
             
-            if($groups[$j][0]->TeamID === $staff->TeamID){
+            if($groups[$j]['TeamID'] === $staff['TeamID']){
                 $groups[$j][] = $staff;
                 $isGroup = true;
                 
@@ -48,10 +60,17 @@ function GetStaffsWhereProjectID($ProjectID){
     // }, $Project->GetStaffJoinProject());
 
     // bổ sung cột ProjectID
-    $Staffs = array_values(array_filter(Staff::GetAllStaff(), function($Staff) use ($ProjectID){
-        return $Staff->ProjectID == $ProjectID;
-    }));
+    // $Staffs = array_values(array_filter(Staff::GetAllStaff(), function($Staff) use ($ProjectID){
+    //     return $Staff->ProjectID == $ProjectID;
+    // }));
 
-    return $Staffs;
+    $action = new ActionDB();
+    $jobs = $action->GetStaffJoinProject($ProjectID);
+    $rows = $jobs->fetch_all(MYSQLI_ASSOC);
+
+    // var_dump($rows);
+    // exit;
+
+    return $rows;
 }
 ?>

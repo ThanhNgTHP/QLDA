@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:8888
--- Thời gian đã tạo: Th5 30, 2024 lúc 07:19 PM
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th6 01, 2024 lúc 10:26 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -190,7 +190,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaHopDong` (IN `maHD` I
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDA` (IN `MaDA` INT)   BEGIN
-    SELECT duan.MaDA AS ID, duan.TenDA AS Name, duan.NgayBatDau AS Begin, duan.NgayKetThuc AS End, duan.TrangThai AS Status, duan.LienHe AS Contact, duan.MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID 
+    SELECT duan.MaDA AS ID, duan.TenDA AS Name, duan.NgayBatDau AS Begin, duan.NgayKetThuc AS End, duan.TrangThai AS Status, duan.LienHe AS Contact, duan.MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
     FROM duan 
     WHERE duan.MaDA = MaDA;
 END$$
@@ -324,6 +324,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
     FROM thanhvien;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinThanhVienThamGiaDuAn` (IN `MaDA` INT)   BEGIN
+    SELECT HoTen AS Name, GioiTinh AS Gender, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID
+    FROM congviec 
+    INNER JOIN thanhvien ON thanhvien.MaTV = congviec.MaTV
+    WHERE congviec.MaDA = MaDA;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
     SELECT HoTen AS StaffName, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status
     FROM thanhvien WHERE thanhvien.MaTV = MaTV;
@@ -348,7 +355,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDA` (IN `TenDA` VARCHAR(255) CHARSET utf8mb4)   BEGIN
     SET @TenDA = CONCAT('%', TenDA , '%');
-    SELECT MaDA AS ProjectID, duan.TenDA AS ProjectName, NgayBatDau AS Begin , NgayKetThuc AS Expire, TrangThai AS Status, LienHe AS Contact, MoTa AS Description
+    SELECT MaDA AS ProjectID, duan.TenDA AS ProjectName, NgayBatDau AS Begin , NgayKetThuc AS Expire, TrangThai AS Status, LienHe AS Contact, MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
     FROM duan
     WHERE duan.TenDA LIKE @TenDA;
 END$$
