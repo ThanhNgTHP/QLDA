@@ -61,6 +61,20 @@
             
         </div>
 
+        <div class="list-job">
+            <div class="text-[30px]">
+                Danh sách công việc
+            </div>
+
+            <a href="list-job-project/?projectID=<?php echo $projectDetail->Project->ID ?>">
+                <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Hiển Thị
+                </button>
+            </a>
+            
+        </div>
+
+
         <br>
 
         <div class="list-contract">

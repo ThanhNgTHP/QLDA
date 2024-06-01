@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 31, 2024 lúc 09:44 AM
+-- Thời gian đã tạo: Th6 01, 2024 lúc 10:26 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -324,6 +324,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
     FROM thanhvien;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinThanhVienThamGiaDuAn` (IN `MaDA` INT)   BEGIN
+    SELECT HoTen AS Name, GioiTinh AS Gender, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID
+    FROM congviec 
+    INNER JOIN thanhvien ON thanhvien.MaTV = congviec.MaTV
+    WHERE congviec.MaDA = MaDA;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
     SELECT HoTen AS StaffName, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status
     FROM thanhvien WHERE thanhvien.MaTV = MaTV;
@@ -333,12 +340,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVBC` (`MaTV` INT)   BEGIN
   SELECT bangcapchungchi.MaTV AS StaffID, bangcapchungchi.MaBC AS ID, bangcapchungchi.TenBC AS Name, bangcapchungchi.NoiCap AS Address, bangcapchungchi.NgayCap AS Date
   FROM thanhvien INNER JOIN bangcapchungchi ON thanhvien.MaTV = bangcapchungchi.MaTV
   WHERE thanhvien.MaTV = MaTV;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVDA` (IN `MaDA` INT)   BEGIN
-    SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
-    FROM congviec 
-    WHERE congviec.MaDA = MaDA;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVTG` (`MaDA` INT)   BEGIN

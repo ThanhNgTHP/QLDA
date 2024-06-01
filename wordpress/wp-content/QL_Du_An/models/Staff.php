@@ -137,7 +137,7 @@ if(!class_exists('Staff')){
             $Teams = [];
             foreach ($Jobs as $key => $job){
                 $TeamID = $job->TeamID;
-                $Teams = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
+                [$Teams] = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
                     return $team->ID === $TeamID;
                 }));
             }

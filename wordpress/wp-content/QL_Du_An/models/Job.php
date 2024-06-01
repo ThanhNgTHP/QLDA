@@ -97,14 +97,14 @@
                 return $project;
             }
 
-            public function StaffProject(){
-                $StaffID = $this->StaffID;
-                [$staff] = array_values(array_filter(Staff::GetAllStaff(), function ($project) use ($StaffID){
-                    return $staff->ID == $StaffID;
-                }));
+            // public function StaffProject(){
+            //     $StaffID = $this->StaffID;
+            //     [$staff] = array_values(array_filter(Staff::GetAllStaff(), function ($staff) use ($StaffID){
+            //         return $staff->ID == $StaffID;
+            //     }));
 
-                return $project;
-            }
+            //     return $staff;
+            // }
         }  
     }
 ?>
