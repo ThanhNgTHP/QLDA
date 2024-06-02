@@ -1,5 +1,6 @@
 <?php 
 include_once getenv('DIR_MODELS') . '/Contract.php';
+include 'base_controllers.php';
 
 $contractID = $_GET['contractID'] ?? null;
 if(!isset($contractID)){

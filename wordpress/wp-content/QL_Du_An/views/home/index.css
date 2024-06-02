@@ -2,10 +2,6 @@ main > div:first-child{
     display: none;
 }
 
-.has-base-background-color{
+/* .has-base-background-color{
     background-color: red !important;
-}
-
-.abcd{
-    background-color: red;
-}
+} */

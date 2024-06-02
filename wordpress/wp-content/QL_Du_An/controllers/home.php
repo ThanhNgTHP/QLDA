@@ -94,6 +94,7 @@ if(!class_exists('ProjectSummary')){
 
                     $projectSummary->ProjectID = $project->ID;
                     $projectSummary->ProjectName = $project->Name;
+                    $projectSummary->ProjectProgress = $project->Progress;
 
                     $staff = new Staff();
                     $projectSummary->StaffCount = $staff->GetStaffCountInProject($project->ID);
@@ -140,6 +141,7 @@ if(!class_exists('ProjectSummary')){
 
                     $projectSummary->ProjectID = $project->ID;
                     $projectSummary->ProjectName = $project->Name;
+                    $projectSummary->ProjectProgress = $project->Progress;
 
                     $staff = new Staff();
                     $projectSummary->StaffCount = $staff->GetStaffCountInProject($project->ID);

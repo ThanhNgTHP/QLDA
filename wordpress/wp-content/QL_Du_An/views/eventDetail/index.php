@@ -9,6 +9,12 @@
 
 ?>
 
+    <?php echo $event->ID; ?>
+    <?php echo $event->Name; ?>
+    <?php echo $event->Image; ?>
+    <?php echo $event->Note; ?>
+
+<!-- <?php echo $eventID; ?> -->
 <!-- <?php echo $eventID; ?> -->
 
 <?php 

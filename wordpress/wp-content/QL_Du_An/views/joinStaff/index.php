@@ -2,7 +2,7 @@
 
 include_once getenv('DIR_CONTROLLERS').'\\join_staff.php';
 
-$current_directory_url = content_url().'/QL_Du_An/views/join_staff';
+$current_directory_url = content_url().'/QL_Du_An/views/joinStaff';
 
 wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 

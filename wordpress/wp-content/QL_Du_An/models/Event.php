@@ -39,7 +39,7 @@ if(!class_exists('Event')){
         /**
          * Lấy ra danh sách thành viên trong nhóm
          *
-         * @return allevent[]
+         * @return Event[]
          */
 
         public static function GetAllEvent(){

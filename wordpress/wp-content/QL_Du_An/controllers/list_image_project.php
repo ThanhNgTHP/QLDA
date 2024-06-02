@@ -1,5 +1,6 @@
 <?php 
 include_once getenv('DIR_MODELS') . '/Project.php';
+include 'base_controllers.php';
 
 $projectID = $_GET['projectID'] ?? null;
 if(!isset($projectID)){
