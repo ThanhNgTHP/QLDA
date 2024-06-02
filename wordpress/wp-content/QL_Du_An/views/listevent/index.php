@@ -27,14 +27,14 @@
             </div>
 
             <div class="overflow-hidden whitespace-normal overflow-ellipsis text-left col-span-3
-                        p-[0_0_0_10px]
+                        p-[0_0_0_5px]
                         m-[0_0_0_0]
                         border-l-solid
                         border-l-2 
                         border-l-indigo-600           
             ">
 
-          `      <div class="h-[300px] overflow-y-hidden">
+                <div class="m-[0_0_0_5px] h-[300px] overflow-y-hidden text-justify">
                     <?php echo $event->Content; ?>
                 </div>
 
@@ -57,6 +57,6 @@
 </div>
 <?php 
     wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-    wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+    // wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>
