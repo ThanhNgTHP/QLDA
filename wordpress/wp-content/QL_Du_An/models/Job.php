@@ -81,7 +81,40 @@
                 return $jobAll;
             }
 
-            public function JobTeam(){
+            public static function GetJobsByProjectID($projectID){
+                $actionDB = new ActionDB();
+
+                $result = $actionDB->JobAllInfo();
+
+                $jobsByProject = array();
+
+                while($row = $result->fetch_assoc()){
+                    if ($row['ProjectID'] == $projectID) {
+                        $job = new Job();
+                
+                        $job->ID = $row['ID'];
+                        $job->Name = $row['Name'];
+                        $job->Content = $row['Content'];
+                        $job->Note = $row['Note'];
+                        $job->Begin = $row['Begin'];
+                        $job->End = $row['End'];
+                        $job->TeamID = $row['TeamID'];
+                        $job->ProjectID = $row['ProjectID'];
+                        $job->Progress = $row['Progress'];
+                        $job->Priority = $row['Priority'];
+                        $job->TargetBudget = $row['TargetBudget'];
+                        $job->ActualBudget = $row['ActualBudget'];
+                        $job->StaffID = $row['StaffID'];
+                                
+                        $jobsByProject[] = $job;
+                    }
+                }
+
+                return $jobsByProject;
+            }
+
+
+            public function GetTeam(){
                 $TeamID = $this->TeamID;
                 [$team] = array_values(array_filter(Team::GetAllTeam(), function ($team) use ($TeamID){
                     return $team->ID == $TeamID;

@@ -26,6 +26,7 @@ if(!class_exists('Team')){
          */
         public $DepartmentID;
 
+
         /**
          * Lấy ra danh sách thành viên trong nhóm
          *
@@ -50,7 +51,6 @@ if(!class_exists('Team')){
                 $staff->AccountID = $row['AccountID'];
                 $staff->Gender = $row['Gender'];
                 $staff->Status = $row['Status'];
-                $staff->TeamID = $row['TeamID'];
 
                 $staffs[] = $staff;
             }
@@ -68,8 +68,6 @@ if(!class_exists('Team')){
             [$Department] = array_values(array_filter(Department::GetAllDepartment(), function($department) use($DepartmentID){
                 return $department->ID === $DepartmentID;
             }));
-
-
 
             $this->DepartmentID = $Department->ID;
 

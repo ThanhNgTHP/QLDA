@@ -43,11 +43,13 @@ function GetQualifications($Staff){
 }
 
 function GetTeams($Staff){
-    return $Staff->GetTeams();
+    return [$Staff->GetTeams()];
 }
 
 function GetDepartments($Teams){
     $Departments = [];
+
+
     foreach($Teams as $key => $Team){
         $Departments = $Team->GetTeamDepartment();
     }
