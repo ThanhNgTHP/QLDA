@@ -63,7 +63,7 @@
     </div>
 </div> 
 
-<div class="w-full">
+<div class="w-full m-[0_0_0_10px]">
     <div class = "text-[20px] "> 
         <img class="w-[500px] m-auto" src="<?php echo $User->Staff->Avatar ?>" alt="Avatar" style="width: 300px;"> 
         <div class = "text-[40px] p-[10px_0_0_0]">
@@ -88,7 +88,7 @@
             <?php echo "Nơi cấp: " . $Qualification->Address ?><br>
         <?php endforeach; ?>
 
-        <div class = "text-[40px] p-[10px_0_0_0]">
+        <!-- <div class = "text-[40px] p-[10px_0_0_0]">
             Phòng ban - Nhóm:
         </div>
         <?php echo "Tên phòng ban: " . $Department->Name ?><br>
@@ -97,7 +97,7 @@
         <?php foreach($Teams as $key => $Team): ?>
             <?php echo "Tên nhóm: " . $Team->Name ?><br>
             <?php echo "Trường nhóm: " . $Team->Leader ?><br>
-        <?php endforeach; ?>
+        <?php endforeach; ?> -->
     </div>
 
     <div class = "text-[40px] p-[10px_0_0_0]">
@@ -111,6 +111,17 @@
         <button id="btn-change-password" 
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >Đổi mật khẩu</button>
+
+    <div class = "text-[40px] p-[10px_0_0_0]">
+            Danh sách công việc:
+        </div>
+        <div class="mr-[0] ml-[auto] col-span-4">
+            <a href="http://localhost/wordpress/list-job-user/?staffID=<?php echo $User->Staff->ID ?>">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Xem
+                </button>
+            </a>    
+        </div>
 </div>
 
 <?php 
