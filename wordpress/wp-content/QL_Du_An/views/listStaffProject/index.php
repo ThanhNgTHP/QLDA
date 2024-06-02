@@ -12,7 +12,11 @@
 
     <?php $staff_id =  0;?>
     <?php $count =  0;?>
-
+    <?php 
+    usort($groups, function ($group1, $group2) {
+        return $group1['StaffID'] <=> $group2['StaffID'];
+    });
+    ?>
     <?php foreach($groups as $key => $group): ?>
         <?php if($group['StaffID'] != $staff_id): ?>
             <?php $count++;?>
@@ -42,7 +46,7 @@
                 alt="<?php echo 'Avatar ' . $group['Name']; ?>"
                 style="width: 300px;"
                 >
-            
+                <?php echo "Mã thành viên: ". $group['StaffID']; ?><br>
                 <?php echo "Họ và tên: ". $group['Name']; ?><br>
                 <?php echo "Giới tính: ". $group['Gender']; ?><br>
                 <?php echo "Chức vụ: ". $group['Position']; ?><br>
