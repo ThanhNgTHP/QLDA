@@ -1,0 +1,9 @@
+{
+    "name": "vendor-name/package-name",
+    "autoload": {
+        "psr-4": {
+            "VendorName\\PackageName\\": "src/"
+        }
+    },
+    "require": {}
+}
