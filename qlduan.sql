@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 02, 2024 lúc 06:22 PM
+-- Máy chủ: 127.0.0.1:8888
+-- Thời gian đã tạo: Th6 03, 2024 lúc 01:03 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -461,12 +461,12 @@ END$$
 --
 -- Các hàm
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
+CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MaTK` INT, `MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
   DECLARE count INT;
   
   UPDATE taikhoan 
   SET  taikhoan.MatKhau = MatKhauMoi
-  WHERE taikhoan.MatKhau = MatKhauCu;
+  WHERE taikhoan.MatKhau = MatKhauCu AND taikhoan.MaTK = MaTK;
  
   SET count = ROW_COUNT();
   
@@ -934,8 +934,8 @@ CREATE TABLE `taikhoan` (
 
 INSERT INTO `taikhoan` (`MaTK`, `TenTK`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES
 (1, 'summon', '123456789', 1, 'Vẫn còn sử dụng'),
-(2, 'galactot', '123456789', 2, 'Tạm ngưng hoạt động'),
-(3, 'nguyentung', '123456789', 3, 'Vẫn còn sử dụng');
+(2, 'galactot', '1234567', 2, 'Tạm ngưng hoạt động'),
+(3, 'nguyentung', '12345678', 3, 'Vẫn còn sử dụng');
 
 -- --------------------------------------------------------
 
