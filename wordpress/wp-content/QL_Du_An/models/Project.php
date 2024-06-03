@@ -134,5 +134,25 @@
 
                 return $projectCategory;
             }
+
+            public function Add($name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress){
+                $actionDB = new ActionDB();
+                $actionDB->AddProject($name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress);
+            }
+
+            public function Edit($id, $name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress){
+                $actionDB = new ActionDB();
+                $actionDB->EditProject($id, $name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress);
+            }
+            
+            public function Delete($id){
+                $actionDB = new ActionDB();
+                $actionDB->DeleteProject($id);
+            }            
+
+            public function Find($name){
+                $actionDB = new ActionDB();
+                return $actionDB->FindProject($name)->fetch_all(MYSQLI_ASSOC);
+            }
         }
     }

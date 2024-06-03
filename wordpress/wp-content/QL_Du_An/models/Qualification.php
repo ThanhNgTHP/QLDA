@@ -49,5 +49,25 @@
 
                 return $staff;
             }
+
+            public function Add($name, $date, $address, $staffID){
+                $actionDB = new ActionDB();
+                $actionDB->AddQualification($name, $date, $address, $staffID);
+            }
+
+            public function Edit($id, $name, $date, $address, $staffID){
+                $actionDB = new ActionDB();
+                $actionDB->EditQualification($id, $name, $date, $address, $staffID);
+            }
+            
+            public function Delete($id){
+                $actionDB = new ActionDB();
+                $actionDB->DeleteQualification($id);
+            }            
+
+            public function Find($name){
+                $actionDB = new ActionDB();
+                return $actionDB->FindQualification($name)->fetch_all(MYSQLI_ASSOC);
+            }
         }
     }

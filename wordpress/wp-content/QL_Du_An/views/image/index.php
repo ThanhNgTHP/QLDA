@@ -9,7 +9,13 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 ?>
 
 <br>
-<button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+<button type="submit" name="find" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+    Tìm Kiếm
+</button>
+<br>
+
+<br>
+<button type="submit" name="add" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
     Thêm
 </button>
 <br>
@@ -58,7 +64,7 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                     <?php $projectSelect = $image->GetImageProject(); ?>
                     <option value="<?php echo $projectSelect->ID; ?>"><?php echo $projectSelect->Name . '-' . $projectSelect->ID; ?></option>
                     <?php foreach(Project::GetAllProject() as $key => $project): ?>
-                        <?php if($project): ?>
+                        <?php if($project->ID != $projectSelect->ID): ?>
                         <option value="<?php $project->ID; ?>"><?php echo $project->Name . '-' . $project->ID; ?></option>
                         <?php endif; ?>
                     <?php endforeach; ?>

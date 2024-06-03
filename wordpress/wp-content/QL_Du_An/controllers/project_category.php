@@ -5,8 +5,7 @@
 
     $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? null;
-    $path = $_FILES["path"] ?? null;
-    $projectID = $_POST['project-id'] ?? null;
+    $description = $_FILES["description"] ?? null;
     
 
     if(isset($name)  && isset($projectID)){
@@ -16,16 +15,39 @@
 
         $method = $_POST['method'];
         if($method === 'add'){
-            $image = new Image();
-            $image->Add($name, $path, (int)$projectID);
+            $projectCategory = new ProjectCategory();
+            $projectCategory->Add($name, $description);
         }
         else if($method === 'edit'){
-            $image = new Image();
-            $image->Edit($id, $name, $path, (int)$projectID);
+            $projectCategory = new ProjectCategory();
+            $projectCategory->Edit($id, $name, $description);
         }
         else if($method === 'delete'){
-            $image = new Image();
-            $image->Delete($id);
+            $projectCategory = new ProjectCategory();
+            $projectCategory->Delete($id);
         }
+        else if($method === 'find'){
+            $projectCategory = new ProjectCategory();
+            $projectCategorys = $projectCategory->Find($name);
+        }        
+    }
+    function Add($name, $description){
+        $projectCategory = new ProjectCategory();
+        $projectCategory->Add($name, $description);
+    }
+
+    function Edit($id, $name, $description){
+        $projectCategory = new ProjectCategory();
+        $projectCategory->Edit($id, $name, $description);
+    }
+
+    function Delete($id){
+        $projectCategory = new ProjectCategory();
+        $projectCategory->Delete($id);
+    }
+
+    function Find($abc){
+        $projectCategory = new ProjectCategory();
+        return $projectCategory->Find($abc);
     }
 ?>

@@ -4,9 +4,6 @@ if(!class_exists('User')){
     include_once getenv('DIR_MODELS') . '/Account.php';
     include_once getenv('DIR_MODELS') . '/Permission.php';
     include_once getenv('DIR_MODELS') . '/Staff.php';
-    include_once getenv('DIR_MODELS') . '/Team.php';
-    include_once getenv('DIR_MODELS') . '/Qualification.php';
-    include_once getenv('DIR_MODELS') . '/Department.php';
     class User{
 
         /** @var Staff $Staff */
@@ -28,10 +25,10 @@ if(!class_exists('User')){
             $this->Staff = $Account->GetAccountStaff();
         }
 
-        public function ChangePassword($currentPassword, $newPassword){
+        public function ChangePassword($accountID, $currentPassword, $newPassword){
 
             $action = new ActionDB();
-            $result = $action->ChangePassword($currentPassword, $newPassword);
+            $result = $action->ChangePassword($accountID, $currentPassword, $newPassword);
             
             while($row = $result->fetch_assoc()) {
 

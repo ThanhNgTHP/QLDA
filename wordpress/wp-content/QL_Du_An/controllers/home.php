@@ -136,7 +136,7 @@ if(!class_exists('ProjectSummary')){
             $ProjectSummaryAll = array();
 
             foreach($projectAll as $key => $project){
-                if(str_contains($project->Name, $projectSummaryName)){
+                if(str_contains(strtolower($project->Name), strtolower($projectSummaryName))){
                     $projectSummary = new ProjectSummary();
 
                     $projectSummary->ProjectID = $project->ID;

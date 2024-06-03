@@ -23,7 +23,11 @@
     if($userInfo_method === "confirm_password" && $User != null){
         $currentPassword = $_POST['current-password'];
         $newPassword = $_POST['new-password'];
-        $isConfirmPassword = $User->ChangePassword($currentPassword, $newPassword);
+
+        $username_json = str_replace("\\", "", $_COOKIE['username']);
+        $username = json_decode($username_json, JSON_UNESCAPED_UNICODE);
+
+        $isConfirmPassword = $User->ChangePassword($username['accountID'], $currentPassword, $newPassword);
     }
     
 function GetUser($username){

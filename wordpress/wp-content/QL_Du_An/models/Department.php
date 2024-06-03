@@ -62,6 +62,26 @@ if(!class_exists('Department')){
 
             return $departmentAll;
         }
+
+        public function Add($name, $description){
+            $actionDB = new ActionDB();
+            $actionDB->AddDepartment($name, $description);
+        }
+
+        public function Edit($id, $name, $description){
+            $actionDB = new ActionDB();
+            $actionDB->EditDepartment($id, $name, $description);
+        }
+        
+        public function Delete($id){
+            $actionDB = new ActionDB();
+            $actionDB->DeleteDepartment($id);
+        }            
+
+        public function Find($name){
+            $actionDB = new ActionDB();
+            return $actionDB->FindDepartment($name)->fetch_all(MYSQLI_ASSOC);
+        }
     }
 }
     

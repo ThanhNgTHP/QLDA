@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 02, 2024 lúc 06:22 PM
+-- Thời gian đã tạo: Th6 04, 2024 lúc 01:23 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -86,6 +86,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaPB` (IN `maPB` INT, IN `tenPB` V
     WHERE phongban.MaPB = maPB;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaQuyen` (`maQuyen` INT, `tenQuyen` VARCHAR(255), `ghiChu` TEXT)   BEGIN
+    UPDATE quyen 
+    SET quyen.TenQuyen = tenQuyen, quyen.TenQuyen = tenQuyen, quyen.GhiChu = ghiChu
+    WHERE quyen.MaQuyen = maQuyen;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaSK` (`maSK` INT, `tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
     UPDATE sukien 
     SET sukien.TenSK = tenSK, sukien.Anh = anh, sukien.GhiChu = ghiChu, sukien.NoiDung = noiDung, sukien.MaDA = maDA
@@ -148,6 +154,10 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemPB` (IN `tenPB` VARCHAR(255), IN `moTa` TEXT)   BEGIN
     INSERT INTO `phongban`(`TenPB`, `MoTa`) VALUES (tenPB, moTa);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemQuyen` (`tenQuyen` VARCHAR(255), `ghiChu` TEXT)   BEGIN
+    INSERT INTO `quyen`(`TenQuyen`, `GhiChu`) VALUES (tenQuyen, ghiChu);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemSK` (`tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
@@ -254,7 +264,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinQuyen` (`MaQuyen` INT)   BE
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaAnh` ()   BEGIN
-	SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID, anh.LoaiAnh AS CategoryImage
+	SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID, anh.LoaiAnh AS ImageCategory
     FROM anh;
 END$$
 
@@ -353,6 +363,27 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVTVTG` (IN `MaTV` INT)   B
   WHERE thanhvienthamgia.MaTV = MaTV;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemAnh` (IN `TenAnh` VARCHAR(255))   BEGIN
+    SET @TenAnh = CONCAT('%', TenAnh , '%');
+    SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID, anh.LoaiAnh AS ImageCategory
+    FROM anh
+    WHERE anh.TenAnh LIKE @TenAnh;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemBCCC` (IN `TenBCCC` VARCHAR(255))   BEGIN
+    SET @TenBCCC = CONCAT('%', TenBCCC , '%');
+    SELECT bangcapchungchi.MaBC AS ID, bangcapchungchi.TenBC AS Name, bangcapchungchi.NgayCap AS Date,bangcapchungchi.NoiCap AS Address, bangcapchungchi.MaTV AS StaffID
+    FROM bangcapchungchi
+    WHERE bangcapchungchi.TenNhom LIKE @TenBCCC;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemCV` (IN `TenCV` VARCHAR(255))   BEGIN
+    SET @TenCV = CONCAT('%', TenCV , '%');
+    SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
+    FROM congviec
+    WHERE congviec.TenCV LIKE @TenCV;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDA` (IN `TenDA` VARCHAR(255) CHARSET utf8mb4)   BEGIN
     SET @TenDA = CONCAT('%', TenDA , '%');
     SELECT MaDA AS ProjectID, duan.TenDA AS ProjectName, NgayBatDau AS Begin , NgayKetThuc AS Expire, TrangThai AS Status, LienHe AS Contact, MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
@@ -372,6 +403,34 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemHD` (`TenHD` VARCHAR(255))  
     SELECT hopdong.MaHD AS ContractID, hopdong.TenHD AS ContractName, hopdong.SoHD AS Number, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS Expire, hopdong.GhiChu AS Note, hopdong.GiaTriHD AS Value, hopdong.TrangThai AS Status, hopdong.MaDT AS PartnerID, hopdong.MaDA AS ProjectID
     FROM hopdong
     WHERE hopdong.TenHD LIKE @TenHD;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemLDA` (IN `TenLDA` VARCHAR(255))   BEGIN
+    SET @TenLDA = CONCAT('%', TenLDA , '%');
+    SELECT loaiduan.MaLoaiDA AS ID, loaiduan.TenLoaiDA AS Name, loaiduan.MoTa AS Description
+    FROM loaiduan
+    WHERE loaiduan.TenLoaiDA LIKE @TenLDA;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemNhom` (IN `TenNhom` VARCHAR(255))   BEGIN
+    SET @TenNhom = CONCAT('%', TenNhom , '%');
+    SELECT nhom.MaNhom AS ID, nhom.TenNhom AS Name, nhom.TruongNhom AS Leader,nhom.MaPB AS DepartmentID
+    FROM nhom
+    WHERE nhom.TenNhom LIKE @TenNhom;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemPB` (IN `TenPB` VARCHAR(255))   BEGIN
+    SET @TenPB = CONCAT('%', TenPB , '%');
+    SELECT phongban.MaPB AS ID, phongban.TenPB AS Name, phongban.MoTa AS Description
+    FROM phongban
+    WHERE phongban.TenPB LIKE @TenPB;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemQuyen` (IN `TenQuyen` VARCHAR(255))   BEGIN
+    SET @TenQuyen = CONCAT('%', TenQuyen , '%');
+    SELECT quyen.MaQuyen AS ID, quyen.TenQuyen AS Name, quyen.GhiChu AS Note
+    FROM quyen
+    WHERE quyen.TenQuyen LIKE @TenQuyen;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemSK` (`TenSK` VARCHAR(255))   BEGIN
@@ -442,6 +501,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaPB` (IN `maPB` INT)   BEGIN
     DELETE FROM phongban WHERE phongban.MaPB = maPB;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaQuyen` (`maQuyen` INT)   BEGIN
+    DELETE FROM quyen WHERE quyen.MaQuyen = maQuyen;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaSK` (`maSK` INT)   BEGIN
     DELETE FROM sukien WHERE sukien.MaSK = maSK;
 END$$
@@ -461,12 +524,12 @@ END$$
 --
 -- Các hàm
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
+CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MaTK` INT, `MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
   DECLARE count INT;
   
   UPDATE taikhoan 
   SET  taikhoan.MatKhau = MatKhauMoi
-  WHERE taikhoan.MatKhau = MatKhauCu;
+  WHERE taikhoan.MatKhau = MatKhauCu AND taikhoan.MaTK = MaTK;
  
   SET count = ROW_COUNT();
   
@@ -934,8 +997,8 @@ CREATE TABLE `taikhoan` (
 
 INSERT INTO `taikhoan` (`MaTK`, `TenTK`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES
 (1, 'summon', '123456789', 1, 'Vẫn còn sử dụng'),
-(2, 'galactot', '123456789', 2, 'Tạm ngưng hoạt động'),
-(3, 'nguyentung', '123456789', 3, 'Vẫn còn sử dụng');
+(2, 'galactot', '1234567', 2, 'Tạm ngưng hoạt động'),
+(3, 'nguyentung', '12345678', 3, 'Vẫn còn sử dụng');
 
 -- --------------------------------------------------------
 

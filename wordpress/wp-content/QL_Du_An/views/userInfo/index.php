@@ -6,6 +6,7 @@
 
     wp_enqueue_style( 'userInfo_style', $current_directory_url.'/index.css', array(), time());
 ?>
+
 <!-- thay đổi mật khẩu thành công, thất bại ? -->   
 <div class="<?php echo isset($isConfirmPassword) ? "" : "hidden"  ?>
             overlay state-change-password fixed top-0 left-0 bottom-0 right-0  bg-black bg-opacity-50 z-[9998] flex justify-center items-center">
@@ -15,7 +16,7 @@
                             shadow-[50px_40px_20px_0px_rgba(0,0,0,0.5)]
                             bg-white rounded-md
                             ">
-            <?php echo $isConfirmPassword ? "success" : "Mật khẩu không tồn tại hoặc trùng khớp với mật khẩu cũ"  ?>
+            <?php echo $isConfirmPassword ? "Đổi mật khẩu thành công" : "Mật khẩu không tồn tại hoặc trùng khớp với mật khẩu cũ"  ?>
 
         </div>
     </div>

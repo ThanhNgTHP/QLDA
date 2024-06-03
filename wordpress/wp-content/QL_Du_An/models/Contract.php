@@ -120,5 +120,25 @@
     
                 return $images;
             }
+
+            public function Add($name, $number, $signDay, $expire, $note, $value, $status, $partnerID, $projectID){
+                $actionDB = new ActionDB();
+                $actionDB->AddContract($name, $number, $signDay, $expire, $note, $value, $status, $partnerID, $projectID);
+            }
+
+            public function Edit($id, $name, $number, $signDay, $expire, $note, $value, $status, $partnerID, $projectID){
+                $actionDB = new ActionDB();
+                $actionDB->EditContract($id, $name, $number, $signDay, $expire, $note, $value, $status, $partnerID, $projectID);
+            }
+            
+            public function Delete($id){
+                $actionDB = new ActionDB();
+                $actionDB->DeleteContract($id);
+            }            
+
+            public function Find($name){
+                $actionDB = new ActionDB();
+                return $actionDB->FindContract($name)->fetch_all(MYSQLI_ASSOC);
+            }        
         }
     }

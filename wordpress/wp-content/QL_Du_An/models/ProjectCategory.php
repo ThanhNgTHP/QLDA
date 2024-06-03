@@ -61,6 +61,26 @@ if(!class_exists('ProjectCategory')){
 
             return $projectCategoryAll;
         } 
+
+        public function Add($name, $description){
+                $actionDB = new ActionDB();
+                $actionDB->AddProjectCategory($name, $description);
+            }
+
+            public function Edit($id, $name, $description){
+                $actionDB = new ActionDB();
+                $actionDB->EditProjectCategory($id, $name, $description);
+            }
+            
+            public function Delete($id){
+                $actionDB = new ActionDB();
+                $actionDB->DeleteProjectCategory($id);
+            }            
+
+            public function Find($name){
+                $actionDB = new ActionDB();
+                return $actionDB->FindProjectCategory($name)->fetch_all(MYSQLI_ASSOC);
+            }
     }
 
 }

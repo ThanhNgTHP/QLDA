@@ -58,5 +58,25 @@ if(!class_exists('Permission')){
 
             return $permissionAll;
         }
+
+        public function Add($name, $note){
+            $actionDB = new ActionDB();
+            $actionDB->AddPermission($name, $note);
+        }
+
+        public function Edit($id, $name, $note){
+            $actionDB = new ActionDB();
+            $actionDB->EditPermission($id, $name, $note);
+        }
+        
+        public function Delete($id){
+            $actionDB = new ActionDB();
+            $actionDB->DeletePermission($id);
+        }            
+
+        public function Find($name){
+            $actionDB = new ActionDB();
+            return $actionDB->FindPermission($name)->fetch_all(MYSQLI_ASSOC);
+        }
     }
 }

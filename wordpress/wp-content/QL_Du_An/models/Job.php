@@ -140,6 +140,27 @@
 
                 return $jobs;
             }
+            
+            public function Add($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID
+            ){
+                $actionDB = new ActionDB();
+                $actionDB->AddJob($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+            }
+
+            public function Edit($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID){
+                $actionDB = new ActionDB();
+                $actionDB->EditJob($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+            }
+            
+            public function Delete($id){
+                $actionDB = new ActionDB();
+                $actionDB->DeleteJob($id);
+            }            
+
+            public function Find($name){
+                $actionDB = new ActionDB();
+                return $actionDB->FindJob($name)->fetch_all(MYSQLI_ASSOC);
+            }
         }  
     }
 ?>

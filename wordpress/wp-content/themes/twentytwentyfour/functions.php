@@ -291,8 +291,8 @@ class AdminMenu {
 			else if($view === 'project'){
 				include_once getenv('DIR_VIEWS') . '/project/index.php';
 			}
-			else if($view === 'join-staff'){
-				include_once getenv('DIR_VIEWS') . '/joinStaff/index.php';
+			else if($view === 'event'){
+				include_once getenv('DIR_VIEWS') . '/event/index.php';
 			}
 
 			$output = ob_get_contents();
@@ -326,7 +326,7 @@ class AdminMenu {
 		$output .= $this->SubmenuCategories('partner');	
 		$output .= $this->SubmenuCategories('contract');	
 		$output .= $this->SubmenuCategories('project');	
-		$output .= $this->SubmenuCategories('join-staff');	
+		$output .= $this->SubmenuCategories('event');	
 		$output .= '</div>';
 		return $output;
 	}

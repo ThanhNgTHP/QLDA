@@ -63,6 +63,8 @@ document.querySelector("#form-login").addEventListener("submit", function(e){
         now.setTime(now.getTime() + expireTime);
 
         // Bảo mật JWT token giải mã
+        /////
+        
         document.cookie = `username=${result}; expires=${now.toUTCString()}; path=/`;
     });
 

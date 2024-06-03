@@ -64,6 +64,26 @@ if(!class_exists('Event')){
 
                 return $eventAll;
             }
+
+        public function Add($name, $image, $note, $content, $projectID){
+            $actionDB = new ActionDB();
+            $actionDB->AddEvent($name, $image, $note, $content, $projectID);
+        }
+
+        public function Edit($id, $name, $image, $note, $content, $projectID){
+            $actionDB = new ActionDB();
+            $actionDB->EditEvent($id, $name, $image, $note, $content, $projectID);
+        }
+        
+        public function Delete($id){
+            $actionDB = new ActionDB();
+            $actionDB->DeleteEvent($id);
+        }            
+
+        public function Find($name){
+            $actionDB = new ActionDB();
+            return $actionDB->FindEvent($name)->fetch_all(MYSQLI_ASSOC);
+        }
     }
 }
     

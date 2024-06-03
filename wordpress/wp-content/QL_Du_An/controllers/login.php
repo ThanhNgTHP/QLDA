@@ -21,8 +21,6 @@
 
         $result = $actionDB->VerifyAccount($username, $password);
         
-      
-
         $loginInfo = array();
 
         while($row = $result->fetch_assoc()) {

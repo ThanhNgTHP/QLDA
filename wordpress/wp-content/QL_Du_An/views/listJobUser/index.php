@@ -5,7 +5,6 @@ $current_directory = content_url() . '/QL_Du_An/views/listJobUser';
 wp_enqueue_style('list_job_user_style', $current_directory . '/index.css');
 ?>
 
-
 <div>
 
     <div class="text-[40px]">
