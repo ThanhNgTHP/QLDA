@@ -5,7 +5,6 @@ if(!class_exists('Staff')){
 
     include_once getenv('DIR_DB') . '/ActionDB.php';
     include_once getenv('DIR_MODELS') . '/Qualification.php';
-    include_once getenv('DIR_MODELS') . '/JoinStaff.php';
     include_once getenv('DIR_MODELS') . '/Team.php';
     include_once getenv('DIR_MODELS') . '/Account.php';
 
@@ -195,5 +194,25 @@ if(!class_exists('Staff')){
 
             return $staffCount;
         }
+
+        public function Add($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar){
+            $actionDB = new ActionDB();
+            $actionDB->AddStaff($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar);
+        }
+
+        public function Edit($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar){
+            $actionDB = new ActionDB();
+            $actionDB->EditStaff($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar);
+        }
+        
+        public function Delete($id){
+            $actionDB = new ActionDB();
+            $actionDB->DeleteStaff($id);
+        }            
+
+        public function Find($name){
+            $actionDB = new ActionDB();
+            return $actionDB->FindStaff($name)->fetch_all(MYSQLI_ASSOC);
+        }        
     }
 }

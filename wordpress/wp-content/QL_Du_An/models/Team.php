@@ -108,5 +108,25 @@ if(!class_exists('Team')){
 
             return $teamAll;
         }
+
+        public function Add($name, $leader, $departmentID){
+            $actionDB = new ActionDB();
+            $actionDB->AddTeam($name, $leader, $departmentID);
+        }
+
+        public function Edit($id, $name, $leader, $departmentID){
+            $actionDB = new ActionDB();
+            $actionDB->EditTeam($id, $name, $leader, $departmentID);
+        }
+        
+        public function Delete($id){
+            $actionDB = new ActionDB();
+            $actionDB->DeleteTeam($id);
+        }            
+
+        public function Find($name){
+            $actionDB = new ActionDB();
+            return $actionDB->FindTeam($name)->fetch_all(MYSQLI_ASSOC);
+        }
     }
 }

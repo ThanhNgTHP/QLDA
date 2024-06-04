@@ -256,43 +256,43 @@ class AdminMenu {
 			$view = $_GET['view'] ?? null;
 
 			if($view === 'image'){
-				include_once getenv('DIR_VIEWS') . '/image/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/image/index.php';
 			}
 			else if($view === 'project-category'){
-				include_once getenv('DIR_VIEWS') . '/projectCategory/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/projectCategory/index.php';
 			}
 			else if($view === 'permission'){
-				include_once getenv('DIR_VIEWS') . '/permission/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/permission/index.php';
 			}
 			else if($view === 'department'){
-				include_once getenv('DIR_VIEWS') . '/department/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/department/index.php';
 			}
 			else if($view === 'team'){
-				include_once getenv('DIR_VIEWS') . '/team/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/team/index.php';
 			}
 			else if($view === 'account'){
-				include_once getenv('DIR_VIEWS') . '/account/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/account/index.php';
 			}
 			else if($view === 'qualification'){
-				include_once getenv('DIR_VIEWS') . '/qualification/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/qualification/index.php';
 			}
 			else if($view === 'job'){
-				include_once getenv('DIR_VIEWS') . '/job/index.php'; //
+				include_once getenv('DIR_VIEWS') . '/admin/job/index.php'; //
 			}
 			else if($view === 'staff'){
-				include_once getenv('DIR_VIEWS') . '/staff/index.php'; //
+				include_once getenv('DIR_VIEWS') . '/admin/staff/index.php'; //
 			}
 			else if($view === 'partner'){
-				include_once getenv('DIR_VIEWS') . '/partner/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/partner/index.php';
 			}
 			else if($view === 'contract'){
-				include_once getenv('DIR_VIEWS') . '/contract/index.php'; //
+				include_once getenv('DIR_VIEWS') . '/admin/contract/index.php'; //
 			}
 			else if($view === 'project'){
-				include_once getenv('DIR_VIEWS') . '/project/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/project/index.php';
 			}
 			else if($view === 'event'){
-				include_once getenv('DIR_VIEWS') . '/event/index.php';
+				include_once getenv('DIR_VIEWS') . '/admin/event/index.php';
 			}
 
 			$output = ob_get_contents();

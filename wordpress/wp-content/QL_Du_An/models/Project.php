@@ -1,10 +1,13 @@
 <?php 
     if(!class_exists('Project')){
         include_once getenv('DIR_DB') . '/ActionDB.php';
-        include_once getenv('DIR_MODELS') . '/Image.php';
-        include_once getenv('DIR_MODELS') . '/JoinStaff.php';
+        // include_once getenv('DIR_MODELS') . '/Image.php';
         include_once getenv('DIR_MODELS') . '/ProjectCategory.php';
 
+        include_once getenv('DIR_MODELS') . '/Job.php';
+        include_once getenv('DIR_MODELS') . '/Contract.php';
+        include_once getenv('DIR_MODELS') . '/Image.php';
+        include_once getenv('DIR_MODELS') . '/Event.php';
         class Project{
 
             /** @var int $ID */
@@ -133,6 +136,79 @@
                 }));
 
                 return $projectCategory;
+            }
+
+            public function Add($name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress){
+                $actionDB = new ActionDB();
+                $actionDB->AddProject($name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress);
+            }
+
+            public function Edit($id, $name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress){
+                $actionDB = new ActionDB();
+                $actionDB->EditProject($id, $name, $begin, $end, $status, $contact, $description, $projectCategoryID, $targetBudget, $actualBudget, $progress);
+            }
+            
+            public function Delete($id){
+                $actionDB = new ActionDB();
+
+                $contractID = 0;
+                foreach(Contract::GetAllContract() as $contract){
+                    if($id == $contract->ProjectID){
+                        $contractID = $contract->ID;
+                    }
+                }
+
+                foreach(Image::GetAllImage() as $image){
+                    if($id == $image->ProjectID || $contractID == $image->ContractID){
+                        $image->Delete($image->ID);
+                    }
+                }
+
+                foreach(Job::GetAllJob() as $job){
+                    if($id == $job->ProjectID){
+                        $job->Delete($job->ID);
+                    }
+                }
+
+                foreach(Event::GetAllEvent() as $event){
+                    if($id == $event->ProjectID){
+                        $event->Delete($event->ID);
+                    }
+                }
+
+                $contract = new Contract();
+                $contract->Delete($contractID);
+                $actionDB->DeleteProject($id);
+            }            
+
+            public function Find($name){
+                $actionDB = new ActionDB();
+
+                $result = $actionDB->FindProject($name);
+                
+                $findProjects = array();
+
+                while($row = $result->fetch_assoc()){
+                
+                    $project = new Project();
+                    $project->ID = $row['ID'];
+                    $project->Name = $row['Name'];
+                    $project->Begin = $row['Begin'];
+                    $project->End = $row['End'];
+                    $project->Status = $row['Status'];
+                    $project->Contact = $row['Contact'];
+                    $project->Description = $row['Description'];
+                    
+                    $project->ProjectCategoryID = $row['ProjectCategoryID'];
+
+                    $project->TargetBudget = $row['TargetBudget'];
+                    $project->ActualBudget = $row['ActualBudget'];
+                    $project->Progress = $row['Progress'];
+    
+                    $findProjects[] = $project;
+                }
+
+                return $findProjects;
             }
         }
     }

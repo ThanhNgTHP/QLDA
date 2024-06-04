@@ -15,7 +15,13 @@
     
             /** @var int $ProjectID */
             public $ProjectID;
-    
+
+            /** @var int $ContractID */
+            public $ContractID;
+
+            /** @var int $ImageCategory */
+            public $ImageCategory;
+
             public static function GetAllImage(){
                 $actionDB = new ActionDB();
         
@@ -30,6 +36,8 @@
                     $image->Name = $row['Name'];
                     $image->Path = $row['Path'];
                     $image->ProjectID = $row['ProjectID'];
+                    $image->ContractID = $row['ContractID'];
+                    $image->ImageCategory = $row['ImageCategory'];
 
                     $imageAll[] = $image;
                 }
@@ -50,5 +58,26 @@
 
                 return $project;
             }
+
+            public function Add($name, $path, $projectID, $contractID, $imageCategory){
+                $actionDB = new ActionDB();
+                $actionDB->AddImage($name, $path, $projectID, $contractID, $imageCategory);
+            }
+
+            public function Edit($id, $name, $path, $projectID, $contractID, $imageCategory){
+                $actionDB = new ActionDB();
+                $actionDB->EditImage($id, $name, $path, $projectID, $contractID, $imageCategory);
+            }
+            
+            public function Delete($id){
+                $actionDB = new ActionDB();
+                $actionDB->DeleteImage($id);
+            }            
+
+            public function Find($name){
+                $actionDB = new ActionDB();
+                return $actionDB->FindImage($name)->fetch_all(MYSQLI_ASSOC);
+            }
+            
         }
     }

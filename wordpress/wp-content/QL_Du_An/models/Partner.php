@@ -85,5 +85,25 @@ if(!class_exists('Partner')){
 
             return $partners;
         } 
+        
+        public function Add($name, $email, $phone, $fax, $address, $status, $note, $taxCode, $representative, $position){
+            $actionDB = new ActionDB();
+            $actionDB->AddPartner($name, $email, $phone, $fax, $address, $status, $note, $taxCode, $representative, $position);
+        }
+
+        public function Edit($id, $name, $email, $phone, $fax, $address, $status, $note, $taxCode, $representative, $position){
+            $actionDB = new ActionDB();
+            $actionDB->EditPartner($id, $name, $email, $phone, $fax, $address, $status, $note, $taxCode, $representative, $position);
+        }
+        
+        public function Delete($id){
+            $actionDB = new ActionDB();
+            $actionDB->DeletePartner($id);
+        }            
+
+        public function Find($name){
+            $actionDB = new ActionDB();
+            return $actionDB->FindPartner($name)->fetch_all(MYSQLI_ASSOC);
+        }
     }
 }

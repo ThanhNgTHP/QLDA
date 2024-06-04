@@ -68,5 +68,25 @@ if(!class_exists('Account')){
 
             return $Permission;
         }
+
+        public function Add($name, $password, $permissionID, $status){
+            $actionDB = new ActionDB();
+            $actionDB->AddAccount($name, $password, $permissionID, $status);
+        }
+
+        public function Edit($id, $name, $password, $permissionID, $status){
+            $actionDB = new ActionDB();
+            $actionDB->EditAccount($id, $name, $password, $permissionID, $status);
+        }
+        
+        public function Delete($id){
+            $actionDB = new ActionDB();
+            $actionDB->DeleteAccount($id);
+        }            
+
+        public function Find($name){
+            $actionDB = new ActionDB();
+            return $actionDB->FindAccount($name)->fetch_all(MYSQLI_ASSOC);
+        }
     }
 }

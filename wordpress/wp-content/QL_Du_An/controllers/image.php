@@ -10,35 +10,32 @@
     $path = $_FILES["path"] ?? null;
     $projectID = $_POST['project-id'] ?? null;
 
-    if(isset($name)  && isset($projectID)){
+    $method = $_POST['method'] ?? null;
+    if($method === 'add' && isset($name) && isset($projectID)){
         if(isset($path)){
             move_uploaded_file($path["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
-            Add($name, $path, (int)$projectID);
         }
-
-        $method = $_POST['method'];
-        if($method === 'add'){
-            Add($name, $path, (int)$projectID);
-        }
-        else if($method === 'edit'){
-           Edit($id, $name, $path, (int)$projectID);
-        }
-        else if($method === 'delete'){
-            Delete($id);
-        }
-        else if($method === 'find'){
-            $images = Find($name);
-        }
+        Add($name, $path, (int)$projectID, (int)$contractID, $imageCategory);
+    }
+    else if($method === 'edit' && isset($id) && isset($name) && isset($projectID)){
+        Edit($id, $name, $path, (int)$projectID, (int)$contractID, $imageCategory);
+    }
+    else if($method === 'delete' && isset($id)){
+        Delete($id);
+    }
+    else if($method === 'find'){
+        $imageName = $_POST['image-name'];
+        $images = Find($imageName);
     }
 
-    function Add($name, $path, $projectID){
+    function Add($name, $path, $projectID, $contractID, $imageCategory){
         $image = new Image();
-        $image->Add($name, $path, $projectID);
+        $image->Add($name, $path, $projectID, $contractID, $imageCategory);
     }
 
-    function Edit($id, $name, $path, $projectID){
+    function Edit($id, $name, $path, $projectID, $contractID, $imageCategory){
         $image = new Image();
-        $image->Edit($id, $name, $path, $projectID);
+        $image->Edit($id, $name, $path, $projectID, $contractID, $imageCategory);
     }
 
     function Delete($id){
@@ -46,8 +43,8 @@
         $image->Delete($id);
     }
 
-    function Find($abc){
+    function Find($name){
         $image = new Image();
-        return $image->Find($abc);
+        return $image->Find($name);
     }
 ?>
