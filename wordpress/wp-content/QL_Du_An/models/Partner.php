@@ -103,9 +103,6 @@ if(!class_exists('Partner')){
 
         public function Find($name){
             $actionDB = new ActionDB();
-<<<<<<< HEAD
-            return $actionDB->FindPartner($name)->fetch_all(MYSQLI_ASSOC);
-=======
 
             $result = $actionDB->FindPartner($name);
 
@@ -130,7 +127,6 @@ if(!class_exists('Partner')){
             }
 
             return $findPartners;
->>>>>>> d45fdc2856ed37ffe9b365709a40cd9b2af68709
         }
     }
 }

@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 05, 2024 lúc 01:11 PM
+-- Máy chủ: 127.0.0.1:8888
+-- Thời gian đã tạo: Th6 05, 2024 lúc 09:29 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -168,8 +168,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTK` (`tenTK` VARCHAR(255), `mat
     INSERT INTO `taikhoan`(`TenTK`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES (tenTK, matKhau, maquyen, trangthai);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTV` (IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255), IN `maNhom` INT)   BEGIN
-    INSERT INTO `thanhvien`(`HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`, `MaNhom`) VALUES (hoTen, sDT, diaChi, ngaySinh, chucVu, email, maTK, gioiTinh, trangThai, anhDaiDien,maNhom);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTV` (IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255))   BEGIN
+    INSERT INTO `thanhvien`(`HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`) VALUES (hoTen, sDT, diaChi, ngaySinh, chucVu, email, maTK, gioiTinh, trangThai, anhDaiDien);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTVTG` (`maTV` INT, `maDA` INT)   BEGIN
@@ -882,7 +882,8 @@ INSERT INTO `loaiduan` (`MaLoaiDA`, `TenLoaiDA`, `MoTa`) VALUES
 (18, 'Game - Trò chơi', 'không có'),
 (19, 'Ứng dụng điện thoại', 'không có'),
 (20, 'Website', 'không có'),
-(21, 'Phần mềm nhúng', 'không có');
+(21, 'Phần mềm nhúng', 'không có'),
+(23, 'Thiết Bị', 'Có');
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1135,7 @@ ALTER TABLE `thanhvien`
 -- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
-  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `bangcapchungchi`
@@ -1170,7 +1171,7 @@ ALTER TABLE `hopdong`
 -- AUTO_INCREMENT cho bảng `loaiduan`
 --
 ALTER TABLE `loaiduan`
-  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`
@@ -1206,7 +1207,7 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

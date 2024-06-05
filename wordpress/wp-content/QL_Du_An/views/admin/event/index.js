@@ -6,7 +6,6 @@
 //     };
 //     fileReader.readAsDataURL(e.target.files[0]);
 // });
-
 document.querySelectorAll('.imageInput').forEach((inputFileElement, key)=>{
     key = key - 1;
     inputFileElement.addEventListener('change', function(e){

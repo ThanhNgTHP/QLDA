@@ -1,6 +1,9 @@
 <?php 
 
     include getenv('DIR_MODELS') . '/Event.php';
+
+    $base_path_folder_image = ABSPATH . 'wp-content\QL_Du_An\resources\img';
+
     $events = [];
 
     $id = $_POST['id'] ?? null;
@@ -15,24 +18,14 @@
         if(isset($image)){
             move_uploaded_file($image["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
         }
-        Add($name, $image, $note, $content, $projectID);
-<<<<<<< HEAD
-    }
-    else if($method === 'edit' && isset($id) && isset($name) && isset($note) && isset($content) && isset($projectID)){
-        Edit($id, $name, $image, $note, $content, $projectID);
-    }
-    else if($method === 'delete' && isset($id)){
-        Delete($id);
-    }
-    else if($method === 'find'){
-        $eventName = $_POST['event-name'];
-        $events = Find($eventName);
-    }
-=======
+        Add($name, $base_path_folder_image . '/' . $path["name"], $note, $content, $projectID);
         $events = Event::GetAllEvent();
     }
     else if($method === 'edit' && isset($id) && isset($name) && isset($note) && isset($content) && isset($projectID)){
-        Edit($id, $name, $image, $note, $content, $projectID);
+        if(isset($image)){
+            move_uploaded_file($image["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
+        }
+        Edit($id, $name, $base_path_folder_image . '/' . $path["name"], $note, $content, $projectID);
         $events = Event::GetAllEvent();
     }
     else if($method === 'delete' && isset($id)){
@@ -46,7 +39,6 @@
     else {
         $events = Event::GetAllEvent();
     }
->>>>>>> d45fdc2856ed37ffe9b365709a40cd9b2af68709
 
     function Add($name, $image, $note, $content, $projectID){
         $event = new Event();
