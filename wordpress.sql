@@ -4,7 +4,7 @@
 --
 -- Máy chủ: 127.0.0.1
 -- Thời gian đã tạo: Th6 05, 2024 lúc 12:14 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB 456
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
