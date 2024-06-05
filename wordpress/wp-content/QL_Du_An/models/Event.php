@@ -43,27 +43,36 @@ if(!class_exists('Event')){
          */
 
         public static function GetAllEvent(){
-                $actionDB = new ActionDB();
-    
-                $result = $actionDB->EventAllInfo();
+            $actionDB = new ActionDB();
 
-                $eventAll = array();
-                // exit;
-    
-                while($row = $result->fetch_assoc()){
-                    $event = new event();
-    
-                    $event->ID = $row['ID'];
-                    $event->Name = $row['Name'];
-                    $event->Image = $row['Image'];
-                    $event->Note = $row['Note'];
-                    $event->Content = $row['Content'];                    
-                    $event->ProjectID = $row['ProjectID'];                    
-                    $eventAll[] = $event;
-                }
+            $result = $actionDB->EventAllInfo();
 
-                return $eventAll;
+            $eventAll = array();
+            // exit;
+
+            while($row = $result->fetch_assoc()){
+                $event = new event();
+
+                $event->ID = $row['ID'];
+                $event->Name = $row['Name'];
+                $event->Image = $row['Image'];
+                $event->Note = $row['Note'];
+                $event->Content = $row['Content'];                    
+                $event->ProjectID = $row['ProjectID'];                    
+                $eventAll[] = $event;
             }
+
+            return $eventAll;
+        }
+
+        public function GetProject(){
+            $ProjectID = $this->ProjectID;
+            [$project] = array_values(array_filter(Project::GetAllProject(), function ($project) use ($ProjectID){
+                return $project->ID == $ProjectID;
+            }));
+
+            return $project;
+        }
 
         public function Add($name, $image, $note, $content, $projectID){
             $actionDB = new ActionDB();
@@ -84,6 +93,8 @@ if(!class_exists('Event')){
             $actionDB = new ActionDB();
             return $actionDB->FindEvent($name)->fetch_all(MYSQLI_ASSOC);
         }
+
+
     }
 }
     

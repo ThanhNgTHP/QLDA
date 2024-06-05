@@ -6,7 +6,7 @@
         include 'models/' . $class_name . '.php';
     });
 
-    $current_directory_url = getenv('VIEWS_URL').'/login';
+    $current_directory_url = getenv('VIEWS_URL').'/user/login';
     $img_directory_url = getenv('RESOURCES_URL').'/layout_img';
 
     

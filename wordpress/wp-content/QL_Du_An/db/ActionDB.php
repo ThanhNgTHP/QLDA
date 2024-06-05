@@ -1106,7 +1106,7 @@
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL ThemBCCC(?, ?, ?)");
+                    $stmt = $this->conn->prepare("CALL ThemBCCC(?, ?, ?, ?)");
                     $stmt->bind_param("sssi", $QualificationName, $QualificationDate, $QualificationAddress, $StaffID);
                     $stmt->execute();
                     $stmt->close();
@@ -1122,7 +1122,7 @@
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL SuaBCCC(?, ?, ?)");
+                    $stmt = $this->conn->prepare("CALL SuaBCCC(?, ?, ?, ?, ?)");
                     $stmt->bind_param("isssi", $QualificationID , $QualificationName, $QualificationDate, $QualificationAddress, $StaffID);
                     $stmt->execute();
                     $stmt->close();
@@ -1174,7 +1174,7 @@
                      * @var bool|mysqli_stmt $stmt
                      */
                     $stmt = $this->conn->prepare("CALL ThemCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssssiiíddi", $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
+                    $stmt->bind_param("ssssdisidiis", $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1190,7 +1190,7 @@
                      * @var bool|mysqli_stmt $stmt
                      */
                     $stmt = $this->conn->prepare("CALL SuaCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("isssssiiíddi", $JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
+                    $stmt->bind_param("issssdisidiis", $JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1251,12 +1251,12 @@
 
             public function EditStaff($StaffID, $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar){
                 parent::connect();
-
+                
                 if(isset($this->conn)){
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL SuaTV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt = $this->conn->prepare("CALL SuaTV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                     $stmt->bind_param("issssssisss", $StaffID, $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar);
                     $stmt->execute();
                     $stmt->close();
@@ -1467,7 +1467,7 @@
                 parent::disconnect();
             }
 
-            public function DeleteProject($ContraProjectIDctID){
+            public function DeleteProject($ProjectID){
                 parent::connect();
 
                 if(isset($this->conn)){

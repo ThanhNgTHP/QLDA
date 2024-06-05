@@ -104,6 +104,6 @@ if(!class_exists('Partner')){
         public function Find($name){
             $actionDB = new ActionDB();
             return $actionDB->FindPartner($name)->fetch_all(MYSQLI_ASSOC);
-        }        
+        }
     }
 }

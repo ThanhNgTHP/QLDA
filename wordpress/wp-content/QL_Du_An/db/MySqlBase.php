@@ -46,9 +46,19 @@
             public function connect(){
                 if(!isset($this->conn)){
                     $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname, $this->port);
-                    
-                    if ($this->conn->connect_error) {
-                        die("Connection failed: " . $this->conn->connect_error);
+
+                    if (!$this->conn || $this->conn->connect_error) {
+                        $attemp = 0;
+
+                        while(!$this->conn && $this->conn->connect_error && $attemp < 5){
+                            sleep(1);
+                            $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname, $this->port);
+                            $attemp++;
+                        }
+
+                        if(!$this->conn || $this->conn->connect_error){
+                            die("Connection failed: " . $this->conn->connect_error);
+                        }
                     }
                 }
             }

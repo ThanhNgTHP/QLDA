@@ -5,7 +5,6 @@ if(!class_exists('Staff')){
 
     include_once getenv('DIR_DB') . '/ActionDB.php';
     include_once getenv('DIR_MODELS') . '/Qualification.php';
-    include_once getenv('DIR_MODELS') . '/JoinStaff.php';
     include_once getenv('DIR_MODELS') . '/Team.php';
     include_once getenv('DIR_MODELS') . '/Account.php';
 
@@ -213,7 +212,30 @@ if(!class_exists('Staff')){
 
         public function Find($name){
             $actionDB = new ActionDB();
-            return $actionDB->FindStaff($name)->fetch_all(MYSQLI_ASSOC);
+
+            $result = $actionDB->FindStaff($name);
+
+            $findStaffs = array();
+
+            while($row = $result->fetch_assoc()) {
+                $staff = new Staff();
+
+                $staff->ID = $row['ID'];
+                $staff->Name = $row['Name'];
+                $staff->Phone = $row['Phone'];
+                $staff->Address = $row['Address'];
+                $staff->BirthDay = $row['BirthDay'];
+                $staff->Position = $row['Position'];
+                $staff->Email = $row['Email'];
+                $staff->AccountID = $row['AccountID'];
+                $staff->Gender = $row['Gender'];
+                $staff->Status = $row['Status'];
+                $staff->Avatar = $row['Avatar'];
+
+                $findStaffs[] = $staff;
+            }
+
+            return $findStaffs;
         }        
     }
 }

@@ -80,7 +80,22 @@ if(!class_exists('Department')){
 
         public function Find($name){
             $actionDB = new ActionDB();
-            return $actionDB->FindDepartment($name)->fetch_all(MYSQLI_ASSOC);
+
+            $result = $actionDB->FindDepartment($name);
+
+            $findDepartments = array();
+
+            while($row = $result->fetch_assoc()) {
+                $department = new Department();
+
+                $department->ID = $row['ID'];
+                $department->Name = $row['Name'];
+                $department->Description = $row['Description'];
+
+                $findDepartments[] = $department;
+            }
+
+            return $findDepartments;
         }
     }
 }

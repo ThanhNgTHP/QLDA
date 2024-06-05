@@ -67,7 +67,24 @@
 
             public function Find($name){
                 $actionDB = new ActionDB();
-                return $actionDB->FindQualification($name)->fetch_all(MYSQLI_ASSOC);
+    
+                $result = $actionDB->FindQualification($name);
+    
+                $findQualifications = array();
+    
+                while($row = $result->fetch_assoc()) {
+                    $qualification = new Qualification();
+    
+                    $qualification->ID = $row['ID'];
+                    $qualification->Name = $row['Name'];
+                    $qualification->Date = $row['Date'];
+                    $qualification->Address = $row['Address'];
+                    $qualification->StaffID = $row['StaffID'];
+    
+                    $findQualifications[] = $qualification;
+                }
+    
+                return $findQualifications;
             }
         }
     }
