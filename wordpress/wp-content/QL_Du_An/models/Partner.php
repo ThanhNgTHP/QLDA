@@ -103,7 +103,30 @@ if(!class_exists('Partner')){
 
         public function Find($name){
             $actionDB = new ActionDB();
-            return $actionDB->FindPartner($name)->fetch_all(MYSQLI_ASSOC);
+
+            $result = $actionDB->FindPartner($name);
+
+            $findPartners = array();
+
+            while($row = $result->fetch_assoc()){
+                $partner = new Partner();
+
+                $partner->ID = $row['ID'];
+                $partner->Name = $row['Name'];
+                $partner->Representative = $row['Representative'];
+                $partner->Position = $row['Position'];
+                $partner->Email = $row['Email'];
+                $partner->Phone = $row['Phone'];
+                $partner->Fax = $row['Fax'];
+                $partner->Address = $row['Address'];
+                $partner->Note = $row['Note'];
+                $partner->Status = $row['Status'];
+                $partner->TaxCode = $row['TaxCode'];
+                
+                $findPartners[] = $partner;
+            }
+
+            return $findPartners;
         }
     }
 }

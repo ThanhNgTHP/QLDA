@@ -138,7 +138,29 @@
 
             public function Find($name){
                 $actionDB = new ActionDB();
-                return $actionDB->FindContract($name)->fetch_all(MYSQLI_ASSOC);
+    
+                $result = $actionDB->FindContract($name);
+    
+                $findContracts = array();
+    
+                while($row = $result->fetch_assoc()){
+                    $contract = new Contract();
+    
+                    $contract->ID = $row['ID'];
+                    $contract->Name = $row['Name'];
+                    $contract->Number = $row['Number'];
+                    $contract->SignDay = $row['SignDay'];
+                    $contract->Expire = $row['Expire'];
+                    $contract->Note = $row['Note'];
+                    $contract->Value = $row['Value'];
+                    $contract->Status = $row['Status'];
+                    $contract->PartnerID = $row['PartnerID'];
+                    $contract->ProjectID = $row['ProjectID'];
+                    
+                    $findContracts[] = $contract;
+                }
+    
+                return $findContracts;
             }        
         }
     }

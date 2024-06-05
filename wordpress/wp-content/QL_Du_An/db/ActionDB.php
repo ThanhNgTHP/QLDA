@@ -1371,12 +1371,14 @@
             public function AddContract($ContractName, $ContractNumber, $ContractSignDay, $ContractExpire, $ContractNote, $ContractValue, $ContractStatus, $PartnerID, $ProjectID){
                 parent::connect();
 
+                // print_r($ContractName.' '. $ContractNumber.' '. $ContractSignDay.' '. $ContractExpire.' '. $ContractNote.' '. $ContractValue.' '. $ContractStatus.' '. $PartnerID.' '. $ProjectID);exit;
+
                 if(isset($this->conn)){
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL ThemHD(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssssssssss", $ContractName, $ContractNumber, $ContractSignDay, $ContractExpire, $ContractNote, $ContractValue, $ContractStatus, $PartnerID, $ProjectID);
+                    $stmt = $this->conn->prepare("CALL ThemHD(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssssdsii", $ContractName, $ContractNumber, $ContractSignDay, $ContractExpire, $ContractNote, $ContractValue, $ContractStatus, $PartnerID, $ProjectID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1391,8 +1393,8 @@
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL SuaHD(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("issssssssss", $ContractID, $ContractName, $ContractNumber, $ContractSignDay, $ContractExpire, $ContractNote, $ContractValue, $ContractStatus, $PartnerID, $ProjectID);
+                    $stmt = $this->conn->prepare("CALL SuaHD(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("isssssdsii", $ContractID, $ContractName, $ContractNumber, $ContractSignDay, $ContractExpire, $ContractNote, $ContractValue, $ContractStatus, $PartnerID, $ProjectID);
                     $stmt->execute();
                     $stmt->close();
                 }

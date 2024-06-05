@@ -5,7 +5,7 @@
 
     $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? null;
-    $number = $_FILES["number"] ?? null;
+    $number = $_POST["number"] ?? null;
     $signDay = $_POST['signDay'] ?? null;
     $expire = $_POST['expire'] ?? null;
     $note = $_POST['note'] ?? null;
@@ -18,20 +18,32 @@
 
         if($method === 'add' && isset($name) && isset($number) 
         && isset($signDay) && isset($expire) && isset($note)
-        && isset($value) && isset($status) && isset($partnerID) && isset($projectID)){
+        && isset($value) && isset($status) && isset($partnerID) 
+        && isset($projectID)){
+                // print_r($name.' '. $number.' '. $signDay.' '. $expire.' '. $note.' '. $value.' '. $status.' '. $partnerID.' '. $projectID);exit;
+
             Add($name, $number, $signDay, $expire, $note, $value, $status, $partnerID, $projectID);
+            $contracts = Contract::GetAllContract();
         }
         else if($method === 'edit' && isset($id) && isset($name) && isset($number) 
         && isset($signDay) && isset($expire) && isset($note)
-        && isset($value) && isset($status) && isset($partnerID) && isset($projectID)){
+        && isset($value) && isset($status) && isset($partnerID)
+        && isset($projectID)){
+                // print_r($id. ' ' .$name.' '. $number.' '. $signDay.' '. $expire.' '. $note.' '. $value.' '. $status.' '. $partnerID.' '. $projectID);exit;
+
             Edit($id, $name, $number, $signDay, $expire, $note, $value, $status, $partnerID, $projectID);
+            $contracts = Contract::GetAllContract();
         }
         else if($method === 'delete' && isset($id)){
             Delete($id);
+            $contracts = Contract::GetAllContract();
         }
         else if($method === 'find'){
-            $contractName = $_POST['contract-name'];
+            $contractName = $_POST['contractName'];
             $contracts = Find($contractName);
+        }
+        else {
+        $contracts = Contract::GetAllContract();
         }
 
     function Add($name, $number, $signDay, $expire, $note, $value, $status, $partnerID, $projectID){

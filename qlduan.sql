@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 05, 2024 lúc 03:53 AM
+-- Thời gian đã tạo: Th6 05, 2024 lúc 12:14 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -391,16 +391,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDA` (IN `TenDA` VARCHAR(255)
     WHERE duan.TenDA LIKE @TenDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDT` (`TenDT` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDT` (IN `TenDT` VARCHAR(255))   BEGIN
     SET @TenDT = CONCAT('%', TenDT , '%');
-    SELECT doitac.MaDT AS PartnerID, doitac.TenDT AS PartnerName, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai as Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
+    SELECT doitac.MaDT AS ID, doitac.TenDT AS Name, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai as Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
     FROM doitac
     WHERE doitac.TenDT LIKE @TenDT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemHD` (`TenHD` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemHD` (IN `TenHD` VARCHAR(255))   BEGIN
     SET @TenHD = CONCAT('%', TenHD , '%');
-    SELECT hopdong.MaHD AS ContractID, hopdong.TenHD AS ContractName, hopdong.SoHD AS Number, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS Expire, hopdong.GhiChu AS Note, hopdong.GiaTriHD AS Value, hopdong.TrangThai AS Status, hopdong.MaDT AS PartnerID, hopdong.MaDA AS ProjectID
+    SELECT hopdong.MaHD AS ID, hopdong.TenHD AS Name, hopdong.SoHD AS Number, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS Expire, hopdong.GhiChu AS Note, hopdong.GiaTriHD AS Value, hopdong.TrangThai AS Status, hopdong.MaDT AS PartnerID, hopdong.MaDA AS ProjectID
     FROM hopdong
     WHERE hopdong.TenHD LIKE @TenHD;
 END$$
@@ -1152,7 +1152,7 @@ ALTER TABLE `congviec`
 -- AUTO_INCREMENT cho bảng `doitac`
 --
 ALTER TABLE `doitac`
-  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `duan`
@@ -1164,7 +1164,7 @@ ALTER TABLE `duan`
 -- AUTO_INCREMENT cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `loaiduan`

@@ -1,7 +1,7 @@
 <?php 
 
     include getenv('DIR_MODELS') . '/Partner.php';
-    $partners = Partner::GetAllPartner();
+    $partners = [];
 
     $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? null;
@@ -21,18 +21,26 @@
     && isset($email) && isset($phone) && isset($fax) && isset($address)
     && isset($status) && isset($note) && isset($taxCode)){
         Add($name, $email, $phone, $fax, $address, $status, $note, $taxCode, $representative, $position);
+        $partners = Partner::GetAllPartner();
     }
     else if($method === 'edit' && isset($id) && isset($name) && isset($representative) && isset($position) 
     && isset($email) && isset($phone) && isset($fax) && isset($address)
     && isset($status) && isset($note) && isset($taxCode)){
-        Edit($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+                // print_r('ấc');exit;
+
+        Edit($id, $name, $email, $phone, $fax, $address, $status, $note, $taxCode, $representative, $position);
+        $partners = Partner::GetAllPartner();
     }
     else if($method === 'delete' && isset($id)){
         Delete($id);
+        $partners = Partner::GetAllPartner();
     }
     else if($method === 'find'){
-        $partnerName = $_POST['partner-name'];
+        $partnerName = $_POST['partnerName'];
         $partners = Find($partnerName);
+    }
+    else{
+        $partners = Partner::GetAllPartner();
     }
     function Add($name, $email, $phone, $fax, $address, $status, $note, $taxCode, $representative, $position){
         $partner = new Partner();
