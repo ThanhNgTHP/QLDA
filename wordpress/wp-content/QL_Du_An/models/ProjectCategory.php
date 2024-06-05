@@ -79,7 +79,21 @@ if(!class_exists('ProjectCategory')){
 
             public function Find($name){
                 $actionDB = new ActionDB();
-                return $actionDB->FindProjectCategory($name)->fetch_all(MYSQLI_ASSOC);
+
+            $result = $actionDB->FindProjectCategory($name);
+
+            $findProjectCategorys = array();
+            
+            while($row = $result->fetch_assoc()){
+                $Category = new ProjectCategory();
+                $Category->ID = $row['ID'];
+                $Category->Name = $row['Name'];
+                $Category->Description = $row['Description'];
+                
+                $findProjectCategorys[] = $Category;
+            }
+
+            return $findProjectCategorys;
             }
     }
 

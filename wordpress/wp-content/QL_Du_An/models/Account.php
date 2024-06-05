@@ -86,7 +86,23 @@ if(!class_exists('Account')){
 
         public function Find($name){
             $actionDB = new ActionDB();
-            return $actionDB->FindAccount($name)->fetch_all(MYSQLI_ASSOC);
+    
+            $result = $actionDB->FindAccount($name);
+
+            $findAccounts = array();
+
+            while($row = $result->fetch_assoc()){
+                $account = new Account();
+
+                $account->ID = $row['ID'];
+                $account->Name = $row['Name'];
+                $account->Status = $row['Status'];
+                $account->Password = $row['Password'];
+                $account->PermissionID = $row['PermissionID'];
+                
+                $findAccounts[] = $account;
+            }
+            return $findAccounts;
         }
     }
 }

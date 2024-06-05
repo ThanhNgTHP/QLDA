@@ -123,7 +123,7 @@
                 return $team;
             }
 
-            public function JobProject(){
+            public function GetJobProject(){
                 $ProjectID = $this->ProjectID;
                 [$project] = array_values(array_filter(Project::GetAllProject(), function ($project) use ($ProjectID){
                     return $project->ID == $ProjectID;
@@ -134,11 +134,19 @@
 
             public function GetStaffProject(){
                 $StaffID = $this->StaffID;
-                $jobs = array_values(array_filter(Job::GetAllJob(), function ($job) use ($StaffID){
+                [$job] = array_values(array_filter(Job::GetAllJob(), function ($job) use ($StaffID){
                     return $job->StaffID == $StaffID;
                 }));
 
-                return $jobs;
+                return $job;
+            }
+
+            public function GetStaffJob(){
+                $StaffID = $this->StaffID;
+                [$staffs] = array_values(array_filter(Staff::GetAllStaff(), function ($staff) use ($StaffID){
+                    return $staff->ID == $StaffID;
+                }));
+                return $staffs;
             }
             
             public function Add($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID
@@ -159,7 +167,32 @@
 
             public function Find($name){
                 $actionDB = new ActionDB();
-                return $actionDB->FindJob($name)->fetch_all(MYSQLI_ASSOC);
+    
+                $result = $actionDB->FindJob($name);
+
+                $findJobs = array();
+    
+                while($row = $result->fetch_assoc()){
+                    $job = new Job();
+    
+                    $job->ID = $row['ID'];
+                    $job->Name = $row['Name'];
+                    $job->Content = $row['Content'];
+                    $job->Note = $row['Note'];
+                    $job->Begin = $row['Begin'];
+                    $job->End = $row['End'];
+                    $job->TeamID = $row['TeamID'];
+                    $job->ProjectID = $row['ProjectID'];
+                    $job->Progress = $row['Progress'];
+                    $job->Priority = $row['Priority'];
+                    $job->TargetBudget = $row['TargetBudget'];
+                    $job->ActualBudget = $row['ActualBudget'];
+                    $job->StaffID = $row['StaffID'];
+                    
+                    $findJobs[] = $job;
+                }
+
+                return $findJobs;
             }
         }  
     }

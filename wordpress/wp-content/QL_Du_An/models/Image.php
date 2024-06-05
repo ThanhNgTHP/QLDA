@@ -59,6 +59,15 @@
                 return $project;
             }
 
+            public function GetImageContract(){
+                $ContractID = $this->ContractID;
+                [$contract] = array_values(array_filter(Contract::GetAllContract(), function ($contract) use ($ContractID){
+                    return $contract->ID == $ContractID;
+                }));
+
+                return $contract;
+            }            
+
             public function Add($name, $path, $projectID, $contractID, $imageCategory){
                 $actionDB = new ActionDB();
                 $actionDB->AddImage($name, $path, $projectID, $contractID, $imageCategory);
@@ -76,7 +85,25 @@
 
             public function Find($name){
                 $actionDB = new ActionDB();
-                return $actionDB->FindImage($name)->fetch_all(MYSQLI_ASSOC);
+        
+                $result = $actionDB->FindImage($name);
+    
+                $findImages = array();
+    
+                while($row = $result->fetch_assoc()){
+                    $image = new Image();
+    
+                    $image->ID = $row['ID'];
+                    $image->Name = $row['Name'];
+                    $image->Path = $row['Path'];
+                    $image->ProjectID = $row['ProjectID'];
+                    $image->ContractID = $row['ContractID'];
+                    $image->ImageCategory = $row['ImageCategory'];
+
+                    $findImages[] = $image;
+                }
+    
+                return $findImages;
             }
             
         }

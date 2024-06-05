@@ -1,13 +1,14 @@
 <?php 
 
     include getenv('DIR_MODELS') . '/ProjectCategory.php';
-    $projectCategories = ProjectCategory::GetAllProjectCategory();
+    $projectCategories = [];
 
     $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? null;
-    $description = $_FILES["description"] ?? null;
+    $description = $_POST["description"] ?? null;
     
 
+<<<<<<< HEAD
     if(isset($path)){
         move_uploaded_file($path["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
     }
@@ -21,6 +22,32 @@
     }
     else if($method === 'delete' && isset($id)){
         Delete($id);
+=======
+    // if(isset($path)){
+    //     move_uploaded_file($path["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
+    // }
+
+    $method = $_POST['method'] ?? null;
+
+    if($method === 'add' && isset($name) && isset($name) && isset($description)){
+        Add($name, $description);
+        $projectCategories = ProjectCategory::GetAllProjectCategory();
+    }
+    else if($method === 'edit' && isset($id) && isset($name) && isset($description)){
+        Edit($id, $name, $description);
+        $projectCategories = ProjectCategory::GetAllProjectCategory();
+    }
+    else if($method === 'delete' && isset($id)){
+        Delete($id);
+        $projectCategories = ProjectCategory::GetAllProjectCategory();
+    }
+    else if($method === 'find'){
+        $projectCategoryName = $_POST['projectcategoryName'];
+        $projectCategories = Find($projectCategoryName);
+    }    
+    else {
+        $projectCategories = ProjectCategory::GetAllProjectCategory();
+>>>>>>> d45fdc2856ed37ffe9b365709a40cd9b2af68709
     }
     else if($method === 'find'){
         $projectCategoryName = $POST['project-category-name'];

@@ -126,7 +126,23 @@ if(!class_exists('Team')){
 
         public function Find($name){
             $actionDB = new ActionDB();
-            return $actionDB->FindTeam($name)->fetch_all(MYSQLI_ASSOC);
+
+            $result = $actionDB->FindTeam($name);
+
+            $findTeams = array();
+
+            while($row = $result->fetch_assoc()) {
+                $team = new Team();
+
+                $team->ID = $row['ID'];
+                $team->Name = $row['Name'];
+                $team->Leader = $row['Leader'];
+                $team->DepartmentID = $row['DepartmentID'];
+
+                $findTeams[] = $team;
+            }
+
+            return $findTeams;
         }
     }
 }

@@ -75,8 +75,25 @@ if(!class_exists('Permission')){
         }            
 
         public function Find($name){
+
             $actionDB = new ActionDB();
-            return $actionDB->FindPermission($name)->fetch_all(MYSQLI_ASSOC);
+    
+            $result = $actionDB->FindPermission($name);
+
+            $findPermissions = array();
+
+            while($row = $result->fetch_assoc()){
+                $permission = new Permission();
+
+                $permission->ID = $row['ID'];
+                $permission->Name = $row['Name'];
+                $permission->Note = $row['Note'];
+                
+                
+                $findPermissions[] = $permission;
+            }
+
+            return $findPermissions;
         }
     }
 }
