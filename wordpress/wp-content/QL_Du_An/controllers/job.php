@@ -30,7 +30,6 @@
     && isset($begin) && isset($end) && isset($teamID) && isset($projectID)
     && isset($progress) && isset($priority) && isset($targetBudget)
     && isset($actualBudget) && isset($staffID)){
-        // print_r($end.'cacs');exit;
         Edit($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
         $jobs = Job::GetAllJob();
     }

@@ -113,11 +113,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                 <input name="path" id="imageInput-<?php echo $key; ?>" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
                 <img class="displayImage-<?php echo $key; ?> inline w-[250px]" src="<?php echo $image->Path ?>" alt="<?php echo $image->Name ?>"> 
                 
-                <!-- <div class="absolute top-0 left-0 bottom-0 right-0">
-                    <div class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-solid border-b-blue-500"></div>
-                    <div class="w-[20px] h-[20px] bg-red-600"></div>
-                </div> -->
-
                 <div class="absolute top-0 left-0 bottom-0 right-0">
                     <label for="imageInput-<?php echo $key; ?>">
                         <div class="w-full h-full hover:bg-white hover:opacity-50">
@@ -132,7 +127,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
             </div>
 
             <div class="text-xl" style="margin: auto;">
-                <!-- <input type="text" name="imageCategory" value="<?php echo $image->ImageCategory; ?>"> -->
                 <select name="imageCategory" id="">
                     <option value="<?php echo $image->ImageCategory ?>"><?php echo $image->ImageCategory ?></option>
                     <?php if($image->ImageCategory != 'anh du an'): ?>
@@ -181,8 +175,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
     </form>
     <?php endforeach; ?>    
 </div>
-
-<!-- <img src="http://localhost/wordpress/wp-content/QL_Du_An/resources/img/1.jpg" alt="http://localhost/wordpress/wp-content/QL_Du_An/resources/img/1.jpg"> -->
 
 <?php
 

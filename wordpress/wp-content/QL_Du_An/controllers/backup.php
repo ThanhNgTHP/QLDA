@@ -1,35 +1,92 @@
 <?php
-ob_start(); // Bật bộ đệm đầu ra
 
 if (isset($_POST['method']) && $_POST['method'] === 'export') {
-    $dbHost = 'localhost';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'qlduan';
-    $fileName = '/qlduan.sql';
-    $filePath = 'D:/xampp/xampp_install/htdocs/backup' . $fileName; // Chỉ định vị trí lưu file tương đối
-    
-    $command = 'D:\xampp\xampp_install\mysql\bin\mysqldump -u '.$dbUsername.' '.$dbName.'> '.$filePath;
+    $fileName = 'qlduan.sql';
+    $filePath = realpath('../wp-content/QL_Du_An/resources/backup') . '/' . $fileName;
+    $command = getenv('MYSQLDUMP') . ' -u ' . getenv('USER_NAME') .
+                ' -P ' . getenv('PORT') . 
+                ' '. getenv('DATABASE_NAME') . ' > ' . '"' . $filePath . '"';
+
     print_r($command);
     exec($command);
 
-    // Kiểm tra xem file đã được tạo thành công chưa
-    // if (file_exists($filePath)) {
-    //     // Thiết lập tiêu đề HTTP để tải file
-    //     header('Content-Description: File Transfer');
-    //     header('Content-Type: application/octet-stream');
-    //     header('Content-Disposition: attachment; filename="' . basename($filePath) . '"');
-    //     header('Expires: 0');
-    //     header('Cache-Control: must-revalidate');
-    //     header('Pragma: public');
-    //     header('Content-Length: ' . filesize($filePath));
-    //     flush(); // Xóa bộ đệm đầu ra của hệ thống
-    //     readfile($filePath);
-    //     exit;
-    // } else {
-    //     echo "File không tồn tại hoặc không thể tạo file.";
-    // }
+    $descriptors = array(
+        0 => array("pipe", "r"),  // stdin
+        1 => array("pipe", "w"),  // stdout
+        2 => array("pipe", "w")   // stderr
+     );
+
+     $process = proc_open($command, $descriptors, $pipes);
+     
+     if (is_resource($process)) {
+         // Đóng stdin
+         fclose($pipes[0]);
+     
+         // Đọc output từ stdout
+        $output = stream_get_contents($pipes[1]);
+
+         // Đọc thông tin lỗi từ stderr
+         $error = stream_get_contents($pipes[2]);
+     
+         // Đóng pipes
+         fclose($pipes[1]);
+         fclose($pipes[2]);
+
+         // Lấy trạng thái kết thúc của process
+         $retval = proc_close($process);
+     
+         // In output và mã trạng thái trả về
+        // echo "Output:\n" . $output;
+        // echo "Error:\n" . $error;
+        // echo "Mã trạng thái trả về: " . $retval . "\n";
+     } else {
+        // echo "Không thể mở process";
+     }
 }
 
-ob_end_flush(); // Kết thúc và gửi bộ đệm đầu ra
+$pathfile = $_FILES['pathfile'] ?? null;
+
+if (isset($_POST['method']) && $_POST['method'] === 'import'&& isset($pathfile)) {
+   // print_r($pathfile);exit;                
+
+    $fileName = 'qlduan.sql';
+    $filePath = realpath('../wp-content/QL_Du_An/resources/backup') . '/' . $pathfile['name'];
+    $command = getenv('MYSQL') . ' -u ' . getenv('USER_NAME') .
+                ' -P ' . getenv('PORT') . 
+                ' '. getenv('DATABASE_NAME') . ' < ' . '"' . $filePath . '"';
+    exec($command);
+
+    $descriptors = array(
+        0 => array("pipe", "r"),  // stdin
+        1 => array("pipe", "w"),  // stdout
+        2 => array("pipe", "w")   // stderr
+     );
+
+     $process = proc_open($command, $descriptors, $pipes);
+     
+     if (is_resource($process)) {
+         // Đóng stdin
+         fclose($pipes[0]);
+     
+         // Đọc output từ stdout
+        $output = stream_get_contents($pipes[1]);
+
+         // Đọc thông tin lỗi từ stderr
+         $error = stream_get_contents($pipes[2]);
+     
+         // Đóng pipes
+         fclose($pipes[1]);
+         fclose($pipes[2]);
+
+         // Lấy trạng thái kết thúc của process
+         $retval = proc_close($process);
+     
+         // In output và mã trạng thái trả về
+        // echo "Output:\n" . $output;
+        // echo "Error:\n" . $error;
+        // echo "Mã trạng thái trả về: " . $retval . "\n";
+     } else {
+        // echo "Không thể mở process";
+     }
+}
 ?>
