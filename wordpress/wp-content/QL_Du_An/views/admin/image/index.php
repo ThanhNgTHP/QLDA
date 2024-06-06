@@ -63,7 +63,10 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="imageCategory" value="">
+                    <select name="imageCategory" id="">
+                        <option value="anh du an">anh du an</option>
+                        <option value="anh hop dong">anh hop dong</option>
+                    </select>
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
@@ -129,7 +132,17 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
             </div>
 
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="imageCategory" value="<?php echo $image->ImageCategory; ?>">
+                <!-- <input type="text" name="imageCategory" value="<?php echo $image->ImageCategory; ?>"> -->
+                <select name="imageCategory" id="">
+                    <option value="<?php echo $image->ImageCategory ?>"><?php echo $image->ImageCategory ?></option>
+                    <?php if($image->ImageCategory != 'anh du an'): ?>
+                        <option value="anh du an">anh du an</option>
+                    <?php endif ?>
+                    
+                    <?php if($image->ImageCategory != 'anh hop dong'): ?>
+                        <option value="anh hop dong">anh hop dong</option>
+                    <?php endif ?>
+                </select>
             </div>
 
             <div class="text-xl" style="margin: auto;">

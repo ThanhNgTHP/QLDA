@@ -56,11 +56,11 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="begin" value="">
+                    <input type="date" name="begin" value="">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="end" value="">
+                    <input type="date" name="end" value="">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
@@ -76,15 +76,15 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="targetBudget" value="">
+                    <input type="number" name="targetBudget" value="" step="any">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="actualBudget" value="">
+                    <input type="number" name="actualBudget" value="" step="any">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="progress" value="">
+                    <input type="number" name="progress" value="" min="0" max="100">
                 </div>
 
                 <?php foreach($projects as $key => $project): ?>
@@ -148,11 +148,11 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
             </div>
 
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="begin" value="<?php echo $project->Begin; ?>">
+                <input type="date" name="begin" value="<?php echo $project->Begin; ?>">
             </div>
 
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="end" value="<?php echo $project->End; ?>">
+                <input type="date" name="end" value="<?php echo $project->End; ?>">
             </div>
 
             <div class="text-xl" style="margin: auto;">
@@ -168,16 +168,16 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
             </div>
 
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="targetBudget" value="<?php echo $project->TargetBudget; ?>">
+                <input type="number" name="targetBudget" value="<?php echo $project->TargetBudget; ?>" step="any">
             </div>
 
             
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="actualBudget" value="<?php echo $project->ActualBudget; ?>">
+                <input type="number" name="actualBudget" value="<?php echo $project->ActualBudget; ?>" step="any">
             </div>
             
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="progress" value="<?php echo $project->Progress; ?>">
+                <input type="number" name="progress" value="<?php echo $project->Progress; ?>" min="0" max="100">
             </div>
 
             <div class="text-xl" style="margin: auto;">

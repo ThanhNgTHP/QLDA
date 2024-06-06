@@ -55,11 +55,11 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
             </div>
 
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="signDay" value="">
+                <input type="date" name="signDay" value="">
             </div>
 
             <div class="text-xl" style="margin: auto;">
-                <input type="text" name="expire" value="">
+                <input type="date" name="expire" value="">
             </div>
 
             <div class="text-xl" style="margin: auto;">
@@ -122,11 +122,11 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="signDay" value="<?php echo $contract->SignDay; ?>">
+                    <input type="date" name="signDay" value="<?php echo $contract->SignDay; ?>">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="expire" value="<?php echo $contract->Expire; ?>">
+                    <input type="date" name="expire" value="<?php echo $contract->Expire; ?>">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
