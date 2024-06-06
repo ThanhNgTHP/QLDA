@@ -71,7 +71,7 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="birthday" value="">
+                    <input type="date" name="birthday" value="">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
@@ -149,7 +149,7 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
-                    <input type="text" name="birthday" value="<?php echo $staff->BirthDay; ?>">
+                    <input type="date" name="birthday" value="<?php echo $staff->BirthDay; ?>">
                 </div>
 
                 <div class="text-xl" style="margin: auto;">

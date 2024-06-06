@@ -14,10 +14,6 @@
             include_once '../models/Permission.php';
             include_once '../models/Staff.php';
         
-            // include_once getenv('DIR_DB') . '../ActionDB.php';
-            // include_once getenv('DIR_MODELS') . '../Account.php';
-            // include_once getenv('DIR_MODELS') . '../Permission.php';
-            // include_once getenv('DIR_MODELS') . '../Staff.php';
             class User{
         
                 /** @var Staff $Staff */

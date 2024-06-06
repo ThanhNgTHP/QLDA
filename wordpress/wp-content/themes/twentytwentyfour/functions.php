@@ -294,6 +294,9 @@ class AdminMenu {
 			else if($view === 'event'){
 				include_once getenv('DIR_VIEWS') . '/admin/event/index.php';
 			}
+			else if($view === 'backup'){
+				include_once getenv('DIR_VIEWS') . '/admin/backup/index.php';
+			}
 
 			$output = ob_get_contents();
 	
@@ -327,6 +330,7 @@ class AdminMenu {
 		$output .= $this->SubmenuCategories('contract');	
 		$output .= $this->SubmenuCategories('project');	
 		$output .= $this->SubmenuCategories('event');	
+		$output .= $this->SubmenuCategories('backup');	
 		$output .= '</div>';
 		return $output;
 	}

@@ -2,7 +2,7 @@
 
 include_once getenv('DIR_CONTROLLERS').'\\account.php';
 
-$current_directory_url = content_url().'/QL_Du_An/views/account';
+$current_directory_url = content_url().'/QL_Du_An/views/admin/account';
 
 wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
