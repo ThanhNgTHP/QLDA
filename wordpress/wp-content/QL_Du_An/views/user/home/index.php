@@ -36,8 +36,8 @@
                             border-t-2 
                             border-t-indigo-600">
                     <div class="img flex justify-center items-center">
-                        <img src="<?php echo $projectSummary->Image->Path; ?>" 
-                        alt="<?php echo $projectSummary->Image->Name; ?>"
+                        <img src="<?php if(isset($projectSummary->Image)){ echo $projectSummary->Image;} else { echo "https://png.pngtree.com/png-vector/20190420/ourmid/pngtree-question-mark-vector-icon-png-image_963976.jpg";} ?>" 
+                        alt="<?php echo $projectSummary->Image; ?>"
                         width="500"
                         >
                     </div>
@@ -61,17 +61,16 @@
                         </div>
 
                         <div class="overflow-hidden text-ellipsis whitespace-nowrap">
-                            <?php echo $projectSummary->ContractNumber; ?> 
+                            Số hơp đồng: <?php if(isset($projectSummary->ContractNumber)){echo $projectSummary->ContractNumber;} else{ echo "chưa có thông tin";} ?> 
                             
                         </div>
 
                         <div class="overflow-hidden text-ellipsis whitespace-nowrap">
-                            <?php echo $projectSummary->PartnerName; ?>
-
+                            Đối tác: <?php if(isset($projectSummary->PartnerName)){echo $projectSummary->PartnerName;;} else{ echo "chưa có thông tin";}  ?>
                         </div>
 
                         <div class="overflow-hidden text-ellipsis whitespace-nowrap">
-                            <?php echo $projectSummary->Description; ?>
+                            Mô tả: <?php echo $projectSummary->Description; ?>
                         </div>
                     </div>
 

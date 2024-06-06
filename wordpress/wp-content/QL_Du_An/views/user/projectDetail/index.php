@@ -1,7 +1,7 @@
 <?php 
     include getcwd().'\\wp-content\\QL_Du_An\\controllers\\project_detail.php';
 
-    $current_directory_url = content_url().'/QL_Du_An/views/projectDetail';
+    $current_directory_url = content_url().'/QL_Du_An/views/user/projectDetail';
     $img_directory_url = content_url().'/QL_Du_An/resources/layout_img';
 
 	wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
@@ -82,27 +82,32 @@
                 Thông Tin Hợp đồng
             </div>
             <div class = "text-[20px]"> 
-            <?php echo "Tên HĐ: ". $projectDetail->Contract->Name ?><br>
-            <?php echo "Số hD: ". $projectDetail->Contract->Number ?><br>
-            <?php echo "Ngày kí: ". $projectDetail->Contract->SignDay ?><br>
-            <?php echo "Ngày hết hạn: ". $projectDetail->Contract->Expire ?><br>
-            <?php echo "ghi chú: ". $projectDetail->Contract->Note ?><br>
-            <?php echo "Giá trị HD: ". $projectDetail->Contract->Value ?><br>
-            <?php echo "Trạng thái: ". $projectDetail->Contract->Status ?><br>
+            <div>Tên HĐ: <?php if(isset($projectDetail->Contract->Name)) {echo $projectDetail->Contract->Name;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Số hợp đồng: <?php if(isset($projectDetail->Contract->Number)) {echo $projectDetail->Contract->Number;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Ngày kí: <?php if(isset($projectDetail->Contract->SignDay)) {echo $projectDetail->Contract->SignDay;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Ngày hết hạn: <?php if(isset($projectDetail->Contract->Expire)) {echo $projectDetail->Contract->Expire;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>ghi chú: <?php if(isset($projectDetail->Contract->Note)) {echo $projectDetail->Contract->Note;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Giá trị HD: <?php if(isset($projectDetail->Contract->Value)) {echo $projectDetail->Contract->Value;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Trạng thái: <?php if(isset($projectDetail->Contract->Status)) {echo $projectDetail->Contract->Status;} else { echo "Chưa có thông tin";} ?><br></div>
             </div>
 
             <div class="list-contract">
             <div class="text-[30px]">
                 Ảnh hợp đồng
             </div>
+            <?php ?>
+            <?php if(isset($projectDetail->Contract->ID)):?>
+                <a href="list-image-contract/?contractID=<?php echo $projectDetail->Contract->ID ?>">
+                    <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        Hiển Thị
+                    </button>
 
-            <a href="list-image-contract/?contractID=<?php echo $projectDetail->Contract->ID ?>">
-
-                <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Hiển Thị
-                </button>
-
-            </a>
+                </a>
+            <?php else:?>
+                    <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        Chưa có ảnh hợp đồng
+                    </button>
+            <?php endif ?>
 
             </div>
         </div>
@@ -112,16 +117,17 @@
                 Thông Tin Đối Tác
             </div>
             <div class = "text-[20px]"> 
-            <?php echo "Tên ĐT: ". $projectDetail->Partner->Name ?><br>
-            <?php echo "Người đại diện: ". $projectDetail->Partner->Representative ?><br>
-            <?php echo "Chức vụ: ". $projectDetail->Partner->Position ?><br>
-            <?php echo "Email: ". $projectDetail->Partner->Email ?><br>
-            <?php echo "SĐT: ". $projectDetail->Partner->Phone ?><br>
-            <?php echo "Fax: ". $projectDetail->Partner->Fax ?><br>
-            <?php echo "Địa chỉ: ". $projectDetail->Partner->Address ?><br>
-            <?php echo "Trạng thái: ". $projectDetail->Partner->Status ?><br>
-            <?php echo "Ghi chú: ". $projectDetail->Partner->Note ?><br>
-            <?php echo "Mã số thuế: ". $projectDetail->Partner->TaxCode ?><br>
+            <div>Tên ĐT: <?php if(isset($projectDetail->Partner->Name)) {echo $projectDetail->Partner->Name;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Người đại diện: <?php if(isset($projectDetail->Partner->Representative)) {echo $projectDetail->Partner->Representative;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Chức vụ: <?php if(isset($projectDetail->Partner->Position)) {echo $projectDetail->Partner->Position;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Email: <?php if(isset($projectDetail->Partner->Email)) {echo $projectDetail->Partner->Email;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>SĐT: <?php if(isset($projectDetail->Partner->Phone)) {echo $projectDetail->Partner->Phone;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Fax: <?php if(isset($projectDetail->Partner->Fax)) {echo $projectDetail->Partner->Fax;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Địa chỉ: <?php if(isset($projectDetail->Partner->Address)) {echo $projectDetail->Partner->Address;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Trạng thái: <?php if(isset($projectDetail->Partner->Status)) {echo $projectDetail->Partner->Status;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Ghi chú: <?php if(isset($projectDetail->Partner->Note)) {echo $projectDetail->Partner->Note;} else { echo "Chưa có thông tin";} ?><br></div>
+            <div>Mã số thuế: <?php if(isset($projectDetail->Partner->TaxCode)) {echo $projectDetail->Partner->TaxCode;} else { echo "Chưa có thông tin";} ?><br></div>
+
             </div>
         </div>
     </div>

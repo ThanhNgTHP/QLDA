@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 06, 2024 lúc 03:27 AM
+-- Thời gian đã tạo: Th6 06, 2024 lúc 02:35 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -926,7 +926,7 @@ CREATE TABLE `phongban` (
 --
 
 INSERT INTO `phongban` (`MaPB`, `TenPB`, `MoTa`) VALUES
-(1, 'Phòng lập trình', 'Không Có'),
+(1, 'Phòng lập trình', 'Không CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông Có'),
 (2, 'Phòng Thiết Kế', 'Không Có'),
 (3, 'Phòng điều khiển điện tử', 'không có'),
 (4, 'Phòng dữ liệu 3D', 'không có'),
@@ -1159,7 +1159,7 @@ ALTER TABLE `doitac`
 -- AUTO_INCREMENT cho bảng `duan`
 --
 ALTER TABLE `duan`
-  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `hopdong`
