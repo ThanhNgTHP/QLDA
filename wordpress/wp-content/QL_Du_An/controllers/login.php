@@ -9,7 +9,6 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if(!class_exists('User')){
-            include_once 'E:\Tong Hop\PHP\wordpress\wp-content\QL_Du_An\db\ActionDB.php';
             include_once '../db/ActionDB.php';
             include_once '../models/Account.php';
             include_once '../models/Permission.php';

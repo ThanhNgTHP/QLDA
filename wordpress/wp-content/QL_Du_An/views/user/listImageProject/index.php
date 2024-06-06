@@ -17,8 +17,8 @@
     <?php 
         foreach($ProjectImages AS $key => $image):
     ?>
-        <div class="text-center" style="margin: auto;">
-            <img 
+        <div class="text-center w-[300px] h-auto pt-[20px]" style="margin: auto;">
+            <img class="w-[300px] h-[200px]"
             src="<?php echo $image->Path ?>" 
             alt="<?php echo  $image->Name; ?>"
             style="width: 300px;"

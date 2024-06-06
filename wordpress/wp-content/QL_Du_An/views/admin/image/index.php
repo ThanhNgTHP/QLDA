@@ -36,16 +36,26 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                     <div style="margin: auto;">Công cụ</div>
     </div>
 
-    <form action="" method="post">
-        <div class="grid grid-cols-6 gap-1 
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="grid grid-cols-6 gap-1
                     w-[200%]
                     p-[25px_0_0_0]
                     m-[50px_0_0_0]
                     border-t-solid
                     border-t-2 
                     border-t-indigo-600">
-                <div class="text-xl" style="margin: auto;">
-                    <input type="file" name="path" value="">
+
+                <div class="relative" style="margin: auto;">
+                    <input name="path" id="imageInput--1" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
+                    <img class="displayImage--1 inline w-[250px]" src="https://cdn.discordapp.com/attachments/1242044806960779315/1247976047107117086/126477-removebg-preview.png?ex=6661fbc3&is=6660aa43&hm=41f3114743d10745256ccf064eac1433c1c803707fa63f2f48f83400ada6c201&" alt="Ảnh"> 
+                    
+                    <div class="absolute top-0 left-0 bottom-0 right-0" style="">
+                        <label for="imageInput--1">
+                            <div class="w-[250px] h-full hover:bg-white hover:opacity-50">
+                                
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
@@ -96,9 +106,9 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                 <input type="text" name="id" value="<?php echo $image->ID; ?>">
             </div>
                             
-            <div class="relative">
-                <input name="path" id="imageInput-<?php echo $key; ?>" class="imageInput hidden" type="file" accept="image/*">
-                <img class="displayImage-<?php echo $key; ?> inline w-full" src="<?php echo $image->Path ?>" alt="<?php echo $image->Name ?>"> 
+            <div class="relative" style="margin: auto;">
+                <input name="path" id="imageInput-<?php echo $key; ?>" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
+                <img class="displayImage-<?php echo $key; ?> inline w-[250px]" src="<?php echo $image->Path ?>" alt="<?php echo $image->Name ?>"> 
                 
                 <!-- <div class="absolute top-0 left-0 bottom-0 right-0">
                     <div class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[10px] border-b-solid border-b-blue-500"></div>
@@ -124,11 +134,11 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
             <div class="text-xl" style="margin: auto;">
                 <select name="projectID" id="">
-                    <?php $projectSelect = $image->GetImageProject(); ?>
-                    <option value="<?php echo $projectSelect->ID; ?>"><?php echo $projectSelect->Name . '-' . $projectSelect->ID; ?></option>
+                    <?php $projectSelect = $image->GetImageProject();?>
+                    <option value="<?php echo $projectSelect->ID ?>"><?php echo $projectSelect->Name . '-' . $projectSelect->ID; ?></option>
                     <?php foreach(Project::GetAllProject() as $key => $project): ?>
-                        <?php if($project->ID != $projectSelect->ID): ?>
-                        <option value="<?php $project->ID; ?>"><?php echo $project->Name . '-' . $project->ID; ?></option>
+                        <?php if($projectSelect->ID !== $project->ID): ?>
+                        <option  value="<?php echo $project->ID ?>"><?php echo $project->Name . '-' . $project->ID; ?></option>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
@@ -159,9 +169,11 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
     <?php endforeach; ?>    
 </div>
 
+<!-- <img src="http://localhost/wordpress/wp-content/QL_Du_An/resources/img/1.jpg" alt="http://localhost/wordpress/wp-content/QL_Du_An/resources/img/1.jpg"> -->
+
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'image_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

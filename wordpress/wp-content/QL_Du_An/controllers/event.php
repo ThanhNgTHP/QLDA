@@ -1,11 +1,14 @@
 <?php 
 
     include getenv('DIR_MODELS') . '/Event.php';
+
+    $base_path_folder_image = ABSPATH . 'wp-content\QL_Du_An\resources\img';
+
     $events = [];
 
     $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? null;
-    $image = $_FILES["image"] ?? null;
+    $path = $_FILES["image"] ?? null;
     $note = $_POST['note'] ?? null;
     $content = $_POST['content'] ?? null;
     $projectID = $_POST['projectID'] ?? null;
@@ -15,11 +18,14 @@
         if(isset($image)){
             move_uploaded_file($image["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
         }
-        Add($name, $image, $note, $content, $projectID);
+        Add($name, $base_path_folder_image . '/' . $path["name"], $note, $content, $projectID);
         $events = Event::GetAllEvent();
     }
     else if($method === 'edit' && isset($id) && isset($name) && isset($note) && isset($content) && isset($projectID)){
-        Edit($id, $name, $image, $note, $content, $projectID);
+        if(isset($image)){
+            move_uploaded_file($image["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
+        }
+        Edit($id, $name, $base_path_folder_image . '/' . $path["name"], $note, $content, $projectID);
         $events = Event::GetAllEvent();
     }
     else if($method === 'delete' && isset($id)){

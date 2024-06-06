@@ -195,11 +195,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
             </div>
 
             <div style="margin: auto;">
-                <button class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    <a href="http://localhost/wordpress/wp-admin/admin.php?page=Dashboard&view=image">
-                        Ảnh
-                    </a>
-                </button>
                 <button type="submit" name="method" value="edit" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                     Sửa
                 </button>

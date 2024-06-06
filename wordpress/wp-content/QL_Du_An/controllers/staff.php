@@ -1,6 +1,9 @@
 <?php 
 
     include getenv('DIR_MODELS') . '/Staff.php';
+
+    $base_path_folder_image = ABSPATH . 'wp-content\QL_Du_An\resources\img';
+
     $staffs = [];
 
     $id = $_POST['id'] ?? null;
@@ -12,24 +15,25 @@
     $email = $_POST['email'] ?? null;
     $gender = $_POST['gender'] ?? null;
     $status = $_POST['status'] ?? null;
-    $avatar = $_POST['avatar'] ?? null;
+    $avatar = $_FILES['avatar'] ?? null;
     $accountID = $_POST['accountID'] ?? null;
 
     $method = $_POST['method'] ?? null;
 
     if($method === 'add' && isset($name) && isset($phone) && isset($address) && isset($birthday)
     && isset($position) && isset($email) && isset($gender) && isset($status) && isset($accountID)){
-        print_r($id.' '. $name.' '. $phone.' '. $address.' '. $birthday.' '. $position.' '. $email.' '. $gender.' '. $status.' '. $accountID.' '. $avatar);exit;
         if(isset($avatar)){
             move_uploaded_file($avatar["tmp_name"], $base_path_folder_image . '/' . $avatar["name"]);
         }
-        Add($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar);
+        Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $base_path_folder_image . '/' . $avatar["name"]);
         $staffs = Staff::GetAllStaff();
     }
     else if($method === 'edit' && isset($id) && isset($name) && isset($phone) && isset($address) && isset($birthday)
     && isset($position) && isset($email) && isset($gender) && isset($status) && isset($accountID)){
-
-        Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar);
+        if(isset($avatar)){
+            move_uploaded_file($avatar["tmp_name"], $base_path_folder_image . '/' . $avatar["name"]);
+        }
+        Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $base_path_folder_image . '/' . $avatar["name"]);
         $staffs = Staff::GetAllStaff();
     }
     else if($method === 'delete' && isset($id)){
@@ -43,14 +47,14 @@
     else {
         $staffs = Staff::GetAllStaff();
     }
-    function Add($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar){
+    function Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar){
         $staff = new Staff();
-        $staff->Add($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar);
+        $staff->Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar);
     }
 
-    function Edit($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar){
+    function Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar){
         $staff = new Staff();
-        $staff->Edit($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar);
+        $staff->Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar);
     }
 
     function Delete($id){

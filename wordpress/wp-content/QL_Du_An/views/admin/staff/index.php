@@ -1,9 +1,9 @@
 <?php 
 
 include_once getenv('DIR_CONTROLLERS').'\\staff.php';
-$current_directory_url = content_url().'/QL_Du_An/views/staff';
+$current_directory_url = content_url().'/QL_Du_An/views/admin/staff';
 
-wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -39,7 +39,8 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                         <div style="margin: auto;">Công cụ</div>
         </div>
 
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
+
             <div class="grid grid-cols-11 gap-1 
                         w-[300%]
                         p-[25px_0_0_0]
@@ -48,8 +49,17 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                         border-t-2 
                         border-t-indigo-600">
 
-                <div class="text-xl w-[300px]" style="margin: auto;">
-                    <input type="file" name="avatar" value="">
+                <div class="relative" style="margin: auto;">
+                    <input name="avatar" id="imageInput--1" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
+                    <img class="displayImage--1 inline" width="250" src="https://cdn.discordapp.com/attachments/1242044806960779315/1247976047107117086/126477-removebg-preview.png?ex=6661fbc3&is=6660aa43&hm=41f3114743d10745256ccf064eac1433c1c803707fa63f2f48f83400ada6c201&" alt="Ảnh"> 
+                    
+                    <div class="absolute top-0 left-0 bottom-0 right-0 text-center" style="">
+                        <label for="imageInput--1">
+                            <div class="w-[250px] h-full hover:bg-white hover:opacity-50">
+                                
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
@@ -103,7 +113,8 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
         </form>
 
     <?php foreach($staffs as $key => $staff): ?>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
+
             <div class="grid grid-cols-11 gap-1 
                         w-[300%]
                         p-[25px_0_0_0]
@@ -116,8 +127,17 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
                     <input type="text" name="id" value="<?php echo $staff->ID; ?>">
                 </div>                                
 
-                <div style="margin: auto;">
-                    <img class="inline w-[150px] h-auto" src="<?php echo $staff->Avatar ?>" alt="Avatar"> 
+                <div class="relative" style="margin: auto;">
+                    <input name="avatar" id="imageInput-<?php echo $key; ?>" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
+                    <img class="displayImage-<?php echo $key; ?> inline w-[350px]" src="<?php echo $staff->Avatar ?>" alt="Avatar"> 
+
+                    <div class="absolute top-0 left-0 bottom-0 right-0">
+                        <label for="imageInput-<?php echo $key; ?>">
+                            <div class="w-[350px] h-full hover:bg-white hover:opacity-50">
+                            
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="text-xl" style="margin: auto;">
@@ -184,6 +204,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'staff_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

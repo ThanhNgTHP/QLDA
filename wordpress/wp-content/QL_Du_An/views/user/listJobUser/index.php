@@ -28,7 +28,7 @@ wp_enqueue_style('list_job_user_style', $current_directory . '/index.css');
                 echo '</div>';
             }
             echo '<div class="border-solid border-2 border-indigo-600 border-l-0 p-4 mb-4">';
-            echo '<div class="text-lg font-bold">Tên dự án: ' . GetNameProject($job->ProjectID) . '</div>';
+            echo '<div class="text-2xl font-bold">Tên dự án: ' . GetNameProject($job->ProjectID) . '</div>';
             $prevProjectID = $job->ProjectID;
         }
         ?>
@@ -40,7 +40,7 @@ wp_enqueue_style('list_job_user_style', $current_directory . '/index.css');
                     border-t-indigo-600
                     grid grid-cols-2 gap-1">
             <div>
-                <div>
+                <div class="font-bold">
                     Công việc <?php echo $key + 1; ?>: <?php echo $job->Name; ?>
                 </div>
                 <br>

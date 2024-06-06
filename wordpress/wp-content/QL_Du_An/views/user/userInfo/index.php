@@ -1,7 +1,7 @@
 <?php 
     include getcwd().'\\wp-content\\QL_Du_An\\controllers\\user_info.php';
 
-    $current_directory_url = content_url().'/QL_Du_An/views/userInfo';
+    $current_directory_url = content_url().'/QL_Du_An/views/user/userInfo';
     $img_directory_url = content_url().'/QL_Du_An/resources/layout_img';
 
     wp_enqueue_style( 'userInfo_style', $current_directory_url.'/index.css', array(), time());

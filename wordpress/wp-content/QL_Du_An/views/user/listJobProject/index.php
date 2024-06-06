@@ -19,10 +19,10 @@
 
 <?php foreach($jobs as $key => $job): ?>
     <?php $count++;?>
-    <div class="text-[30px]">
+    <div class="text-[30px] pl-[10px]">
             <?php echo $count.". ". $job->Name; ?><br>
     </div>
-    <div class="p-[5px_0_0_0]
+    <div class="p-[5px_0_0_25px]
                 m-[20px_0_50px_0]
                 border-t-solid
                 border-t-2 
@@ -44,8 +44,7 @@
                 </div>
             </div>
         </div>
-        <br>
-        <div class="text-[25px]">
+        <div class="text-[25px] pt-[10px]">
             *Bộ phận phụ trách công việc:
         </div>        
 
