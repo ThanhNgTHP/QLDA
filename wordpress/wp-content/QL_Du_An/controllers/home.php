@@ -53,28 +53,50 @@ if(!class_exists('ProjectSummary')){
                 $staff = new Staff();
                 $projectSummary->StaffCount = $staff->GetStaffCountInProject($project->ID);
 
-                [$contract] = array_values(array_filter(Contract::GetAllContract(), function ($contract) use ($projectSummary){
+                $contract = array_values(array_filter(Contract::GetAllContract(), function ($contract) use ($projectSummary){
                     return $contract->ProjectID == $projectSummary->ProjectID;
                 }));
-                $projectSummary->ContractNumber = $contract->Number;
+                if(count($contract) > 0){
+                    $projectSummary->ContractNumber = $contract[0]->Number;
+                }
+                else {
+                    $projectSummary->ContractNumber = null;
+                }
 
-                [$partner] = array_values(array_filter(Partner::GetAllPartner(), function ($partner) use ($contract){
-                    return $partner->ID == $contract->PartnerID;
-                }));
-                $projectSummary->PartnerName = $partner->Name;
+                if(isset($projectSummary->ContractNumber)){
+                    $partner = array_values(array_filter(Partner::GetAllPartner(), function ($partner) use ($contract){
+                        return $partner->ID == $contract[0]->PartnerID;
+                    }));
+                    if(count($partner) > 0){
+                        $projectSummary->PartnerName = $partner[0]->Name;
+                    }
+                    else {
+                        $projectSummary->PartnerName = null;
+                    }
+                }
 
-                [$projectCategory] = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function ($projectCategory) use ($projectSummary){
+                $projectCategory = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function ($projectCategory) use ($projectSummary){
                     return $projectCategory->ID == $projectSummary->ProjectID;
                 }));
-                $projectSummary->ProjectCategoryName = $projectCategory->Name;
+                if(count($projectCategory) > 0){
+                    $projectSummary->ProjectCategoryName = $projectCategory[0]->Name;
+                }
+                else {
+                    $projectSummary->ProjectCategoryName = null;
+                }
 
                 $projectSummary->Description = $project->Description;
                 
-                [$image] = array_values(array_filter(Image::GetAllImage(), function ($image) use ($projectSummary){
+                $image = array_values(array_filter(Image::GetAllImage(), function ($image) use ($projectSummary){
                     return $image->ProjectID == $projectSummary->ProjectID;
                 }));
-                $projectSummary->Image = $image;
-
+                if(count($image) > 0){
+                    $projectSummary->Image = $image[0]->Path;
+                }
+                else {
+                    $projectSummary->Image = null;
+                }
+                
                 $ProjectSummaryAll[] = $projectSummary;
             }
             
@@ -100,31 +122,54 @@ if(!class_exists('ProjectSummary')){
                     $projectSummary->StaffCount = $staff->GetStaffCountInProject($project->ID);
                     
 
-                    [$contract] = array_values(array_filter(Contract::GetAllContract(), function ($contract) use ($projectSummary){
-                        return $contract->ProjectID == $projectSummary->ProjectID;
-                    }));
-                    $projectSummary->ContractNumber = $contract->Number;
+                    $contract = array_values(array_filter(Contract::GetAllContract(), function ($contract) use ($projectSummary){
+                    return $contract->ProjectID == $projectSummary->ProjectID;
+                }));
+                if(count($contract) > 0){
+                    $projectSummary->ContractNumber = $contract[0]->Number;
+                }
+                else {
+                    $projectSummary->ContractNumber = null;
+                }
 
-                    [$partner] = array_values(array_filter(Partner::GetAllPartner(), function ($partner) use ($contract){
-                        return $partner->ID == $contract->PartnerID;
+                if(isset($projectSummary->ContractNumber)){
+                    $partner = array_values(array_filter(Partner::GetAllPartner(), function ($partner) use ($contract){
+                        return $partner->ID == $contract[0]->PartnerID;
                     }));
-                    $projectSummary->PartnerName = $partner->Name;
+                    if(count($partner) > 0){
+                        $projectSummary->PartnerName = $partner[0]->Name;
+                    }
+                    else {
+                        $projectSummary->PartnerName = null;
+                    }
+                }
 
-                    [$projectCategory] = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function ($projectCategory) use ($projectSummary){
-                        return $projectCategory->ID == $projectSummary->ProjectID;
-                    }));
-                    $projectSummary->ProjectCategoryName = $projectCategory->Name;
+                $projectCategory = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function ($projectCategory) use ($projectSummary){
+                    return $projectCategory->ID == $projectSummary->ProjectID;
+                }));
+                if(count($projectCategory) > 0){
+                    $projectSummary->ProjectCategoryName = $projectCategory[0]->Name;
+                }
+                else {
+                    $projectSummary->ProjectCategoryName = null;
+                }
 
-                    $projectSummary->Description = $project->Description;
-                    
-                    [$image] = array_values(array_filter(Image::GetAllImage(), function ($image) use ($projectSummary){
-                        return $image->ProjectID == $projectSummary->ProjectID;
-                    }));
-                    $projectSummary->Image = $image;
+                $projectSummary->Description = $project->Description;
+                
+                $image = array_values(array_filter(Image::GetAllImage(), function ($image) use ($projectSummary){
+                    return $image->ProjectID == $projectSummary->ProjectID;
+                }));
+                if(count($image) > 0){
+                    $projectSummary->Image = $image[0]->Path;
+                }
+                else {
+                    $projectSummary->Image = null;
+                }
 
                     $ProjectSummaryAll[] = $projectSummary;
                 }
             }
+            // print_r($ProjectSummaryAll);exit;
             
             return $ProjectSummaryAll;
         }
@@ -146,27 +191,49 @@ if(!class_exists('ProjectSummary')){
                     $staff = new Staff();
                     $projectSummary->StaffCount = $staff->GetStaffCountInProject($project->ID);
 
-                    [$contract] = array_values(array_filter(Contract::GetAllContract(), function ($contract) use ($projectSummary){
-                        return $contract->ProjectID == $projectSummary->ProjectID;
-                    }));
-                    $projectSummary->ContractNumber = $contract->Number;
+                    $contract = array_values(array_filter(Contract::GetAllContract(), function ($contract) use ($projectSummary){
+                    return $contract->ProjectID == $projectSummary->ProjectID;
+                }));
+                if(count($contract) > 0){
+                    $projectSummary->ContractNumber = $contract[0]->Number;
+                }
+                else {
+                    $projectSummary->ContractNumber = null;
+                }
 
-                    [$partner] = array_values(array_filter(Partner::GetAllPartner(), function ($partner) use ($contract){
-                        return $partner->ID == $contract->PartnerID;
+                if(isset($projectSummary->ContractNumber)){
+                    $partner = array_values(array_filter(Partner::GetAllPartner(), function ($partner) use ($contract){
+                        return $partner->ID == $contract[0]->PartnerID;
                     }));
-                    $projectSummary->PartnerName = $partner->Name;
+                    if(count($partner) > 0){
+                        $projectSummary->PartnerName = $partner[0]->Name;
+                    }
+                    else {
+                        $projectSummary->PartnerName = null;
+                    }
+                }
 
-                    [$projectCategory] = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function ($projectCategory) use ($projectSummary){
-                        return $projectCategory->ID == $projectSummary->ProjectID;
-                    }));
-                    $projectSummary->ProjectCategoryName = $projectCategory->Name;
+                $projectCategory = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function ($projectCategory) use ($projectSummary){
+                    return $projectCategory->ID == $projectSummary->ProjectID;
+                }));
+                if(count($projectCategory) > 0){
+                    $projectSummary->ProjectCategoryName = $projectCategory[0]->Name;
+                }
+                else {
+                    $projectSummary->ProjectCategoryName = null;
+                }
 
-                    $projectSummary->Description = $project->Description;
-                    
-                    [$image] = array_values(array_filter(Image::GetAllImage(), function ($image) use ($projectSummary){
-                        return $image->ProjectID == $projectSummary->ProjectID;
-                    }));
-                    $projectSummary->Image = $image;
+                $projectSummary->Description = $project->Description;
+                
+                $image = array_values(array_filter(Image::GetAllImage(), function ($image) use ($projectSummary){
+                    return $image->ProjectID == $projectSummary->ProjectID;
+                }));
+                if(count($image) > 0){
+                    $projectSummary->Image = $image[0]->Path;
+                }
+                else {
+                    $projectSummary->Image = null;
+                }
 
                     $ProjectSummaryAll[] = $projectSummary;
                 }

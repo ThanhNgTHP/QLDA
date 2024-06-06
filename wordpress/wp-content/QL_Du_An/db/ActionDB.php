@@ -635,7 +635,7 @@
                 return $result;
             }
 
-            public function QualificationStaff($QualificationID){
+            public function QualificationStaff($StaffID){
                 parent::connect();
 
                 if(isset($this->conn)){
@@ -643,7 +643,7 @@
                      * @var bool|mysqli_stmt $stmt
                      */
                     $stmt = $this->conn->prepare("CALL ThongTinTVBC(?)");
-                    $stmt->bind_param("i", $QualificationID);
+                    $stmt->bind_param("i", $StaffID);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     $stmt->close();
@@ -1174,7 +1174,7 @@
                      * @var bool|mysqli_stmt $stmt
                      */
                     $stmt = $this->conn->prepare("CALL ThemCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssssdisidiis", $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
+                    $stmt->bind_param("sssssiiisddi", $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1190,7 +1190,7 @@
                      * @var bool|mysqli_stmt $stmt
                      */
                     $stmt = $this->conn->prepare("CALL SuaCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("issssdisidiis", $JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
+                    $stmt->bind_param("isssssiiisddi", $JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1541,7 +1541,7 @@
                      * @var bool|mysqli_stmt $stmt
                      */
                     $stmt = $this->conn->prepare("CALL TimKiemSK(?)");
-                    $stmt->bind_param("s", $v);
+                    $stmt->bind_param("s", $EventName);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     $stmt->close();

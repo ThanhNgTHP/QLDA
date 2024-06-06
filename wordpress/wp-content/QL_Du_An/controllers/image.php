@@ -23,7 +23,6 @@
         $images = Image::GetAllImage();
     }
     else if($method === 'edit' && isset($id) && isset($name) && isset($path) && isset($projectID) && isset($contractID) && isset($imageCategory)){
-        
         if(isset($path)){
             move_uploaded_file($path["tmp_name"], $base_path_folder_image . '/' . $path["name"]);
         }

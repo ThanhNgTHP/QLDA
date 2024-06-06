@@ -134,11 +134,11 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
             <div class="text-xl" style="margin: auto;">
                 <select name="projectID" id="">
-                    <?php $projectSelect = $image->GetImageProject(); ?>
-                    <option value="<?php echo $projectSelect->ID; ?>"><?php echo $projectSelect->Name . '-' . $projectSelect->ID; ?></option>
+                    <?php $projectSelect = $image->GetImageProject();?>
+                    <option value="<?php echo $projectSelect->ID ?>"><?php echo $projectSelect->Name . '-' . $projectSelect->ID; ?></option>
                     <?php foreach(Project::GetAllProject() as $key => $project): ?>
-                        <?php if($project->ID != $projectSelect->ID): ?>
-                        <option value="<?php $project->ID; ?>"><?php echo $project->Name . '-' . $project->ID; ?></option>
+                        <?php if($projectSelect->ID !== $project->ID): ?>
+                        <option  value="<?php echo $project->ID ?>"><?php echo $project->Name . '-' . $project->ID; ?></option>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
@@ -168,6 +168,8 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
     </form>
     <?php endforeach; ?>    
 </div>
+
+<!-- <img src="http://localhost/wordpress/wp-content/QL_Du_An/resources/img/1.jpg" alt="http://localhost/wordpress/wp-content/QL_Du_An/resources/img/1.jpg"> -->
 
 <?php
 

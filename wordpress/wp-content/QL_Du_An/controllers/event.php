@@ -8,7 +8,7 @@
 
     $id = $_POST['id'] ?? null;
     $name = $_POST['name'] ?? null;
-    $image = $_FILES["image"] ?? null;
+    $path = $_FILES["image"] ?? null;
     $note = $_POST['note'] ?? null;
     $content = $_POST['content'] ?? null;
     $projectID = $_POST['projectID'] ?? null;

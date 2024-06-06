@@ -132,7 +132,7 @@
                 return $project;
             }
 
-            public function GetStaffProject(){
+            public function GetJobStaff(){
                 $StaffID = $this->StaffID;
                 $job = array_values(array_filter(Job::GetAllJob(), function ($job) use ($StaffID){
                     return $job->StaffID == $StaffID;

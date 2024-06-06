@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1:8888
--- Thời gian đã tạo: Th6 05, 2024 lúc 09:29 PM
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th6 06, 2024 lúc 02:35 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -128,7 +128,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (IN `tenCV` VARCHAR(255), I
     INSERT INTO `congviec`(`TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maNhom, maTV, doUuTien);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemDA` (IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, `nganSachThucTe` FLOAT, `nganSachDuKien` FLOAT, `tienDo` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemDA` (IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `tienDo` INT)   BEGIN
     INSERT INTO `duan`(`TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES (tenDA, ngayBatDau, ngayKetThuc, trangThai, lienHe, moTa, maLoaiDA, nganSachThucTe, nganSachDuKien, tienDo);
 END$$
 
@@ -433,9 +433,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemQuyen` (IN `TenQuyen` VARCHA
     WHERE quyen.TenQuyen LIKE @TenQuyen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemSK` (`TenSK` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemSK` (IN `TenSK` VARCHAR(255))   BEGIN
     SET @TenSK = CONCAT('%', TenSK , '%');
-    SELECT sukien.MaSK AS EventID, sukien.TenSK AS EventName, sukien.Anh AS Image, sukien.GhiChu AS Note, sukien.NoiDung AS Content, sukien.MaDA AS ProjectID
+    SELECT sukien.MaSK AS ID, sukien.TenSK AS Name, sukien.Anh AS Image, sukien.GhiChu AS Note, sukien.NoiDung AS Content, sukien.MaDA AS ProjectID
     FROM sukien
     WHERE sukien.TenSK LIKE @TenSK;
 END$$
@@ -926,7 +926,7 @@ CREATE TABLE `phongban` (
 --
 
 INSERT INTO `phongban` (`MaPB`, `TenPB`, `MoTa`) VALUES
-(1, 'Phòng lập trình', 'Không Có'),
+(1, 'Phòng lập trình', 'Không CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông Có'),
 (2, 'Phòng Thiết Kế', 'Không Có'),
 (3, 'Phòng điều khiển điện tử', 'không có'),
 (4, 'Phòng dữ liệu 3D', 'không có'),
@@ -1135,79 +1135,79 @@ ALTER TABLE `thanhvien`
 -- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
-  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `bangcapchungchi`
 --
 ALTER TABLE `bangcapchungchi`
-  MODIFY `MaBC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `MaBC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `congviec`
 --
 ALTER TABLE `congviec`
-  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `doitac`
 --
 ALTER TABLE `doitac`
-  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `duan`
 --
 ALTER TABLE `duan`
-  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `loaiduan`
 --
 ALTER TABLE `loaiduan`
-  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `MaLoaiDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `nhom`
 --
 ALTER TABLE `nhom`
-  MODIFY `MaNhom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MaNhom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `phongban`
 --
 ALTER TABLE `phongban`
-  MODIFY `MaPB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MaPB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `quyen`
 --
 ALTER TABLE `quyen`
-  MODIFY `MaQuyen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MaQuyen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `sukien`
 --
 ALTER TABLE `sukien`
-  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MaSK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `MaTK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MaTK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -7,7 +7,7 @@
 
 <div>
     <?php foreach($Events as $key => $event):?>
-        <div class ="p-[25px_0_0_0]
+        <div class ="p-[25px_10px_0_10px]
                     m-[0_0_50px_0]
                     border-t-solid
                     border-t-2 
@@ -19,7 +19,7 @@
 
         <div class="grid grid-cols-4 gap-1">
 
-            <div class="img img-event flex justify-center items-center col-span-1 p-[0_0_10px_0]">
+            <div class="img img-event flex justify-center items-center col-span-1 p-[0_10px_10px_0]">
                 <img src="<?php echo $event->Image; ?>" 
                 alt=""
                 width="500"

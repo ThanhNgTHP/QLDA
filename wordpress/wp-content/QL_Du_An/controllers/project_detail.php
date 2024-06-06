@@ -29,20 +29,37 @@ if(!class_exists('ProjectDetail')){
             }));
             $this->Project = $Project;
 
-            [$ProjectCategory] = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function($projectCategory) use($Project){
-                return $Project->ID === $projectCategory->ID;
+            $ProjectCategory = array_values(array_filter(ProjectCategory::GetAllProjectCategory(), function($projectCategory) use($Project){
+                return $Project->ProjectCategoryID === $projectCategory->ID;
             }));
-            $this->ProjectCategory = $ProjectCategory;
+            if(count($ProjectCategory) > 0){
+                $this->ProjectCategory = $ProjectCategory[0];
+            }
+            else {
+                $this->ProjectCategory = null;
+            }
 
-            [$Contract] = array_values(array_filter(Contract::GetAllContract(), function($contract) use($Project){
+            $Contract = array_values(array_filter(Contract::GetAllContract(), function($contract) use($Project){
                 return $Project->ID === $contract->ProjectID;
             }));
-            $this->Contract = $Contract;
+            if(count($Contract) > 0){
+                $this->Contract = $Contract[0];
+            }
+            else {
+                $this->Contract = null;
+            }
 
-            [$Partner] = array_values(array_filter(Partner::GetAllPartner(), function($partner) use($Contract){
-                return $partner->ID === $Contract->PartnerID;
-            }));
-            $this->Partner = $Partner;
+            if(isset($this->Contract)){
+                $Partner = array_values(array_filter(Partner::GetAllPartner(), function($partner) use($Contract){
+                    return $partner->ID === $Contract[0]->PartnerID;
+                }));
+                if(count($Partner) > 0){
+                    $this->Partner = $Partner[0];
+                }
+                else {
+                    $this->Partner = null;
+                }
+            }
 
             // [$Job] = array_values(array_filter(Job::GetAllJob(), function($job) use($Project){
             //     return $job->ProjectID === $Project->ID;

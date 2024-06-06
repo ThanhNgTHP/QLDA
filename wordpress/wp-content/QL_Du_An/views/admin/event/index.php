@@ -101,7 +101,7 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
                 <div class="relative" style="margin: auto;">
                     <input name="image" id="imageInput-<?php echo $key; ?>" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
-                    <img class="displayImage-<?php echo $key; ?> inline w-[350px]" src="<?php echo $events->Image ?>" alt="Avatar"> 
+                    <img class="displayImage-<?php echo $key; ?> inline w-[350px]" src="<?php echo $events->Image ?>" alt="<?php echo $events->Image ?>Avatar"> 
 
                     <div class="absolute top-0 left-0 bottom-0 right-0">
                         <label for="imageInput-<?php echo $key; ?>">

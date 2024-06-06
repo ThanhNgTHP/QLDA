@@ -1,7 +1,7 @@
 <?php 
     include getcwd().'\\wp-content\\QL_Du_An\\controllers\\user_info.php';
 
-    $current_directory_url = content_url().'/QL_Du_An/views/userInfo';
+    $current_directory_url = content_url().'/QL_Du_An/views/user/userInfo';
     $img_directory_url = content_url().'/QL_Du_An/resources/layout_img';
 
     wp_enqueue_style( 'userInfo_style', $current_directory_url.'/index.css', array(), time());
@@ -33,17 +33,17 @@
 
                 <div class=" mt-[40px] mb-[40px]">
                     <label for="current-password">Mật khẩu cũ</label>
-                    <input id="current-password" class="input-password outline ml-[60px] p-[0_0_0_5px]" name="current-password" type="password">
+                    <input id="current-password" class="input-password outline ml-[60px] p-[0_0_0_5px]" name="current-password" type="password" maxlength="16">
                 </div>
 
                 <div class=" mt-[40px] mb-[40px]">
                     <label for="new-password">Mật khẩu mới</label>
-                    <input id="new-password" class="input-password outline ml-[50px] p-[0_0_0_5px]" name="new-password" type="password">
+                    <input id="new-password" class="input-password outline ml-[50px] p-[0_0_0_5px]" name="new-password" type="password" maxlength="16">
                 </div>
 
                 <div class="verify-password  mt-[40px] mb-[40px]">
                     <label for="verify-password">Xác thực mật khẩu</label>
-                    <input id="verify-password" class="input-password outline ml-[10px] p-[0_0_0_5px]" name="verify-password" type="password">
+                    <input id="verify-password" class="input-password outline ml-[10px] p-[0_0_0_5px]" name="verify-password" type="password" maxlength="16">
                 </div>
 
 

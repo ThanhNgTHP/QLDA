@@ -69,7 +69,7 @@ if(!class_exists('Team')){
                 return $department->ID === $DepartmentID;
             }));
 
-            $this->DepartmentID = $Department->ID;
+            // $this->DepartmentID = $Department->ID;
 
             return $Department;
         }

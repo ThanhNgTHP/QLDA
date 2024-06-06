@@ -35,9 +35,9 @@
     <?php foreach($groups as $key => $group): ?>
         <?php if($group['StaffID'] != $staffID): ?>
 
-                <div class="grid grid-cols-4 gap-1
-                        p-[25px_0_0_0]
-                        m-[0_0_50px_0]
+                <div class="grid grid-cols-2 gap-1
+                        p-[10px_0_10px_0]
+                        m-[0_0_0_50px]
                         border-t-solid
                         border-t-2 
                         border-t-indigo-600">
@@ -46,11 +46,17 @@
                 alt="<?php echo 'Avatar ' . $group['Name']; ?>"
                 style="width: 300px;"
                 >
-                <?php echo "Mã thành viên: ". $group['StaffID']; ?><br>
-                <?php echo "Họ và tên: ". $group['Name']; ?><br>
-                <?php echo "Giới tính: ". $group['Gender']; ?><br>
-                <?php echo "Chức vụ: ". $group['Position']; ?><br>
-                <?php echo "Trạng thái: ". $group['Status']; ?><br>
+                <div class="border-l-solid
+                            border-l-2 
+                            border-l-indigo-600
+                            p-[25px_0_0_50px]">
+                            
+                    <?php echo "Mã thành viên: ". $group['StaffID']; ?><br>
+                    <?php echo "Họ và tên: ". $group['Name']; ?><br>
+                    <?php echo "Giới tính: ". $group['Gender']; ?><br>
+                    <?php echo "Chức vụ: ". $group['Position']; ?><br>
+                    <?php echo "Trạng thái: ". $group['Status']; ?><br>
+                </div>
 
                 </div>
             <?php $staffID =  $group['StaffID'];?>

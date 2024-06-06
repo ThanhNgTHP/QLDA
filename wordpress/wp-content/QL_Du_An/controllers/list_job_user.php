@@ -12,7 +12,7 @@ if(!isset($staffID)){
 
 $job = new Job();
 $job->StaffID = $staffID;
-$jobs = $job->GetStaffProject();
+$jobs = $job->GetJobStaff();
 
 
 function GetNameProject($projectID){

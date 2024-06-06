@@ -91,7 +91,24 @@ if(!class_exists('Event')){
 
         public function Find($name){
             $actionDB = new ActionDB();
-            return $actionDB->FindEvent($name)->fetch_all(MYSQLI_ASSOC);
+
+            $result = $actionDB->FindEvent($name);
+
+            $findEvents = array();
+
+            while($row = $result->fetch_assoc()){
+                $event = new event();
+
+                $event->ID = $row['ID'];
+                $event->Name = $row['Name'];
+                $event->Image = $row['Image'];
+                $event->Note = $row['Note'];
+                $event->Content = $row['Content'];                    
+                $event->ProjectID = $row['ProjectID'];                    
+                $findEvents[] = $event;
+            }
+
+            return $findEvents;
         }
 
 
