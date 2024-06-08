@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 06, 2024 lúc 05:42 PM
+-- Thời gian đã tạo: Th6 08, 2024 lúc 01:51 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -586,7 +586,7 @@ INSERT INTO `anh` (`MaAnh`, `TenAnh`, `DuongDan`, `MaDA`, `MaHD`, `LoaiAnh`) VAL
 (12, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXTJUlDUf3Z2fUJIF_lt1Y_rFNfKfxanpTED8alu6hmsY6cvqb9lP9ORtTs1-VOMgQRo&usqp=CAU', 2, 2, 'anh hop dong'),
 (13, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 2', 'https://image.slidesharecdn.com/hpngcungngdchvqungco-220530095856-53a865bd/85/H-P-D-NG-CUNG-NG-D-CH-V-QU-NG-CAO-doc-1-320.jpg', 2, 2, 'anh hop dong'),
 (14, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/756a7eaa66f9a88f9f768174f70790cc/thumb_1200_1553.png', 2, 2, 'anh hop dong'),
-(15, 'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3', 'D:\\xampp\\xampp_install\\htdocs\\wordpress/wp-content\\QL_Du_An\\resources\\img/', 2, 2, 'anh du an');
+(34, 'Tàu cập cảng Hải Phòng', 'https://simulation.vn/images/taucapcanghp.jpg', 17, 10, 'anh du an');
 
 -- --------------------------------------------------------
 
@@ -650,7 +650,8 @@ INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`,
 (14, 'Cập nhật phần mềm quản trị mạng và firmware thiết bị mạng', 'không có', '2006-01-02', '2006-01-10', 1000, 10, 'không có', 2, 1200, 5, 1, 'high'),
 (15, 'Nâng cấp hệ thống', 'không có', '2006-01-11', '2006-01-15', 1009.3, 10, 'không có', 2, 1200, 6, 1, 'high'),
 (16, 'Đảm bảo hoạt động của hệ thống', 'Đảm bảo hệ thống luôn hoạt động an toàn và hiệu quả', '2006-01-16', '2006-01-17', 1000, 10, 'không có', 2, 1200, 7, 1, 'high'),
-(17, 'Lập kế hoạch dự phòng và khôi phục', 'không có', '2006-01-18', '2006-01-20', 1000, 10, 'không có', 2, 1200, 4, 1, 'high');
+(17, 'Lập kế hoạch dự phòng và khôi phục', 'không có', '2006-01-18', '2006-01-20', 1000, 10, 'không có', 2, 1200, 4, 1, 'high'),
+(27, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng, phần mềm, chức năng cần thiết cho hệ thống', '2014-02-03', '2013-12-20', 0, 100, 'Thông tin dữ liệu chính xác', 17, 0, 5, 17, 'cao');
 
 --
 -- Bẫy `congviec`
@@ -831,7 +832,8 @@ CREATE TABLE `duan` (
 
 INSERT INTO `duan` (`MaDA`, `TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES
 (1, 'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành', '2017-07-21', '2017-12-12', 'Ngừng Phát Triển', 'Nguyễn Văn Long - 0845758492 - longvan@gmail.com', 'Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì', 1, 19197.2, 19197.2, 40),
-(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-26', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 17242, 17242, 28);
+(2, 'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng', '2005-06-14', '2010-12-26', 'Ngừng Phát Triển', 'Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com', 'Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập', 2, 17242, 17242, 28),
+(17, 'Hệ thống mô phỏng dạy lái tàu thủy', '2013-12-20', '2016-11-15', 'đã hoàn thành', 'Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com', 'Hệ thống mô phỏng lái tàu đường sông cho phép các học viên thực hành tập lái trên một cabin mô phỏng được thiết kế giống như thực tế. Quang cảnh hoạt động của khúc sông tập luyện được tái tạo phù hợp với quang cảnh thực tế trên môi trường đồ họa 3D.', 2, 0, 100000, 100);
 
 -- --------------------------------------------------------
 
@@ -858,7 +860,8 @@ CREATE TABLE `hopdong` (
 
 INSERT INTO `hopdong` (`MaHD`, `TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiChu`, `GiaTriHD`, `TrangThai`, `MaDT`, `MaDA`) VALUES
 (1, 'Hợp Đồng Cung Cấp Hàng Hóa', '654/HĐ', '2024-07-21', '2024-12-12', 'Ghi Rõ Thông Tin Về Tên Doanh Nghiệp, Trụ Sở, Số Điện Thoại, Chức Vụ, Và Người Đại Diện', 1736730000, 'Hết Hiệu Lực', 1, 1),
-(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2);
+(2, 'Hợp Đồng Kinh Tế', '101015/LLVNSIM', '2024-06-14', '2024-12-29', 'Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng', 2071190000, 'Hết Hiệu Lực', 2, 2),
+(10, 'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang', '20-12/TMG-VNSIM', '2013-12-20', '2016-11-15', 'không có', 200000, 'hợp đồng đã hoàn thành', 3, 17);
 
 -- --------------------------------------------------------
 
@@ -882,8 +885,7 @@ INSERT INTO `loaiduan` (`MaLoaiDA`, `TenLoaiDA`, `MoTa`) VALUES
 (18, 'Game - Trò chơi', 'không có'),
 (19, 'Ứng dụng điện thoại', 'không có'),
 (20, 'Website', 'không có'),
-(21, 'Phần mềm nhúng', 'không có'),
-(23, 'Thiết Bị', 'Có');
+(21, 'Phần mềm nhúng', 'không có');
 
 -- --------------------------------------------------------
 
@@ -926,7 +928,7 @@ CREATE TABLE `phongban` (
 --
 
 INSERT INTO `phongban` (`MaPB`, `TenPB`, `MoTa`) VALUES
-(1, 'Phòng lập trình', 'Không CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông Có'),
+(1, 'Phòng lập trình', 'Phòng code'),
 (2, 'Phòng Thiết Kế', 'Không Có'),
 (3, 'Phòng điều khiển điện tử', 'không có'),
 (4, 'Phòng dữ liệu 3D', 'không có'),
@@ -1030,7 +1032,11 @@ INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`,
 (2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Phân tích hệ thống', 'buithihoan@gmail.com', 2, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg'),
 (3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 3, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg'),
 (4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Kỹ thuật viên điều khiển', 'Dan50302@gmail.com', 3, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG'),
-(6, 'Phạm Tiến Đồng', '0978563485', 'Trung hòa, Cầu Giấy, HN', '1989-04-05', 'Nhân viên kiểm thử', 'phamdong@gmail.com', 3, 'Nam', 'Đang làm việc', 'https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg');
+(6, 'Phạm Tiến Đồng', '0978563485', 'Trung hòa, Cầu Giấy, HN', '1989-04-05', 'Nhân viên kiểm thử', 'phamdong@gmail.com', 3, 'Nam', 'Đang làm việc', 'https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg'),
+(13, 'Đồng Nguyên Chất', '0124934734', 'Thanh xuân, Hà Nội', '1995-03-23', 'kĩ sư lập trình', 'cunguyenchat@gmail.com', 1, 'Nam', 'Đang làm việc', 'https://haycafe.vn/wp-content/uploads/2021/12/Mau-anh-the-nam.jpg'),
+(14, 'Nguyễn văn Tùng', '0123957347', 'Nam Từ Niêm, Hà Nội', '1996-06-02', 'kĩ sư lập trình', 'tungnv@gmail.com', 1, 'Nam', 'Đang làm việc', 'https://m.thebank.vn/uploads/users/f8b4c999264ebabcba1dddf44cad57eb_daotranthu.jpeg'),
+(16, 'Lê Tiến Đạt', '0955484733', 'Hai Bà Trưng, Hà Nội', '1997-12-04', 'kĩ sư lập trình', 'datlt@gmail.com', 1, 'Nam', 'Đang làm việc', 'https://img2.thuthuatphanmem.vn/uploads/2019/05/06/anh-the-nam-dep-nhat_100828554.jpg'),
+(17, 'Lê thị Diễn', '0955563573', 'Hai Bà Trưng, Hà Nội', '1995-11-11', 'Phân tích hệ thống', 'dienlt@gmail.com', 1, 'Nữ', 'Đang làm việc', 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/03/mau-anh-the.jpg?ssl=1');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1135,7 +1141,7 @@ ALTER TABLE `thanhvien`
 -- AUTO_INCREMENT cho bảng `anh`
 --
 ALTER TABLE `anh`
-  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `MaAnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `bangcapchungchi`
@@ -1147,25 +1153,25 @@ ALTER TABLE `bangcapchungchi`
 -- AUTO_INCREMENT cho bảng `congviec`
 --
 ALTER TABLE `congviec`
-  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `MaCV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `doitac`
 --
 ALTER TABLE `doitac`
-  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MaDT` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `duan`
 --
 ALTER TABLE `duan`
-  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `MaDA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `hopdong`
 --
 ALTER TABLE `hopdong`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `loaiduan`
@@ -1207,7 +1213,7 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `MaTV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
