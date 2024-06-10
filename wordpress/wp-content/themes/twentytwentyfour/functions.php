@@ -358,16 +358,28 @@ $adminMenu = new AdminMenu();
 add_action('admin_menu', array($adminMenu, 'mainMenuSetup'));
 
 
+
 add_shortcode('GetAllProjectCategory', function($arr){
-	$output = '<div class="w-[200px]">' ;
-		foreach(ProjectCategory::GetAllProjectCategory() as $key => $projectCategory){
-			$output .= '<a href="' . 'http://localhost/wordpress?projectCategoryID=' . $projectCategory->ID . '">' .
-			'<div class="text-[1.5rem] p-[8px_0_8px_0] hover:border-solid ' . 
-			'hover:border-[2px] hover:border-orange-600">'
-			. $projectCategory->Name .
-			'</div>' .
-			'</a>' ;
-		}
+	$output = '<div class="w-[200px]">';
+
+	$output .= '<div class="contain-project-categories group">';
+	$output .= '<div class="hover:opacity-75 text-[1.5rem] p-[8px_0_8px_0] hover:border-solid hover:border-[2px] hover:border-orange-600">';
+	$output .= 'Loại Dự Án' 
+				.'<span class="hidden state-project-categories">></span>' // Trạng thái chưa click
+				. '<span class="state-project-categories"><</span>'; // Trạng thái click
+	$output .= '</div>';
+	$output .= '<div class="project-categories hidden">';
+	
+	foreach(ProjectCategory::GetAllProjectCategory() as $key => $projectCategory){
+		$output .= '<a class="no-underline" href="' . 'http://localhost/wordpress?projectCategoryID=' . $projectCategory->ID . '">' .
+		'<div class="text-[1.5rem] p-[8px_0_8px_0] hover:border-solid ' . 
+		'hover:border-[2px] hover:border-orange-600">'
+		. $projectCategory->Name .
+		'</div>' .
+		'</a>' ;
+	}
+		
+	$output .= '</div>';
 	$output .= '</div>';
 	return $output;
 });

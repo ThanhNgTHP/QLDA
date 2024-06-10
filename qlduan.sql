@@ -25,193 +25,193 @@ DELIMITER $$
 --
 -- Thủ tục
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaAnh` (`maAnh` INT, `tenAnh` VARCHAR(255), `duongDan` VARCHAR(255), `maDA` INT, `maHD` INT, `loaiAnh` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `SuaAnh` (`maAnh` INT, `tenAnh` VARCHAR(255), `duongDan` VARCHAR(255), `maDA` INT, `maHD` INT, `loaiAnh` VARCHAR(255))   BEGIN
     UPDATE anh 
     SET anh.TenAnh = tenAnh, anh.DuongDan = duongDan, anh.MaDA = maDA, anh.MaHD = maHD, anh.LoaiAnh = loaiAnh
     WHERE anh.MaAnh = maAnh;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaBCCC` (`maBC` INT, `tenBC` VARCHAR(255), `ngayCap` DATE, `noiCap` VARCHAR(255), `maTV` INT)   BEGIN
+CREATE  PROCEDURE `SuaBCCC` (`maBC` INT, `tenBC` VARCHAR(255), `ngayCap` DATE, `noiCap` VARCHAR(255), `maTV` INT)   BEGIN
 	UPDATE bangcapchungchi 
     SET bangcapchungchi.TenBC = tenBC, bangcapchungchi.NgayCap = ngayCap, bangcapchungchi.NoiCap = noiCap, bangcapchungchi.MaTV = maTV
     WHERE bangcapchungchi.MaBC = maBC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaCV` (IN `maCV` INT, IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maNhom` INT, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
+CREATE  PROCEDURE `SuaCV` (IN `maCV` INT, IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maNhom` INT, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
     UPDATE congviec 
     SET congviec.TenCV = tenCV, congviec.NoiDung = noiDung, congviec.NgayKetThuc = ngayKetThuc, congviec.NgayBatDau = ngayBatDau, congviec.NganSachDuKien = nganSachDuKien, congviec.TienDo = tienDo, congviec.GhiChu = ghiChu, congviec.MaDA = maDA, congviec.NganSachThucTe = nganSachThucTe, congviec.MaNhom = maNhom, congviec.MaTV = maTV, congviec.DoUuTien = doUuTien
     WHERE congviec.MaCV = maCV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaDA` (IN `maDA` INT, IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, `nganSachThucTe` FLOAT, `nganSachDuKien` FLOAT, `tienDo` INT)   BEGIN
+CREATE  PROCEDURE `SuaDA` (IN `maDA` INT, IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, `nganSachThucTe` FLOAT, `nganSachDuKien` FLOAT, `tienDo` INT)   BEGIN
     UPDATE duan 
     SET duan.TenDA = tenDA, duan.NgayBatDau = ngayBatDau, duan.NgayKetThuc = ngayKetThuc, duan.TrangThai = trangThai, duan.LienHe = lienHe, duan.MoTa = moTa, duan.MaLoaiDA = maLoaiDA, duan.NganSachThucTe = nganSachThucTe, duan.NganSachDuKien = nganSachDuKien, duan.TienDo = tienDo
     WHERE duan.MaDA = maDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaDT` (IN `maDT` INT, IN `tenDT` VARCHAR(255), IN `email` TEXT, IN `sDT` CHAR(10), IN `fax` VARCHAR(15), IN `diaChi` VARCHAR(255), IN `trangThai` VARCHAR(255), IN `ghiChu` TEXT, IN `maSoThue` VARCHAR(255), IN `nguoiDaiDien` VARCHAR(255), IN `chucVu` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `SuaDT` (IN `maDT` INT, IN `tenDT` VARCHAR(255), IN `email` TEXT, IN `sDT` CHAR(10), IN `fax` VARCHAR(15), IN `diaChi` VARCHAR(255), IN `trangThai` VARCHAR(255), IN `ghiChu` TEXT, IN `maSoThue` VARCHAR(255), IN `nguoiDaiDien` VARCHAR(255), IN `chucVu` VARCHAR(255))   BEGIN
     UPDATE doitac 
     SET doitac.TenDT = tenDT, doitac.Email = email, doitac.SDT = sDT, doitac.Fax = fax, doitac.DiaChi = diaChi, doitac.TrangThai = trangThai, doitac.GhiChu = ghiChu, doitac.MaSoThue = maSoThue, doitac.Nguoidaidien = nguoiDaiDien, doitac.ChucVu = chucVu
     WHERE doitac.MaDT = maDT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaHD` (IN `maHD` INT, IN `tenHD` VARCHAR(255), IN `soHD` VARCHAR(20), IN `ngayKiKet` DATE, IN `ngayHetHan` DATE, IN `ghiChu` TEXT, IN `giaTriHD` FLOAT, IN `trangThai` VARCHAR(255), IN `maDT` INT, IN `maDA` INT)   BEGIN
+CREATE  PROCEDURE `SuaHD` (IN `maHD` INT, IN `tenHD` VARCHAR(255), IN `soHD` VARCHAR(20), IN `ngayKiKet` DATE, IN `ngayHetHan` DATE, IN `ghiChu` TEXT, IN `giaTriHD` FLOAT, IN `trangThai` VARCHAR(255), IN `maDT` INT, IN `maDA` INT)   BEGIN
     UPDATE hopdong 
     SET hopdong.TenHD = tenHD, hopdong.SoHD = soHD, hopdong.NgayKiKet = ngayKiKet, hopdong.NgayHetHan = ngayHetHan, hopdong.GhiChu = ghiChu, hopdong.GiaTriHD = giaTriHD, hopdong.TrangThai = trangThai, hopdong.MaDT = maDT, hopdong.MaDA = maDA
     WHERE hopdong.MaHD = maHD;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaLDA` (IN `maLoaiDA` INT, IN `tenLoaiDA` VARCHAR(255), IN `moTa` TEXT)   BEGIN
+CREATE  PROCEDURE `SuaLDA` (IN `maLoaiDA` INT, IN `tenLoaiDA` VARCHAR(255), IN `moTa` TEXT)   BEGIN
     UPDATE loaiduan 
     SET loaiduan.TenLoaiDA = tenLoaiDA, loaiduan.MoTa = moTa
     WHERE loaiduan.MaLoaiDA = maLoaiDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaNhom` (`maNhom` INT, `tenNhom` VARCHAR(255), `truongNhom` VARCHAR(255), `maPB` INT)   BEGIN
+CREATE  PROCEDURE `SuaNhom` (`maNhom` INT, `tenNhom` VARCHAR(255), `truongNhom` VARCHAR(255), `maPB` INT)   BEGIN
     UPDATE nhom 
     SET nhom.TenNhom = tenNhom, nhom.TruongNhom = truongNhom, nhom.MaPB = maPB
     WHERE nhom.MaNhom = maNhom;
     END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaNV` (`maNV` INT, `tenNV` VARCHAR(255), `noiDung` TEXT, `hoanThanh` TINYINT, `doUuTien` VARCHAR(255), `ngayBatDau` DATE, `ngayKetThuc` DATE, `nganSachDuKien` FLOAT, `maTV` INT, `maCV` INT, `nganSachThucTe` FLOAT)   BEGIN
+CREATE  PROCEDURE `SuaNV` (`maNV` INT, `tenNV` VARCHAR(255), `noiDung` TEXT, `hoanThanh` TINYINT, `doUuTien` VARCHAR(255), `ngayBatDau` DATE, `ngayKetThuc` DATE, `nganSachDuKien` FLOAT, `maTV` INT, `maCV` INT, `nganSachThucTe` FLOAT)   BEGIN
     UPDATE nhiemvu 
     SET nhiemvu.TenNV = tenNV, nhiemvu.NoiDung = noiDung, nhiemvu.HoanThanh = hoanThanh, nhiemvu.DoUuTien = doUuTien, nhiemvu.NgayBatDau = ngayBatDau, nhiemvu.NgayKetThuc = ngayKetThuc, nhiemvu.NganSachDuKien = nganSachDuKien, nhiemvu.MaTV = maTV, nhiemvu.MaCV = maCV, nhiemvu.NganSachThucTe = nganSachThucTe
     WHERE nhiemvu.MaNV = maNV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaPB` (IN `maPB` INT, IN `tenPB` VARCHAR(255), IN `moTa` TEXT)   BEGIN
+CREATE  PROCEDURE `SuaPB` (IN `maPB` INT, IN `tenPB` VARCHAR(255), IN `moTa` TEXT)   BEGIN
     UPDATE phongban 
     SET phongban.TenPB = tenPB, phongban.MoTa = moTa
     WHERE phongban.MaPB = maPB;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaQuyen` (`maQuyen` INT, `tenQuyen` VARCHAR(255), `ghiChu` TEXT)   BEGIN
+CREATE  PROCEDURE `SuaQuyen` (`maQuyen` INT, `tenQuyen` VARCHAR(255), `ghiChu` TEXT)   BEGIN
     UPDATE quyen 
     SET quyen.TenQuyen = tenQuyen, quyen.TenQuyen = tenQuyen, quyen.GhiChu = ghiChu
     WHERE quyen.MaQuyen = maQuyen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaSK` (`maSK` INT, `tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
+CREATE  PROCEDURE `SuaSK` (`maSK` INT, `tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
     UPDATE sukien 
     SET sukien.TenSK = tenSK, sukien.Anh = anh, sukien.GhiChu = ghiChu, sukien.NoiDung = noiDung, sukien.MaDA = maDA
     WHERE sukien.MaSK = maSK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaTK` (IN `maTK` INT, IN `tenTK` VARCHAR(255), IN `matKhau` VARCHAR(255), IN `maQuyen` INT, IN `trangThai` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `SuaTK` (IN `maTK` INT, IN `tenTK` VARCHAR(255), IN `matKhau` VARCHAR(255), IN `maQuyen` INT, IN `trangThai` VARCHAR(255))   BEGIN
 	UPDATE taikhoan 
     SET taikhoan.TenTK = tenTK, taikhoan.MatKhau = matKhau, taikhoan.MaQuyen = maQuyen, taikhoan.TrangThai = trangThai
     WHERE taikhoan.MaTK = MaTK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaTV` (IN `maTV` INT, IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `SuaTV` (IN `maTV` INT, IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255))   BEGIN
     UPDATE thanhvien 
     SET thanhvien.HoTen = hoTen, thanhvien.SDT = sDT, thanhvien.DiaChi = diaChi, thanhvien.NgaySinh = ngaySinh, thanhvien.ChucVu = chucVu, thanhvien.Email = email, thanhvien.MaTK = maTK, thanhvien.GioiTinh = gioiTinh, thanhvien.TrangThai = trangThai, thanhvien.AnhDaiDien = anhDaiDien
     WHERE thanhvien.MaTV = maTV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaTVTG` (`maTVTG` INT, `maTV` INT, `maDA` INT)   BEGIN
+CREATE  PROCEDURE `SuaTVTG` (`maTVTG` INT, `maTV` INT, `maDA` INT)   BEGIN
     UPDATE thanhvienthamgia 
     SET thanhvienthamgia.MaTV = maTV, thanhvienthamgia.MaDA = maDA
     WHERE thanhvienthamgia.MaTVTG = maTVTG;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemAnh` (`tenAnh` VARCHAR(255), `duongDan` VARCHAR(255), `maDA` INT, `maHD` INT, `loaiAnh` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `ThemAnh` (`tenAnh` VARCHAR(255), `duongDan` VARCHAR(255), `maDA` INT, `maHD` INT, `loaiAnh` VARCHAR(255))   BEGIN
     INSERT INTO `anh`(`TenAnh`, `DuongDan`, `MaDA`, `MaHD`, `LoaiAnh`) VALUES (tenAnh, duongDan, maDA,maHD, loaiAnh);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemBCCC` (`tenBC` VARCHAR(255), `ngayCap` DATE, `noiCap` VARCHAR(255), `maTV` INT)   BEGIN
+CREATE  PROCEDURE `ThemBCCC` (`tenBC` VARCHAR(255), `ngayCap` DATE, `noiCap` VARCHAR(255), `maTV` INT)   BEGIN
 	INSERT INTO `bangcapchungchi`(`TenBC`, `NgayCap`, `NoiCap`, `MaTV`) VALUES (tenBC, ngayCap, noiCap, maTV);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maNhom` INT, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
+CREATE  PROCEDURE `ThemCV` (IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maNhom` INT, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
     INSERT INTO `congviec`(`TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maNhom, maTV, doUuTien);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemDA` (IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `tienDo` INT)   BEGIN
+CREATE  PROCEDURE `ThemDA` (IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `tienDo` INT)   BEGIN
     INSERT INTO `duan`(`TenDA`, `NgayBatDau`, `NgayKetThuc`, `TrangThai`, `LienHe`, `MoTa`, `MaLoaiDA`, `NganSachThucTe`, `NganSachDuKien`, `TienDo`) VALUES (tenDA, ngayBatDau, ngayKetThuc, trangThai, lienHe, moTa, maLoaiDA, nganSachThucTe, nganSachDuKien, tienDo);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemDT` (IN `tenDT` VARCHAR(255), IN `email` TEXT, IN `sDT` CHAR(10), IN `fax` VARCHAR(15), IN `diaChi` VARCHAR(255), IN `trangThai` VARCHAR(255), IN `ghiChu` TEXT, IN `maSoThue` VARCHAR(255), IN `nguoiDaiDien` VARCHAR(255), IN `chucVu` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `ThemDT` (IN `tenDT` VARCHAR(255), IN `email` TEXT, IN `sDT` CHAR(10), IN `fax` VARCHAR(15), IN `diaChi` VARCHAR(255), IN `trangThai` VARCHAR(255), IN `ghiChu` TEXT, IN `maSoThue` VARCHAR(255), IN `nguoiDaiDien` VARCHAR(255), IN `chucVu` VARCHAR(255))   BEGIN
     INSERT INTO `doitac`(`TenDT`, `Email`, `SDT`, `Fax`, `DiaChi`, `TrangThai`, `GhiChu`, `MaSoThue`, `Nguoidaidien`, `ChucVu`) VALUES (tenDT, email, sDT, fax, diaChi, trangThai, ghiChu, maSoThue, nguoiDaiDien, chucVu);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemHD` (IN `tenHD` VARCHAR(255), IN `soHD` VARCHAR(20), IN `ngayKiKet` DATE, IN `ngayHetHan` DATE, IN `ghiChu` TEXT, IN `giaTriHD` FLOAT, IN `trangThai` VARCHAR(255), IN `maDT` INT, IN `maDA` INT)   BEGIN
+CREATE  PROCEDURE `ThemHD` (IN `tenHD` VARCHAR(255), IN `soHD` VARCHAR(20), IN `ngayKiKet` DATE, IN `ngayHetHan` DATE, IN `ghiChu` TEXT, IN `giaTriHD` FLOAT, IN `trangThai` VARCHAR(255), IN `maDT` INT, IN `maDA` INT)   BEGIN
     INSERT INTO `hopdong`(`TenHD`, `SoHD`, `NgayKiKet`, `NgayHetHan`, `GhiChu`, `GiaTriHD`, `TrangThai`, `MaDT`, `MaDA`) VALUES (tenHD, soHD, ngayKiKet, ngayHetHan, ghiChu, giaTriHD, trangThai, maDT, maDA);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemLDA` (IN `tenLoaiDA` VARCHAR(255), IN `moTa` TEXT)   BEGIN
+CREATE  PROCEDURE `ThemLDA` (IN `tenLoaiDA` VARCHAR(255), IN `moTa` TEXT)   BEGIN
     INSERT INTO `loaiduan`(`TenLoaiDA`, `MoTa`) VALUES (tenLoaiDA, moTa);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemNhom` (`tenNhom` VARCHAR(255), `truongNhom` VARCHAR(255), `maPB` INT)   BEGIN
+CREATE  PROCEDURE `ThemNhom` (`tenNhom` VARCHAR(255), `truongNhom` VARCHAR(255), `maPB` INT)   BEGIN
     INSERT INTO `nhom`(`TenNhom`, `TruongNhom`, `MaPB`) VALUES (tenNhom, truongNhom, maPB);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemNV` (IN `tenNV` VARCHAR(255), IN `noiDung` TEXT, IN `hoanThanh` TINYINT, IN `doUuTien` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `nganSachDuKien` FLOAT, IN `maTV` INT, IN `maCV` INT, IN `nganSachThucTe` FLOAT)   BEGIN
+CREATE  PROCEDURE `ThemNV` (IN `tenNV` VARCHAR(255), IN `noiDung` TEXT, IN `hoanThanh` TINYINT, IN `doUuTien` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `nganSachDuKien` FLOAT, IN `maTV` INT, IN `maCV` INT, IN `nganSachThucTe` FLOAT)   BEGIN
     INSERT INTO nhiemvu(`TenNV`, `NoiDung`, `HoanThanh`, `DoUuTien`, `NgayBatDau`, `NgayKetThuc`, `NganSachDuKien`, `MaTV`, `MaCV`, `NganSachThucTe`) VALUES (tenNV, noiDung, hoanThanh, doUuTien, ngayBatDau, ngayKetThuc, nganSachDuKien, maTV, maCV, nganSachThucTe);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemPB` (IN `tenPB` VARCHAR(255), IN `moTa` TEXT)   BEGIN
+CREATE  PROCEDURE `ThemPB` (IN `tenPB` VARCHAR(255), IN `moTa` TEXT)   BEGIN
     INSERT INTO `phongban`(`TenPB`, `MoTa`) VALUES (tenPB, moTa);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemQuyen` (`tenQuyen` VARCHAR(255), `ghiChu` TEXT)   BEGIN
+CREATE  PROCEDURE `ThemQuyen` (`tenQuyen` VARCHAR(255), `ghiChu` TEXT)   BEGIN
     INSERT INTO `quyen`(`TenQuyen`, `GhiChu`) VALUES (tenQuyen, ghiChu);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemSK` (`tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
+CREATE  PROCEDURE `ThemSK` (`tenSK` VARCHAR(255), `anh` VARCHAR(255), `ghiChu` TEXT, `noiDung` TEXT, `maDA` INT)   BEGIN
     INSERT INTO sukien(`TenSK`, `Anh`, `GhiChu`, `NoiDung`, `MaDA`) VALUES (tenSK, anh, ghiChu, noiDung, maDA);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTK` (`tenTK` VARCHAR(255), `matKhau` VARCHAR(255), `maquyen` INT, `trangthai` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `ThemTK` (`tenTK` VARCHAR(255), `matKhau` VARCHAR(255), `maquyen` INT, `trangthai` VARCHAR(255))   BEGIN
     INSERT INTO `taikhoan`(`TenTK`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES (tenTK, matKhau, maquyen, trangthai);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTV` (IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `ThemTV` (IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255))   BEGIN
     INSERT INTO `thanhvien`(`HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`) VALUES (hoTen, sDT, diaChi, ngaySinh, chucVu, email, maTK, gioiTinh, trangThai, anhDaiDien);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTVTG` (`maTV` INT, `maDA` INT)   BEGIN
+CREATE  PROCEDURE `ThemTVTG` (`maTV` INT, `maDA` INT)   BEGIN
     INSERT INTO `thanhvienthamgia`(`MaTV`, `MaDA`) VALUES (maTV,maDA);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongQuyenTK` (IN `MaQuyen` INT)   BEGIN
+CREATE  PROCEDURE `ThongQuyenTK` (IN `MaQuyen` INT)   BEGIN
   SELECT taikhoan.MaTK AS ID, taikhoan.TenTK AS Name, taikhoan.MatKhau AS Password, taikhoan.MaQuyen AS PermissionID FROM taikhoan, taikhoan.TrangThai AS Status
   WHERE taikhoan.MaQuyen = MaQuyen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnh` (`MaAnh` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinAnh` (`MaAnh` INT)   BEGIN
   SELECT MaAnh AS ID, TenAnh AS Name, DuongDan AS Path, MaDA AS ProjectID
   FROM anh
   WHERE anh.MaAnh = MaAnh;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaDuAn` (IN `maDA` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinAnhCuaDuAn` (IN `maDA` INT)   BEGIN
   SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID
   FROM anh
   WHERE anh.LoaiAnh = 'anh du an' AND anh.MaDA = maDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinAnhCuaHopDong` (IN `maHD` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinAnhCuaHopDong` (IN `maHD` INT)   BEGIN
   SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaHD AS ContractID
   FROM anh
   WHERE anh.LoaiAnh = 'anh hop dong' AND anh.MaHD = maHD;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDA` (IN `MaDA` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinDA` (IN `MaDA` INT)   BEGIN
     SELECT duan.MaDA AS ID, duan.TenDA AS Name, duan.NgayBatDau AS Begin, duan.NgayKetThuc AS End, duan.TrangThai AS Status, duan.LienHe AS Contact, duan.MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
     FROM duan 
     WHERE duan.MaDA = MaDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinDT` (IN `MaDT` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinDT` (IN `MaDT` INT)   BEGIN
   SELECT doitac.MaDT AS ID, doitac.TenDT AS Name, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai AS Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
   FROM doitac
   WHERE doitac.MaDT = MaDT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinHDDT` (IN `MaDA` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinHDDT` (IN `MaDA` INT)   BEGIN
     SELECT hopdong.SoHD AS ContractNumber, doitac.TenDT AS PartnerName	
     FROM duan
     INNER JOIN hopdong ON duan.MaDA = hopdong.MaDA
@@ -219,18 +219,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinHDDT` (IN `MaDA` INT)   BEG
     WHERE duan.MaDA = MaDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinLDA` (`MaLDA` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinLDA` (`MaLDA` INT)   BEGIN
   SELECT loaiduan.MaLoaiDA AS ID, loaiduan.TenLoaiDA AS Name, loaiduan.MoTa AS Description
   FROM loaiduan
   WHERE loaiduan.MaLoaiDA = MaLoaiDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinLDADA` (IN `MaLoaiDA` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinLDADA` (IN `MaLoaiDA` INT)   BEGIN
   SELECT duan.MaLoaiDA AS ProjectCategoryID, duan.MaDA AS ID, duan.TenDA AS Name, duan.NgayBatDau AS Begin, duan.NgayKetThuc AS End, duan.TrangThai AS Status, duan.LienHe AS Contact, duan.MoTa AS Description  FROM duan
   WHERE duan.MaLoaiDA = MaLoaiDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinNguoiDung` (IN `MaTK` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinNguoiDung` (IN `MaTK` INT)   BEGIN
   	SELECT quyen.TenQuyen AS PermissionName, thanhvien.MaTV AS StaffID, taikhoan.TenTK AS Username, thanhvien.MaTV
     FROM taikhoan
     INNER JOIN quyen ON taikhoan.MaQuyen = quyen.MaQuyen
@@ -238,293 +238,293 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinNguoiDung` (IN `MaTK` INT) 
     WHERE taikhoan.MaTK = MaTK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinNhom` (`MaNhom` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinNhom` (`MaNhom` INT)   BEGIN
   SELECT nhom.MaNhom AS ID, nhom.TenNhom AS Name from nhom
   WHERE nhom.MaNhom = MaNhom;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinNhomTV` (IN `MaNhom` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinNhomTV` (IN `MaNhom` INT)   BEGIN
   SELECT thanhvien.MaTV AS ID, thanhvien.HoTen AS Name, thanhvien.SDT AS Phone, thanhvien.DiaChi AS Address, thanhvien.NgaySinh AS BirthDay, thanhvien.ChucVu AS Position, thanhvien.Email AS Email, thanhvien.MaTK as AccountID, thanhvien.GioiTinh AS Gender, thanhvien.TrangThai AS Status, thanhvien.AnhDaiDien AS Avatar, thanhvien.MaNhom AS TeamID FROM thanhvien
   WHERE thanhvien.MaNhom = MaNhom;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinPB` (`MaPB` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinPB` (`MaPB` INT)   BEGIN
   SELECT phongban.MaPB AS DepartmentID, phongban.TenPB AS DepartmentName FROM phongban
   WHERE phongban.MaPB = MaPB;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinPBNhom` (`MaPB` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinPBNhom` (`MaPB` INT)   BEGIN
   SELECT nhom.MaNhom AS ID, nhom.TenNhom AS Name, nhom.TruongNhom AS Leader, nhom.MaPB AS DepartmentID FROM nhom
   WHERE nhom.MaPB = MaPB;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinQuyen` (`MaQuyen` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinQuyen` (`MaQuyen` INT)   BEGIN
   SELECT quyen.MaQuyen AS ID, quyen.TenQuyen AS Name, quyen.GhiChu AS Description FROM quyen
   WHERE quyen.MaQuyen = MaQuyen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaAnh` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaAnh` ()   BEGIN
 	SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID, anh.LoaiAnh AS ImageCategory
     FROM anh;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaBC` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaBC` ()   BEGIN
     SELECT MaBC AS ID, TenBC AS Name, NgayCap AS Date, NoiCap AS Address , MaTV AS StaffID
     FROM bangcapchungchi;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaCV` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaCV` ()   BEGIN
   SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
   FROM congviec;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaDA` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaDA` ()   BEGIN
     SELECT MaDA AS ID, TenDA AS Name, NgayBatDau AS Begin , NgayKetThuc AS End, TrangThai AS Status, LienHe AS Contact, MoTa AS Description, MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
     FROM duan;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaDT` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaDT` ()   BEGIN
   SELECT doitac.MaDT AS ID, doitac.TenDT AS Name, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai AS Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
   FROM doitac;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaHD` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaHD` ()   BEGIN
     SELECT hopdong.MaHD AS ID, hopdong.TenHD AS Name, hopdong.SoHD AS Number, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS Expire, hopdong.GhiChu AS Note, hopdong.GiaTriHD AS Value, hopdong.TrangThai AS Status, hopdong.MaDT AS PartnerID, hopdong.MaDA AS ProjectID
     FROM hopdong;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaLDA` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaLDA` ()   BEGIN
   SELECT loaiduan.MaLoaiDA AS ID, loaiduan.TenLoaiDA AS Name, loaiduan.MoTa AS Description
   FROM loaiduan;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaNhiemVu` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaNhiemVu` ()   BEGIN
     SELECT nhiemvu.MaNV AS ID, nhiemvu.TenNV AS Name, nhiemvu.NoiDung AS Content, nhiemvu.HoanThanh AS Complete, nhiemvu.DoUuTien AS Priority, nhiemvu.NgayBatDau AS Begin, nhiemvu.NgayKetThuc AS End, nhiemvu.NganSachDuKien AS TargetBudget, nhiemvu.MaTV AS StaffID, nhiemvu.MaCV AS JobID, nhiemvu. NganSachThucTe AS ActualBudget
     FROM nhiemvu;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaNhom` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaNhom` ()   BEGIN
   SELECT nhom.MaNhom AS ID, nhom.TenNhom AS Name, nhom.TruongNhom AS Leader, nhom.MaPB AS DepartmentID
   from nhom
   WHERE nhom.MaNhom = MaNhom;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaPB` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaPB` ()   BEGIN
   SELECT phongban.MaPB AS ID, phongban.TenPB AS Name, phongban.MoTa AS Description
   FROM phongban;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaQuyen` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaQuyen` ()   BEGIN
     SELECT quyen.MaQuyen AS ID, quyen.TenQuyen AS Name, quyen.GhiChu as Note
     FROM quyen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaSK` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaSK` ()   BEGIN
     SELECT sukien.MaSK AS ID, sukien.TenSK AS Name, sukien.Anh AS Image , sukien.GhiChu AS Note, sukien.NoiDung AS Content, sukien.MaDA AS ProjectID
     FROM sukien;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTK` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaTK` ()   BEGIN
     SELECT taikhoan.MaTK AS ID, taikhoan.TenTK AS Name, taikhoan.MatKhau AS Password, taikhoan.MaQuyen AS PermissionID, taikhoan.TrangThai AS Status
     FROM taikhoan;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
+CREATE  PROCEDURE `ThongTinTatCaTV` ()   BEGIN
     SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay
     FROM thanhvien;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinThanhVienThamGiaDuAn` (IN `MaDA` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinThanhVienThamGiaDuAn` (IN `MaDA` INT)   BEGIN
     SELECT HoTen AS Name, GioiTinh AS Gender, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID
     FROM congviec 
     INNER JOIN thanhvien ON thanhvien.MaTV = congviec.MaTV
     WHERE congviec.MaDA = MaDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
     SELECT HoTen AS StaffName, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status
     FROM thanhvien WHERE thanhvien.MaTV = MaTV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVBC` (`MaTV` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinTVBC` (`MaTV` INT)   BEGIN
   SELECT bangcapchungchi.MaTV AS StaffID, bangcapchungchi.MaBC AS ID, bangcapchungchi.TenBC AS Name, bangcapchungchi.NoiCap AS Address, bangcapchungchi.NgayCap AS Date
   FROM thanhvien INNER JOIN bangcapchungchi ON thanhvien.MaTV = bangcapchungchi.MaTV
   WHERE thanhvien.MaTV = MaTV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVTG` (`MaDA` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinTVTG` (`MaDA` INT)   BEGIN
   SELECT COUNT(MaTVTG) FROM thanhvienthamgia
   INNER JOIN duan ON thanhvienthamgia.MaDA = duan.MaDA
   INNER JOIN thanhvien ON thanhvienthamgia.MaTV = thanhvien.MaTV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTVTVTG` (IN `MaTV` INT)   BEGIN
+CREATE  PROCEDURE `ThongTinTVTVTG` (IN `MaTV` INT)   BEGIN
   SELECT thanhvienthamgia.MaTVTG AS ID, thanhvienthamgia.MaTV AS StaffID, thanhvienthamgia.MaDA AS ProjectID FROM thanhvienthamgia
   WHERE thanhvienthamgia.MaTV = MaTV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemAnh` (IN `TenAnh` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemAnh` (IN `TenAnh` VARCHAR(255))   BEGIN
     SET @TenAnh = CONCAT('%', TenAnh , '%');
     SELECT anh.MaAnh AS ID, anh.TenAnh AS Name, anh.DuongDan AS Path, anh.MaDA AS ProjectID, anh.MaHD AS ContractID, anh.LoaiAnh AS ImageCategory
     FROM anh
     WHERE anh.TenAnh LIKE @TenAnh;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemBCCC` (IN `TenBCCC` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemBCCC` (IN `TenBCCC` VARCHAR(255))   BEGIN
     SET @TenBCCC = CONCAT('%', TenBCCC , '%');
     SELECT bangcapchungchi.MaBC AS ID, bangcapchungchi.TenBC AS Name, bangcapchungchi.NgayCap AS Date,bangcapchungchi.NoiCap AS Address, bangcapchungchi.MaTV AS StaffID
     FROM bangcapchungchi
     WHERE bangcapchungchi.TenBC LIKE @TenBCCC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemCV` (IN `TenCV` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemCV` (IN `TenCV` VARCHAR(255))   BEGIN
     SET @TenCV = CONCAT('%', TenCV , '%');
     SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
     FROM congviec
     WHERE congviec.TenCV LIKE @TenCV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDA` (IN `TenDA` VARCHAR(255) CHARSET utf8mb4)   BEGIN
+CREATE  PROCEDURE `TimKiemDA` (IN `TenDA` VARCHAR(255) CHARSET utf8mb4)   BEGIN
     SET @TenDA = CONCAT('%', TenDA , '%');
     SELECT MaDA AS ID, duan.TenDA AS Name, NgayBatDau AS Begin , NgayKetThuc AS End, TrangThai AS Status, LienHe AS Contact, MoTa AS Description, duan.MaLoaiDA AS ProjectCategoryID, duan.NganSachThucTe AS ActualBudget, duan.NganSachDuKien AS TargetBudget, duan.TienDo AS Progress
     FROM duan
     WHERE duan.TenDA LIKE @TenDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemDT` (IN `TenDT` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemDT` (IN `TenDT` VARCHAR(255))   BEGIN
     SET @TenDT = CONCAT('%', TenDT , '%');
     SELECT doitac.MaDT AS ID, doitac.TenDT AS Name, doitac.Email AS Email, doitac.SDT AS Phone, doitac.Fax AS Fax, doitac.DiaChi AS Address, doitac.TrangThai as Status, doitac.GhiChu AS Note, doitac.MaSoThue AS TaxCode, doitac.Nguoidaidien AS Representative, doitac.ChucVu AS Position
     FROM doitac
     WHERE doitac.TenDT LIKE @TenDT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemHD` (IN `TenHD` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemHD` (IN `TenHD` VARCHAR(255))   BEGIN
     SET @TenHD = CONCAT('%', TenHD , '%');
     SELECT hopdong.MaHD AS ID, hopdong.TenHD AS Name, hopdong.SoHD AS Number, hopdong.NgayKiKet AS SignDay, hopdong.NgayHetHan AS Expire, hopdong.GhiChu AS Note, hopdong.GiaTriHD AS Value, hopdong.TrangThai AS Status, hopdong.MaDT AS PartnerID, hopdong.MaDA AS ProjectID
     FROM hopdong
     WHERE hopdong.TenHD LIKE @TenHD;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemLDA` (IN `TenLDA` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemLDA` (IN `TenLDA` VARCHAR(255))   BEGIN
     SET @TenLDA = CONCAT('%', TenLDA , '%');
     SELECT loaiduan.MaLoaiDA AS ID, loaiduan.TenLoaiDA AS Name, loaiduan.MoTa AS Description
     FROM loaiduan
     WHERE loaiduan.TenLoaiDA LIKE @TenLDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemNhom` (IN `TenNhom` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemNhom` (IN `TenNhom` VARCHAR(255))   BEGIN
     SET @TenNhom = CONCAT('%', TenNhom , '%');
     SELECT nhom.MaNhom AS ID, nhom.TenNhom AS Name, nhom.TruongNhom AS Leader,nhom.MaPB AS DepartmentID
     FROM nhom
     WHERE nhom.TenNhom LIKE @TenNhom;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemPB` (IN `TenPB` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemPB` (IN `TenPB` VARCHAR(255))   BEGIN
     SET @TenPB = CONCAT('%', TenPB , '%');
     SELECT phongban.MaPB AS ID, phongban.TenPB AS Name, phongban.MoTa AS Description
     FROM phongban
     WHERE phongban.TenPB LIKE @TenPB;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemQuyen` (IN `TenQuyen` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemQuyen` (IN `TenQuyen` VARCHAR(255))   BEGIN
     SET @TenQuyen = CONCAT('%', TenQuyen , '%');
     SELECT quyen.MaQuyen AS ID, quyen.TenQuyen AS Name, quyen.GhiChu AS Note
     FROM quyen
     WHERE quyen.TenQuyen LIKE @TenQuyen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemSK` (IN `TenSK` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemSK` (IN `TenSK` VARCHAR(255))   BEGIN
     SET @TenSK = CONCAT('%', TenSK , '%');
     SELECT sukien.MaSK AS ID, sukien.TenSK AS Name, sukien.Anh AS Image, sukien.GhiChu AS Note, sukien.NoiDung AS Content, sukien.MaDA AS ProjectID
     FROM sukien
     WHERE sukien.TenSK LIKE @TenSK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemTK` (IN `TenTK` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemTK` (IN `TenTK` VARCHAR(255))   BEGIN
     SET @TenTK = CONCAT('%', TenTK , '%');
     SELECT taikhoan.MaTK AS ID, taikhoan.TenTK AS Name, taikhoan.MatKhau AS Password, taikhoan.MaQuyen AS PermissionID, taikhoan.TrangThai AS Status
     FROM taikhoan
     WHERE taikhoan.TenTK LIKE @TenTK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemTV` (IN `HoTen` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `TimKiemTV` (IN `HoTen` VARCHAR(255))   BEGIN
     SET @HoTen = CONCAT('%', HoTen , '%');
     SELECT MaTV AS ID, thanhvien.HoTen AS Name, thanhvien.SDT AS Phone, thanhvien.DiaChi AS Address, thanhvien.NgaySinh as BirthDay, thanhvien.ChucVu AS Position, thanhvien.Email AS Email, thanhvien.MaTK AS AccountID, thanhvien.GioiTinh AS Gender, thanhvien.TrangThai AS Status, thanhvien.AnhDaiDien AS Avatar
     FROM thanhvien
     WHERE thanhvien.HoTen LIKE @HoTen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XacMinhTaiKhoan` (IN `taikhoan` VARCHAR(255), IN `matkhau` VARCHAR(255))   BEGIN
+CREATE  PROCEDURE `XacMinhTaiKhoan` (IN `taikhoan` VARCHAR(255), IN `matkhau` VARCHAR(255))   BEGIN
     SELECT taikhoan.MaTK AS accountID, quyen.TenQuyen AS permissionName, thanhvien.MaTV AS staffID, taikhoan.TenTK AS username FROM taikhoan
     INNER JOIN quyen ON taikhoan.MaQuyen = quyen.MaQuyen
     INNER JOIN thanhvien ON taikhoan.MaTK = thanhvien.MaTK
     WHERE taikhoan.TenTK = taikhoan AND taikhoan.MatKhau = matkhau;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaAnh` (`maAnh` INT)   BEGIN
+CREATE  PROCEDURE `XoaAnh` (`maAnh` INT)   BEGIN
     DELETE FROM anh WHERE anh.MaAnh = maAnh;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaBCCC` (IN `maBC` INT)   BEGIN
+CREATE  PROCEDURE `XoaBCCC` (IN `maBC` INT)   BEGIN
 	DELETE FROM bangcapchungchi WHERE bangcapchungchi.MaBC = maBC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaCV` (`maCV` INT)   BEGIN
+CREATE  PROCEDURE `XoaCV` (`maCV` INT)   BEGIN
     DELETE FROM congviec WHERE congviec.MaCV = maCV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaDA` (IN `maDA` INT)   BEGIN
+CREATE  PROCEDURE `XoaDA` (IN `maDA` INT)   BEGIN
     DELETE FROM duan WHERE duan.MaDA = maDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaDT` (IN `maDT` INT)   BEGIN
+CREATE  PROCEDURE `XoaDT` (IN `maDT` INT)   BEGIN
 	DELETE FROM doitac WHERE doitac.MaDT = maDT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaHD` (IN `maHD` INT)   BEGIN
+CREATE  PROCEDURE `XoaHD` (IN `maHD` INT)   BEGIN
 	DELETE FROM hopdong WHERE hopdong.MaHD = maHD;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaLDA` (IN `maLoaiDA` INT)   BEGIN
+CREATE  PROCEDURE `XoaLDA` (IN `maLoaiDA` INT)   BEGIN
     DELETE FROM loaiduan WHERE loaiduan.MaLoaiDA = maLoaiDA;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaNhom` (IN `maNhom` INT)   BEGIN
+CREATE  PROCEDURE `XoaNhom` (IN `maNhom` INT)   BEGIN
 	DELETE FROM nhom WHERE nhom.MaNhom = maNhom;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaNV` (`maNV` INT)   BEGIN
+CREATE  PROCEDURE `XoaNV` (`maNV` INT)   BEGIN
     DELETE FROM nhiemvu WHERE nhiemvu.MaNV = MaNV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaPB` (IN `maPB` INT)   BEGIN
+CREATE  PROCEDURE `XoaPB` (IN `maPB` INT)   BEGIN
     DELETE FROM phongban WHERE phongban.MaPB = maPB;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaQuyen` (`maQuyen` INT)   BEGIN
+CREATE  PROCEDURE `XoaQuyen` (`maQuyen` INT)   BEGIN
     DELETE FROM quyen WHERE quyen.MaQuyen = maQuyen;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaSK` (`maSK` INT)   BEGIN
+CREATE  PROCEDURE `XoaSK` (`maSK` INT)   BEGIN
     DELETE FROM sukien WHERE sukien.MaSK = maSK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaTK` (`maTK` INT)   BEGIN
+CREATE  PROCEDURE `XoaTK` (`maTK` INT)   BEGIN
     DELETE FROM taikhoan WHERE taikhoan.MaTK = maTK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaTV` (IN `maTV` INT)   BEGIN
+CREATE  PROCEDURE `XoaTV` (IN `maTV` INT)   BEGIN
     DELETE FROM thanhvien WHERE thanhvien.MaTV = maTV;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `XoaTVTG` (`maTVTG` INT)   BEGIN
+CREATE  PROCEDURE `XoaTVTG` (`maTVTG` INT)   BEGIN
     DELETE FROM thanhvienthamgia WHERE thanhvienthamgia.MaTVTG = maTVTG;
 END$$
 
 --
 -- Các hàm
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MaTK` INT, `MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
+CREATE  FUNCTION `DoiMatKhau` (`MaTK` INT, `MatKhauCu` VARCHAR(16), `MatKhauMoi` VARCHAR(16)) RETURNS TINYINT(1)  BEGIN 
   DECLARE count INT;
   
   UPDATE taikhoan 
@@ -540,7 +540,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `DoiMatKhau` (`MaTK` INT, `MatKhauCu`
   END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `SoNguoiThamGia` (`MaDA` INT) RETURNS INT(11)  BEGIN 
+CREATE  FUNCTION `SoNguoiThamGia` (`MaDA` INT) RETURNS INT(11)  BEGIN 
   DECLARE count INT;
   SELECT COUNT(MaDA) INTO count 
   FROM congviec INNER JOIN duan 
