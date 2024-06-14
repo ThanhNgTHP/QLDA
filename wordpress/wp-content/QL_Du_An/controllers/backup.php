@@ -1,3 +1,5 @@
+<label for=""></label>
+
 <?php
 
 if (isset($_POST['method']) && $_POST['method'] === 'export') {
@@ -34,6 +36,7 @@ if (isset($_POST['method']) && $_POST['method'] === 'export') {
 
          // Lấy trạng thái kết thúc của process
          $retval = proc_close($process);
+         $retval_export = $retval;
      
          // In output và mã trạng thái trả về
         // echo "Output:\n" . $output;
@@ -44,16 +47,20 @@ if (isset($_POST['method']) && $_POST['method'] === 'export') {
      }
 }
 
-$pathfile = $_FILES['pathfile'] ?? null;
+if (isset($_POST['method']) && $_POST['method'] === 'import') {
+   print_r($_FILES['fileimport']['name']);exit;
 
-if (isset($_POST['method']) && $_POST['method'] === 'import'&& isset($pathfile)) {
-   // print_r($pathfile);exit;                
+   $fileTmpPath = $_FILES['fileimport']['tmp_name'];
+   $fileDestination = $_FILES['fileimport']['name'];
+   print_r($fileTmpPath . ' ' . $fileDestination);exit;
+
 
     $fileName = 'qlduan.sql';
-    $filePath = realpath('../wp-content/QL_Du_An/resources/backup') . '/' . $pathfile['name'];
+   //  $filePath = realpath('../wp-content/QL_Du_An/resources/backup') . '/' . $fileName;
     $command = getenv('MYSQL') . ' -u ' . getenv('USER_NAME') .
                 ' -P ' . getenv('PORT') . 
-                ' '. getenv('DATABASE_NAME') . ' < ' . '"' . $filePath . '"';
+                ' '. getenv('DATABASE_NAME') . ' < ' . '"' . $fileDestination . '"';
+   print_r($command);exit;
     exec($command);
 
     $descriptors = array(

@@ -47,9 +47,9 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
                 <div class="relative" style="margin: auto;">
                     <input name="path" id="imageInput--1" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
-                    <img class="displayImage--1 inline w-[50px]" src="https://upanh.codevivu.com/icon.png" alt="Ảnh"> 
+                    <img class="displayImage--1 inline w-[50px]" src="https://w7.pngwing.com/pngs/527/625/png-transparent-scalable-graphics-computer-icons-upload-uploading-cdr-angle-text-thumbnail.png" alt="Ảnh"> 
                     
-                    <div class="absolute top-0 left-0 bottom-0 right-0" style="">
+                    <div class="absolute top-0 left-0 bottom-0 right-0">
                         <label for="imageInput--1">
                             <div class="w-[250px] h-full hover:bg-white hover:opacity-50">
                                 

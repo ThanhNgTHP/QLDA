@@ -12,49 +12,63 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 </div>
 
 <div>
-    <div class="text-xl p-[50px_0_5px_0]">
-        Nhập file database để phục hồi dữ liệu
-    </div>
-    <div class="text-xl" style="margin: auto;">
-        <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="text-xl">
+            Nhập file database để phục hồi dữ liệu
+        </div>
+        <div class="text-xl" style="margin: auto;">
+            <input type="file" name="fileimport" value="">
+            <br>
+            <button type="submit" name="method" value="import" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Nhập
+            </button>        
+        </div>
+
+        <!-- <div class="text-xl" style="margin: auto;">
             <div class="relative" style="margin: auto;">
-                <input name="pathfile" value="upfile" id="" class="" type="file" accept=".sql">   
+                <input name="fileImport" id="import" class="imageInput hidden" type="file">
+                
+                <div class="absolute top-0 left-0 bottom-0 right-0">
+                    <label for="import">
+                        <div class="w-[250px] h-full hover:bg-white hover:opacity-50">
+                            Nhập
+                        </div>
+                    </label>
+                </div>
             </div>
-            <div class="pt-[5px]">
-                <button type="submit" name="method" value="import" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Nhập
-                </button>                
-            </div>
-        </form>
-    </div>
+        </div> -->
 
-    <div class="text-xl p-[50px_0_5px_0]">
-        Xuất file database để sao lưu dữ liệu
-    </div>
-    <div class="text-xl" style="margin: auto;">
-        <form method="post" action="">
+        
+    </form>
 
-            <button type="submit" name="method" value="export" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                Xuất
-            </button>
+        <div class="text-xl">
+            Xuất file database để sao lưu dữ liệu
+        </div>
+        <div class="text-xl" style="margin: auto;">
+            <form method="post" action="">
 
-            <?php if(isset($retval)): ?>
-                <?php if($retval == 0): ?>
-                    <a href="<?php echo home_url() . '/wp-content/QL_Du_An/resources/backup/qlduan.sql' ?>" download>
-                        <img src="https://d1hjkbq40fs2x4.cloudfront.net/2016-01-31/files/1045-2.jpg" alt="W3Schools" width="104" height="142">
-                    </a>
+                <button type="submit" name="method" value="export" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Xuất
+                </button>
 
-                    <div>Xuất file thành công</div>
+                <?php if(isset($retval)): ?>
+                    <?php if($retval == 0): ?>
+                        <a href="<?php echo home_url() . '/wp-content/QL_Du_An/resources/backup/qlduan.sql' ?>" download>
+                            <img src="https://d1hjkbq40fs2x4.cloudfront.net/2016-01-31/files/1045-2.jpg" alt="W3Schools" width="104" height="142">
+                        </a>
 
-                <?php else: ?>
-                    <div>Xuất file thất bại</div>
+                        <div>Xuất file thành công</div>
+
+                    <?php else: ?>
+                        <div>Xuất file thất bại</div>
+                    <?php endif; ?>
+
                 <?php endif; ?>
-
-            <?php endif; ?>
-            
-            
-        </form>
-    </div>
+                
+                
+            </form>
+        </div>
+    </form>
 </div>
 
 <?php

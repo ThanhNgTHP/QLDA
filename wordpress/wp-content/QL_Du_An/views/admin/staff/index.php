@@ -51,7 +51,7 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
 
                 <div class="relative" style="margin: auto;">
                     <input name="avatar" id="imageInput--1" class="imageInput hidden" type="file" accept="image/jpeg, image/png, image/gif">
-                    <img class="displayImage--1 inline" width="50px" src="https://upanh.codevivu.com/icon.png" alt="Ảnh"> 
+                    <img class="displayImage--1 inline" width="50" src="https://w7.pngwing.com/pngs/527/625/png-transparent-scalable-graphics-computer-icons-upload-uploading-cdr-angle-text-thumbnail.png" alt="Ảnh"> 
                     
                     <div class="absolute top-0 left-0 bottom-0 right-0 text-center" style="">
                         <label for="imageInput--1">

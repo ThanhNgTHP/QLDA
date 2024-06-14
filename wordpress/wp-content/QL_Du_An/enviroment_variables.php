@@ -2,7 +2,7 @@
     putenv('SERVER_NAME=localhost');
     putenv('USER_NAME=root');
     putenv('PASSWORD=');
-    putenv('DATABASE_NAME=QLDuAn');
+    putenv('DATABASE_NAME=qlduan');
     putenv('PORT='. 3306);
     putenv('MYSQLDUMP='. 'D:/Xampp/mysql/bin/mysqldump');
     putenv('MYSQL='. 'D:/Xampp/mysql/bin/mysql');

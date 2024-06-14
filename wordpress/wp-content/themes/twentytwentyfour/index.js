@@ -63,6 +63,13 @@ const divElements = document.querySelectorAll("div");
 const copyrightXYZ = divElements[divElements.length - 1];
 copyrightXYZ.style.display = 'none';
 
+$stateProjectCategories = document.querySelectorAll('.state-project-categories');
+document.querySelector('.contain-project-categories').onclick = (e)=>{
+    document.querySelector('.project-categories').classList.toggle('hidden');
+    document.querySelectorAll('.state-project-categories').forEach((e)=>{
+        e.classList.toggle('hidden');
+    });
+};
 
 // main = document.querySelector('header + div');
 // main.style.flexWrap = 'wrap';

@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: QLDuAn
+-- Host: localhost    Database: qlduan
 -- ------------------------------------------------------
 -- Server version	10.4.32-MariaDB
 
@@ -34,7 +34,7 @@ CREATE TABLE `anh` (
   KEY `MaHD` (`MaHD`),
   CONSTRAINT `anh_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`),
   CONSTRAINT `anh_ibfk_2` FOREIGN KEY (`MaHD`) REFERENCES `hopdong` (`MaHD`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `anh` (
 
 LOCK TABLES `anh` WRITE;
 /*!40000 ALTER TABLE `anh` DISABLE KEYS */;
-INSERT INTO `anh` VALUES (1,'Mô Phỏng Xe Tăng','https://www.simulation.vn/templates/phoneapps-et/slideshow/1.jpg',1,1,'anh du an'),(2,'Mô Phỏng Lái Xe Ô Tô','https://www.simulation.vn/templates/phoneapps-et/slideshow/2.jpg',2,1,'anh du an'),(3,'Mô Phỏng Phòng Học','https://www.simulation.vn/images/sbhinh1.jpg',1,1,'anh du an'),(4,'Mô Phỏng Súng AK','https://www.simulation.vn/images/ak-nhinthang.jpg',1,1,'anh du an'),(5,'Mô Phỏng Cấu Tạo Hoạt Động Động Cơ Cơ Khí','https://www.simulation.vn/images/giamtoccanh2.jpg',1,1,'anh du an'),(6,'Mô Phỏng Huấn Luyện Chiến Thuật Phân Đội Tank - Thiết Giáp','https://www.simulation.vn/images/3dtank.jpg',1,1,'anh du an'),(8,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 1','https://sanketoan.vn/public/library_staff/25094/images/3(273).PNG',1,1,'anh hop dong'),(9,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 2','https://o.vdoc.vn/data/image/2022/05/16/Hop-dong-ve-quay-phim-chup-hinh-1-1.jpg',1,1,'anh hop dong'),(10,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 3','https://s1.hopdongmau.com/pehAUEk9tIABIOBY/thumb/2015/08/20/mau-hop-dong-dich-vu-quang-cao-thuong-mai_1qA3eaucDq.jpg',1,1,'anh hop dong'),(11,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 4','https://panoquangcao.net/wp-content/uploads/2016/11/mau-hop-dong-quang-cao-ngoai-troi-1.jpg',1,1,'anh hop dong'),(12,'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 1','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXTJUlDUf3Z2fUJIF_lt1Y_rFNfKfxanpTED8alu6hmsY6cvqb9lP9ORtTs1-VOMgQRo&usqp=CAU',2,2,'anh hop dong'),(13,'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 2','https://image.slidesharecdn.com/hpngcungngdchvqungco-220530095856-53a865bd/85/H-P-D-NG-CUNG-NG-D-CH-V-QU-NG-CAO-doc-1-320.jpg',2,2,'anh hop dong'),(14,'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3','https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/756a7eaa66f9a88f9f768174f70790cc/thumb_1200_1553.png',2,2,'anh hop dong'),(15,'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3','D:\\xampp\\xampp_install\\htdocs\\wordpress/wp-content\\QL_Du_An\\resources\\img/',2,2,'anh du an');
+INSERT INTO `anh` VALUES (1,'Mô Phỏng Xe Tăng','https://www.simulation.vn/templates/phoneapps-et/slideshow/1.jpg',1,1,'anh du an'),(2,'Mô Phỏng Lái Xe Ô Tô','https://www.simulation.vn/templates/phoneapps-et/slideshow/2.jpg',2,1,'anh du an'),(3,'Mô Phỏng Phòng Học','https://www.simulation.vn/images/sbhinh1.jpg',1,1,'anh du an'),(4,'Mô Phỏng Súng AK','https://www.simulation.vn/images/ak-nhinthang.jpg',1,1,'anh du an'),(5,'Mô Phỏng Cấu Tạo Hoạt Động Động Cơ Cơ Khí','https://www.simulation.vn/images/giamtoccanh2.jpg',1,1,'anh du an'),(6,'Mô Phỏng Huấn Luyện Chiến Thuật Phân Đội Tank - Thiết Giáp','https://www.simulation.vn/images/3dtank.jpg',1,1,'anh du an'),(8,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 1','https://sanketoan.vn/public/library_staff/25094/images/3(273).PNG',1,1,'anh hop dong'),(9,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 2','https://o.vdoc.vn/data/image/2022/05/16/Hop-dong-ve-quay-phim-chup-hinh-1-1.jpg',1,1,'anh hop dong'),(10,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 3','https://s1.hopdongmau.com/pehAUEk9tIABIOBY/thumb/2015/08/20/mau-hop-dong-dich-vu-quang-cao-thuong-mai_1qA3eaucDq.jpg',1,1,'anh hop dong'),(11,'Hợp đồng xây dựng Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành trang số 4','https://panoquangcao.net/wp-content/uploads/2016/11/mau-hop-dong-quang-cao-ngoai-troi-1.jpg',1,1,'anh hop dong'),(12,'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 1','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXTJUlDUf3Z2fUJIF_lt1Y_rFNfKfxanpTED8alu6hmsY6cvqb9lP9ORtTs1-VOMgQRo&usqp=CAU',2,2,'anh hop dong'),(13,'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 2','https://image.slidesharecdn.com/hpngcungngdchvqungco-220530095856-53a865bd/85/H-P-D-NG-CUNG-NG-D-CH-V-QU-NG-CAO-doc-1-320.jpg',2,2,'anh hop dong'),(14,'Hợp đồng Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng trang số 3','https://d20ohkaloyme4g.cloudfront.net/img/document_thumbnails/756a7eaa66f9a88f9f768174f70790cc/thumb_1200_1553.png',2,2,'anh hop dong'),(34,'Tàu cập cảng Hải Phòng','https://simulation.vn/images/taucapcanghp.jpg',17,10,'anh du an'),(35,'website quản lý dự án','http://localhost/wordpress/wp-content/QL_Du_An/resources/img/trangtru.png',18,NULL,'anh du an');
 /*!40000 ALTER TABLE `anh` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `congviec` (
   CONSTRAINT `congviec_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`),
   CONSTRAINT `congviec_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`),
   CONSTRAINT `congviec_ibfk_3` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `congviec` (
 
 LOCK TABLES `congviec` WRITE;
 /*!40000 ALTER TABLE `congviec` DISABLE KEYS */;
-INSERT INTO `congviec` VALUES (1,'khảo sát hệ thống','xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống','2016-02-02','2016-03-02',2000,62,'cần lấy dữ liệu chính xác',1,840,5,2,'cao'),(2,'phân tích thiết kế hệ thống','sơ đồ hệ thống, các thành phần phần cứng và phần mềm','2016-03-02','2016-06-02',10000,57,'không có',1,6060,5,2,'cao'),(3,'triển khai hệ thống','lắp đặt phần cứng và phần mềm của hệ thống','2016-06-02','2016-08-02',15000,83,'không có',1,9147.15,3,1,'cao'),(4,'Kiểm thử hệ thống','Kiểm tra và thử nghiệm hệ thống','2016-08-02','2016-09-02',1000,0,'không có',1,1550,7,6,'cao'),(5,'Vận hành và bảo trì hệ thống','Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống','2016-09-02','2016-10-02',2000,0,'không có',1,1600,6,4,'cao'),(8,'Xác định yêu cầu','không có','2005-06-16','2005-06-20',1500,100,'không có',2,500,5,2,'cao'),(9,'Chọn giải pháp','không có','2005-06-21','2005-06-30',1250,100,'không có',2,755,5,2,'cao'),(10,'Triển khai hệ thống','không có','2005-07-01','2005-12-15',1250,10,'không có',2,8787,3,1,'cao'),(11,'Quản lý và vận hành','không có','2005-12-16','2005-12-30',1200,0,'không có',2,1200,6,4,'cao'),(13,'Duy trì và nâng cấp','không có','2005-12-30','2006-01-01',1000,10,'không có',2,1200,4,1,'high'),(14,'Cập nhật phần mềm quản trị mạng và firmware thiết bị mạng','không có','2006-01-02','2006-01-10',1000,10,'không có',2,1200,5,1,'high'),(15,'Nâng cấp hệ thống','không có','2006-01-11','2006-01-15',1009.3,10,'không có',2,1200,6,1,'high'),(16,'Đảm bảo hoạt động của hệ thống','Đảm bảo hệ thống luôn hoạt động an toàn và hiệu quả','2006-01-16','2006-01-17',1000,10,'không có',2,1200,7,1,'high'),(17,'Lập kế hoạch dự phòng và khôi phục','không có','2006-01-18','2006-01-20',1000,10,'không có',2,1200,4,1,'high');
+INSERT INTO `congviec` VALUES (1,'khảo sát hệ thống','xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống','2016-02-02','2016-03-02',2000,62,'cần lấy dữ liệu chính xác',1,840,5,2,'cao'),(2,'phân tích thiết kế hệ thống','sơ đồ hệ thống, các thành phần phần cứng và phần mềm','2016-03-02','2016-06-02',10000,57,'không có',1,6060,5,2,'cao'),(3,'triển khai hệ thống','lắp đặt phần cứng và phần mềm của hệ thống','2016-06-02','2016-08-02',15000,83,'không có',1,9147.15,3,1,'cao'),(4,'Kiểm thử hệ thống','Kiểm tra và thử nghiệm hệ thống','2016-08-02','2016-09-02',1000,0,'không có',1,1550,7,6,'cao'),(5,'Vận hành và bảo trì hệ thống','Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống','2016-09-02','2016-10-02',2000,0,'không có',1,1600,6,4,'cao'),(8,'Xác định yêu cầu','không có','2005-06-16','2005-06-20',1500,100,'không có',2,500,5,2,'cao'),(9,'Chọn giải pháp','không có','2005-06-21','2005-06-30',1250,100,'không có',2,755,5,2,'cao'),(10,'Triển khai hệ thống','không có','2005-07-01','2005-12-15',1250,10,'không có',2,8787,3,1,'cao'),(11,'Quản lý và vận hành','không có','2005-12-16','2005-12-30',1200,0,'không có',2,1200,6,4,'cao'),(13,'Duy trì và nâng cấp','không có','2005-12-30','2006-01-01',1000,10,'không có',2,1200,4,1,'high'),(14,'Cập nhật phần mềm quản trị mạng và firmware thiết bị mạng','không có','2006-01-02','2006-01-10',1000,10,'không có',2,1200,5,1,'high'),(15,'Nâng cấp hệ thống','không có','2006-01-11','2006-01-15',1009.3,10,'không có',2,1200,6,1,'high'),(16,'Đảm bảo hoạt động của hệ thống','Đảm bảo hệ thống luôn hoạt động an toàn và hiệu quả','2006-01-16','2006-01-17',1000,10,'không có',2,1200,7,1,'high'),(17,'Lập kế hoạch dự phòng và khôi phục','không có','2006-01-18','2006-01-20',1000,10,'không có',2,1200,4,1,'high'),(27,'phân tích thiết kế hệ thống','sơ đồ hệ thống, các thành phần phần cứng, phần mềm, chức năng cần thiết cho hệ thống','2013-12-20','2014-02-03',0,100,'Thông tin dữ liệu chính xác',17,0,5,17,'cao'),(28,'khảo sát hệ thống','xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống','2013-12-20','2014-02-03',750,100,'cần lấy dữ liệu chính xác',17,523,5,18,'Cao'),(29,'triển khai hệ thống','Không có','2014-07-22','2014-02-03',1200,100,'cần lấy dữ liệu chính xác',17,1172,6,28,'Cao'),(30,'triển khai hệ thống','Không có','2014-07-22','2014-02-03',1200,100,'cần lấy dữ liệu chính xác',17,1172,6,27,'Cao'),(32,'Kiểm thử hệ thống','Không có','2014-12-02','2014-07-22',900,100,'kiểm thử kĩ càng',17,921,6,24,'Cao'),(33,'Thiết kế giao diện','cần tối ưu','2015-06-22','2014-12-02',900,100,'thiết kế gọn gàng',17,921,6,19,'Cao'),(34,'kiểm thử hệ thống','cần tối ưu','2016-01-02','2015-06-22',2000,100,'thiết kế gọn gàng',17,1722,6,23,'Cao');
 /*!40000 ALTER TABLE `congviec` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -323,7 +323,7 @@ CREATE TABLE `doitac` (
   `Nguoidaidien` varchar(255) DEFAULT NULL,
   `ChucVu` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`MaDT`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -358,7 +358,7 @@ CREATE TABLE `duan` (
   PRIMARY KEY (`MaDA`),
   KEY `MaLoaiDA` (`MaLoaiDA`),
   CONSTRAINT `duan_ibfk_1` FOREIGN KEY (`MaLoaiDA`) REFERENCES `loaiduan` (`MaLoaiDA`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -367,7 +367,7 @@ CREATE TABLE `duan` (
 
 LOCK TABLES `duan` WRITE;
 /*!40000 ALTER TABLE `duan` DISABLE KEYS */;
-INSERT INTO `duan` VALUES (1,'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành','2017-07-21','2017-12-12','Ngừng Phát Triển','Nguyễn Văn Long - 0845758492 - longvan@gmail.com','Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì',1,19197.2,19197.2,40),(2,'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng','2005-06-14','2010-12-26','Ngừng Phát Triển','Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com','Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập',2,17242,17242,28);
+INSERT INTO `duan` VALUES (1,'Hệ Thống Điện Tử Tự Động Giám Sát Thi Thực Hành','2017-07-21','2017-12-12','Ngừng Phát Triển','Nguyễn Văn Long - 0845758492 - longvan@gmail.com','Hệ Thống Có Thể Theo Dõi Qúa Trình Thi Thực Hành Của Từng Học Viên, Ghi Lại Kết Quả Và Cung Cấp Phản Hồi Tức Thì',1,19197.2,19197.2,40),(2,'Xây Dựng Hệ Thống Phần Mềm Quản Trị Mạng','2005-06-14','2010-12-26','Ngừng Phát Triển','Nguyễn Văn Mạnh - 0957557641- vanmanh@gmail.com','Bảo Vệ Mạng Và Dữ Liệu Từ Các Mối Đe Dọa Bằng Cách Sử Dụng Các Công Cụ Nhu Tường Lửa, Hệ Thống Tiêu Diệt Virus Và Phát Hiện Xâm Nhập',2,17242,17242,28),(17,'Hệ thống mô phỏng dạy lái tàu thủy','2013-12-20','2016-11-15','đã hoàn thành','Hoàng Tuấn Long - 0963504821 - hoangtuanlong@gmail.com','Hệ thống mô phỏng lái tàu đường sông cho phép các học viên thực hành tập lái trên một cabin mô phỏng được thiết kế giống như thực tế. Quang cảnh hoạt động của khúc sông tập luyện được tái tạo phù hợp với quang cảnh thực tế trên môi trường đồ họa 3D.',21,6431,100000,100),(18,'Website quản lý dự án Công ty Cổ phần đầu tư và phát triển Công Nghệ Mô phỏng Việt Nam','2024-02-07','2024-06-28','Đang phát triển','Nguyễn Tuấn Anh - 0963504821 - hoangtuanlong@gmail.com','website quản lý dự án cho nội bộ trong công ty',20,0,5000,0);
 /*!40000 ALTER TABLE `duan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +394,7 @@ CREATE TABLE `hopdong` (
   KEY `MaDA` (`MaDA`),
   CONSTRAINT `hopdong_ibfk_1` FOREIGN KEY (`MaDT`) REFERENCES `doitac` (`MaDT`),
   CONSTRAINT `hopdong_ibfk_2` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -403,7 +403,7 @@ CREATE TABLE `hopdong` (
 
 LOCK TABLES `hopdong` WRITE;
 /*!40000 ALTER TABLE `hopdong` DISABLE KEYS */;
-INSERT INTO `hopdong` VALUES (1,'Hợp Đồng Cung Cấp Hàng Hóa','654/HĐ','2024-07-21','2024-12-12','Ghi Rõ Thông Tin Về Tên Doanh Nghiệp, Trụ Sở, Số Điện Thoại, Chức Vụ, Và Người Đại Diện',1736730000,'Hết Hiệu Lực',1,1),(2,'Hợp Đồng Kinh Tế','101015/LLVNSIM','2024-06-14','2024-12-29','Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng',2071190000,'Hết Hiệu Lực',2,2);
+INSERT INTO `hopdong` VALUES (1,'Hợp Đồng Cung Cấp Hàng Hóa','654/HĐ','2024-07-21','2024-12-12','Ghi Rõ Thông Tin Về Tên Doanh Nghiệp, Trụ Sở, Số Điện Thoại, Chức Vụ, Và Người Đại Diện',1736730000,'Hết Hiệu Lực',1,1),(2,'Hợp Đồng Kinh Tế','101015/LLVNSIM','2024-06-14','2024-12-29','Mô Tả Chi Tiết Về Hàng Hóa Cần Cung Cấp, Bao Gồm Loại Hàng Số Lượng Và Chất Lượng',2071190000,'Hết Hiệu Lực',2,2),(10,'Hợp đồng xây dựng hệ thống mô phỏng dạy lái tàu sông cho trường trung cấp nghề Tiền Giang','20-12/TMG-VNSIM','2013-12-20','2016-11-15','không có',200000,'hợp đồng đã hoàn thành',3,17);
 /*!40000 ALTER TABLE `hopdong` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,7 +428,7 @@ CREATE TABLE `loaiduan` (
 
 LOCK TABLES `loaiduan` WRITE;
 /*!40000 ALTER TABLE `loaiduan` DISABLE KEYS */;
-INSERT INTO `loaiduan` VALUES (1,'Thiết Bị','Không Có'),(2,'Phần Mềm','Không Có'),(18,'Game - Trò chơi','không có'),(19,'Ứng dụng điện thoại','không có'),(20,'Website','không có'),(21,'Phần mềm nhúng','không có'),(23,'Thiết Bị','Có');
+INSERT INTO `loaiduan` VALUES (1,'Thiết Bị','Không Có'),(2,'Phần Mềm','Không Có'),(18,'Game - Trò chơi','không có'),(19,'Ứng dụng điện thoại','không có'),(20,'Website','không có'),(21,'Phần mềm nhúng','không có');
 /*!40000 ALTER TABLE `loaiduan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -481,7 +481,7 @@ CREATE TABLE `phongban` (
 
 LOCK TABLES `phongban` WRITE;
 /*!40000 ALTER TABLE `phongban` DISABLE KEYS */;
-INSERT INTO `phongban` VALUES (1,'Phòng lập trình','Không CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông CóKhông Có'),(2,'Phòng Thiết Kế','Không Có'),(3,'Phòng điều khiển điện tử','không có'),(4,'Phòng dữ liệu 3D','không có'),(5,'Phòng thiết kế cơ khí','không có'),(6,'phòng bảo hành','không có'),(7,'Phòng kiểm thử','không có');
+INSERT INTO `phongban` VALUES (1,'Phòng lập trình','Phòng code'),(2,'Phòng Thiết Kế','Không Có'),(3,'Phòng điều khiển điện tử','không có'),(4,'Phòng dữ liệu 3D','không có'),(5,'Phòng thiết kế cơ khí','không có'),(6,'phòng bảo hành','không có'),(7,'Phòng kiểm thử','không có');
 /*!40000 ALTER TABLE `phongban` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -556,7 +556,7 @@ CREATE TABLE `taikhoan` (
   PRIMARY KEY (`MaTK`),
   KEY `MaQuyen` (`MaQuyen`),
   CONSTRAINT `taikhoan_ibfk_1` FOREIGN KEY (`MaQuyen`) REFERENCES `quyen` (`MaQuyen`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -565,7 +565,7 @@ CREATE TABLE `taikhoan` (
 
 LOCK TABLES `taikhoan` WRITE;
 /*!40000 ALTER TABLE `taikhoan` DISABLE KEYS */;
-INSERT INTO `taikhoan` VALUES (1,'summon','123456789',1,'Vẫn còn sử dụng'),(2,'galactot','1234567',2,'Tạm ngưng hoạt động'),(3,'nguyentung','12345678',3,'Vẫn còn sử dụng');
+INSERT INTO `taikhoan` VALUES (1,'summon','123456789',1,'Vẫn còn sử dụng'),(2,'galactot','1234567',2,'Vẫn còn sử dụng'),(3,'nguyentung','12345678',3,'Vẫn còn sử dụng'),(8,'nguyenvantung','password123',1,'Active'),(9,'buithihoan','password123',1,'Active'),(10,'thilong632','password123',1,'Inactive'),(11,'Dan50302','password123',1,'Active'),(12,'phamdong','password123',1,'Active'),(13,'cunguyenchat','password123',1,'Active'),(14,'tungnv','password123',1,'Active'),(15,'datlt','password123',1,'Active'),(16,'dienlt','password123',1,'Active'),(17,'hant0','password123',1,'Active'),(18,'phuchl00','password123',1,'Active'),(19,'haudp00','password123',1,'Active'),(20,'thaith00','password123',1,'Active'),(21,'minhtc0','password123',1,'Active'),(22,'linhht0','password123',1,'Active'),(23,'thaovt0','password123',1,'Active'),(24,'duccn0','password123',1,'Active'),(25,'phucnv0','password123',1,'Active'),(26,'quydt0','password123',1,'Active'),(27,'hailv0','password123',1,'Active'),(28,'longdv0','password123',1,'Active'),(29,'conglh0','password123',1,'Active'),(30,'anhvm0','password123',1,'Active'),(31,'minhhezi1304','password123',1,'Active'),(32,'toan0505','password123',1,'Active'),(33,'vodanh12','password123',1,'Active');
 /*!40000 ALTER TABLE `taikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -591,7 +591,7 @@ CREATE TABLE `thanhvien` (
   PRIMARY KEY (`MaTV`),
   KEY `MaTK` (`MaTK`),
   CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -600,7 +600,7 @@ CREATE TABLE `thanhvien` (
 
 LOCK TABLES `thanhvien` WRITE;
 /*!40000 ALTER TABLE `thanhvien` DISABLE KEYS */;
-INSERT INTO `thanhvien` VALUES (1,'Nguyễn Văn Tùng','0245624669','Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản','2000-03-01','kĩ sư lập trình','nguyenvantung@gmail.com',1,'Nam','Đang Làm Việc','https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg'),(2,'Bùi Thị Hoan','0942782218','Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng','2024-03-01','Phân tích hệ thống','buithihoan@gmail.com',2,'Nữ','Đang Làm Việc','https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg'),(3,'Trần Thị Long','3767005332','Thủy Đường, Thủy Nguyên, Hải Phòng','2024-03-03','Nhân Viên Thiết Kế Giao Diện','thilong632@gmail.com',3,'Nu','Nghỉ việc','https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg'),(4,'Le Quoc Dan','4298892323','Đống Đa, Hà Nội, Việt Nam','2000-03-04','Kỹ thuật viên điều khiển','Dan50302@gmail.com',3,'Nam','Vẫn còn làm việc','https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG'),(6,'Phạm Tiến Đồng','0978563485','Trung hòa, Cầu Giấy, HN','1989-04-05','Nhân viên kiểm thử','phamdong@gmail.com',3,'Nam','Đang làm việc','https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg');
+INSERT INTO `thanhvien` VALUES (1,'Nguyễn Văn Tùng','0245624669','Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản','2000-03-01','kĩ sư lập trình','nguyenvantung@gmail.com',8,'Nam','Đang Làm Việc','https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg'),(2,'Bùi Thị Hoan','0942782218','Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng','2024-03-01','Phân tích hệ thống','buithihoan@gmail.com',9,'Nữ','Đang Làm Việc','https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg'),(3,'Trần Thị Long','3767005332','Thủy Đường, Thủy Nguyên, Hải Phòng','2024-03-03','Nhân Viên Thiết Kế Giao Diện','thilong632@gmail.com',10,'Nu','Nghỉ việc','https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg'),(4,'Le Quoc Dan','4298892323','Đống Đa, Hà Nội, Việt Nam','2000-03-04','Kỹ thuật viên điều khiển','Dan50302@gmail.com',11,'Nam','Vẫn còn làm việc','https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG'),(6,'Phạm Tiến Đồng','0978563485','Trung hòa, Cầu Giấy, HN','1989-04-05','Nhân viên kiểm thử','phamdong@gmail.com',12,'Nam','Đang làm việc','https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg'),(13,'Đồng Nguyên Chất','0124934734','Thanh xuân, Hà Nội','1995-03-23','kĩ sư lập trình','cunguyenchat@gmail.com',13,'Nam','Đang làm việc','https://haycafe.vn/wp-content/uploads/2021/12/Mau-anh-the-nam.jpg'),(14,'Nguyễn văn Tùng','0123957347','Nam Từ Niêm, Hà Nội','1996-06-02','kĩ sư lập trình','tungnv@gmail.com',14,'Nam','Đang làm việc','https://m.thebank.vn/uploads/users/f8b4c999264ebabcba1dddf44cad57eb_daotranthu.jpeg'),(16,'Lê Tiến Đạt','0955484733','Hai Bà Trưng, Hà Nội','1997-12-04','kĩ sư lập trình','datlt@gmail.com',15,'Nam','Đang làm việc','https://img2.thuthuatphanmem.vn/uploads/2019/05/06/anh-the-nam-dep-nhat_100828554.jpg'),(17,'Lê thị Diễn','0955563573','Hai Bà Trưng, Hà Nội','1995-11-11','Phân tích hệ thống','dienlt@gmail.com',16,'Nữ','Đang làm việc','https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/03/mau-anh-the.jpg?ssl=1'),(18,'Nguyễn Thanh Hà','0847934734','Tiên Lữ, Hưng Yên','1997-03-22','Phân tích hệ thống','hant0@gmail.com',17,'Nữ','Đang làm việc','https://fn.vinhphuc.edu.vn/UploadImages/thptngogiatu/admin/2017_10/thu%2030.JPG'),(19,'Lê Hồng Phúc','0847974655','Đằng Giang, Ngô Quyền, Hải Phòng','2000-02-28','Nhân Viên Thiết Kế Giao Diện','phuchl00@gmail.com',18,'Nam','Đang làm việc','https://www.uit.edu.vn/sites/vi/files/image_from_word/va.jpeg'),(20,'Đồng Phúc Hậu','0984336557','Hai Bà Trưng, hà Nội','1999-02-28','Nhân Viên Thiết Kế Giao Diện','haudp00@gmail.com',19,'Nam','Đang làm việc','D:\\Xampp\\htdocs\\wordpress/wp-content\\QL_Du_An\\resources\\img/'),(21,'Trần Hoàng Thái','0984446437','Hai Bà Trưng, hà Nội','1999-07-02','Nhân Viên Thiết Kế Giao Diện','thaith00@gmail.com',20,'Nam','Đang làm việc','https://www.giasucantho.net.vn/gia-su/images/nguyen-phuoc-sang-3555.jpg'),(22,'Trần Thái Minh','0983646437','Thanh Xuân, hà Nội','1993-07-30','Nhân Viên Thiết Kế Giao Diện','minhtc0@gmail.com',21,'Nam','Đang làm việc','https://bizweb.dktcdn.net/100/175/849/files/bi-kip-chup-anh-the-dep-va-an-anh-05.jpg?v=1608028893933'),(23,'Hồng Thái Linh','098364435','Cầu Giấy, hà Nội','1996-09-15','Nhân viên kiểm thử','linhht0@gmail.com',22,'Nam','Đang làm việc','https://i.pinimg.com/564x/5e/6c/57/5e6c572eed026b75f81682e02f83a983.jpg'),(24,'Vũ Thị Thảo','098366635','Cầu Giấy, hà Nội','1998-03-15','Nhân viên kiểm thử','thaovt0@gmail.com',23,'Nữ','Đang làm việc','https://bizweb.dktcdn.net/100/175/849/files/chup-anh-chan-dung-lam-ho-so-nop-thcs-thpt-thi-vao-lop-10-cao-dang-dai-hoc-03.jpg?v=1594895178127'),(25,'Nguyễn Công Đức','098366635','Cầu Giấy, hà Nội','1998-02-22','Nhân viên kiểm thử','duccn0@gmail.com',24,'Nữ','Đang làm việc','https://toigingiuvedep.vn/wp-content/uploads/2021/07/anh-the.jpg'),(26,'Nguyễn Văn Phúc','0987349879','Đường Láng, Hà Nội','1998-02-22','Kỹ thuật viên điều khiển','phucnv0@gmail.com',25,'Nam','Đang làm việc','https://vn-test-11.slatic.net/p/a12f377df925c0bffdc309b91a2efcf4.jpg'),(27,'Dỗ Thị Quy','0933422577','Ba Đình, Hà Nội','1998-02-22','Kỹ thuật viên điều khiển','quydt0@gmail.com',26,'Nữ','Đang làm việc','https://tiemanhsky.com/wp-content/uploads/2020/03/jhjh-1-768x1024.jpg'),(28,'Lương Văn hải','0933422577','Hoàn Kiếm, Hà Nội','1992-03-08','Kỹ thuật viên điều khiển','hailv0@gmail.com',27,'nam','Đang làm việc','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWQyEU_CfGvsgKoJE628kiuSXLDbrBua5Rwg&usqp=CAU'),(29,'Đào Văn Long','0933422577','Hoàn Kiếm, Hà Nội','1999-08-03','kĩ sư lập trình','longdv0@gmail.com',28,'nam','Đang làm việc','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJWhCtkn2kvqdh1PBkqx3hrqfdPIeJ5exO4A-_9oPqT7-ZrphLivtVyt3Ny0rlfUvQYV4&usqp=CAU'),(30,'Lê hoàng Công','0933493247','Đống Đa, Hà Nội','1997-11-23','kĩ sư lập trình','conglh0@gmail.com',29,'nam','Đang làm việc','https://benhviensannhibacninh.vn/wp-content/uploads/2019/11/pk.jpg'),(31,'Vũ Minh Anh','0923224978','Tây Hồ, Hà Nội','2000-12-31','kĩ sư lập trình','anhvm0@gmail.com',30,'nữ','Đang làm việc','https://toplist.vn/images/800px/kieu-toc-va-mau-toc-812636.jpg'),(32,'Bùi Đức Minh','0869105701','Tiên Lữ, Hưng Yên','2002-04-13','Phân tích hệ thống','minhhezi1304@gmail.com',31,'nam','Đang làm việc','https://i.pinimg.com/736x/53/fa/94/53fa941122c8d54ec88af31eedd2f884.jpg'),(33,'Nguyễn Công Toàn','0939465882','Thủy Nguyên, Hải Phòng','2002-05-05','Nhân Viên Thiết Kế Giao Diện','toan0505@gmail.com',32,'nam','Đang làm việc','https://png.pngtree.com/png-clipart/20230729/ourlarge/pngtree-cute-fat-boy-sticker-png-image_9116119.png'),(34,'Nguyễn tiến thành','0939465882','Thủy Nguyên, Hải Phòng','2002-12-07','kĩ sư lập trình','vodanh12@gmail.com',33,'nam','Đang làm việc','https://donoithatdanang.com/wp-content/uploads/2021/11/hinh-anh-anime-boy-chibi.jpg');
 /*!40000 ALTER TABLE `thanhvien` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -613,4 +613,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-07  9:58:03
+-- Dump completed on 2024-06-10 18:55:27
