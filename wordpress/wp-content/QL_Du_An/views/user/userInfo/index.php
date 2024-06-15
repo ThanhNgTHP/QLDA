@@ -123,6 +123,16 @@
                 </button>
             </a>    
         </div>
+        <div class = "text-[40px] p-[10px_0_0_0]">
+            Chinh sửa thông tin cá nhân:
+        </div>
+        <div class="mr-[0] ml-[auto] col-span-4">
+            <a href="http://localhost/wordpress/edit-user-info/?staffID=<?php echo $User->Staff->ID ?>">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Chỉnh sửa
+                </button>
+            </a>    
+        </div>
 </div>
 
 <?php 

@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\team.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/team';
 
-wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'team_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -67,6 +67,7 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
     </form>
 
+    <?php $teams = array_reverse($teams);?>
     <?php foreach($teams as $key => $team): ?>
         <form action="" method="post">
             <div class="grid grid-cols-5 gap-1 
@@ -117,6 +118,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'team_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

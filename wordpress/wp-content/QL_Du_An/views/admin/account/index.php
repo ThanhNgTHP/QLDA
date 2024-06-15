@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\account.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/admin/account';
 
-wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'account_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -73,7 +73,8 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
         </div>
 
     </form>
-
+    
+    <?php $accounts = array_reverse($accounts);?>
     <?php foreach($accounts as $key => $account): ?>
         <form action="" method="post">
             <div class="grid grid-cols-5 gap-1 
@@ -128,6 +129,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'account_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

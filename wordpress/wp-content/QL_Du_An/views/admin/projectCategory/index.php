@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\project_category.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/project_category';
 
-wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'project_category_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -57,7 +57,8 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
         </div>
 
     </form>
-
+    
+    <?php $projectCategories = array_reverse($projectCategories);?>
     <?php foreach($projectCategories as $key => $projectCategory): ?>
         <form action="" method="post">
             <div class="grid grid-cols-3 gap-1 
@@ -95,6 +96,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'project_category_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

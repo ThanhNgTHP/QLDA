@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\department.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/department';
 
-wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'department_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -56,6 +56,7 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
     </form>
 
+    <?php $departments = array_reverse($departments);?>
     <?php foreach($departments as $key => $department): ?>
         <form action="" method="post">
             <div class="grid grid-cols-3 gap-1 
@@ -94,6 +95,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'department_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

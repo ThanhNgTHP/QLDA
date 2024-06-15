@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\permission.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/permission';
 
-wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'permission_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -58,7 +58,8 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
         </div>
 
     </form>
-
+    
+    <?php $permissions = array_reverse($permissions);?>
     <?php foreach($permissions as $key => $permission): ?>
         <form action="" method="post">
             <div class="grid grid-cols-3 gap-1 
@@ -97,6 +98,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'permission_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

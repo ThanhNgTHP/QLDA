@@ -112,6 +112,7 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
 
         </form>
 
+    <?php $staffs = array_reverse($staffs);?>
     <?php foreach($staffs as $key => $staff): ?>
         <form action="" method="post" enctype="multipart/form-data">
 

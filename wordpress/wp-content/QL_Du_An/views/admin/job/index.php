@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\job.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/job';
 
-wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -118,7 +118,8 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
         </div>
 
     </form>
-
+    
+    <?php $jobs = array_reverse($jobs);?>
     <?php foreach($jobs as $key => $job): ?>
         <form action="" method="post">
             <div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1 
@@ -221,6 +222,6 @@ wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'job_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

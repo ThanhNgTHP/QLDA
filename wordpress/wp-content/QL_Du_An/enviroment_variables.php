@@ -4,8 +4,8 @@
     putenv('PASSWORD=');
     putenv('DATABASE_NAME=qlduan');
     putenv('PORT='. 3306);
-    putenv('MYSQLDUMP='. 'D:/Xampp/mysql/bin/mysqldump');
-    putenv('MYSQL='. 'D:/Xampp/mysql/bin/mysql');
+    putenv('MYSQLDUMP='. 'D:/xampp/xampp_install/mysql/bin/mysqldump');
+    putenv('MYSQL='. 'D:/xampp/xampp_install/mysql/bin/mysql');
 
     putenv('DIR_ROOT=' . dirname(__FILE__));
     putenv('DIR_DB=' . getenv('DIR_ROOT').'/db');
