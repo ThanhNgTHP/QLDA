@@ -21,7 +21,11 @@ function GetNameProject($projectID){
     }));
     return $Project->Name;
 }
-function GetNameTeam($teamID){
+function GetNameTeam($staffID){
+    [$Staff] = array_values(array_filter(Staff::GetAllStaff(), function ($staff) use ($staffID){
+        return $staff->ID == $staffID;
+    }));
+    $teamID = $Staff->TeamID;
     [$Team] = array_values(array_filter(Team::GetAllTeam(), function ($team) use ($teamID){
         return $team->ID == $teamID;
     }));

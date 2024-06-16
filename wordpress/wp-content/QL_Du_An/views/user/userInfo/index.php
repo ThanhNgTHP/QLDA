@@ -66,7 +66,7 @@
 
 <div class="w-full m-[0_0_0_10px]">
     <div class = "text-[20px] "> 
-        <img class="w-[500px] m-auto" src="<?php echo $User->Staff->Avatar ?>" alt="Avatar" style="width: 300px;"> 
+        <img class="w-[500px] m-auto pt-[10px]" src="<?php echo $User->Staff->Avatar ?>" alt="Avatar" style="width: 300px;"> 
         <div class = "text-[40px] p-[10px_0_0_0]">
             Thông tin cá nhân:
         </div>
@@ -89,7 +89,7 @@
             <?php echo "Nơi cấp: " . $Qualification->Address ?><br>
         <?php endforeach; ?>
 
-        <!-- <div class = "text-[40px] p-[10px_0_0_0]">
+        <div class = "text-[40px] p-[10px_0_0_0]">
             Phòng ban - Nhóm:
         </div>
         <?php echo "Tên phòng ban: " . $Department->Name ?><br>
@@ -98,7 +98,7 @@
         <?php foreach($Teams as $key => $Team): ?>
             <?php echo "Tên nhóm: " . $Team->Name ?><br>
             <?php echo "Trường nhóm: " . $Team->Leader ?><br>
-        <?php endforeach; ?> -->
+        <?php endforeach; ?>
     </div>
 
     <div class = "text-[40px] p-[10px_0_0_0]">

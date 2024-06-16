@@ -17,23 +17,24 @@
     $status = $_POST['status'] ?? null;
     $avatar = $_FILES['avatar'] ?? null;
     $accountID = $_POST['accountID'] ?? null;
+    $teamID = $_POST['teamID'] ?? null;
 
     $method = $_POST['method'] ?? null;
 
     if($method === 'add' && isset($name) && isset($phone) && isset($address) && isset($birthday)
-    && isset($position) && isset($email) && isset($gender) && isset($status) && isset($accountID)){
+    && isset($position) && isset($email) && isset($gender) && isset($status) && isset($accountID) && isset($teamID)){
         if(isset($avatar)){
             move_uploaded_file($avatar["tmp_name"], $base_path_folder_image . '/' . $avatar["name"]);
         }
-        Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $base_path_folder_image . '/' . $avatar["name"]);
+        Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $base_path_folder_image . '/' . $avatar["name"], $teamID);
         $staffs = Staff::GetAllStaff();
     }
     else if($method === 'edit' && isset($id) && isset($name) && isset($phone) && isset($address) && isset($birthday)
-    && isset($position) && isset($email) && isset($gender) && isset($status) && isset($accountID)){
+    && isset($position) && isset($email) && isset($gender) && isset($status) && isset($accountID) && isset($teamID)){
         if(isset($avatar)){
             move_uploaded_file($avatar["tmp_name"], $base_path_folder_image . '/' . $avatar["name"]);
         }
-        Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $base_path_folder_image . '/' . $avatar["name"]);
+        Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $base_path_folder_image . '/' . $avatar["name"], $teamID);
         $staffs = Staff::GetAllStaff();
     }
     else if($method === 'delete' && isset($id)){
@@ -47,14 +48,14 @@
     else {
         $staffs = Staff::GetAllStaff();
     }
-    function Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar){
+    function Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar, $teamid){
         $staff = new Staff();
-        $staff->Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar);
+        $staff->Add($name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar, $teamid);
     }
 
-    function Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar){
+    function Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar, $teamid){
         $staff = new Staff();
-        $staff->Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar);
+        $staff->Edit($id, $name, $phone, $address, $birthday, $position, $email, $accountID, $gender, $status, $avatar, $teamid);
     }
 
     function Delete($id){

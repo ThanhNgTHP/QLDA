@@ -1166,15 +1166,15 @@
                 return $result;
             }
 
-            public function AddJob($JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID){
+            public function AddJob($JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID){
                 parent::connect();
 
                 if(isset($this->conn)){
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL ThemCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssssiiisddi", $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
+                    $stmt = $this->conn->prepare("CALL ThemCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssssiisddi", $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1182,15 +1182,15 @@
                 parent::disconnect();
             }
 
-            public function EditJob($JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID){
+            public function EditJob($JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID){
                 parent::connect();
 
                 if(isset($this->conn)){
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL SuaCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("isssssiiisddi", $JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $TeamID, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
+                    $stmt = $this->conn->prepare("CALL SuaCV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("isssssiisddi", $JobID, $JobName, $JobContent, $JobNote, $JobBegin, $JobEnd, $ProjectID, $JobProgress, $JobPriority, $JobTargetBudget, $JobActualBudget, $StaffID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1233,15 +1233,15 @@
                 return $result;
             }
 
-            public function AddStaff($StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar){
+            public function AddStaff($StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar, $TeamID){
                 parent::connect();
 
                 if(isset($this->conn)){
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL ThemTV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssssssisss", $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar);
+                    $stmt = $this->conn->prepare("CALL ThemTV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("ssssssisssi", $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar, $TeamID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1249,15 +1249,15 @@
                 parent::disconnect();
             }
 
-            public function EditStaff($StaffID, $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar){
+            public function EditStaff($StaffID, $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar, $TeamID){
                 parent::connect();
                 
                 if(isset($this->conn)){
                     /**
                      * @var bool|mysqli_stmt $stmt
                      */
-                    $stmt = $this->conn->prepare("CALL SuaTV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("issssssisss", $StaffID, $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar);
+                    $stmt = $this->conn->prepare("CALL SuaTV(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("issssssisssi", $StaffID, $StaffName, $StaffPhone, $StaffAddress, $StaffBirthDay, $StaffPosition, $StaffEmail, $AccountID, $StaffGender, $StaffStatus, $StaffAvatar, $TeamID);
                     $stmt->execute();
                     $stmt->close();
                 }
@@ -1550,6 +1550,22 @@
                 parent::disconnect();
 
                 return $result;
+            }
+
+            public function EditUserInfo($id, $name, $phone, $address, $birthday, $email, $gender){
+                parent::connect();
+
+                if(isset($this->conn)){
+                    /**
+                     * @var bool|mysqli_stmt $stmt
+                     */
+                    $stmt = $this->conn->prepare("CALL SuaThongTinNguoiDung(?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("issssss", $id, $name, $phone, $address, $birthday, $email, $gender);
+                    $stmt->execute();
+                    $stmt->close();
+                }
+
+                parent::disconnect();
             }
 
             public function ProjectListImage($projectID){

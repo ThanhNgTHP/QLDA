@@ -23,8 +23,8 @@
             /** @var Date $End */
             public  $End;
 
-            /** @var int $TeamID */
-            public  $TeamID;
+            // /** @var int $TeamID */
+            // public  $TeamID;
 
             /** @var int $ProjectID */
             public  $ProjectID;
@@ -67,7 +67,7 @@
                     $job->Note = $row['Note'];
                     $job->Begin = $row['Begin'];
                     $job->End = $row['End'];
-                    $job->TeamID = $row['TeamID'];
+                    // $job->TeamID = $row['TeamID'];
                     $job->ProjectID = $row['ProjectID'];
                     $job->Progress = $row['Progress'];
                     $job->Priority = $row['Priority'];
@@ -98,7 +98,7 @@
                         $job->Note = $row['Note'];
                         $job->Begin = $row['Begin'];
                         $job->End = $row['End'];
-                        $job->TeamID = $row['TeamID'];
+                        // $job->TeamID = $row['TeamID'];
                         $job->ProjectID = $row['ProjectID'];
                         $job->Progress = $row['Progress'];
                         $job->Priority = $row['Priority'];
@@ -149,15 +149,15 @@
                 return $staffs;
             }
             
-            public function Add($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID
+            public function Add($name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID
             ){
                 $actionDB = new ActionDB();
-                $actionDB->AddJob($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+                $actionDB->AddJob($name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
             }
 
-            public function Edit($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID){
+            public function Edit($id, $name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID){
                 $actionDB = new ActionDB();
-                $actionDB->EditJob($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+                $actionDB->EditJob($id, $name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
             }
             
             public function Delete($id){
@@ -181,7 +181,7 @@
                     $job->Note = $row['Note'];
                     $job->Begin = $row['Begin'];
                     $job->End = $row['End'];
-                    $job->TeamID = $row['TeamID'];
+                    // $job->TeamID = $row['TeamID'];
                     $job->ProjectID = $row['ProjectID'];
                     $job->Progress = $row['Progress'];
                     $job->Priority = $row['Priority'];

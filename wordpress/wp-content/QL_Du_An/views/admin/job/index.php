@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\job.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/job';
 
-wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
 ?>
 
@@ -20,7 +20,7 @@ wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
 
 <div class="overflow-auto">
 
-    <div class="text-xl grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1 
+    <div class="text-xl grid grid-cols-[repeat(12,_minmax(0,_1fr))] gap-1 
                     w-[400%]
                     p-[25px_0_0_0]
                     m-[50px_0_0_0]
@@ -36,14 +36,14 @@ wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
                     <div style="margin: auto;">Dộ ưu tiên</div>
                     <div style="margin: auto;">Tiến độ</div>
                     <div style="margin: auto;">Tên thành viên</div>
-                    <div style="margin: auto;">Tên nhóm</div>
+                    <!-- <div style="margin: auto;">Tên nhóm</div> -->
                     <div style="margin: auto;">Tên dự án</div>
                     <div style="margin: auto;">Ghi chú</div>
                     <div style="margin: auto;">Công cụ</div>
     </div>
 
     <form action="" method="post">
-        <div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1 
+        <div class="grid grid-cols-[repeat(12,_minmax(0,_1fr))] gap-1 
                     w-[400%]
                     p-[25px_0_0_0]
                     m-[50px_0_0_0]
@@ -90,13 +90,13 @@ wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
                     </select>
                 </div>
 
-                <div class="text-xl" style="margin: auto;">
+                <!-- <div class="text-xl" style="margin: auto;">
                     <select name="teamID" id="">
                         <?php foreach(Team::GetAllTeam() as $key => $team): ?>
                             <option value="<?php echo $team->ID; ?>"><?php echo $team->Name; ?> - <?php echo $team->ID; ?></option>
                         <?php endforeach; ?>
                     </select>
-                </div>
+                </div> -->
                 
                 <div class="text-xl" style="margin: auto;">
                     <select name="projectID" id="">
@@ -122,7 +122,7 @@ wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
     <?php $jobs = array_reverse($jobs);?>
     <?php foreach($jobs as $key => $job): ?>
         <form action="" method="post">
-            <div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1 
+            <div class="grid grid-cols-[repeat(12,_minmax(0,_1fr))] gap-1 
                         w-[400%]
                         p-[25px_0_0_0]
                         m-[50px_0_0_0]
@@ -178,7 +178,7 @@ wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
                     </select>
                 </div>
 
-                <div class="text-xl" style="margin: auto;">
+                <!-- <div class="text-xl" style="margin: auto;">
                     <select name="teamID" id="">
                         <?php $teamSelect = $job->GetTeam();?>
                         <option value="<?php echo $teamSelect->ID ?>"><?php echo $teamSelect->Name . '-' . $teamSelect->ID; ?></option>
@@ -188,7 +188,7 @@ wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
-                </div>
+                </div> -->
 
                 <div class="text-xl" style="margin: auto;">
                     <select name="projectID" id="">
@@ -222,6 +222,6 @@ wp_enqueue_style( 'job_style', $current_directory_url.'/index.css' );
 <?php
 
 wp_enqueue_script('tailwind_script', 'https://cdn.tailwindcss.com', array(), time(), true);
-wp_enqueue_script( 'job_script', $current_directory_url.'/index.js', array(), time(), true);
+wp_enqueue_script( 'login_script', $current_directory_url.'/index.js', array(), time(), true);
 
 ?>

@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\backup.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/admin/backup';
 
-wp_enqueue_style( 'backup_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
 ?>
 <div class="text-[50px]">

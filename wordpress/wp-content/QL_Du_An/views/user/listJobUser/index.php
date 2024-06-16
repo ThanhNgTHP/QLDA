@@ -68,7 +68,7 @@ wp_enqueue_style('list_job_user_style', $current_directory . '/index.css');
 
                     <div>
                         <div>
-                            Tên nhóm: <?php echo GetNameTeam($job->TeamID); ?>
+                            Tên nhóm: <?php echo GetNameTeam($job->StaffID); ?>
                         </div>
                         <br>
                         <div>

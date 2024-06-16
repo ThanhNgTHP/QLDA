@@ -18,6 +18,8 @@
     $teams = [];
     $departments = [];
 
+    // print_r(gettype($jobs));exit;
+
     foreach($jobs as $key => $job){
         $team = GetTeam($job);
         $teams[] = $team;
@@ -41,7 +43,12 @@
     }
 
     function GetTeam($job){
-        return $job->GetTeam();
+        $staffID = $job->StaffID;
+        [$Staff] = array_values(array_filter(Staff::GetAllStaff(), function ($staff) use ($staffID){
+            return $staff->ID == $staffID;
+        }));
+
+        return $Staff->GetTeams();
     }
 
     function GetDepartment($team)

@@ -19,7 +19,7 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
 
 <div class="overflow-auto">
 
-    <div class="text-xl grid grid-cols-11 gap-1 
+    <div class="text-xl grid grid-cols-12 gap-1 
                         w-[300%]
                         p-[25px_0_0_0]
                         m-[50px_0_0_0]
@@ -36,12 +36,13 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
                         <div style="margin: auto;">Chức vụ</div>
                         <div style="margin: auto;">Trạng thái</div>
                         <div style="margin: auto;">Tài khoản</div>
+                        <div style="margin: auto;">Nhóm</div>
                         <div style="margin: auto;">Công cụ</div>
         </div>
 
         <form action="" method="post" enctype="multipart/form-data">
 
-            <div class="grid grid-cols-11 gap-1 
+            <div class="grid grid-cols-12 gap-1 
                         w-[300%]
                         p-[25px_0_0_0]
                         m-[50px_0_0_0]
@@ -102,6 +103,14 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
                         <?php endforeach; ?>
                     </select>
                 </div>
+
+                <div class="text-xl" style="margin: auto;">
+                    <select name="teamID" id="">
+                        <?php foreach(Team::GetAllTeam() as $key => $team): ?>
+                            <option value="<?php echo $team->ID; ?>"><?php echo $team->Name; ?> - <?php echo $team->ID; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                 
                 <div style="margin: auto;">
                     <button type="submit" name="method" value="add" class="text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
@@ -116,7 +125,7 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
     <?php foreach($staffs as $key => $staff): ?>
         <form action="" method="post" enctype="multipart/form-data">
 
-            <div class="grid grid-cols-11 gap-1 
+            <div class="grid grid-cols-12 gap-1 
                         w-[300%]
                         p-[25px_0_0_0]
                         m-[50px_0_0_0]
@@ -184,6 +193,18 @@ wp_enqueue_style( 'staff_style', $current_directory_url.'/index.css' );
                         <?php foreach(Account::GetAllAccount() as $key => $account): ?>
                             <?php if($accountSelect->ID !== $account->ID): ?>
                             <option  value="<?php echo $account->ID ?>"><?php echo $account->Name . '-' . $account->ID; ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="text-xl" style="margin: auto;">
+                    <select name="teamID" id="">
+                        <?php $teamSelect = $staff->GetTeams();?>
+                        <option value="<?php echo $teamSelect->ID ?>"><?php echo $teamSelect->Name . '-' . $teamSelect->ID; ?></option>
+                        <?php foreach(Team::GetAllTeam() as $key => $team): ?>
+                            <?php if($teamSelect->ID !== $team->ID): ?>
+                            <option  value="<?php echo $team->ID ?>"><?php echo $team->Name . '-' . $team->ID; ?></option>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </select>

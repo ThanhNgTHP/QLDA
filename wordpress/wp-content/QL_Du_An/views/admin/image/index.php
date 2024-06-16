@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\image.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/admin/image';
 
-wp_enqueue_style( 'image_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
 ?>
 

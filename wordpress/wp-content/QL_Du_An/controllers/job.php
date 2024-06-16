@@ -9,7 +9,7 @@
     $note = $_POST['note'] ?? null;
     $begin = $_POST['begin'] ?? null;
     $end = $_POST['end'] ?? null;
-    $teamID = $_POST['teamID'] ?? null;
+    // $teamID = $_POST['teamID'] ?? null;
     $projectID = $_POST['projectID'] ?? null;
     $progress = $_POST['progress'] ?? null;
     $priority = $_POST['priority'] ?? null;
@@ -20,17 +20,17 @@
     $method = $_POST['method'] ?? null;
 
     if($method === 'add' && isset($name) && isset($content) && isset($note) 
-    && isset($begin) && isset($end) && isset($teamID) && isset($projectID)
+    && isset($begin) && isset($end) && isset($projectID)
     && isset($progress) && isset($priority) && isset($targetBudget)
     && isset($actualBudget) && isset($staffID)){
-        Add($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+        Add($name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
         $jobs = Job::GetAllJob();
     }
     else if($method === 'edit' && isset($id) && isset($name) && isset($content) && isset($note) 
-    && isset($begin) && isset($end) && isset($teamID) && isset($projectID)
+    && isset($begin) && isset($end) && isset($projectID)
     && isset($progress) && isset($priority) && isset($targetBudget)
     && isset($actualBudget) && isset($staffID)){
-        Edit($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+        Edit($id, $name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
         $jobs = Job::GetAllJob();
     }
     else if($method === 'delete' && isset($id)){
@@ -45,14 +45,14 @@
         $jobs = Job::GetAllJob();
     }
 
-    function Add($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID){
+    function Add($name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID){
         $job = new Job();
-        $job->Add($name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+        $job->Add($name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
     }
 
-    function Edit($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID){
+    function Edit($id, $name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID){
         $job = new Job();
-        $job->Edit($id, $name, $content, $note, $begin, $end, $teamID, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
+        $job->Edit($id, $name, $content, $note, $begin, $end, $projectID, $progress, $priority, $targetBudget, $actualBudget, $staffID);
     }
 
     function Delete($id){

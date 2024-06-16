@@ -14,18 +14,18 @@ $staff = new Staff();
 $staff = GetStaffInfo($staffID);
 
 $id = $_POST['id'] ?? null;
-$name = $_POST['name'] ?? null;
-$gender = $_POST['gender'] ?? null;
-$birthday = $_POST['birthday'] ?? null;
-$phone = $_POST['phone'] ?? null;
-$email = $_POST['email'] ?? null;
-// $address = $_POST['address'] ?? null;
+$name = $_POST['name_user'] ?? null;
+$gender = $_POST['gender_user'] ?? null;
+$birthday = $_POST['birthday_user'] ?? null;
+$phone = $_POST['phone_user'] ?? null;
+$email = $_POST['email_user'] ?? null;
+$address = $_POST['address_user'] ?? null;
 
 
 $method = $_POST['method'] ?? null;
 if($method === 'request_editing'){
     // print_r($id.' '. $name.' '. $phone.' '. $address.' '. $birthday.' '. $email.' '. $gender);exit;
-    print_r("abc");exit;
+    // print_r("abc");exit;
     $action = new ActionDB();
     $action->EditUserInfo($id, $name, $phone, $address, $birthday, $email, $gender);
     $staff = GetStaffInfo($staffID);

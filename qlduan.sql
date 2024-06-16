@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 14, 2024 lúc 01:36 PM
+-- Thời gian đã tạo: Th6 16, 2024 lúc 02:06 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -37,9 +37,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaBCCC` (`maBC` INT, `tenBC` VARCH
     WHERE bangcapchungchi.MaBC = maBC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaCV` (IN `maCV` INT, IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maNhom` INT, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaCV` (IN `maCV` INT, IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
     UPDATE congviec 
-    SET congviec.TenCV = tenCV, congviec.NoiDung = noiDung, congviec.NgayKetThuc = ngayKetThuc, congviec.NgayBatDau = ngayBatDau, congviec.NganSachDuKien = nganSachDuKien, congviec.TienDo = tienDo, congviec.GhiChu = ghiChu, congviec.MaDA = maDA, congviec.NganSachThucTe = nganSachThucTe, congviec.MaNhom = maNhom, congviec.MaTV = maTV, congviec.DoUuTien = doUuTien
+    SET congviec.TenCV = tenCV, congviec.NoiDung = noiDung, congviec.NgayKetThuc = ngayKetThuc, congviec.NgayBatDau = ngayBatDau, congviec.NganSachDuKien = nganSachDuKien, congviec.TienDo = tienDo, congviec.GhiChu = ghiChu, congviec.MaDA = maDA, congviec.NganSachThucTe = nganSachThucTe, congviec.MaTV = maTV, congviec.DoUuTien = doUuTien
     WHERE congviec.MaCV = maCV;
 END$$
 
@@ -98,15 +98,21 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaSK` (`maSK` INT, `tenSK` VARCHAR
     WHERE sukien.MaSK = maSK;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaThongTinNguoiDung` (IN `maTV` INT, IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `email` VARCHAR(64), IN `gioiTinh` VARCHAR(20))   BEGIN
+    UPDATE thanhvien 
+    SET thanhvien.HoTen = hoTen, thanhvien.SDT = sDT, thanhvien.DiaChi = diaChi, thanhvien.NgaySinh = ngaySinh, thanhvien.Email = email, thanhvien.GioiTinh = gioiTinh
+    WHERE thanhvien.MaTV = maTV;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaTK` (IN `maTK` INT, IN `tenTK` VARCHAR(255), IN `matKhau` VARCHAR(255), IN `maQuyen` INT, IN `trangThai` VARCHAR(255))   BEGIN
 	UPDATE taikhoan 
     SET taikhoan.TenTK = tenTK, taikhoan.MatKhau = matKhau, taikhoan.MaQuyen = maQuyen, taikhoan.TrangThai = trangThai
     WHERE taikhoan.MaTK = MaTK;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaTV` (IN `maTV` INT, IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SuaTV` (IN `maTV` INT, IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255), `maNhom` INT)   BEGIN
     UPDATE thanhvien 
-    SET thanhvien.HoTen = hoTen, thanhvien.SDT = sDT, thanhvien.DiaChi = diaChi, thanhvien.NgaySinh = ngaySinh, thanhvien.ChucVu = chucVu, thanhvien.Email = email, thanhvien.MaTK = maTK, thanhvien.GioiTinh = gioiTinh, thanhvien.TrangThai = trangThai, thanhvien.AnhDaiDien = anhDaiDien
+    SET thanhvien.HoTen = hoTen, thanhvien.SDT = sDT, thanhvien.DiaChi = diaChi, thanhvien.NgaySinh = ngaySinh, thanhvien.ChucVu = chucVu, thanhvien.Email = email, thanhvien.MaTK = maTK, thanhvien.GioiTinh = gioiTinh, thanhvien.TrangThai = trangThai, thanhvien.AnhDaiDien = anhDaiDien, thanhvien.MaNhom = maNhom
     WHERE thanhvien.MaTV = maTV;
 END$$
 
@@ -124,8 +130,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemBCCC` (`tenBC` VARCHAR(255), `n
 	INSERT INTO `bangcapchungchi`(`TenBC`, `NgayCap`, `NoiCap`, `MaTV`) VALUES (tenBC, ngayCap, noiCap, maTV);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maNhom` INT, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
-    INSERT INTO `congviec`(`TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maNhom, maTV, doUuTien);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemCV` (IN `tenCV` VARCHAR(255), IN `noiDung` TEXT, IN `ghiChu` TEXT, IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `maDA` INT, IN `tienDo` INT, IN `doUuTien` VARCHAR(255), IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `maTV` INT)   BEGIN
+    INSERT INTO congviec(TenCV, NoiDung, NgayKetThuc, NgayBatDau, NganSachDuKien, TienDo, GhiChu, MaDA, NganSachThucTe, MaTV, DoUuTien) VALUES (tenCV, noiDung, ngayKetThuc, ngayBatDau, nganSachDuKien, tienDo, ghiChu, maDA, nganSachThucTe, maTV, doUuTien);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemDA` (IN `tenDA` VARCHAR(255), IN `ngayBatDau` DATE, IN `ngayKetThuc` DATE, IN `trangThai` TEXT, IN `lienHe` TEXT, IN `moTa` TEXT, IN `maLoaiDA` INT, IN `nganSachDuKien` FLOAT, IN `nganSachThucTe` FLOAT, IN `tienDo` INT)   BEGIN
@@ -168,8 +174,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTK` (`tenTK` VARCHAR(255), `mat
     INSERT INTO `taikhoan`(`TenTK`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES (tenTK, matKhau, maquyen, trangthai);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTV` (IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255))   BEGIN
-    INSERT INTO `thanhvien`(`HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`) VALUES (hoTen, sDT, diaChi, ngaySinh, chucVu, email, maTK, gioiTinh, trangThai, anhDaiDien);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTV` (IN `hoTen` VARCHAR(30), IN `sDT` VARCHAR(10), IN `diaChi` VARCHAR(255), IN `ngaySinh` DATE, IN `chucVu` VARCHAR(255), IN `email` VARCHAR(64), IN `maTK` INT, IN `gioiTinh` VARCHAR(20), IN `trangThai` VARCHAR(255), IN `anhDaiDien` VARCHAR(255), `maNhom` INT)   BEGIN
+    INSERT INTO thanhvien(HoTen, SDT, DiaChi, NgaySinh, ChucVu, Email, MaTK, GioiTinh, TrangThai, AnhDaiDien, MaNhom) VALUES (hoTen, sDT, diaChi, ngaySinh, chucVu, email, maTK, gioiTinh, trangThai, anhDaiDien, maNhom);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThemTVTG` (`maTV` INT, `maDA` INT)   BEGIN
@@ -274,7 +280,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaBC` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaCV` ()   BEGIN
-  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
+  SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
   FROM congviec;
 END$$
 
@@ -330,19 +336,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTK` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTatCaTV` ()   BEGIN
-    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay
+    SELECT MaTV AS ID, HoTen AS Name, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, thanhvien.MaTK AS AccountID, thanhvien.NgaySinh AS BirthDay, thanhvien.MaNhom AS TeamID
     FROM thanhvien;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinThanhVienThamGiaDuAn` (IN `MaDA` INT)   BEGIN
-    SELECT HoTen AS Name, GioiTinh AS Gender, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID
+    SELECT HoTen AS Name, GioiTinh AS Gender, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, congviec.MaTV AS StaffID
     FROM congviec 
     INNER JOIN thanhvien ON thanhvien.MaTV = congviec.MaTV
     WHERE congviec.MaDA = MaDA;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ThongTinTV` (IN `MaTV` INT)   BEGIN
-    SELECT HoTen AS StaffName, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status
+    SELECT HoTen AS StaffName, GioiTinh AS Gender, NgaySinh AS Birthday, SDT AS Phone, Email, DiaChi AS Address, ChucVu AS Position, AnhDaiDien AS Avatar, TrangThai AS Status, MaNhom AS TeamID
     FROM thanhvien WHERE thanhvien.MaTV = MaTV;
 END$$
 
@@ -379,7 +385,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemCV` (IN `TenCV` VARCHAR(255))   BEGIN
     SET @TenCV = CONCAT('%', TenCV , '%');
-    SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaNhom AS TeamID, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
+    SELECT congviec.MaCV AS ID, congviec.TenCV AS Name, congviec.NoiDung AS Content, congviec.NgayKetThuc AS End, congviec.NgayBatDau AS Begin, congviec.NganSachDuKien AS TargetBudget, congviec.TienDo AS Progress, congviec.GhiChu AS Note, congviec.MaDA AS ProjectID, congviec.NganSachThucTe AS ActualBudget, congviec.MaTV AS StaffID, congviec.DoUuTien AS Priority
     FROM congviec
     WHERE congviec.TenCV LIKE @TenCV;
 END$$
@@ -449,7 +455,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TimKiemTV` (IN `HoTen` VARCHAR(255))   BEGIN
     SET @HoTen = CONCAT('%', HoTen , '%');
-    SELECT MaTV AS ID, thanhvien.HoTen AS Name, thanhvien.SDT AS Phone, thanhvien.DiaChi AS Address, thanhvien.NgaySinh as BirthDay, thanhvien.ChucVu AS Position, thanhvien.Email AS Email, thanhvien.MaTK AS AccountID, thanhvien.GioiTinh AS Gender, thanhvien.TrangThai AS Status, thanhvien.AnhDaiDien AS Avatar
+    SELECT MaTV AS ID, thanhvien.HoTen AS Name, thanhvien.SDT AS Phone, thanhvien.DiaChi AS Address, thanhvien.NgaySinh as BirthDay, thanhvien.ChucVu AS Position, thanhvien.Email AS Email, thanhvien.MaTK AS AccountID, thanhvien.GioiTinh AS Gender, thanhvien.TrangThai AS Status, thanhvien.AnhDaiDien AS Avatar, thanhvien.MaNhom AS TeamID
     FROM thanhvien
     WHERE thanhvien.HoTen LIKE @HoTen;
 END$$
@@ -628,7 +634,6 @@ CREATE TABLE `congviec` (
   `GhiChu` text DEFAULT NULL,
   `MaDA` int(11) DEFAULT NULL,
   `NganSachThucTe` float DEFAULT NULL,
-  `MaNhom` int(11) DEFAULT NULL,
   `MaTV` int(11) DEFAULT NULL,
   `DoUuTien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -637,33 +642,33 @@ CREATE TABLE `congviec` (
 -- Đang đổ dữ liệu cho bảng `congviec`
 --
 
-INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaNhom`, `MaTV`, `DoUuTien`) VALUES
-(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 62, 'cần lấy dữ liệu chính xác', 1, 840, 5, 2, 'cao'),
-(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 57, 'không có', 1, 6060, 5, 2, 'cao'),
-(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 83, 'không có', 1, 9147.15, 3, 1, 'cao'),
-(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 7, 6, 'cao'),
-(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 6, 4, 'cao'),
-(8, 'Xác định yêu cầu', 'không có', '2005-06-16', '2005-06-20', 1500, 100, 'không có', 2, 500, 5, 2, 'cao'),
-(9, 'Chọn giải pháp', 'không có', '2005-06-21', '2005-06-30', 1250, 100, 'không có', 2, 755, 5, 2, 'cao'),
-(10, 'Triển khai hệ thống', 'không có', '2005-07-01', '2005-12-15', 1250, 10, 'không có', 2, 8787, 3, 1, 'cao'),
-(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 6, 4, 'cao'),
-(13, 'Duy trì và nâng cấp', 'không có', '2005-12-30', '2006-01-01', 1000, 10, 'không có', 2, 1200, 4, 1, 'high'),
-(14, 'Cập nhật phần mềm quản trị mạng và firmware thiết bị mạng', 'không có', '2006-01-02', '2006-01-10', 1000, 10, 'không có', 2, 1200, 5, 1, 'high'),
-(15, 'Nâng cấp hệ thống', 'không có', '2006-01-11', '2006-01-15', 1009.3, 10, 'không có', 2, 1200, 6, 1, 'high'),
-(16, 'Đảm bảo hoạt động của hệ thống', 'Đảm bảo hệ thống luôn hoạt động an toàn và hiệu quả', '2006-01-16', '2006-01-17', 1000, 10, 'không có', 2, 1200, 7, 1, 'high'),
-(17, 'Lập kế hoạch dự phòng và khôi phục', 'không có', '2006-01-18', '2006-01-20', 1000, 10, 'không có', 2, 1200, 4, 1, 'high'),
-(27, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng, phần mềm, chức năng cần thiết cho hệ thống', '2013-12-20', '2014-02-03', 0, 100, 'Thông tin dữ liệu chính xác', 17, 0, 5, 17, 'cao'),
-(28, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2013-12-20', '2014-02-03', 750, 100, 'cần lấy dữ liệu chính xác', 17, 523, 5, 18, 'Cao'),
-(29, 'triển khai hệ thống', 'Không có', '2014-07-22', '2014-02-03', 1200, 100, 'cần lấy dữ liệu chính xác', 17, 1172, 6, 28, 'Cao'),
-(30, 'triển khai hệ thống', 'Không có', '2014-07-22', '2014-02-03', 1200, 100, 'cần lấy dữ liệu chính xác', 17, 1172, 6, 27, 'Cao'),
-(32, 'Kiểm thử hệ thống', 'Không có', '2014-12-02', '2014-07-22', 900, 100, 'kiểm thử kĩ càng', 17, 921, 6, 24, 'Cao'),
-(33, 'Thiết kế giao diện', 'cần tối ưu', '2015-06-22', '2014-12-02', 900, 100, 'thiết kế gọn gàng', 17, 921, 6, 19, 'Cao'),
-(34, 'kiểm thử hệ thống', 'cần tối ưu', '2016-01-02', '2015-06-22', 2000, 100, 'thiết kế gọn gàng', 17, 1722, 6, 23, 'Cao'),
-(35, 'Phân tích thiết kế hệ thống và làm báo cáo', 'PTTKHT', '2024-02-07', '2024-06-10', 1500, 100, 'hoàn thiện trước hạn', 18, 0, 5, 32, 'Trung Cao'),
-(36, 'Thiết kế giao diện, hỗ trợ lập trình', 'Thiết kế giao diện, hỗ trợ lập trình thành viên: Nguyễn Tiến Thànhh', '2024-02-07', '2024-06-10', 800, 90, 'hoàn thiện', 18, 0, 4, 33, 'Cao'),
-(37, 'lập trình các chức năng của website', 'lập trình các chức năng theo yêu cầu', '2024-02-07', '2024-06-10', 500, 90, 'hoàn thiện', 18, 0, 3, 34, 'Cao'),
-(38, 'aaa1', 'aaa', '2024-05-15', '2024-05-01', 2000, 0, 'abc', 19, 500, 7, 2, 'cao'),
-(39, 'aaa2', 'babc', '2024-06-01', '2024-07-01', 4000, 0, 'gcayasugbc', 19, 200, 3, 3, 'cao');
+INSERT INTO `congviec` (`MaCV`, `TenCV`, `NoiDung`, `NgayKetThuc`, `NgayBatDau`, `NganSachDuKien`, `TienDo`, `GhiChu`, `MaDA`, `NganSachThucTe`, `MaTV`, `DoUuTien`) VALUES
+(1, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2016-02-02', '2016-03-02', 2000, 62, 'cần lấy dữ liệu chính xác', 1, 840, 2, 'cao'),
+(2, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng và phần mềm', '2016-03-02', '2016-06-02', 10000, 57, 'không có', 1, 6060, 2, 'cao'),
+(3, 'triển khai hệ thống', 'lắp đặt phần cứng và phần mềm của hệ thống', '2016-06-02', '2016-08-02', 15000, 83, 'không có', 1, 9147.15, 1, 'cao'),
+(4, 'Kiểm thử hệ thống', 'Kiểm tra và thử nghiệm hệ thống', '2016-08-02', '2016-09-02', 1000, 0, 'không có', 1, 1550, 6, 'cao'),
+(5, 'Vận hành và bảo trì hệ thống', 'Huấn luyện cán bộ vận hành và sử dụng hệ thống. Chuyển giao hệ thống', '2016-09-02', '2016-10-02', 2000, 0, 'không có', 1, 1600, 4, 'cao'),
+(8, 'Xác định yêu cầu', 'không có', '2005-06-16', '2005-06-20', 1500, 100, 'không có', 2, 500, 2, 'cao'),
+(9, 'Chọn giải pháp', 'không có', '2005-06-21', '2005-06-30', 1250, 100, 'không có', 2, 755, 2, 'cao'),
+(10, 'Triển khai hệ thống', 'không có', '2005-07-01', '2005-12-15', 1250, 10, 'không có', 2, 8787, 1, 'cao'),
+(11, 'Quản lý và vận hành', 'không có', '2005-12-16', '2005-12-30', 1200, 0, 'không có', 2, 1200, 4, 'cao'),
+(13, 'Duy trì và nâng cấp', 'không có', '2005-12-30', '2006-01-01', 1000, 10, 'không có', 2, 1200, 1, 'high'),
+(14, 'Cập nhật phần mềm quản trị mạng và firmware thiết bị mạng', 'không có', '2006-01-02', '2006-01-10', 1000, 10, 'không có', 2, 1200, 1, 'high'),
+(15, 'Nâng cấp hệ thống', 'không có', '2006-01-11', '2006-01-15', 1009.3, 10, 'không có', 2, 1200, 1, 'high'),
+(16, 'Đảm bảo hoạt động của hệ thống', 'Đảm bảo hệ thống luôn hoạt động an toàn và hiệu quả', '2006-01-16', '2006-01-17', 1000, 10, 'không có', 2, 1200, 1, 'high'),
+(17, 'Lập kế hoạch dự phòng và khôi phục', 'không có', '2006-01-18', '2006-01-20', 1000, 10, 'không có', 2, 1200, 1, 'high'),
+(27, 'phân tích thiết kế hệ thống', 'sơ đồ hệ thống, các thành phần phần cứng, phần mềm, chức năng cần thiết cho hệ thống', '2013-12-20', '2014-02-03', 0, 100, 'Thông tin dữ liệu chính xác', 17, 0, 17, 'cao'),
+(28, 'khảo sát hệ thống', 'xác định mục đích, mục tiêu, yêu cầu của hệ thống, tài liệu, dữ liệu liên quan đến hệ thống', '2013-12-20', '2014-02-03', 750, 100, 'cần lấy dữ liệu chính xác', 17, 523, 18, 'Cao'),
+(29, 'triển khai hệ thống', 'Không có', '2014-07-22', '2014-02-03', 1200, 100, 'cần lấy dữ liệu chính xác', 17, 1172, 28, 'Cao'),
+(30, 'triển khai hệ thống', 'Không có', '2014-07-22', '2014-02-03', 1200, 100, 'cần lấy dữ liệu chính xác', 17, 1172, 27, 'Cao'),
+(32, 'Kiểm thử hệ thống', 'Không có', '2014-12-02', '2014-07-22', 900, 100, 'kiểm thử kĩ càng', 17, 921, 24, 'Cao'),
+(33, 'Thiết kế giao diện', 'cần tối ưu', '2015-06-22', '2014-12-02', 900, 100, 'thiết kế gọn gàng', 17, 921, 19, 'Cao'),
+(34, 'kiểm thử hệ thống', 'cần tối ưu', '2016-01-02', '2015-06-22', 2000, 100, 'thiết kế gọn gàng', 17, 1722, 23, 'Cao'),
+(35, 'Phân tích thiết kế hệ thống và làm báo cáo', 'PTTKHT', '2024-02-07', '2024-06-10', 1500, 100, 'hoàn thiện trước hạn', 18, 0, 32, 'Trung Cao'),
+(36, 'Thiết kế giao diện, hỗ trợ lập trình', 'Thiết kế giao diện, hỗ trợ lập trình thành viên: Nguyễn Tiến Thànhh', '2024-02-07', '2024-06-10', 800, 90, 'hoàn thiện', 18, 0, 33, 'Cao'),
+(37, 'lập trình các chức năng của website', 'lập trình các chức năng theo yêu cầu', '2024-02-07', '2024-06-10', 500, 90, 'hoàn thiện', 18, 0, 34, 'Cao'),
+(38, 'aaa1', 'aaa', '2024-05-15', '2024-05-01', 2000, 0, 'abc', 19, 500, 2, 'cao'),
+(39, 'aaa2', 'babc', '2024-06-01', '2024-07-01', 4000, 0, 'gcayasugbc', 19, 200, 3, 'cao');
 
 --
 -- Bẫy `congviec`
@@ -1060,40 +1065,41 @@ CREATE TABLE `thanhvien` (
   `MaTK` int(11) DEFAULT NULL,
   `GioiTinh` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 'Nam',
   `TrangThai` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `AnhDaiDien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
+  `AnhDaiDien` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `MaNhom` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `thanhvien`
 --
 
-INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`) VALUES
-(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'kĩ sư lập trình', 'nguyenvantung@gmail.com', 8, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg'),
-(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Phân tích hệ thống', 'buithihoan@gmail.com', 9, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg'),
-(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 10, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg'),
-(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Kỹ thuật viên điều khiển', 'Dan50302@gmail.com', 11, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG'),
-(6, 'Phạm Tiến Đồng', '0978563485', 'Trung hòa, Cầu Giấy, HN', '1989-04-05', 'Nhân viên kiểm thử', 'phamdong@gmail.com', 12, 'Nam', 'Đang làm việc', 'https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg'),
-(13, 'Đồng Nguyên Chất', '0124934734', 'Thanh xuân, Hà Nội', '1995-03-23', 'kĩ sư lập trình', 'cunguyenchat@gmail.com', 13, 'Nam', 'Đang làm việc', 'https://haycafe.vn/wp-content/uploads/2021/12/Mau-anh-the-nam.jpg'),
-(14, 'Nguyễn văn Tùng', '0123957347', 'Nam Từ Niêm, Hà Nội', '1996-06-02', 'kĩ sư lập trình', 'tungnv@gmail.com', 14, 'Nam', 'Đang làm việc', 'https://m.thebank.vn/uploads/users/f8b4c999264ebabcba1dddf44cad57eb_daotranthu.jpeg'),
-(16, 'Lê Tiến Đạt', '0955484733', 'Hai Bà Trưng, Hà Nội', '1997-12-04', 'kĩ sư lập trình', 'datlt@gmail.com', 15, 'Nam', 'Đang làm việc', 'https://img2.thuthuatphanmem.vn/uploads/2019/05/06/anh-the-nam-dep-nhat_100828554.jpg'),
-(17, 'Lê thị Diễn', '0955563573', 'Hai Bà Trưng, Hà Nội', '1995-11-11', 'Phân tích hệ thống', 'dienlt@gmail.com', 16, 'Nữ', 'Đang làm việc', 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/03/mau-anh-the.jpg?ssl=1'),
-(18, 'Nguyễn Thanh Hà', '0847934734', 'Tiên Lữ, Hưng Yên', '1997-03-22', 'Phân tích hệ thống', 'hant0@gmail.com', 17, 'Nữ', 'Đang làm việc', 'https://fn.vinhphuc.edu.vn/UploadImages/thptngogiatu/admin/2017_10/thu%2030.JPG'),
-(19, 'Lê Hồng Phúc', '0847974655', 'Đằng Giang, Ngô Quyền, Hải Phòng', '2000-02-28', 'Nhân Viên Thiết Kế Giao Diện', 'phuchl00@gmail.com', 18, 'Nam', 'Đang làm việc', 'https://www.uit.edu.vn/sites/vi/files/image_from_word/va.jpeg'),
-(20, 'Đồng Phúc Hậu', '0984336557', 'Hai Bà Trưng, hà Nội', '1999-02-28', 'Nhân Viên Thiết Kế Giao Diện', 'haudp00@gmail.com', 19, 'Nam', 'Đang làm việc', 'D:\\Xampp\\htdocs\\wordpress/wp-content\\QL_Du_An\\resources\\img/'),
-(21, 'Trần Hoàng Thái', '0984446437', 'Hai Bà Trưng, hà Nội', '1999-07-02', 'Nhân Viên Thiết Kế Giao Diện', 'thaith00@gmail.com', 20, 'Nam', 'Đang làm việc', 'https://www.giasucantho.net.vn/gia-su/images/nguyen-phuoc-sang-3555.jpg'),
-(22, 'Trần Thái Minh', '0983646437', 'Thanh Xuân, hà Nội', '1993-07-30', 'Nhân Viên Thiết Kế Giao Diện', 'minhtc0@gmail.com', 21, 'Nam', 'Đang làm việc', 'https://bizweb.dktcdn.net/100/175/849/files/bi-kip-chup-anh-the-dep-va-an-anh-05.jpg?v=1608028893933'),
-(23, 'Hồng Thái Linh', '098364435', 'Cầu Giấy, hà Nội', '1996-09-15', 'Nhân viên kiểm thử', 'linhht0@gmail.com', 22, 'Nam', 'Đang làm việc', 'https://i.pinimg.com/564x/5e/6c/57/5e6c572eed026b75f81682e02f83a983.jpg'),
-(24, 'Vũ Thị Thảo', '098366635', 'Cầu Giấy, hà Nội', '1998-03-15', 'Nhân viên kiểm thử', 'thaovt0@gmail.com', 23, 'Nữ', 'Đang làm việc', 'https://bizweb.dktcdn.net/100/175/849/files/chup-anh-chan-dung-lam-ho-so-nop-thcs-thpt-thi-vao-lop-10-cao-dang-dai-hoc-03.jpg?v=1594895178127'),
-(25, 'Nguyễn Công Đức', '098366635', 'Cầu Giấy, hà Nội', '1998-02-22', 'Nhân viên kiểm thử', 'duccn0@gmail.com', 24, 'Nữ', 'Đang làm việc', 'https://toigingiuvedep.vn/wp-content/uploads/2021/07/anh-the.jpg'),
-(26, 'Nguyễn Văn Phúc', '0987349879', 'Đường Láng, Hà Nội', '1998-02-22', 'Kỹ thuật viên điều khiển', 'phucnv0@gmail.com', 25, 'Nam', 'Đang làm việc', 'https://vn-test-11.slatic.net/p/a12f377df925c0bffdc309b91a2efcf4.jpg'),
-(27, 'Dỗ Thị Quy', '0933422577', 'Ba Đình, Hà Nội', '1998-02-22', 'Kỹ thuật viên điều khiển', 'quydt0@gmail.com', 26, 'Nữ', 'Đang làm việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/jhjh-1-768x1024.jpg'),
-(28, 'Lương Văn hải', '0933422577', 'Hoàn Kiếm, Hà Nội', '1992-03-08', 'Kỹ thuật viên điều khiển', 'hailv0@gmail.com', 27, 'nam', 'Đang làm việc', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWQyEU_CfGvsgKoJE628kiuSXLDbrBua5Rwg&usqp=CAU'),
-(29, 'Đào Văn Long', '0933422577', 'Hoàn Kiếm, Hà Nội', '1999-08-03', 'kĩ sư lập trình', 'longdv0@gmail.com', 28, 'nam', 'Đang làm việc', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJWhCtkn2kvqdh1PBkqx3hrqfdPIeJ5exO4A-_9oPqT7-ZrphLivtVyt3Ny0rlfUvQYV4&usqp=CAU'),
-(30, 'Lê hoàng Công', '0933493247', 'Đống Đa, Hà Nội', '1997-11-23', 'kĩ sư lập trình', 'conglh0@gmail.com', 29, 'nam', 'Đang làm việc', 'https://benhviensannhibacninh.vn/wp-content/uploads/2019/11/pk.jpg'),
-(31, 'Vũ Minh Anh', '0923224978', 'Tây Hồ, Hà Nội', '2000-12-31', 'kĩ sư lập trình', 'anhvm0@gmail.com', 30, 'nữ', 'Đang làm việc', 'https://toplist.vn/images/800px/kieu-toc-va-mau-toc-812636.jpg'),
-(32, 'Bùi Đức Minh', '0869105701', 'Tiên Lữ, Hưng Yên', '2002-04-13', 'Phân tích hệ thống', 'minhhezi1304@gmail.com', 31, 'nam', 'Đang làm việc', 'https://i.pinimg.com/736x/53/fa/94/53fa941122c8d54ec88af31eedd2f884.jpg'),
-(33, 'Nguyễn Công Toàn', '0939465882', 'Thủy Nguyên, Hải Phòng', '2002-05-05', 'Nhân Viên Thiết Kế Giao Diện', 'toan0505@gmail.com', 32, 'nam', 'Đang làm việc', 'https://png.pngtree.com/png-clipart/20230729/ourlarge/pngtree-cute-fat-boy-sticker-png-image_9116119.png'),
-(34, 'Nguyễn tiến thành', '0939465882', 'Thủy Nguyên, Hải Phòng', '2002-12-07', 'kĩ sư lập trình', 'vodanh12@gmail.com', 33, 'nam', 'Đang làm việc', 'https://donoithatdanang.com/wp-content/uploads/2021/11/hinh-anh-anime-boy-chibi.jpg');
+INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `SDT`, `DiaChi`, `NgaySinh`, `ChucVu`, `Email`, `MaTK`, `GioiTinh`, `TrangThai`, `AnhDaiDien`, `MaNhom`) VALUES
+(1, 'Nguyễn Văn Tùng', '0245624669', 'Xã Kênh Giang - Thủy Nguyên - Hải Phòng - Thôn Đồng Phản', '2000-03-01', 'kĩ sư lập trình', 'nguyenvantung@gmail.com', 8, 'Nam', 'Đang Làm Việc', 'https://demoda.vn/wp-content/uploads/2022/03/mau-anh-the-nhan-vien-van-phong.jpg', 3),
+(2, 'Bùi Thị Hoan', '0942782218', 'Xã Ngũ Lão - Huyện Thủy Nguyên - Hải Phòng', '2024-03-01', 'Phân tích hệ thống', 'buithihoan@gmail.com', 9, 'Nữ', 'Đang Làm Việc', 'https://khoinguonsangtao.vn/wp-content/uploads/2022/11/mau-anh-the-nam-gai-ao-somi.jpg', 3),
+(3, 'Trần Thị Long', '3767005332', 'Thủy Đường, Thủy Nguyên, Hải Phòng', '2024-03-03', 'Nhân Viên Thiết Kế Giao Diện', 'thilong632@gmail.com', 10, 'Nu', 'Nghỉ việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/%E1%BA%A3nh-th%E1%BA%BB-683x1024.jpg', 3),
+(4, 'Le Quoc Dan', '4298892323', 'Đống Đa, Hà Nội, Việt Nam', '2000-03-04', 'Kỹ thuật viên điều khiển', 'Dan50302@gmail.com', 11, 'Nam', 'Vẫn còn làm việc', 'https://d1plicc6iqzi9y.cloudfront.net/sites/default/files/image/202008/14/-05-33-414f09d19128976bbb896968910eec3503.JPEG', 3),
+(6, 'Phạm Tiến Đồng', '0978563485', 'Trung hòa, Cầu Giấy, HN', '1989-04-05', 'Nhân viên kiểm thử', 'phamdong@gmail.com', 12, 'Nam', 'Đang làm việc', 'https://jobsgo.vn/blog/wp-content/uploads/2023/05/Anh-ho-so.jpg', 3),
+(13, 'Đồng Nguyên Chất', '0124934734', 'Thanh xuân, Hà Nội', '1995-03-23', 'kĩ sư lập trình', 'cunguyenchat@gmail.com', 13, 'Nam', 'Đang làm việc', 'https://haycafe.vn/wp-content/uploads/2021/12/Mau-anh-the-nam.jpg', 3),
+(14, 'Nguyễn văn Tùng', '0123957347', 'Nam Từ Niêm, Hà Nội', '1996-06-02', 'kĩ sư lập trình', 'tungnv@gmail.com', 14, 'Nam', 'Đang làm việc', 'https://m.thebank.vn/uploads/users/f8b4c999264ebabcba1dddf44cad57eb_daotranthu.jpeg', 3),
+(16, 'Lê Tiến Đạt', '0955484733', 'Hai Bà Trưng, Hà Nội', '1997-12-04', 'kĩ sư lập trình', 'datlt@gmail.com', 15, 'Nam', 'Đang làm việc', 'https://img2.thuthuatphanmem.vn/uploads/2019/05/06/anh-the-nam-dep-nhat_100828554.jpg', 3),
+(17, 'Lê thị Diễn', '0955563573', 'Hai Bà Trưng, Hà Nội', '1995-11-11', 'Phân tích hệ thống', 'dienlt@gmail.com', 16, 'Nữ', 'Đang làm việc', 'https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/03/mau-anh-the.jpg?ssl=1', 3),
+(18, 'Nguyễn Thanh Hà', '0847934734', 'Tiên Lữ, Hưng Yên', '1997-03-22', 'Phân tích hệ thống', 'hant0@gmail.com', 17, 'Nữ', 'Đang làm việc', 'https://fn.vinhphuc.edu.vn/UploadImages/thptngogiatu/admin/2017_10/thu%2030.JPG', 3),
+(19, 'Lê Hồng Phúc', '0847974655', 'Đằng Giang, Ngô Quyền, Hải Phòng', '2000-02-28', 'Nhân Viên Thiết Kế Giao Diện', 'phuchl00@gmail.com', 18, 'Nam', 'Đang làm việc', 'https://www.uit.edu.vn/sites/vi/files/image_from_word/va.jpeg', 3),
+(20, 'Đồng Phúc Hậu', '0984336557', 'Hai Bà Trưng, hà Nội', '1999-02-28', 'Nhân Viên Thiết Kế Giao Diện', 'haudp00@gmail.com', 19, 'Nam', 'Đang làm việc', 'D:\\Xampp\\htdocs\\wordpress/wp-content\\QL_Du_An\\resources\\img/', 3),
+(21, 'Trần Hoàng Thái', '0984446437', 'Hai Bà Trưng, hà Nội', '1999-07-02', 'Nhân Viên Thiết Kế Giao Diện', 'thaith00@gmail.com', 20, 'Nam', 'Đang làm việc', 'https://www.giasucantho.net.vn/gia-su/images/nguyen-phuoc-sang-3555.jpg', 3),
+(22, 'Trần Thái Minh', '0983646437', 'Thanh Xuân, hà Nội', '1993-07-30', 'Nhân Viên Thiết Kế Giao Diện', 'minhtc0@gmail.com', 21, 'Nam', 'Đang làm việc', 'https://bizweb.dktcdn.net/100/175/849/files/bi-kip-chup-anh-the-dep-va-an-anh-05.jpg?v=1608028893933', 3),
+(23, 'Hồng Thái Linh', '098364435', 'Cầu Giấy, hà Nội', '1996-09-15', 'Nhân viên kiểm thử', 'linhht0@gmail.com', 22, 'Nam', 'Đang làm việc', 'https://i.pinimg.com/564x/5e/6c/57/5e6c572eed026b75f81682e02f83a983.jpg', 3),
+(24, 'Vũ Thị Thảo', '098366635', 'Cầu Giấy, hà Nội', '1998-03-15', 'Nhân viên kiểm thử', 'thaovt0@gmail.com', 23, 'Nữ', 'Đang làm việc', 'https://bizweb.dktcdn.net/100/175/849/files/chup-anh-chan-dung-lam-ho-so-nop-thcs-thpt-thi-vao-lop-10-cao-dang-dai-hoc-03.jpg?v=1594895178127', 3),
+(25, 'Nguyễn Công Đức', '098366635', 'Cầu Giấy, hà Nội', '1998-02-22', 'Nhân viên kiểm thử', 'duccn0@gmail.com', 24, 'Nữ', 'Đang làm việc', 'https://toigingiuvedep.vn/wp-content/uploads/2021/07/anh-the.jpg', 3),
+(26, 'Nguyễn Văn Phúc', '0987349879', 'Đường Láng, Hà Nội', '1998-02-22', 'Kỹ thuật viên điều khiển', 'phucnv0@gmail.com', 25, 'Nam', 'Đang làm việc', 'https://vn-test-11.slatic.net/p/a12f377df925c0bffdc309b91a2efcf4.jpg', 3),
+(27, 'Dỗ Thị Quy', '0933422577', 'Ba Đình, Hà Nội', '1998-02-22', 'Kỹ thuật viên điều khiển', 'quydt0@gmail.com', 26, 'Nữ', 'Đang làm việc', 'https://tiemanhsky.com/wp-content/uploads/2020/03/jhjh-1-768x1024.jpg', 3),
+(28, 'Lương Văn hải', '0933422577', 'Hoàn Kiếm, Hà Nội', '1992-03-08', 'Kỹ thuật viên điều khiển', 'hailv0@gmail.com', 27, 'nam', 'Đang làm việc', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWQyEU_CfGvsgKoJE628kiuSXLDbrBua5Rwg&usqp=CAU', 3),
+(29, 'Đào Văn Long', '0933422577', 'Hoàn Kiếm, Hà Nội', '1999-08-03', 'kĩ sư lập trình', 'longdv0@gmail.com', 28, 'nam', 'Đang làm việc', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJWhCtkn2kvqdh1PBkqx3hrqfdPIeJ5exO4A-_9oPqT7-ZrphLivtVyt3Ny0rlfUvQYV4&usqp=CAU', 3),
+(30, 'Lê hoàng Công', '0933493247', 'Đống Đa, Hà Nội', '1997-11-23', 'kĩ sư lập trình', 'conglh0@gmail.com', 29, 'nam', 'Đang làm việc', 'https://benhviensannhibacninh.vn/wp-content/uploads/2019/11/pk.jpg', 3),
+(31, 'Vũ Minh Anh', '0923224978', 'Tây Hồ, Hà Nội', '2000-12-31', 'kĩ sư lập trình', 'anhvm0@gmail.com', 30, 'nữ', 'Đang làm việc', 'https://toplist.vn/images/800px/kieu-toc-va-mau-toc-812636.jpg', 3),
+(32, 'Bùi Đức Minh', '0869105701', 'Tiên Lữ, Hưng Yên', '2002-04-13', 'Phân tích hệ thống', 'minhhezi1304@gmail.com', 31, 'nam', 'Đang làm việc', 'https://i.pinimg.com/736x/53/fa/94/53fa941122c8d54ec88af31eedd2f884.jpg', 3),
+(33, 'Nguyễn Công Toàn', '0939465882', 'Thủy Nguyên, Hải Phòng', '2002-05-05', 'Nhân Viên Thiết Kế Giao Diện', 'toan0505@gmail.com', 32, 'nam', 'Đang làm việc', 'https://png.pngtree.com/png-clipart/20230729/ourlarge/pngtree-cute-fat-boy-sticker-png-image_9116119.png', 3),
+(34, 'Nguyễn tiến thành', '0939465882', 'Thủy Nguyên, Hải Phòng', '2002-12-07', 'kĩ sư lập trình', 'vodanh12@gmail.com', 33, 'nam', 'Đang làm việc', 'https://donoithatdanang.com/wp-content/uploads/2021/11/hinh-anh-anime-boy-chibi.jpg', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1120,7 +1126,6 @@ ALTER TABLE `bangcapchungchi`
 ALTER TABLE `congviec`
   ADD PRIMARY KEY (`MaCV`),
   ADD KEY `MaDA` (`MaDA`),
-  ADD KEY `MaNhom` (`MaNhom`),
   ADD KEY `MaTV` (`MaTV`);
 
 --
@@ -1188,7 +1193,8 @@ ALTER TABLE `taikhoan`
 --
 ALTER TABLE `thanhvien`
   ADD PRIMARY KEY (`MaTV`),
-  ADD KEY `MaTK` (`MaTK`);
+  ADD KEY `MaTK` (`MaTK`),
+  ADD KEY `MaNhom` (`MaNhom`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -1294,7 +1300,6 @@ ALTER TABLE `bangcapchungchi`
 --
 ALTER TABLE `congviec`
   ADD CONSTRAINT `congviec_ibfk_1` FOREIGN KEY (`MaDA`) REFERENCES `duan` (`MaDA`),
-  ADD CONSTRAINT `congviec_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`),
   ADD CONSTRAINT `congviec_ibfk_3` FOREIGN KEY (`MaTV`) REFERENCES `thanhvien` (`MaTV`);
 
 --
@@ -1332,7 +1337,8 @@ ALTER TABLE `taikhoan`
 -- Các ràng buộc cho bảng `thanhvien`
 --
 ALTER TABLE `thanhvien`
-  ADD CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`);
+  ADD CONSTRAINT `thanhvien_ibfk_1` FOREIGN KEY (`MaTK`) REFERENCES `taikhoan` (`MaTK`),
+  ADD CONSTRAINT `thanhvien_ibfk_2` FOREIGN KEY (`MaNhom`) REFERENCES `nhom` (`MaNhom`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

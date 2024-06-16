@@ -66,10 +66,10 @@ if(!class_exists('Staff')){
          */
         public $AccountID;
         
-        // /**
-        //  * @var int $ProjectID
-        //  */
-        // public $ProjectID; 
+        /**
+         * @var int $TeamID
+         */
+        public $TeamID; 
 
         /**
          * Lấy ra danh sách bằng cấp của nhân viên 
@@ -127,21 +127,25 @@ if(!class_exists('Staff')){
          * @return Team
          */
         public function GetTeams(){
-            $StaffID = $this->ID;
+            // $StaffID = $this->ID;
 
-            $Jobs = array_values(array_filter(Job::GetAllJob(), function($job) use($StaffID){
-                return $job->StaffID === $StaffID;
+            // $Jobs = array_values(array_filter(Job::GetAllJob(), function($job) use($StaffID){
+            //     return $job->StaffID === $StaffID;
+            // }));
+
+            // $Teams = [];
+            // foreach ($Jobs as $key => $job){
+            //     $TeamID = $job->TeamID;
+            //     [$Teams] = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
+            //         return $team->ID === $TeamID;
+            //     }));
+            // }
+            $TeamID = $this->TeamID;
+            [$Team] = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
+                return $team->ID === $TeamID;
             }));
 
-            $Teams = [];
-            foreach ($Jobs as $key => $job){
-                $TeamID = $job->TeamID;
-                [$Teams] = array_values(array_filter(Team::GetAllTeam(), function($team) use($TeamID){
-                    return $team->ID === $TeamID;
-                }));
-            }
-
-            return $Teams;
+            return $Team;
         }
 
         public static function GetAllStaff() { 
@@ -165,6 +169,7 @@ if(!class_exists('Staff')){
                 $staff->Gender = $row['Gender'];
                 $staff->Status = $row['Status'];
                 $staff->Avatar = $row['Avatar'];
+                $staff->TeamID = $row['TeamID'];
 
                 $staffAll[] = $staff;
             }
@@ -195,14 +200,14 @@ if(!class_exists('Staff')){
             return $staffCount;
         }
 
-        public function Add($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar){
+        public function Add($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar, $teamid){
             $actionDB = new ActionDB();
-            $actionDB->AddStaff($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar);
+            $actionDB->AddStaff($name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar, $teamid);
         }
 
-        public function Edit($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar){
+        public function Edit($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar, $teamid){
             $actionDB = new ActionDB();
-            $actionDB->EditStaff($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar);
+            $actionDB->EditStaff($id, $name, $phone, $address, $birthDay, $position, $email, $accountID, $gender, $status, $avatar, $teamid);
         }
         
         public function Delete($id){
@@ -231,6 +236,7 @@ if(!class_exists('Staff')){
                 $staff->Gender = $row['Gender'];
                 $staff->Status = $row['Status'];
                 $staff->Avatar = $row['Avatar'];
+                $staff->TeamID = $row['TeamID'];
 
                 $findStaffs[] = $staff;
             }

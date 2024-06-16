@@ -4,7 +4,7 @@ include_once getenv('DIR_CONTROLLERS').'\\event.php';
 
 $current_directory_url = content_url().'/QL_Du_An/views/admin/event';
 
-wp_enqueue_style( 'event_style', $current_directory_url.'/index.css' );
+wp_enqueue_style( 'login_style', $current_directory_url.'/index.css' );
 
 ?>
 
